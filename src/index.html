@@ -1,13 +1,178 @@
 <!doctype html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="/dist/output.css" rel="stylesheet">
+  <script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
+  <script
+  defer
+  src="https://unpkg.com/alpinejs-form-data@latest/dist/form-data.min.js"
+></script>
 </head>
+
 <body>
-  <h1 class="text-3xl font-bold underline">
-    Hello world!
-  </h1>
+  <header>
+    <nav class="bg-gray-300 border-gray-200 px-4 lg:px-6 py-4 dark:bg-gray-800">
+      <div class="flex flex-wrap justify-between items-center mx-auto max-w-[110rem]">
+        <a href="" class="flex items-center">
+          <img src="./nextgem.png" class="mr-3 h-6 sm:h-12" alt="NextGEM Logo" />
+          <!-- <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Search</span> -->
+        </a>
+
+      </div>
+    </nav>
+  </header>
+  <script>
+    const keys = [
+      "title",
+      // "url",
+      "address",
+      "contactName",
+      // "dataOwners",
+      // "description",
+      // "doi",
+      "email",
+      // "externalId",
+      "frequency",
+      // "id",
+      "institution",
+      // "keywords",
+      "language",
+      "modulation",
+      "outputType",
+      // "privacyLevel",
+      // "publicationDate",
+      "studyType",
+      // "termsOfAccess",
+    ];
+    let nextData = [];
+  </script>
+  <div class="flex flex-wrap justify-between items-center w-full mt-20 flex-col" x-data="{
+    records: {},
+
+    async getRecords(formData) {
+        this.records = await (await fetch(`http://139.91.58.19:5000?${new URLSearchParams(formData)}`, {
+          method: 'GET',
+          headers: {
+            'Authorization': 'Token ' + 'eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI4Q3R0eXZpUWlkZ052ZVdOZFNzR244ajN1MGlKRG13U0I1S19LS2hVbVNrIn0.eyJleHAiOjE3MDI5MjU5NjAsImlhdCI6MTcwMjg5NzE2MCwianRpIjoiZWQ4ZjhlYmYtMjNiNC00NmUxLTk2YjMtZjc0ZGIwMzlmYzJhIiwiaXNzIjoiaHR0cDovLzEzOS45MS41OC4xNjozMDY2OC9yZWFsbXMvTmV4dEdFTSIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI5NzMyN2UzMC05MDVmLTQ2MjItOTJjZS02NGY2ZjgxNDJiNTgiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJuaWtoLWF1dGgiLCJzZXNzaW9uX3N0YXRlIjoiMzEzYTk1N2UtNTNiNy00ZGQ2LWFkMzktMWFiOTk5NDkzYWM1IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsImRlZmF1bHQtcm9sZXMtbmV4dGdlbSIsImFkbWluIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiIzMTNhOTU3ZS01M2I3LTRkZDYtYWQzOS0xYWI5OTk0OTNhYzUiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6ImZvcnRoLWFkbWluIiwiZ2l2ZW5fbmFtZSI6IiIsImZhbWlseV9uYW1lIjoiIn0.PMmbGtQMf8GmCUGcBaCSiYpaYOSNkwjoao2ZkayS4YqXr6u3iLwvdySkSYNHgt7aaeVrqYMDa99iILsBiMcA9scPocqXGrbYwsT8pQeumXgZC7Vb-WehFNdE2UcU3L7C44rzOQZoB1zqAd2sizQZ7-OUSrzXZapZQeQKmKNWP9acT6GUuze7zMs3IMhrNa5Zd8nwSFuM7-mfkn5C2fkZVWDErdL5t8rf5Srr4WdSLvgAio1GvHhyeZ3_VYWl9Ew61kAV0J0w3rYXpKZMmi_h3bpY97r4PT_0PSnkMvb_yKH0Iq25Lx8c-spZdB4b73IevuPu5j05CJuEq4mlU2MBEg',
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'no-cors',
+            'Access-Control-Allow-Methods': 'GET',
+            'Access-Control-Allow-Headers': 'Content-Type, X-CSRF-TOKEN',
+                  },
+        })).json();
+
+        this.records = JSON.parse(JSON.stringify(this.records));
+    },
+}">
+    <form class="mx-auto w-[100rem]" x-data="{institution: '', keywords: '', modulation: '', outputType: '', studyType: ''}" @submit.prevent="getRecords({institution, keywords, modulation, outputType, studyType})">
+      <div class="grid gap-6 mb-6 md:grid-cols-2 ">
+        <div class=" ">
+          <label for="Institution"
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Institution</label>
+          <input type="text" id="Institution" x-model="institution"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Institution">
+        </div>
+
+        <div>
+          <label for="keywords" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Keywords</label>
+          <input type="text" id="keywords" x-model="keywords"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Keywords">
+        </div>
+
+        <div class=" ">
+          <label for="keywords" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Modulation</label>
+          <select
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option value="">--</option>
+            <option value="NR">NR</option>
+            <option value="noModulation">No Modulation</option>
+          </select>
+        </div>
+        <div>
+          <label for="keywords" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Output type</label>
+          <select
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option value="">--</option>
+            <option value="audio">audio</option>
+            <option value="codebook">codebook</option>
+            <option value="dataset">dataset</option>
+            <option value="deliverable">deliverable</option>
+            <option value="image">image</option>
+            <option value="poster">poster</option>
+            <option value="presentation">presentation</option>
+            <option value="publication">publication</option>
+            <option value="report">report</option>
+            <option value="software">software</option>
+            <option value="video">video</option>
+          </select>
+        </div>
+        <div>
+          <label for="keywords" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Study type</label>
+          <select
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option value="">--</option>
+            <option value="exVivo">exVivo</option>
+            <option value="exposureAssessment">exposureAssessment</option>
+            <option value="humanStudies">humanStudies</option>
+            <option value="inVitro">inVitro</option>
+            <option value="inVivo">inVivo</option>
+            <option value="riskAssessment">riskAssessment</option>
+            <option value="simulation">simulation</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit"
+        class="w-12 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+    </form>
+
+    <div class="container pt-8 w-[100rem] mx-auto" >
+      <template x-if="records.length > 0">
+
+      <table class="w-full text-sm mt-10 text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            <template x-for="key in keys" :key="key">
+              <th scope="col" x-text="key" class="px-6 py-3">
+              </th>
+
+            </template>
+          </tr>
+        </thead>
+        <tbody>
+
+          <template x-for="item in records" :key="item">
+            <!-- <a href="#"
+          class="block w-full mb-4 p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+
+          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+            x-text="item.employee_name + ' (' + item.employee_age + ')'"></h5>
+          <p class="font-normal text-gray-700 dark:text-gray-400" x-text="'$'+item.employee_salary/100"></p>
+        </a> -->
+            <tr
+              class="even:bg-white even:dark:bg-gray-900 odd:bg-gray-50 odd:dark:bg-gray-800 border-b dark:border-gray-700">
+              <template x-for="key in keys" :key="key">
+                <td scope="row" x-text="item[key]" class="px-6 py-4 flex-wrap">
+                </td>
+              </template>
+            </tr>
+          </template>
+
+        </tbody>
+      </table>
+      </template>
+    </div>
+
+  </div>
+  <div>
+
+  </div>
+  </div>
 </body>
+
 </html>

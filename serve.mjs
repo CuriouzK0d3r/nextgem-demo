@@ -1,0 +1,39 @@
+import fetch from 'node-fetch';
+import express from 'express';
+import cors from 'cors';
+
+const app = express()
+const port = 5000
+
+
+let options = {
+  method: 'GET',
+  headers: {
+    access_token: 'eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI4Q3R0eXZpUWlkZ052ZVdOZFNzR244ajN1MGlKRG13U0I1S19LS2hVbVNrIn0.eyJleHAiOjE3MDI5MjU5NjAsImlhdCI6MTcwMjg5NzE2MCwianRpIjoiZWQ4ZjhlYmYtMjNiNC00NmUxLTk2YjMtZjc0ZGIwMzlmYzJhIiwiaXNzIjoiaHR0cDovLzEzOS45MS41OC4xNjozMDY2OC9yZWFsbXMvTmV4dEdFTSIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI5NzMyN2UzMC05MDVmLTQ2MjItOTJjZS02NGY2ZjgxNDJiNTgiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJuaWtoLWF1dGgiLCJzZXNzaW9uX3N0YXRlIjoiMzEzYTk1N2UtNTNiNy00ZGQ2LWFkMzktMWFiOTk5NDkzYWM1IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsImRlZmF1bHQtcm9sZXMtbmV4dGdlbSIsImFkbWluIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiIzMTNhOTU3ZS01M2I3LTRkZDYtYWQzOS0xYWI5OTk0OTNhYzUiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6ImZvcnRoLWFkbWluIiwiZ2l2ZW5fbmFtZSI6IiIsImZhbWlseV9uYW1lIjoiIn0.PMmbGtQMf8GmCUGcBaCSiYpaYOSNkwjoao2ZkayS4YqXr6u3iLwvdySkSYNHgt7aaeVrqYMDa99iILsBiMcA9scPocqXGrbYwsT8pQeumXgZC7Vb-WehFNdE2UcU3L7C44rzOQZoB1zqAd2sizQZ7-OUSrzXZapZQeQKmKNWP9acT6GUuze7zMs3IMhrNa5Zd8nwSFuM7-mfkn5C2fkZVWDErdL5t8rf5Srr4WdSLvgAio1GvHhyeZ3_VYWl9Ew61kAV0J0w3rYXpKZMmi_h3bpY97r4PT_0PSnkMvb_yKH0Iq25Lx8c-spZdB4b73IevuPu5j05CJuEq4mlU2MBEg',
+    Authorization: 'access_token eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI4Q3R0eXZpUWlkZ052ZVdOZFNzR244ajN1MGlKRG13U0I1S19LS2hVbVNrIn0.eyJleHAiOjE3MDI5MjU5NjAsImlhdCI6MTcwMjg5NzE2MCwianRpIjoiZWQ4ZjhlYmYtMjNiNC00NmUxLTk2YjMtZjc0ZGIwMzlmYzJhIiwiaXNzIjoiaHR0cDovLzEzOS45MS41OC4xNjozMDY2OC9yZWFsbXMvTmV4dEdFTSIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI5NzMyN2UzMC05MDVmLTQ2MjItOTJjZS02NGY2ZjgxNDJiNTgiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJuaWtoLWF1dGgiLCJzZXNzaW9uX3N0YXRlIjoiMzEzYTk1N2UtNTNiNy00ZGQ2LWFkMzktMWFiOTk5NDkzYWM1IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsImRlZmF1bHQtcm9sZXMtbmV4dGdlbSIsImFkbWluIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiIzMTNhOTU3ZS01M2I3LTRkZDYtYWQzOS0xYWI5OTk0OTNhYzUiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6ImZvcnRoLWFkbWluIiwiZ2l2ZW5fbmFtZSI6IiIsImZhbWlseV9uYW1lIjoiIn0.PMmbGtQMf8GmCUGcBaCSiYpaYOSNkwjoao2ZkayS4YqXr6u3iLwvdySkSYNHgt7aaeVrqYMDa99iILsBiMcA9scPocqXGrbYwsT8pQeumXgZC7Vb-WehFNdE2UcU3L7C44rzOQZoB1zqAd2sizQZ7-OUSrzXZapZQeQKmKNWP9acT6GUuze7zMs3IMhrNa5Zd8nwSFuM7-mfkn5C2fkZVWDErdL5t8rf5Srr4WdSLvgAio1GvHhyeZ3_VYWl9Ew61kAV0J0w3rYXpKZMmi_h3bpY97r4PT_0PSnkMvb_yKH0Iq25Lx8c-spZdB4b73IevuPu5j05CJuEq4mlU2MBEg',
+    cookie: 'JSESSIONID=E01EE32EA29D9780686F20AFB65983B5; '
+  }
+}; 
+
+app.use(cors());
+
+app.get('/', async (req, res) => {
+  console.log(req.query)
+  let url = 'http://139.91.58.16/metadata/records?';
+
+  const keys = Object.keys(req.query);
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i];
+    const value = req.query[key];
+    url += `${key}=${value}&`;
+  }
+
+  const resp = await fetch(url, options)
+  const respp = await resp.json();
+  console.log(respp)
+  res.send(respp)
+})
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
