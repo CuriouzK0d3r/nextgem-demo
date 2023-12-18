@@ -25,9 +25,12 @@ app.get('/', async (req, res) => {
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i];
     const value = req.query[key];
+    if (value === '') {
+      continue
+    }
     url += `${key}=${value}&`;
   }
-
+  console.log(url)
   const resp = await fetch(url, options)
   const respp = await resp.json();
   console.log(respp)

@@ -52,7 +52,7 @@
   </script>
   <div class="flex flex-wrap justify-between items-center w-full mt-20 flex-col" x-data="{
     records: {},
-
+    submitted: false,
     async getRecords(formData) {
         this.records = await (await fetch(`http://139.91.58.19:5000?${new URLSearchParams(formData)}`, {
           method: 'GET',
@@ -64,7 +64,7 @@
             'Access-Control-Allow-Headers': 'Content-Type, X-CSRF-TOKEN',
                   },
         })).json();
-
+        this.submitted = true;
         this.records = JSON.parse(JSON.stringify(this.records));
     },
 }">
@@ -133,7 +133,9 @@
 
     <div class="container pt-8 w-[100rem] mx-auto" >
       <template x-if="records.length > 0">
-
+        <div><span x-text="records.length"></span> results found.</div>
+      </template>
+      <template x-if="records.length > 0">
       <table class="w-full text-sm mt-10 text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
@@ -166,6 +168,10 @@
         </tbody>
       </table>
       </template>
+      <template x-if="records.length == 0 && submitted">
+        <h3>No results found.</h3>
+      </template>
+
     </div>
 
   </div>
