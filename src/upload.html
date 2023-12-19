@@ -1,0 +1,277 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/dist/output.css" rel="stylesheet">
+    <script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
+    <script defer src="https://unpkg.com/alpinejs-form-data@latest/dist/form-data.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav class="bg-gray-300 border-gray-200 px-4 lg:px-6 py-4 dark:bg-gray-800">
+            <div class="flex flex-wrap justify-between items-center mx-auto max-w-[110rem]">
+                <a href="" class="flex items-center">
+                    <img src="./nextgem.png" class="mr-3 h-6 sm:h-12" alt="NextGEM Logo" />
+                    <!-- <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Search</span> -->
+                </a>
+                <a href="/index.html" class="mt-2" style="text-decoration: underline;">Search</a>
+
+            </div>
+        </nav>
+    </header>
+    <script>
+        const keys = [
+            "title",
+            // "url",
+            "address",
+            "contactName",
+            // "dataOwners",
+            // "description",
+            // "doi",
+            "email",
+            // "externalId",
+            "frequency",
+            // "id",
+            "institution",
+            // "keywords",
+            "language",
+            "modulation",
+            "outputType",
+            // "privacyLevel",
+            // "publicationDate",
+            "studyType",
+            // "termsOfAccess",
+        ];
+
+        const headers = {
+            "title": "Title",
+            "url": "URL",
+            "address": "Address",
+            "contactName": "Contact Name",
+            "dataOwners": "Data Owners",
+            "description": "Description",
+            "doi": "DOI",
+            "email": "Email",
+            "externalId": "External ID",
+            "frequency": "Frequency",
+            "id": "ID",
+            "institution": "Institution",
+            "keywords": "Keywords",
+            "language": "Language",
+            // "modulation": "Modulation",
+            // "outputType": "Output Type",
+            "privacyLevel": "Privacy Level",
+            "publicationDate": "Publication Date",
+            // "studyType": "Study Type",
+            "termsOfAccess": "Terms of Access",
+        };
+        const inputData = {
+            title: '',
+            url: '',
+            address: '',
+            contactName: '',
+            dataOwners: '',
+            description: '',
+            doi: '',
+            email: '',
+            externalId: '',
+            frequency: '',
+            id: '',
+            institution: '',
+            keywords: '',
+            language: '',
+            modulation: '',
+            outputType: '',
+            privacyLevel: '',
+            publicationDate: '',
+            studyType: '',
+            termsOfAccess: '',
+        }
+        // let dataData= { title, url, address, contactName, dataOwners, description, doi, email, externalId, frequency, id, institution, keywords, language, modulation, outputType, privacyLevel, publicationDate, studyType, termsOfAccess}
+        let nextData = [];
+    </script>
+    <div class="flex flex-wrap justify-between items-center w-full mt-20 flex-col" x-data="{
+    records: {},
+    submitted: false,
+    async postRecords(formData) {
+        this.records = {};
+        console.log(formData);
+        //  replace with location.hostname (ngrok proxy breaks this)
+        this.records = await (await fetch(`http://${location.hostname}:5000/upload?${new URLSearchParams(formData)}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'POST',
+            'Access-Control-Allow-Headers': 'Content-Type, X-CSRF-TOKEN',
+            },
+        })).json();
+        this.submitted = true;
+        this.records = JSON.parse(JSON.stringify(this.records));
+    },
+}">
+        <form class="mx-auto w-[100rem]" x-data="inputData"
+            @submit.prevent="postRecords({ title, url, address, contactName, dataOwners, description, doi, email, externalId, frequency, id, institution, keywords, language, modulation, outputType, privacyLevel, publicationDate, studyType, termsOfAccess})">
+            <div class="grid gap-6 mb-6 md:grid-cols-2 ">
+                <template x-for="key in headers" :key="key">
+                    <div class=" ">
+                        <!-- <label for="key"
+          x-text="headers[key]"
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></label> -->
+                        <input type="text" id="key" x-model="key"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            x-bind:placeholder="key">
+                    </div>
+                </template>
+                <div></div>
+                <div class=" ">
+                    <label for="modulation"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Modulation</label>
+                    <select x-model="modulation"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="">--</option>
+                        <option value="NR">NR</option>
+                        <option value="noModulation">No Modulation</option>
+                    </select>
+                </div>
+                <div class=" ">
+                    <label for="outputType" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Output
+                        Type</label>
+                    <select x-model="outputType"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="">--</option>
+                        <option value="audio">audio</option>
+                        <option value="codebook">codebook</option>
+                        <option value="dataset">dataset</option>
+                        <option value="deliverable">deliverable</option>
+                        <option value="image">image</option>
+                        <option value="poster">poster</option>
+                        <option value="presentation">presentation</option>
+                        <option value="publication">publication</option>
+                        <option value="report">report</option>
+                        <option value="software">software</option>
+                        <option value="video">video</option>
+                    </select>
+                </div>
+                <div class=" ">
+                    <label for="studyType" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Study
+                        Type</label>
+                    <select x-model="studyType"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="">--</option>
+                        <option value="exVivo">exVivo</option>
+                        <option value="exposureAssessment">exposureAssessment</option>
+                        <option value="humanStudies">humanStudies</option>
+                        <option value="inVitro">inVitro</option>
+                        <option value="inVivo">inVivo</option>
+                        <option value="riskAssessment">riskAssessment</option>
+                        <option value="simulation">simulation</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+
+                <!--
+        </div>
+        <div>
+           <div>
+          <label for="keywords" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Keywords</label>
+          <input type="text" id="keywords" x-model="keywords"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Keywords">
+        </div>
+
+        <div class=" ">
+          <label for="keywords" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Modulation</label>
+          <select x-model="modulation"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option value="">--</option>
+            <option value="NR">NR</option>
+            <option value="noModulation">No Modulation</option>
+          </select>
+        </div>
+        <div>
+          <label for="keywords" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Output type</label>
+          <select x-model="outputType"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option value="">--</option>
+            <option value="audio">audio</option>
+            <option value="codebook">codebook</option>
+            <option value="dataset">dataset</option>
+            <option value="deliverable">deliverable</option>
+            <option value="image">image</option>
+            <option value="poster">poster</option>
+            <option value="presentation">presentation</option>
+            <option value="publication">publication</option>
+            <option value="report">report</option>
+            <option value="software">software</option>
+            <option value="video">video</option>
+          </select>
+        </div>
+        <div>
+          <label for="keywords" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Study type</label>
+          <select x-model="studyType"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option value="">--</option>
+            <option value="exVivo">exVivo</option>
+            <option value="exposureAssessment">exposureAssessment</option>
+            <option value="humanStudies">humanStudies</option>
+            <option value="inVitro">inVitro</option>
+            <option value="inVivo">inVivo</option>
+            <option value="riskAssessment">riskAssessment</option>
+            <option value="simulation">simulation</option>
+          </select>
+        </div> -->
+            </div>
+            <button type="submit"
+                class="w-12 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+        </form>
+
+        <div class="container pt-8 w-[100rem] mx-auto">
+            <template x-if="records.length > 0">
+                <div><span x-text="records.length"></span> results found.</div>
+            </template>
+            <template x-if="records.length > 0">
+                <table class="w-full text-sm mt-10 text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <template x-for="key in keys" :key="key">
+                                <th scope="col" x-text="headers[key]" class="px-6 py-3">
+                                </th>
+
+                            </template>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <template x-for="item in records" :key="item">
+                            <tr
+                                class="even:bg-white even:dark:bg-gray-900 odd:bg-gray-50 odd:dark:bg-gray-800 border-b dark:border-gray-700">
+                                <template x-for="key in keys" :key="key">
+                                    <td scope="row" x-text="item[key]" class="px-6 py-4 flex-wrap">
+                                    </td>
+                                </template>
+                            </tr>
+                        </template>
+
+                    </tbody>
+                </table>
+            </template>
+            <template x-if="records.length == 0 && submitted">
+                <h3>No results found.</h3>
+            </template>
+
+        </div>
+
+    </div>
+    <div>
+
+    </div>
+    </div>
+</body>
+
+</html>
