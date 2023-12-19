@@ -26,25 +26,25 @@
     <script>
         const keys = [
             "title",
-            // "url",
+            "url",
             "address",
             "contactName",
-            // "dataOwners",
-            // "description",
-            // "doi",
+            "dataOwners",
+            "description",
+            "doi",
             "email",
-            // "externalId",
+            "externalId",
             "frequency",
-            // "id",
+            "id",
             "institution",
-            // "keywords",
+            "keywords",
             "language",
             "modulation",
             "outputType",
-            // "privacyLevel",
-            // "publicationDate",
+            "privacyLevel",
+            "publicationDate",
             "studyType",
-            // "termsOfAccess",
+            "termsOfAccess",
         ];
 
         const headers = {
@@ -117,14 +117,15 @@
         <form class="mx-auto w-[100rem]" x-data="inputData"
             @submit.prevent="postRecords({ title, url, address, contactName, dataOwners, description, doi, email, externalId, frequency, id, institution, keywords, language, modulation, outputType, privacyLevel, publicationDate, studyType, termsOfAccess})">
             <div class="grid gap-6 mb-6 md:grid-cols-2 ">
-                <template x-for="key in headers" :key="key">
+                <template x-for="(head, value) in headers" :key="head">
                     <div class=" ">
-                        <!-- <label for="key"
+                            <!-- <label for="key"
           x-text="headers[key]"
             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></label> -->
-                        <input type="text" id="key" x-model="key"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            x-bind:placeholder="key">
+                            <input type="text" x-bind:id="value"
+                            x-bind:x-model="value"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                x-bind:placeholder="head">
                     </div>
                 </template>
                 <div></div>
