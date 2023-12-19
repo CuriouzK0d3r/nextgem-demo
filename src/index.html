@@ -7,10 +7,7 @@
   <link href="/dist/output.css" rel="stylesheet">
   <script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
-  <script
-  defer
-  src="https://unpkg.com/alpinejs-form-data@latest/dist/form-data.min.js"
-></script>
+  <script defer src="https://unpkg.com/alpinejs-form-data@latest/dist/form-data.min.js"></script>
 </head>
 
 <body>
@@ -48,12 +45,35 @@
       "studyType",
       // "termsOfAccess",
     ];
+    const headers = {
+      "title" : "Title",
+      "url" : "URL",
+      "address": "Address",
+      "contactName": "Contact Name",
+      "dataOwners": "Data Owners",
+      "description": "Description",
+      "doi": "DOI",
+      "email": "Email",
+      "externalId": "External ID",
+      "frequency": "Frequency",
+      "id": "ID",
+      "institution": "Institution",
+      "keywords": "Keywords",
+      "language": "Language",
+      "modulation": "Modulation",
+      "outputType": "Output Type",
+      "privacyLevel": "Privacy Level",
+      "publicationDate": "Publication Date",
+      "studyType": "Study Type",
+      "termsOfAccess": "Terms of Access",
+    };
     let nextData = [];
   </script>
   <div class="flex flex-wrap justify-between items-center w-full mt-20 flex-col" x-data="{
     records: {},
     submitted: false,
     async getRecords(formData) {
+        this.records = {};
         this.records = await (await fetch(`http://139.91.58.19:5000?${new URLSearchParams(formData)}`, {
           method: 'GET',
           headers: {
@@ -68,7 +88,9 @@
         this.records = JSON.parse(JSON.stringify(this.records));
     },
 }">
-    <form class="mx-auto w-[100rem]" x-data="{institution: '', keywords: '', modulation: '', outputType: '', studyType: ''}" @submit.prevent="getRecords({institution, keywords, modulation, outputType, studyType})">
+    <form class="mx-auto w-[100rem]"
+      x-data="{institution: '', keywords: '', modulation: '', outputType: '', studyType: ''}"
+      @submit.prevent="getRecords({institution, keywords, modulation, outputType, studyType})">
       <div class="grid gap-6 mb-6 md:grid-cols-2 ">
         <div class=" ">
           <label for="Institution"
@@ -87,7 +109,7 @@
 
         <div class=" ">
           <label for="keywords" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Modulation</label>
-          <select
+          <select x-model="modulation"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             <option value="">--</option>
             <option value="NR">NR</option>
@@ -96,7 +118,7 @@
         </div>
         <div>
           <label for="keywords" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Output type</label>
-          <select
+          <select x-model="outputType"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             <option value="">--</option>
             <option value="audio">audio</option>
@@ -114,7 +136,7 @@
         </div>
         <div>
           <label for="keywords" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Study type</label>
-          <select
+          <select x-model="studyType"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             <option value="">--</option>
             <option value="exVivo">exVivo</option>
@@ -131,42 +153,35 @@
         class="w-12 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
     </form>
 
-    <div class="container pt-8 w-[100rem] mx-auto" >
+    <div class="container pt-8 w-[100rem] mx-auto">
       <template x-if="records.length > 0">
         <div><span x-text="records.length"></span> results found.</div>
       </template>
       <template x-if="records.length > 0">
-      <table class="w-full text-sm mt-10 text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          <tr>
-            <template x-for="key in keys" :key="key">
-              <th scope="col" x-text="key" class="px-6 py-3">
-              </th>
-
-            </template>
-          </tr>
-        </thead>
-        <tbody>
-
-          <template x-for="item in records" :key="item">
-            <!-- <a href="#"
-          class="block w-full mb-4 p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-
-          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
-            x-text="item.employee_name + ' (' + item.employee_age + ')'"></h5>
-          <p class="font-normal text-gray-700 dark:text-gray-400" x-text="'$'+item.employee_salary/100"></p>
-        </a> -->
-            <tr
-              class="even:bg-white even:dark:bg-gray-900 odd:bg-gray-50 odd:dark:bg-gray-800 border-b dark:border-gray-700">
+        <table class="w-full text-sm mt-10 text-left rtl:text-right text-gray-500 dark:text-gray-400">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
               <template x-for="key in keys" :key="key">
-                <td scope="row" x-text="item[key]" class="px-6 py-4 flex-wrap">
-                </td>
+                <th scope="col" x-text="headers[key]" class="px-6 py-3">
+                </th>
+
               </template>
             </tr>
-          </template>
+          </thead>
+          <tbody>
 
-        </tbody>
-      </table>
+            <template x-for="item in records" :key="item">
+              <tr
+                class="even:bg-white even:dark:bg-gray-900 odd:bg-gray-50 odd:dark:bg-gray-800 border-b dark:border-gray-700">
+                <template x-for="key in keys" :key="key">
+                  <td scope="row" x-text="item[key]" class="px-6 py-4 flex-wrap">
+                  </td>
+                </template>
+              </tr>
+            </template>
+
+          </tbody>
+        </table>
       </template>
       <template x-if="records.length == 0 && submitted">
         <h3>No results found.</h3>
