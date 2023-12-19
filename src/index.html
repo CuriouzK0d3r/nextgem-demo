@@ -74,12 +74,13 @@
     submitted: false,
     async getRecords(formData) {
         this.records = {};
-        this.records = await (await fetch(`http://${location.hostname}:5000?${new URLSearchParams(formData)}`, {
+        //  replace with location.hostname (ngrok proxy breaks this)
+        this.records = await (await fetch(`https://773f-139-91-58-19.ngrok-free.app?${new URLSearchParams(formData)}`, {
           method: 'GET',
           headers: {
             'Authorization': 'Token ' + 'eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI4Q3R0eXZpUWlkZ052ZVdOZFNzR244ajN1MGlKRG13U0I1S19LS2hVbVNrIn0.eyJleHAiOjE3MDI5MjU5NjAsImlhdCI6MTcwMjg5NzE2MCwianRpIjoiZWQ4ZjhlYmYtMjNiNC00NmUxLTk2YjMtZjc0ZGIwMzlmYzJhIiwiaXNzIjoiaHR0cDovLzEzOS45MS41OC4xNjozMDY2OC9yZWFsbXMvTmV4dEdFTSIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI5NzMyN2UzMC05MDVmLTQ2MjItOTJjZS02NGY2ZjgxNDJiNTgiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJuaWtoLWF1dGgiLCJzZXNzaW9uX3N0YXRlIjoiMzEzYTk1N2UtNTNiNy00ZGQ2LWFkMzktMWFiOTk5NDkzYWM1IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsImRlZmF1bHQtcm9sZXMtbmV4dGdlbSIsImFkbWluIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiIzMTNhOTU3ZS01M2I3LTRkZDYtYWQzOS0xYWI5OTk0OTNhYzUiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6ImZvcnRoLWFkbWluIiwiZ2l2ZW5fbmFtZSI6IiIsImZhbWlseV9uYW1lIjoiIn0.PMmbGtQMf8GmCUGcBaCSiYpaYOSNkwjoao2ZkayS4YqXr6u3iLwvdySkSYNHgt7aaeVrqYMDa99iILsBiMcA9scPocqXGrbYwsT8pQeumXgZC7Vb-WehFNdE2UcU3L7C44rzOQZoB1zqAd2sizQZ7-OUSrzXZapZQeQKmKNWP9acT6GUuze7zMs3IMhrNa5Zd8nwSFuM7-mfkn5C2fkZVWDErdL5t8rf5Srr4WdSLvgAio1GvHhyeZ3_VYWl9Ew61kAV0J0w3rYXpKZMmi_h3bpY97r4PT_0PSnkMvb_yKH0Iq25Lx8c-spZdB4b73IevuPu5j05CJuEq4mlU2MBEg',
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': 'no-cors',
+            'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'GET',
             'Access-Control-Allow-Headers': 'Content-Type, X-CSRF-TOKEN',
                   },
