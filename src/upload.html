@@ -16,7 +16,6 @@
             <div class="flex flex-wrap justify-between items-center mx-auto max-w-[110rem]">
                 <a href="" class="flex items-center">
                     <img src="./nextgem.png" class="mr-3 h-6 sm:h-12" alt="NextGEM Logo" />
-                    <!-- <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Search</span> -->
                 </a>
                 <a href="/index.html" class="mt-2" style="text-decoration: underline;">Search</a>
 
@@ -35,7 +34,6 @@
             "email",
             "externalId",
             "frequency",
-            "id",
             "institution",
             "keywords",
             "language",
@@ -58,7 +56,6 @@
             "email": "Email",
             "externalId": "External ID",
             "frequency": "Frequency",
-            "id": "ID",
             "institution": "Institution",
             "keywords": "Keywords",
             "language": "Language",
@@ -80,7 +77,6 @@
             email: '',
             externalId: '',
             frequency: '',
-            id: '',
             institution: '',
             keywords: '',
             language: '',
@@ -99,9 +95,9 @@
     submitted: false,
     async postRecords(formData) {
         this.records = {};
-        console.log(formData);
+
         //  replace with location.hostname (ngrok proxy breaks this)
-        this.records = await (await fetch(`http://${location.hostname}:5000/upload?${new URLSearchParams(formData)}`, {
+        let resp = await (await fetch(`http://${location.hostname}:5000/upload?${new URLSearchParams(formData)}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -110,25 +106,96 @@
             'Access-Control-Allow-Headers': 'Content-Type, X-CSRF-TOKEN',
             },
         })).json();
-        this.submitted = true;
-        this.records = JSON.parse(JSON.stringify(this.records));
+
+        if (resp.status == 200) {
+            console.log('success');
+            this.submitted = true;
+        }
     },
 }">
         <form class="mx-auto w-[100rem]" x-data="inputData"
-            @submit.prevent="postRecords({ title, url, address, contactName, dataOwners, description, doi, email, externalId, frequency, id, institution, keywords, language, modulation, outputType, privacyLevel, publicationDate, studyType, termsOfAccess})">
+            @submit.prevent="postRecords({ title, url, address, contactName, dataOwners, description, doi, email, externalId, frequency, institution, keywords, language, modulation, outputType, privacyLevel, publicationDate, studyType, termsOfAccess})">
             <div class="grid gap-6 mb-6 md:grid-cols-2 ">
-                <template x-for="(head, value) in headers" :key="head">
-                    <div class=" ">
-                            <!-- <label for="key"
-          x-text="headers[key]"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></label> -->
-                            <input type="text" x-bind:id="value"
-                            x-bind:x-model="value"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                x-bind:placeholder="head">
-                    </div>
-                </template>
-                <div></div>
+                <div class=" ">
+                    <input type="text"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        id="title" x-model="title" placeholder="Title">
+                </div>
+                <div class=" ">
+                    <input type="text"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        id="url" x-model="url" placeholder="URL">
+                </div>
+                <div class=" ">
+                    <input type="text"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        id="address" x-model="address" placeholder="Address">
+                </div>
+                <div class=" ">
+                    <input type="text"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        id="contactName" x-model="contactName" placeholder="Contact Name">
+                </div>
+                <div class=" ">
+                    <input type="text"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        id="dataOwners" x-model="dataOwners" placeholder="Data Owners">
+                </div>
+                <div class=" ">
+                    <input type="text"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        id="description" x-model="description" placeholder="Description">
+                </div>
+                <div class=" ">
+                    <input type="text"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        id="doi" x-model="doi" placeholder="DOI">
+                </div>
+                <div class=" ">
+                    <input type="text"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        id="email" x-model="email" placeholder="Email">
+                </div>
+                <div class=" ">
+                    <input type="text"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        id="externalId" x-model="externalId" placeholder="External ID">
+                </div>
+                <div class=" ">
+                    <input type="text"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        id="frequency" x-model="frequency" placeholder="Frequency">
+                </div>
+                <div class=" ">
+                    <input type="text"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        id="institution" x-model="institution" placeholder="Institution">
+                </div>
+                <div class=" ">
+                    <input type="text"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        id="keywords" x-model="keywords" placeholder="Keywords">
+                </div>
+                <div class=" ">
+                    <input type="text"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        id="language" x-model="language" placeholder="Language">
+                </div>
+                <div class=" ">
+                    <input type="text"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        id="privacyLevel" x-model="privacyLevel" placeholder="Privacy Level">
+                </div>
+                <div class=" ">
+                    <input type="text"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        id="publicationDate" x-model="publicationDate" placeholder="Publication Date">
+                </div>
+                <div class=" ">
+                    <input type="text"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        id="termsOfAccess" x-model="termsOfAccess" placeholder="Terms of Access">
+                </div>
                 <div class=" ">
                     <label for="modulation"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Modulation</label>
@@ -174,99 +241,15 @@
                     </select>
                 </div>
             </div>
-            <div>
-
-                <!--
-        </div>
-        <div>
-           <div>
-          <label for="keywords" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Keywords</label>
-          <input type="text" id="keywords" x-model="keywords"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Keywords">
-        </div>
-
-        <div class=" ">
-          <label for="keywords" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Modulation</label>
-          <select x-model="modulation"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option value="">--</option>
-            <option value="NR">NR</option>
-            <option value="noModulation">No Modulation</option>
-          </select>
-        </div>
-        <div>
-          <label for="keywords" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Output type</label>
-          <select x-model="outputType"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option value="">--</option>
-            <option value="audio">audio</option>
-            <option value="codebook">codebook</option>
-            <option value="dataset">dataset</option>
-            <option value="deliverable">deliverable</option>
-            <option value="image">image</option>
-            <option value="poster">poster</option>
-            <option value="presentation">presentation</option>
-            <option value="publication">publication</option>
-            <option value="report">report</option>
-            <option value="software">software</option>
-            <option value="video">video</option>
-          </select>
-        </div>
-        <div>
-          <label for="keywords" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Study type</label>
-          <select x-model="studyType"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option value="">--</option>
-            <option value="exVivo">exVivo</option>
-            <option value="exposureAssessment">exposureAssessment</option>
-            <option value="humanStudies">humanStudies</option>
-            <option value="inVitro">inVitro</option>
-            <option value="inVivo">inVivo</option>
-            <option value="riskAssessment">riskAssessment</option>
-            <option value="simulation">simulation</option>
-          </select>
-        </div> -->
-            </div>
             <button type="submit"
                 class="w-12 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
         </form>
+        <template x-if="submitted">
+            <h3>Data uploaded!</h3>
+        </template>
+    </div>
 
-        <div class="container pt-8 w-[100rem] mx-auto">
-            <template x-if="records.length > 0">
-                <div><span x-text="records.length"></span> results found.</div>
-            </template>
-            <template x-if="records.length > 0">
-                <table class="w-full text-sm mt-10 text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        <tr>
-                            <template x-for="key in keys" :key="key">
-                                <th scope="col" x-text="headers[key]" class="px-6 py-3">
-                                </th>
-
-                            </template>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        <template x-for="item in records" :key="item">
-                            <tr
-                                class="even:bg-white even:dark:bg-gray-900 odd:bg-gray-50 odd:dark:bg-gray-800 border-b dark:border-gray-700">
-                                <template x-for="key in keys" :key="key">
-                                    <td scope="row" x-text="item[key]" class="px-6 py-4 flex-wrap">
-                                    </td>
-                                </template>
-                            </tr>
-                        </template>
-
-                    </tbody>
-                </table>
-            </template>
-            <template x-if="records.length == 0 && submitted">
-                <h3>No results found.</h3>
-            </template>
-
-        </div>
+    
 
     </div>
     <div>
