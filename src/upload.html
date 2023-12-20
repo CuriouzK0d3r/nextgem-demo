@@ -90,16 +90,27 @@
         // let dataData= { title, url, address, contactName, dataOwners, description, doi, email, externalId, frequency, id, institution, keywords, language, modulation, outputType, privacyLevel, publicationDate, studyType, termsOfAccess}
         let nextData = [];
     </script>
+
     <div class="flex flex-wrap justify-between items-center w-full mt-20 flex-col" x-data="{
     records: {},
+    files: {},
     submitted: false,
+    async postFiles(files) {
+        const file = files[0]
+        const reader = new FileReader()
+       
+        reader.readAsText(file)
+        reader.onload = () => {
+            this.postRecords(JSON.parse(reader.result))
+        }
+    },
     async postRecords(formData) {
         this.records = {};
-
+        console.log(formData)
         //  replace with location.hostname (ngrok proxy breaks this)
         let resp = await (await fetch(`http://${location.hostname}:5000/upload?${new URLSearchParams(formData)}`, {
-          method: 'GET',
-          headers: {
+            method: 'GET',
+            headers: {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'POST',
@@ -232,25 +243,36 @@
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option value="">--</option>
                         <option value="exVivo">exVivo</option>
-                        <option value="exposureAssessment">exposureAssessment</option>
-                        <option value="humanStudies">humanStudies</option>
+                        <option value="exposureAssessment">Exposure Assessment</option>
+                        <option value="humanStudies">Human Studies</option>
                         <option value="inVitro">inVitro</option>
                         <option value="inVivo">inVivo</option>
-                        <option value="riskAssessment">riskAssessment</option>
-                        <option value="simulation">simulation</option>
+                        <option value="riskAssessment">Risk Assessment</option>
+                        <option value="simulation">Simulation</option>
                     </select>
                 </div>
             </div>
             <button type="submit"
-                class="w-12 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+                class="text-white mb-6 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
         </form>
+        <div class="mx-auto w-[100rem] mt-6">
+            <h1 class="text-2xl mb-4 font-semibold">File Upload</h1>
+            <div >
+            <form @submit.prevent="postFiles(this.files)" class="my-6">
+                <label class="mt-4 mb-2 border-2 border-gray-200 p-3 w-full block rounded cursor-pointer my-2"
+                    for="customFile1" x-data="{ files: null }">
+                    <input type="file" class="sr-only" id="customFile1" multiple="true"
+                        x-on:change="this.files = Object.values($event.target.files)">
+                </label>
+                <button type="submit"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Upload</button>
+            </form>
+            </div>
+        </div>
         <template x-if="submitted">
             <h3>Data uploaded!</h3>
         </template>
     </div>
-
-    
-
     </div>
     <div>
 
