@@ -1,6 +1,0 @@
---2023-12-18 10:31:41--  http://ginan.ics.forth.gr:3000/_next/image?url=%2FNextGEM.png
-Resolving ginan.ics.forth.gr (ginan.ics.forth.gr)... 139.91.58.19
-Connecting to ginan.ics.forth.gr (ginan.ics.forth.gr)|139.91.58.19|:3000... connected.
-HTTP request sent, awaiting response... 400 Bad Request
-2023-12-18 10:31:41 ERROR 400: Bad Request.
-
