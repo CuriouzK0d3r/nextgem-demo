@@ -96,13 +96,14 @@
     files: {},
     submitted: false,
     async postFiles(files) {
-        const file = files[0]
-        const reader = new FileReader()
-       
-        reader.readAsText(file)
-        reader.onload = () => {
-            this.postRecords(JSON.parse(reader.result))
-        }
+        files.forEach(file => {
+            const reader = new FileReader()
+        
+            reader.readAsText(file)
+            reader.onload = () => {
+                this.postRecords(JSON.parse(reader.result))
+            }
+        });
     },
     async postRecords(formData) {
         this.records = {};
@@ -257,16 +258,16 @@
         </form>
         <div class="mx-auto w-[100rem] mt-6">
             <h1 class="text-2xl mb-4 font-semibold">File Upload</h1>
-            <div >
-            <form @submit.prevent="postFiles(this.files)" class="my-6">
-                <label class="mt-4 mb-2 border-2 border-gray-200 p-3 w-full block rounded cursor-pointer my-2"
-                    for="customFile1" x-data="{ files: null }">
-                    <input type="file" class="sr-only" id="customFile1" multiple="true"
-                        x-on:change="this.files = Object.values($event.target.files)">
-                </label>
-                <button type="submit"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Upload</button>
-            </form>
+            <div>
+                <form @submit.prevent="postFiles(this.files)" class="my-6">
+                    <label class="mt-4 mb-2 border-2 border-gray-200 p-3 w-full block rounded cursor-pointer my-2"
+                        for="customFile1" x-data="{ files: null }">
+                        <input type="file" class="sr-only" id="customFile1" multiple="true"
+                            x-on:change="this.files = Object.values($event.target.files)">
+                    </label>
+                    <button type="submit"
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Upload</button>
+                </form>
             </div>
         </div>
         <template x-if="submitted">
