@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation'
+import { Card, Typography } from "@material-tailwind/react";
 
 function LoginPage() {
     const [email, setEmail] = useState('');
@@ -14,7 +15,38 @@ function LoginPage() {
     const registerEmailRef = useRef<any>(null);
     const registerOrgRef = useRef<any>(null);
 
-    const router = useRouter()
+    const router = useRouter();
+
+    const TABLE_HEAD = ["Name", "Job", "Employed", ""];
+ 
+const TABLE_ROWS = [
+  {
+    name: "John Michael",
+    job: "Manager",
+    date: "23/04/18",
+  },
+  {
+    name: "Alexa Liras",
+    job: "Developer",
+    date: "23/04/18",
+  },
+  {
+    name: "Laurent Perrier",
+    job: "Executive",
+    date: "19/09/17",
+  },
+  {
+    name: "Michael Levi",
+    job: "Developer",
+    date: "24/12/08",
+  },
+  {
+    name: "Richard Gran",
+    job: "Manager",
+    date: "04/10/21",
+  },
+];
+
 
     function isLoggedIn() {
         let apiEndpoint = "/api/auth/token";
@@ -129,13 +161,31 @@ function LoginPage() {
     // Add
 
     return (
+        <div className='h-full w-full'>
+            <header>
+    <nav className="bg-gray-200 bg-opacity-90 border-gray-200 px-4 lg:px-6 py-4">
+      <div className="flex flex-wrap justify-between items-center mx-auto max-w-[100rem]">
+        <a href="" className="flex items-center">
+        <img
+        className="mr-3 h-18"
+                src="https://www.nextgem.eu/wp-content/uploads/2022/07/cropped-NextGEM_final_transparent.png"
+                alt="logo-img"
+                id="logo-img"
+            />
+          {/* <!-- <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Search</span> --> */}
+        </a>
+        {/* <a href="/upload.html" className="mt-2" style="text-decoration: underline;">Upload</a> */}
+
+      </div>
+    </nav>
+  </header>
         <div className="container w-1/2">
              <h4 className='mb-2 text-3xl'>Search for Studies</h4>
             <div className='form-container'>
             <form className='mt-4' id="loginForm" onSubmit={(event) => submitLoginForm(event)}>
                 <div className="grid gap-6 mb-6 md:grid-cols-2 ">
                     <div>
-                    <label className="block mb-2 text-sm font-medium text-gray-900 ">Institution</label>
+                    <label className="block mb-2  font-medium text-gray-900 ">Institution</label>
 
                         <input
                             className='rounded'
@@ -148,7 +198,7 @@ function LoginPage() {
                         />
                     </div>
                     <div>
-                    <label className="block mb-2 text-sm font-medium text-gray-900 ">Keywords</label>
+                    <label className="block mb-2 font-medium text-gray-900 ">Keywords</label>
 
                         <input
                             className='rounded'
@@ -161,16 +211,16 @@ function LoginPage() {
                         />
                     </div>
                     <div className="">
-                        <label className="block mb-2 text-sm font-medium text-gray-900 ">Modulation</label>
+                        <label className="block mb-2  font-medium text-gray-900 ">Modulation</label>
                         <select
-                            className="text-sm rounded-lg  block w-full p-2.5  dark:border-gray-600 ">
+                            className=" rounded-lg  block w-full p-2.5  dark:border-gray-600 ">
                             <option value="">--</option>
                             <option value="NR">NR</option>
                             <option value="noModulation">No Modulation</option>
                         </select>
                     </div>
                     <div className=" ">
-                        <label className="block mb-2 text-sm font-medium text-gray-900 ">Output type</label>
+                        <label className="block mb-2  font-medium text-gray-900 ">Output type</label>
                         <select
                             className="text-sm rounded-lg  block w-full p-2.5  dark:border-gray-600">
                             <option value="">--</option>
@@ -188,7 +238,7 @@ function LoginPage() {
                         </select>
                     </div>
                     <div className=" ">
-                        <label className="block mb-2 text-sm font-medium text-gray-900 ">Study type</label>
+                        <label className="block mb-2  font-medium text-gray-900 ">Study type</label>
                         <select
                             className="text-sm rounded-lg  block w-full p-2.5  dark:border-gray-600">
                             <option value="">--</option>
@@ -205,6 +255,52 @@ function LoginPage() {
                 <input type="submit" id="searchBtn" className="btn font-bold" value="Search" />
             </form>
             </div>
+            <Card className="h-full w-full overflow-scroll hidden">
+      <table className="w-full min-w-max table-auto text-left">
+        <thead>
+          <tr>
+            {TABLE_HEAD.map((head) => (
+              <th key={head} className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
+                <Typography
+                  variant="small"
+                  color="blue-gray"
+                  className="font-normal leading-none opacity-70"
+                >
+                  {head}
+                </Typography>
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {TABLE_ROWS.map(({ name, job, date }, index) => (
+            <tr key={name} className="even:bg-blue-gray-50/50">
+              <td className="p-4">
+                <Typography variant="small" color="blue-gray" className="font-normal">
+                  {name}
+                </Typography>
+              </td>
+              <td className="p-4">
+                <Typography variant="small" color="blue-gray" className="font-normal">
+                  {job}
+                </Typography>
+              </td>
+              <td className="p-4">
+                <Typography variant="small" color="blue-gray" className="font-normal">
+                  {date}
+                </Typography>
+              </td>
+              <td className="p-4">
+                <Typography as="a" href="#" variant="small" color="blue-gray" className="font-medium">
+                  Edit
+                </Typography>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </Card>
+        </div>
         </div>);
 }
 

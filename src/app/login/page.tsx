@@ -14,7 +14,7 @@ function LoginPage() {
     const registerEmailRef = useRef<any>(null);
     const registerOrgRef = useRef<any>(null);
 
-    const router = useRouter()
+    const router = useRouter();
 
     function isLoggedIn() {
         let apiEndpoint = "/api/auth/token";
@@ -35,7 +35,7 @@ function LoginPage() {
                         router.push('/login');
                     }
                     // window.location.href = "https://example.com/example-page";
-                    // Cookies.set('token', responseJSON.access_token, { expires: 1, secure: false });
+                    Cookies.set('token', responseJSON.access_token, { expires: 1, secure: false });
                 } else {
                     // alert("Login failed. Status: " + response.status);
                     console.error("Login failed. Status: " + response.status);
@@ -46,7 +46,7 @@ function LoginPage() {
             });
     }
 
-    function openTab(evt, tabName) {
+    function openTab(evt: any, tabName: any) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
         for (i = 0; i < tabcontent.length; i++) {
@@ -129,7 +129,9 @@ function LoginPage() {
     // Add
 
     return (
-        <div className="container">
+        
+<div className="container w-[40rem] h-full">
+              
             <h4>Welcome to</h4>
 
             <img
@@ -137,7 +139,7 @@ function LoginPage() {
                 alt="logo-img"
                 id="logo-img"
             />
-            <div className="form-container">
+            <div className="form-container w-full">
                 <div className="tab">
                     <button className="tablinks active" onClick={(event) => openTab(event, 'loginTab')}>
                         Login
@@ -228,6 +230,7 @@ function LoginPage() {
                 </div>
             </div>
         </div>
+        
     );
 }
 
