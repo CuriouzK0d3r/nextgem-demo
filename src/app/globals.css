@@ -148,8 +148,37 @@ form input {
   background: #eee;
   font-size: 16px;
   margin: 0 0 15px 0;
-  width: 300px;
+  /* width: 16rem; */
   font-weight: 100;
   outline: none;
   font-family: "Baloo 2", sans-serif;
+  border-radius: 8px;
+}
+
+select option {
+  border: none;
+  padding: 12px;
+  background: #eee;
+  font-size: 16px;
+  margin: 0 0 15px 0;
+  /* width: 300px; */
+  font-weight: 100;
+  outline: none;
+  font-family: "Baloo 2", sans-serif;
+}
+
+#uploadButton {
+  background: radial-gradient(
+    100% 100% at 100% 0%,
+    #29946b 0%,
+    #81a256 100%
+  );
+  color: white;
+  font-weight: bold;
+}
+
+#uploadButton:hover {
+  box-shadow: 0px 4px 8px rgb(45 35 66 / 40%),
+    0px 7px 13px -3px rgb(45 35 66 / 30%), inset 0px -3px 0px #1f6e50;
+  transform: translateY(-2px);
 }

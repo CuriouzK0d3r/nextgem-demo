@@ -60,7 +60,7 @@ function LoginPage() {
         evt.currentTarget.className += " active";
     }
 
-    function submitRegisterForm( event: any ) {
+    function submitRegisterForm(event: any) {
         event.preventDefault();
         const username = registerUsernameRef.current?.value;
         const password = registerPasswordRef.current?.value;
@@ -129,106 +129,83 @@ function LoginPage() {
     // Add
 
     return (
-        <div className="container">
-            <h4>Welcome to</h4>
+        <div className="container w-1/2">
+             <h4 className='mb-2 text-3xl'>Search for Studies</h4>
+            <div className='form-container'>
+            <form className='mt-4' id="loginForm" onSubmit={(event) => submitLoginForm(event)}>
+                <div className="grid gap-6 mb-6 md:grid-cols-2 ">
+                    <div>
+                    <label className="block mb-2 text-sm font-medium text-gray-900 ">Institution</label>
 
-            <img
-                src="https://www.nextgem.eu/wp-content/uploads/2022/07/cropped-NextGEM_final_transparent.png"
-                alt="logo-img"
-                id="logo-img"
-            />
-            <div className="form-container">
-                <div className="tab">
-                    <button className="tablinks active" onClick={(event) => openTab(event, 'loginTab')}>
-                        Login
-                    </button>
-                    <button className="tablinks" onClick={(event) => openTab(event, 'registerTab')}>
-                        Register
-                    </button>
-                </div>
-
-                {/* <!-- Login Tab --> */}
-                <div id="loginTab" className="tabcontent" style={{display: "block"}}>
-                    {/* <h3>Login</h3> */}
-                    <form className='mt-4' id="loginForm" onSubmit={(event) => submitLoginForm(event)}>
-                        <label htmlFor="loginUsername">Username:</label>
                         <input
                             className='rounded'
-                            ref={loginUsernameRef}
+                            // ref={loginUsernameRef}
                             type="text"
-                            id="loginUsername"
-                            name="loginUsername"
+                            id="institution"
+                            name="institution"
+                            placeholder='Institution'
                             required
                         />
+                    </div>
+                    <div>
+                    <label className="block mb-2 text-sm font-medium text-gray-900 ">Keywords</label>
 
-                        <label htmlFor="loginPassword">Password:</label>
                         <input
-                        className='rounded'
-                            ref={loginPasswordRef}
-                            type="password"
-                            id="loginPassword"
-                            name="loginPassword"
+                            className='rounded'
+                            // ref={loginPasswordRef}
+                            type="text"
+                            id="Keywords"
+                            name="Keywords"
+                            placeholder='Keywords'
                             required
                         />
-
-                        <input type="submit" id="loginBtn" className="btn font-bold" value="Login" />
-                    </form>
+                    </div>
+                    <div className="">
+                        <label className="block mb-2 text-sm font-medium text-gray-900 ">Modulation</label>
+                        <select
+                            className="text-sm rounded-lg  block w-full p-2.5  dark:border-gray-600 ">
+                            <option value="">--</option>
+                            <option value="NR">NR</option>
+                            <option value="noModulation">No Modulation</option>
+                        </select>
+                    </div>
+                    <div className=" ">
+                        <label className="block mb-2 text-sm font-medium text-gray-900 ">Output type</label>
+                        <select
+                            className="text-sm rounded-lg  block w-full p-2.5  dark:border-gray-600">
+                            <option value="">--</option>
+                            <option value="audio">audio</option>
+                            <option value="codebook">codebook</option>
+                            <option value="dataset">dataset</option>
+                            <option value="deliverable">deliverable</option>
+                            <option value="image">image</option>
+                            <option value="poster">poster</option>
+                            <option value="presentation">presentation</option>
+                            <option value="publication">publication</option>
+                            <option value="report">report</option>
+                            <option value="software">software</option>
+                            <option value="video">video</option>
+                        </select>
+                    </div>
+                    <div className=" ">
+                        <label className="block mb-2 text-sm font-medium text-gray-900 ">Study type</label>
+                        <select
+                            className="text-sm rounded-lg  block w-full p-2.5  dark:border-gray-600">
+                            <option value="">--</option>
+                            <option value="exVivo">exVivo</option>
+                            <option value="exposureAssessment">exposureAssessment</option>
+                            <option value="humanStudies">humanStudies</option>
+                            <option value="inVitro">inVitro</option>
+                            <option value="inVivo">inVivo</option>
+                            <option value="riskAssessment">riskAssessment</option>
+                            <option value="simulation">simulation</option>
+                        </select>
+                    </div>
                 </div>
-
-                {/* <!-- Register Tab --> */}
-                <div id="registerTab" className="tabcontent">
-                    <form className='mt-4' id="registerForm" onSubmit={(event)=>submitRegisterForm(event)}>
-                        <label htmlFor="registerUsername">Username:</label>
-                        <input
-                        className='rounded'
-                            ref={registerUsernameRef}
-                            type="text"
-                            id="registerUsername"
-                            name="registerUsername"
-                            required
-                        />
-
-                        <label htmlFor="registerPassword">Password:</label>
-                        <input
-                        className='rounded'
-                            ref={registerPasswordRef}
-                            type="password"
-                            id="registerPassword"
-                            name="registerPassword"
-                            required
-                        />
-
-                        <label htmlFor="registerEmail">Email:</label>
-                        <input
-                        className='rounded'
-                            ref={registerEmailRef}
-                            type="email"
-                            id="registerEmail"
-                            name="registerEmail"
-                            required
-                        />
-
-                        <label htmlFor="registerOrg">Organization:</label>
-                        <input
-                        className='rounded'
-                            ref={registerOrgRef}
-                            type="text"
-                            id="registerOrg"
-                            name="registerOrg"
-                            required
-                        />
-
-                        <input
-                            type="submit"
-                            id="registerBtn"
-                            className="btn font-bold"
-                            value="Register"
-                        />
-                    </form>
-                </div>
+                <input type="submit" id="searchBtn" className="btn font-bold" value="Search" />
+            </form>
             </div>
-        </div>
-    );
+        </div>);
 }
 
 export default LoginPage;
