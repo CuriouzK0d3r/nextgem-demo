@@ -1,307 +1,507 @@
 "use client"
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, Fragment } from 'react';
+import { Menu, Transition } from "@headlessui/react";
+import { ChevronDownIcon } from '@heroicons/react/20/solid';
+
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation'
 import { Card, Typography } from "@material-tailwind/react";
 
+function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(" ");
+}
+
 function LoginPage() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const loginUsernameRef = useRef<any>(null);
-    const loginPasswordRef = useRef<any>(null);
-    const registerUsernameRef = useRef<any>(null);
-    const registerPasswordRef = useRef<any>(null);
-    const registerEmailRef = useRef<any>(null);
-    const registerOrgRef = useRef<any>(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const loginUsernameRef = useRef<any>(null);
+  const loginPasswordRef = useRef<any>(null);
+  const registerUsernameRef = useRef<any>(null);
+  const registerPasswordRef = useRef<any>(null);
+  const registerEmailRef = useRef<any>(null);
+  const registerOrgRef = useRef<any>(null);
 
-    const router = useRouter();
+  const router = useRouter();
 
-    const TABLE_HEAD = ["Name", "Job", "Employed", ""];
- 
-const TABLE_ROWS = [
-  {
-    name: "John Michael",
-    job: "Manager",
-    date: "23/04/18",
-  },
-  {
-    name: "Alexa Liras",
-    job: "Developer",
-    date: "23/04/18",
-  },
-  {
-    name: "Laurent Perrier",
-    job: "Executive",
-    date: "19/09/17",
-  },
-  {
-    name: "Michael Levi",
-    job: "Developer",
-    date: "24/12/08",
-  },
-  {
-    name: "Richard Gran",
-    job: "Manager",
-    date: "04/10/21",
-  },
-];
+  const TABLE_HEAD = ["Name", "Job", "Employed", ""];
+
+  const TABLE_ROWS = [
+    {
+      name: "John Michael",
+      job: "Manager",
+      date: "23/04/18",
+    },
+    {
+      name: "Alexa Liras",
+      job: "Developer",
+      date: "23/04/18",
+    },
+    {
+      name: "Laurent Perrier",
+      job: "Executive",
+      date: "19/09/17",
+    },
+    {
+      name: "Michael Levi",
+      job: "Developer",
+      date: "24/12/08",
+    },
+    {
+      name: "Richard Gran",
+      job: "Manager",
+      date: "04/10/21",
+    },
+  ];
 
 
-    function isLoggedIn() {
-        let apiEndpoint = "/api/auth/token";
+  function isLoggedIn() {
+    let apiEndpoint = "/api/auth/token";
 
-        fetch(apiEndpoint, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                access_token: Cookies.get('token'),
-            }),
-        })
-            .then(async (response) => {
-                if (response.ok) {
-                    let responseJSON = await response.json();
-                    if (responseJSON.loggedin) {
-                        router.push('/login');
-                    }
-                    // window.location.href = "https://example.com/example-page";
-                    // Cookies.set('token', responseJSON.access_token, { expires: 1, secure: false });
-                } else {
-                    // alert("Login failed. Status: " + response.status);
-                    console.error("Login failed. Status: " + response.status);
-                }
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            });
-    }
-
-    function openTab(evt, tabName) {
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
+    fetch(apiEndpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        access_token: Cookies.get('token'),
+      }),
+    })
+      .then(async (response) => {
+        if (response.ok) {
+          let responseJSON = await response.json();
+          if (responseJSON.loggedin) {
+            router.push('/login');
+          }
+          // window.location.href = "https://example.com/example-page";
+          // Cookies.set('token', responseJSON.access_token, { expires: 1, secure: false });
+        } else {
+          // alert("Login failed. Status: " + response.status);
+          console.error("Login failed. Status: " + response.status);
         }
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
+
+  function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+
+  function submitRegisterForm(event: any) {
+    event.preventDefault();
+    const username = registerUsernameRef.current?.value;
+    const password = registerPasswordRef.current?.value;
+    const email = registerEmailRef.current?.value;
+    const organization = registerOrgRef?.current?.value;
+    const apiEndpoint = "http://139.91.58.16/nikh-auth/register";
+
+    fetch(apiEndpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+        email: email,
+        organizationId: [organization],
+        firstName: "Random",
+        roles: ["user"]
+      }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          // window.location.href = "https://example.com/example-page";
+          router.push('/register');
+        } else {
+          alert("Login failed. Status: " + response.status);
+          console.error("Registration failed. Status: " + response.status);
         }
-        document.getElementById(tabName).style.display = "block";
-        evt.currentTarget.className += " active";
-    }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
 
-    function submitRegisterForm(event: any) {
-        event.preventDefault();
-        const username = registerUsernameRef.current?.value;
-        const password = registerPasswordRef.current?.value;
-        const email = registerEmailRef.current?.value;
-        const organization = registerOrgRef?.current?.value;
-        const apiEndpoint = "http://139.91.58.16/nikh-auth/register";
+  function submitLoginForm(event: any) {
+    event.preventDefault();
+    const username = loginUsernameRef.current?.value;
+    const password = loginPasswordRef.current?.value;
+    const apiEndpoint = "/api/auth/login";
 
-        fetch(apiEndpoint, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                username: username,
-                password: password,
-                email: email,
-                organizationId: [organization],
-                firstName: "Random",
-                roles: ["user"]
-            }),
-        })
-            .then((response) => {
-                if (response.ok) {
-                    // window.location.href = "https://example.com/example-page";
-                    router.push('/register');
-                } else {
-                    alert("Login failed. Status: " + response.status);
-                    console.error("Registration failed. Status: " + response.status);
-                }
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            });
-    }
+    fetch(apiEndpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      }),
+    })
+      .then(async (response) => {
+        if (response.ok) {
+          let responseJSON = await response.json();
+          Cookies.set('token', responseJSON.access_token, { expires: 1, secure: false });
+          router.push('/search');
+        } else {
+          alert("Login failed. Status: " + response.status);
+          console.error("Login failed. Status: " + response.status);
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
+  // Add
 
-    function submitLoginForm(event: any) {
-        event.preventDefault();
-        const username = loginUsernameRef.current?.value;
-        const password = loginPasswordRef.current?.value;
-        const apiEndpoint = "/api/auth/login";
-
-        fetch(apiEndpoint, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                username: username,
-                password: password,
-            }),
-        })
-            .then(async (response) => {
-                if (response.ok) {
-                    let responseJSON = await response.json();
-                    Cookies.set('token', responseJSON.access_token, { expires: 1, secure: false });
-                    router.push('/search');
-                } else {
-                    alert("Login failed. Status: " + response.status);
-                    console.error("Login failed. Status: " + response.status);
-                }
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            });
-    }
-    // Add
-
-    return (
-        <div className='h-full w-full'>
-            <header>
-    <nav className="bg-gray-200 bg-opacity-90 border-gray-200 px-4 lg:px-6 py-4">
-      <div className="flex flex-wrap justify-between items-center mx-auto max-w-[100rem]">
-        <a href="" className="flex items-center">
-        <img
-        className="mr-3 h-18"
-                src="https://www.nextgem.eu/wp-content/uploads/2022/07/cropped-NextGEM_final_transparent.png"
+  return (
+    <div className='h-full w-full'>
+      <header>
+        <nav className="bg-niki-blue bg-opacity-90 border-gray-200 px-4 lg:px-6 py-4">
+          <div className="flex flex-wrap justify-between items-center mx-auto max-w-[100rem]">
+            <a href="" className="flex items-center">
+              <img
+                className="mr-3 h-18"
+                src="https://subra.ics.forth.gr/wp-content/uploads/2024/01/NIKH-logoname.png"
                 alt="logo-img"
                 id="logo-img"
-            />
-          {/* <!-- <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Search</span> --> */}
-        </a>
-        {/* <a href="/upload.html" className="mt-2" style="text-decoration: underline;">Upload</a> */}
+              />
+              {/* <!-- <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Search</span> --> */}
+            </a>
+            {/* <a href="/upload.html" className="mt-2" style="text-decoration: underline;">Upload</a> */}
 
-      </div>
-    </nav>
-  </header>
-        <div className="container w-1/2">
-             <h4 className='mb-2 text-3xl'>Search for Studies</h4>
-            <div className='form-container'>
-            <form className='mt-4' id="loginForm" onSubmit={(event) => submitLoginForm(event)}>
-                <div className="grid gap-6 mb-6 md:grid-cols-2 ">
-                    <div>
-                    <label className="block mb-2  font-medium text-gray-900 ">Institution</label>
+          </div>
+        </nav>
+      </header>
+      <div className="container w-3/4">
+        <h3 className='mb-2 text-6xl .title-color'>Search Scientific Catalogue</h3>
+        <div className='form-container w-full'>
 
-                        <input
-                            className='rounded'
-                            // ref={loginUsernameRef}
-                            type="text"
-                            id="institution"
-                            name="institution"
-                            placeholder='Institution'
-                            required
-                        />
-                    </div>
-                    <div>
-                    <label className="block mb-2 font-medium text-gray-900 ">Keywords</label>
-
-                        <input
-                            className='rounded'
-                            // ref={loginPasswordRef}
-                            type="text"
-                            id="Keywords"
-                            name="Keywords"
-                            placeholder='Keywords'
-                            required
-                        />
-                    </div>
-                    <div className="">
-                        <label className="block mb-2  font-medium text-gray-900 ">Modulation</label>
-                        <select
-                            className=" rounded-lg  block w-full p-2.5  dark:border-gray-600 ">
-                            <option value="">--</option>
-                            <option value="NR">NR</option>
-                            <option value="noModulation">No Modulation</option>
-                        </select>
-                    </div>
-                    <div className=" ">
-                        <label className="block mb-2  font-medium text-gray-900 ">Output type</label>
-                        <select
-                            className="text-sm rounded-lg  block w-full p-2.5  dark:border-gray-600">
-                            <option value="">--</option>
-                            <option value="audio">audio</option>
-                            <option value="codebook">codebook</option>
-                            <option value="dataset">dataset</option>
-                            <option value="deliverable">deliverable</option>
-                            <option value="image">image</option>
-                            <option value="poster">poster</option>
-                            <option value="presentation">presentation</option>
-                            <option value="publication">publication</option>
-                            <option value="report">report</option>
-                            <option value="software">software</option>
-                            <option value="video">video</option>
-                        </select>
-                    </div>
-                    <div className=" ">
-                        <label className="block mb-2  font-medium text-gray-900 ">Study type</label>
-                        <select
-                            className="text-sm rounded-lg  block w-full p-2.5  dark:border-gray-600">
-                            <option value="">--</option>
-                            <option value="exVivo">exVivo</option>
-                            <option value="exposureAssessment">exposureAssessment</option>
-                            <option value="humanStudies">humanStudies</option>
-                            <option value="inVitro">inVitro</option>
-                            <option value="inVivo">inVivo</option>
-                            <option value="riskAssessment">riskAssessment</option>
-                            <option value="simulation">simulation</option>
-                        </select>
-                    </div>
+          <form className='flex-1 w-3/4 mx-auto mb-10' >
+            <div className="flex">
+              {/* <label className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Your Email</label> */}
+              <Menu as="div" className="relative flex-none text-left w-[150px]">
+                <div>
+                  <Menu.Button style={{ borderWidth: "2px",  borderTopLeftRadius: "8px" }} id="dropdown-button" data-dropdown-toggle="dropdown"
+                    className=" w-[150px]  h-[70px] flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center 
+            text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none
+             focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700
+              dark:text-white dark:border-gray-600 pl-9">
+                    { }
+                    <ChevronDownIcon className="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
+                  </Menu.Button>
                 </div>
-                <input type="submit" id="searchBtn" className="btn font-bold" value="Search" />
-            </form>
-            </div>
-            <Card className="h-full w-full overflow-scroll hidden">
-      <table className="w-full min-w-max table-auto text-left">
-        <thead>
-          <tr>
-            {TABLE_HEAD.map((head) => (
-              <th key={head} className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="font-normal leading-none opacity-70"
+                <Transition
+                  as={Fragment}
+                  enter="transition ease-out duration-100"
+                  enterFrom="transform opacity-0 scale-95"
+                  enterTo="transform opacity-100 scale-100"
+                  leave="transition ease-in duration-75"
+                  leaveFrom="transform opacity-100 scale-100"
+                  leaveTo="transform opacity-0 scale-95"
                 >
-                  {head}
-                </Typography>
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {TABLE_ROWS.map(({ name, job, date }, index) => (
-            <tr key={name} className="even:bg-blue-gray-50/50">
-              <td className="p-4">
-                <Typography variant="small" color="blue-gray" className="font-normal">
-                  {name}
-                </Typography>
-              </td>
-              <td className="p-4">
-                <Typography variant="small" color="blue-gray" className="font-normal">
-                  {job}
-                </Typography>
-              </td>
-              <td className="p-4">
-                <Typography variant="small" color="blue-gray" className="font-normal">
-                  {date}
-                </Typography>
-              </td>
-              <td className="p-4">
-                <Typography as="a" href="#" variant="small" color="blue-gray" className="font-medium">
-                  Edit
-                </Typography>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </Card>
+                  <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <div className="py-1 divide-y">
+                      <Menu.Item>
+                        {({ active }) => (
+                          <a
+                            href="#"
+                            onClick={() => { }}
+                            className={classNames(
+                              active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                              'block px-4 py-2 text-sm font-bold'
+                            )}
+                          >
+                            All Fields
+                          </a>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <a
+                            href="#"
+                            onClick={() => { }}
+                            className={classNames(
+                              active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                              'block px-4 py-2 text-sm font-bold'
+                            )}
+                          >
+                            Title
+                          </a>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <a
+                            href="#"
+                            onClick={() => { }}
+                            className={classNames(
+                              active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                              'block px-4 py-2 text-sm font-bold'
+                            )}
+                          >
+                            Author
+                          </a>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <a
+                            onClick={() => { }}
+                            href="#"
+                            className={classNames(
+                              active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                              'block px-4 py-2 text-sm font-bold'
+                            )}
+                          >
+                            Abstract
+                          </a>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <a
+                            onClick={() => { setSearchType('Subject'); setCurrentPage(1); }}
+                            href="#"
+                            className={classNames(
+                              active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                              'block px-4 py-2 text-sm font-bold'
+                            )}
+                          >
+                            Subject
+                          </a>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <a
+                            onClick={() => { setSearchType('DOI'); setCurrentPage(1); }}
+                            href="#"
+                            className={classNames(
+                              active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                              'block px-4 py-2 text-sm font-bold'
+                            )}
+                          >
+                            DOI
+                          </a>
+                        )}
+                      </Menu.Item>
+                    </div>
+                  </Menu.Items>
+                </Transition>
+              </Menu>
+              <div className="relative inline-block flex-1 h-full">
+                <input
+                  style={{ borderWidth: "2px", borderColor: "#6359E1" }}
+                  // value={searchQuery}
+                  onChange={(e) => { }}
+                  type="search" id="search-dropdown" className="w-full h-[70px] block p-2.5 z-20 text-sm text-gray-900 
+                bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 
+                dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
+                dark:focus:border-blue-500" placeholder="Search Titles, DOIs, Authors, Subjects" required />
+                <div className='h-full'>
+                  <button style={{ borderWidth: "2px", borderColor: "#6359E1", borderTopLeftRadius: "8px" }} type="submit" className="w-[100px] absolute top-0 right-0 pl-9 text-sm font-medium h-[70px] text-white bg-niki-blue rounded-r-lg border border-blue-500 hover:bg-niki-blue focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-700">
+                    <svg className="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                      <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                    </svg>
+                    <span className="sr-only">Search</span>
+                  </button>
+                </div>
+
+              </div>
+            </div>
+          </form>
+          <form className='mt-4' id="searchForm">
+            <h5 className='text-center text-xl mb-10'>
+              Search Terms:
+            </h5>
+            <div className="grid gap-6 mb-6 md:grid-cols-2 ">
+              <div>
+                <span className='underline text-lg mb-10'>
+                  Description
+                </span>
+                <div>
+                  <div className="flex mb-4">
+                    <label className="block mb-2  font-medium text-gray-900 mr-5">Type of Study</label>
+                    <select
+                      className="text-sm rounded-lg  block p-2.5  w-2/4 dark:border-gray-600">
+                      <option value="">--</option>
+                      <option value="exVivo">exVivo</option>
+                      <option value="exposureAssessment">exposureAssessment</option>
+                      <option value="humanStudies">humanStudies</option>
+                      <option value="inVitro">inVitro</option>
+                      <option value="inVivo">inVivo</option>
+                      <option value="riskAssessment">riskAssessment</option>
+                      <option value="simulation">simulation</option>
+                    </select>
+                  </div>
+                  <div className="flex ">
+                    <label className="block mb-2  font-medium text-gray-900 mr-3">Type of Output</label>
+                    <select
+                      className="text-sm rounded-lg  block w-2/4 p-2.5  dark:border-gray-600">
+                      <option value="">--</option>
+                      <option value="audio">audio</option>
+                      <option value="codebook">codebook</option>
+                      <option value="dataset">dataset</option>
+                      <option value="deliverable">deliverable</option>
+                      <option value="image">image</option>
+                      <option value="poster">poster</option>
+                      <option value="presentation">presentation</option>
+                      <option value="publication">publication</option>
+                      <option value="report">report</option>
+                      <option value="software">software</option>
+                      <option value="video">video</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <span className='underline'>
+                  Indicative Terms
+                </span>
+              </div>
+              <div className="flex">
+                <label className="block mb-2  font-medium text-gray-900 mr-10">Modulation</label>
+                <select
+                  className=" rounded-lg  block w-2/4 p-2.5  dark:border-gray-600 ">
+                  <option value="">--</option>
+                  <option value="NR">NR</option>
+                  <option value="noModulation">No Modulation</option>
+                </select>
+              </div>
+              {/* <div>
+                <label className="block mb-2  font-medium text-gray-900 ">Institution</label>
+
+                <input
+                  className='rounded'
+                  // ref={loginUsernameRef}
+                  type="text"
+                  id="institution"
+                  name="institution"
+                  placeholder='Institution'
+                  required
+                />
+              </div>
+              <div>
+                <label className="block mb-2 font-medium text-gray-900 ">Keywords</label>
+                <input
+                  className='rounded'
+                  // ref={loginPasswordRef}
+                  type="text"
+                  id="Keywords"
+                  name="Keywords"
+                  placeholder='Keywords'
+                  required
+                />
+              </div>
+              <div className="">
+                <label className="block mb-2  font-medium text-gray-900 ">Modulation</label>
+                <select
+                  className=" rounded-lg  block w-full p-2.5  dark:border-gray-600 ">
+                  <option value="">--</option>
+                  <option value="NR">NR</option>
+                  <option value="noModulation">No Modulation</option>
+                </select>
+              </div>
+              <div className=" ">
+                <label className="block mb-2  font-medium text-gray-900 ">Output type</label>
+                <select
+                  className="text-sm rounded-lg  block w-full p-2.5  dark:border-gray-600">
+                  <option value="">--</option>
+                  <option value="audio">audio</option>
+                  <option value="codebook">codebook</option>
+                  <option value="dataset">dataset</option>
+                  <option value="deliverable">deliverable</option>
+                  <option value="image">image</option>
+                  <option value="poster">poster</option>
+                  <option value="presentation">presentation</option>
+                  <option value="publication">publication</option>
+                  <option value="report">report</option>
+                  <option value="software">software</option>
+                  <option value="video">video</option>
+                </select>
+              </div>
+              <div className=" ">
+                <label className="block mb-2  font-medium text-gray-900 ">Study type</label>
+                <select
+                  className="text-sm rounded-lg  block w-full p-2.5  dark:border-gray-600">
+                  <option value="">--</option>
+                  <option value="exVivo">exVivo</option>
+                  <option value="exposureAssessment">exposureAssessment</option>
+                  <option value="humanStudies">humanStudies</option>
+                  <option value="inVitro">inVitro</option>
+                  <option value="inVivo">inVivo</option>
+                  <option value="riskAssessment">riskAssessment</option>
+                  <option value="simulation">simulation</option>
+                </select>
+              </div> */}
+            </div>
+            <div>
+              <button className="clear-button font-bold w-30 mr-4" type="submit">Clear</button>
+              <input type="submit" id="searchBtn" className="btn font-bold w-30" value="Search" />
+            </div>
+          </form>
         </div>
-        </div>);
+        <Card className="h-full w-full overflow-scroll hidden">
+          <table className="w-full min-w-max table-auto text-left">
+            <thead>
+              <tr>
+                {TABLE_HEAD.map((head) => (
+                  <th key={head} className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="font-normal leading-none opacity-70"
+                    >
+                      {head}
+                    </Typography>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {TABLE_ROWS.map(({ name, job, date }, index) => (
+                <tr key={name} className="even:bg-blue-gray-50/50">
+                  <td className="p-4">
+                    <Typography variant="small" color="blue-gray" className="font-normal">
+                      {name}
+                    </Typography>
+                  </td>
+                  <td className="p-4">
+                    <Typography variant="small" color="blue-gray" className="font-normal">
+                      {job}
+                    </Typography>
+                  </td>
+                  <td className="p-4">
+                    <Typography variant="small" color="blue-gray" className="font-normal">
+                      {date}
+                    </Typography>
+                  </td>
+                  <td className="p-4">
+                    <Typography as="a" href="#" variant="small" color="blue-gray" className="font-medium">
+                      Edit
+                    </Typography>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </Card>
+      </div>
+    </div>);
 }
 
 export default LoginPage;

@@ -16,8 +16,6 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   
-  // const router = useRouter() 
-  console.log(children.props) 
   return (
     <html lang="en">
       <head>

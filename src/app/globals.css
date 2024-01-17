@@ -16,12 +16,44 @@
   }
 }
 
+
+@layer utilities {
+  .light-theme {
+    --foreground-rgb: 0, 0, 0;
+    --background-start-rgb: 214, 219, 220;
+    --background-end-rgb: 255, 255, 255;
+    color: rgb(var(--foreground-rgb));
+    background: linear-gradient(to bottom,
+        transparent,
+        rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+  }
+
+  .dark-theme {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+    color: rgb(var(--foreground-rgb));
+    background: linear-gradient(to bottom,
+        transparent,
+        rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+  }
+
+  .title-color {
+    color: #878C90;
+  }
+
+  .bg-niki-blue {
+    background-color: #1D2E66;
+  }
+}
+
+
 body {
   font-family: "Baloo 2", sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
-  background-image: url(https://www.nextgem.eu/wp-content/uploads/2022/07/background-overlay.png);
+  background-color: #F6FFF4;
+  /* background-image: url(https://www.nextgem.eu/wp-content/uploads/2022/07/background-overlay.png); */
   background-repeat: no-repeat;
   background-size: cover;
   opacity: 1;
@@ -44,7 +76,7 @@ body {
   width: 350px;
 }
 h3 {
-  color: #81a256;
+  color: #878C90;
   font-size: 16px;
 }
 h4 {
@@ -59,11 +91,41 @@ h4 {
 }
 
 
+.clear-button {
+  background-color: #014F27;
+  display: inline-block;
+  font-family: "Baloo 2", sans-serif;
+  font-size: 16px;
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  will-change: box-shadow, transform;
+  box-shadow: 0px 2px 4px rgb(45 35 66 / 40%),
+    0px 7px 13px -3px rgb(45 35 66 / 30%),
+    inset 0px -3px 0px rgb(58 65 111 / 50%);
+    padding: 0 32px;
+    border-radius: 6px;
+    color: #fff;
+    height: 48px;
+    text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+    margin-top: 1rem;
+}
+.clear-button:hover {
+  box-shadow: 0px 4px 8px rgb(45 35 66 / 40%),
+    0px 7px 13px -3px rgb(45 35 66 / 30%), inset 0px -3px 0px #1f6e50;
+  transform: translateY(-2px);
+}
+.clear-button:active {
+  box-shadow: inset 0px 3px 7px#1b4b38;
+  transform: translateY(2px);
+}
+
+
 .btn {
   display: inline-block;
   font-family: "Baloo 2", sans-serif;
-  font-size: 20px;
-  width: 100%;
+  font-size: 16px;
   outline: 0;
   border: 0;
   cursor: pointer;
@@ -78,7 +140,7 @@ h4 {
     inset 0px -3px 0px rgb(58 65 111 / 50%);
   padding: 0 32px;
   border-radius: 6px;
-  color: #fff;
+  color: #000;
   height: 48px;
   text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
   transition: box-shadow 0.15s ease, transform 0.15s ease;
@@ -94,9 +156,9 @@ h4 {
   transform: translateY(2px);
 }
 .form-container {
-  background-color: #fff;
+  background-color: #D9D9D9;
   padding: 3rem;
-  border-radius: 8px;
+  border-radius: 30px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   /* height: 20rem; */
 }
