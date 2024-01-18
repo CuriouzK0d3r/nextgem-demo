@@ -216,7 +216,11 @@ form input {
   font-weight: 100;
   outline: none;
   font-family: "Baloo 2", sans-serif;
-  border-radius: 8px;
+  /* border-radius: 8px; */
+}
+
+.chosen-source {
+  border: 2px solid #1D2E66;
 }
 
 select option {
