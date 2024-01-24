@@ -60,6 +60,23 @@ body {
   transition: background 0.3s, border-radius 0.3s, opacity 0.3s;
 }
 
+.box {
+  height: 39px;
+  width: 496px;
+}
+
+.box .rectangle {
+  background-color: #f1f1f4;
+  border: 1px solid;
+  border-color: #efefef;
+  border-radius: 23px;
+  height: 39px;
+  left: 0;
+  top: 0;
+  width: 496px;
+}
+
+
 .container {
   display: flex;
   flex-direction: column;
@@ -73,23 +90,48 @@ body {
 }
 
 #logo-img {
-  width: 350px;
+  width: 200px;
 }
+
 h3 {
   color: #878C90;
   font-size: 16px;
 }
+
 h4 {
   color: #81a256;
   font-size: 24px;
   margin-bottom: -40px;
 }
+
 .btnBox {
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
 }
 
+
+.login-button {
+  background-color: rgba(61, 53, 47, 0.36);
+  display: inline-block;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  outline: 0;
+  border: 1px solid rgba(244, 244, 244, 0.80);
+  border-radius: 28px !important;
+  cursor: pointer;
+  will-change: box-shadow, transform;
+  box-shadow: 0px 2px 4px rgb(45 35 66 / 40%),
+    0px 7px 13px -3px rgb(45 35 66 / 30%),
+    inset 0px -3px 0px rgb(58 65 111 / 50%);
+  padding: 0 32px;
+  color: #fff;
+  width: 144.025px;
+  height: 39px;
+  text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+  margin-top: 1rem;
+}
 
 .clear-button {
   background-color: #014F27;
@@ -103,19 +145,21 @@ h4 {
   box-shadow: 0px 2px 4px rgb(45 35 66 / 40%),
     0px 7px 13px -3px rgb(45 35 66 / 30%),
     inset 0px -3px 0px rgb(58 65 111 / 50%);
-    padding: 0 32px;
-    border-radius: 6px;
-    color: #fff;
-    height: 48px;
-    text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
-    transition: box-shadow 0.15s ease, transform 0.15s ease;
-    margin-top: 1rem;
+  padding: 0 32px;
+  border-radius: 6px;
+  color: #fff;
+  height: 48px;
+  text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+  margin-top: 1rem;
 }
+
 .clear-button:hover {
   box-shadow: 0px 4px 8px rgb(45 35 66 / 40%),
     0px 7px 13px -3px rgb(45 35 66 / 30%), inset 0px -3px 0px #1f6e50;
   transform: translateY(-2px);
 }
+
 .clear-button:active {
   box-shadow: inset 0px 3px 7px#1b4b38;
   transform: translateY(2px);
@@ -130,11 +174,9 @@ h4 {
   border: 0;
   cursor: pointer;
   will-change: box-shadow, transform;
-  background: radial-gradient(
-    100% 100% at 100% 0%,
-    #29946b 0%,
-    #81a256 100%
-  );
+  background: radial-gradient(100% 100% at 100% 0%,
+      #29946b 0%,
+      #81a256 100%);
   box-shadow: 0px 2px 4px rgb(45 35 66 / 40%),
     0px 7px 13px -3px rgb(45 35 66 / 30%),
     inset 0px -3px 0px rgb(58 65 111 / 50%);
@@ -146,15 +188,18 @@ h4 {
   transition: box-shadow 0.15s ease, transform 0.15s ease;
   margin-top: 1rem;
 }
+
 .btn:hover {
   box-shadow: 0px 4px 8px rgb(45 35 66 / 40%),
     0px 7px 13px -3px rgb(45 35 66 / 30%), inset 0px -3px 0px #1f6e50;
   transform: translateY(-2px);
 }
+
 .btn:active {
   box-shadow: inset 0px 3px 7px#1b4b38;
   transform: translateY(2px);
 }
+
 .form-container {
   background-color: #D9D9D9;
   padding: 3rem;
@@ -189,11 +234,9 @@ h4 {
 
 .tab button.active {
   color: #fff;
-  background: radial-gradient(
-    100% 100% at 100% 0%,
-    #29946b 0%,
-    #81a256 100%
-  );
+  background: radial-gradient(100% 100% at 100% 0%,
+      #29946b 0%,
+      #81a256 100%);
   box-shadow: 0px 2px 4px rgb(45 35 66 / 40%),
     0px 7px 13px -3px rgb(45 35 66 / 30%),
     inset 0px -3px 0px rgb(58 65 111 / 50%);
@@ -202,10 +245,12 @@ h4 {
 .tabcontent {
   display: none;
 }
+
 form {
   display: flex;
   flex-direction: column;
 }
+
 form input {
   border: none;
   padding: 12px;
@@ -236,11 +281,9 @@ select option {
 }
 
 #uploadButton {
-  background: radial-gradient(
-    100% 100% at 100% 0%,
-    #29946b 0%,
-    #81a256 100%
-  );
+  background: radial-gradient(100% 100% at 100% 0%,
+      #29946b 0%,
+      #81a256 100%);
   color: white;
   font-weight: bold;
 }

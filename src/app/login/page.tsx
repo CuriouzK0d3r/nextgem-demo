@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation'
+import Header from '../components/header';
 
 function LoginPage() {
     const [email, setEmail] = useState('');
@@ -130,8 +131,10 @@ function LoginPage() {
 
     return (
         
-<div className="container w-[40rem] h-full">
-              
+<div className="">
+<div className='h-full w-full '>
+    <Header></Header>
+<div className="container w-[40rem] ">
             <h4>Welcome to</h4>
 
             <img
@@ -230,7 +233,8 @@ function LoginPage() {
                 </div>
             </div>
         </div>
-        
+        </div>
+        </div>
     );
 }
 

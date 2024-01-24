@@ -7,56 +7,14 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation'
 import { Card, Typography } from "@material-tailwind/react";
+import Header from '../components/header';
 
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
-}
-
-function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const loginUsernameRef = useRef<any>(null);
-  const loginPasswordRef = useRef<any>(null);
-  const registerUsernameRef = useRef<any>(null);
-  const registerPasswordRef = useRef<any>(null);
-  const registerEmailRef = useRef<any>(null);
-  const registerOrgRef = useRef<any>(null);
-
+function SearchPage() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
 
-  const TABLE_HEAD = ["Name", "Job", "Employed", ""];
-
-  const TABLE_ROWS = [
-    {
-      name: "John Michael",
-      job: "Manager",
-      date: "23/04/18",
-    },
-    {
-      name: "Alexa Liras",
-      job: "Developer",
-      date: "23/04/18",
-    },
-    {
-      name: "Laurent Perrier",
-      job: "Executive",
-      date: "19/09/17",
-    },
-    {
-      name: "Michael Levi",
-      job: "Developer",
-      date: "24/12/08",
-    },
-    {
-      name: "Richard Gran",
-      job: "Manager",
-      date: "04/10/21",
-    },
-  ];
-
-
-  function isLoggedIn() {
-    let apiEndpoint = "/api/auth/token";
+  const checkLoginStatus = () => {
+    const apiEndpoint = "/api/auth/token";
 
     fetch(apiEndpoint, {
       method: "POST",
@@ -70,13 +28,11 @@ function LoginPage() {
       .then(async (response) => {
         if (response.ok) {
           let responseJSON = await response.json();
+          console.log(responseJSON)
           if (responseJSON.loggedin) {
-            router.push('/login');
+            setIsLoggedIn(true);
           }
-          // window.location.href = "https://example.com/example-page";
-          // Cookies.set('token', responseJSON.access_token, { expires: 1, secure: false });
         } else {
-          // alert("Login failed. Status: " + response.status);
           console.error("Login failed. Status: " + response.status);
         }
       })
@@ -85,86 +41,7 @@ function LoginPage() {
       });
   }
 
-  function openTab(evt, tabName) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-      tabcontent[i].style.display = "none";
-    }
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    document.getElementById(tabName).style.display = "block";
-    evt.currentTarget.className += " active";
-  }
-
-  function submitRegisterForm(event: any) {
-    event.preventDefault();
-    const username = registerUsernameRef.current?.value;
-    const password = registerPasswordRef.current?.value;
-    const email = registerEmailRef.current?.value;
-    const organization = registerOrgRef?.current?.value;
-    const apiEndpoint = "http://139.91.58.16/nikh-auth/register";
-
-    fetch(apiEndpoint, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: username,
-        password: password,
-        email: email,
-        organizationId: [organization],
-        firstName: "Random",
-        roles: ["user"]
-      }),
-    })
-      .then((response) => {
-        if (response.ok) {
-          // window.location.href = "https://example.com/example-page";
-          router.push('/register');
-        } else {
-          alert("Login failed. Status: " + response.status);
-          console.error("Registration failed. Status: " + response.status);
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  }
-
-  function submitLoginForm(event: any) {
-    event.preventDefault();
-    const username = loginUsernameRef.current?.value;
-    const password = loginPasswordRef.current?.value;
-    const apiEndpoint = "/api/auth/login";
-
-    fetch(apiEndpoint, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: username,
-        password: password,
-      }),
-    })
-      .then(async (response) => {
-        if (response.ok) {
-          let responseJSON = await response.json();
-          Cookies.set('token', responseJSON.access_token, { expires: 1, secure: false });
-          router.push('/search');
-        } else {
-          alert("Login failed. Status: " + response.status);
-          console.error("Login failed. Status: " + response.status);
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  }
+  checkLoginStatus();
 
   const TextInputComponent = ({ label, type, required, ref }: any) => {
     return (
@@ -199,30 +76,14 @@ function LoginPage() {
 
   return (
     <div className='h-full w-full '>
-      <header>
-        <nav className="bg-niki-blue bg-opacity-90 border-gray-200 px-4 lg:px-6 py-4">
-          <div className="flex flex-wrap justify-between items-center mx-auto max-w-[100rem]">
-            <a href="" className="flex items-center">
-              <img
-                className="mr-3 h-18"
-                src="https://subra.ics.forth.gr/wp-content/uploads/2024/01/NIKH-logoname.png"
-                alt="logo-img"
-                id="logo-img"
-              />
-            </a>
-            <div>
-              <a href="" className="text-base font-medium text-white hover:text-gray-200"> </a>
-            </div>
-          </div>
-        </nav>
-      </header>
-      <div className="w-full mt-16 h-full ">
+      <Header isLoggedIn={isLoggedIn}></Header>
+      <div className="w-full mt-16 ">
         <h3 className='mb-4 text-5xl .title-color text-center mx-auto'>Search Scientific Catalogue</h3>
         <div className='form-container w-3/4 mx-auto'>
           <form className='flex-1 w-3/4 mx-auto mb-10' >
             <div className="flex">
               {/* <label className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Your Email</label> */}
-              <Menu as="div" className="relative flex-none text-left w-[150px] h-[74px] bottom-[2px]">
+              {/* <Menu as="div" className="relative flex-none text-left w-[150px] h-[74px] bottom-[2px]">
                 <div>
                   <Menu.Button style={{ borderWidth: "2px", borderTopLeftRadius: "8px" }} id="dropdown-button" data-dropdown-toggle="dropdown"
                     className=" w-[150px]  h-[74px] flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center 
@@ -331,14 +192,14 @@ function LoginPage() {
                     </div>
                   </Menu.Items>
                 </Transition>
-              </Menu>
+              </Menu> */}
               <div className="relative inline-block flex-1 h-full">
                 <input
                   style={{ borderWidth: "2px", borderColor: "#6359E1" }}
                   // value={searchQuery}
                   onChange={(e) => { }}
-                  type="search" id="search-dropdown" className="w-full h-[70px] block p-2.5 z-20 text-sm text-gray-900 
-                bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 
+                  type="search" id="search-dropdown" className="w-full h-[70px] block p-2.5 pl-9 z-20 text-sm text-gray-900 
+                bg-gray-50 rounded-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 
                 dark:bg-gray-700 dark:border-l-gray-700 mb-0  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
                 dark:focus:border-blue-500" placeholder="Search Titles, DOIs, Authors, Subjects" required />
                 <div className='h-full'>
@@ -387,74 +248,7 @@ function LoginPage() {
                 <SelectInputComponent label="Biological Model" values={["--", ""]} required={false} />
                 <SelectInputComponent label="BioSpecific Endpoints" values={["--", ""]} required={false} />
                 <SelectInputComponent label="Methods" values={["--", ""]} required={false} />
-
               </div>
-              {/* <div>
-                <label className="block mb-2  font-medium text-gray-900 ">Institution</label>
-
-                <input
-                  className='rounded'
-                  // ref={loginUsernameRef}
-                  type="text"
-                  id="institution"
-                  name="institution"
-                  placeholder='Institution'
-                  required
-                />
-              </div>
-              <div>
-                <label className="block mb-2 font-medium text-gray-900 ">Keywords</label>
-                <input
-                  className='rounded'
-                  // ref={loginPasswordRef}
-                  type="text"
-                  id="Keywords"
-                  name="Keywords"
-                  placeholder='Keywords'
-                  required
-                />
-              </div>
-              <div className="">
-                <label className="block mb-2  font-medium text-gray-900 ">Modulation</label>
-                <select
-                  className=" rounded-lg  block w-full p-2.5  dark:border-gray-600 ">
-                  <option value="">--</option>
-                  <option value="NR">NR</option>
-                  <option value="noModulation">No Modulation</option>
-                </select>
-              </div>
-              <div className=" ">
-                <label className="block mb-2  font-medium text-gray-900 ">Output type</label>
-                <select
-                  className="text-sm rounded-lg  block w-full p-2.5  dark:border-gray-600">
-                  <option value="">--</option>
-                  <option value="audio">audio</option>
-                  <option value="codebook">codebook</option>
-                  <option value="dataset">dataset</option>
-                  <option value="deliverable">deliverable</option>
-                  <option value="image">image</option>
-                  <option value="poster">poster</option>
-                  <option value="presentation">presentation</option>
-                  <option value="publication">publication</option>
-                  <option value="report">report</option>
-                  <option value="software">software</option>
-                  <option value="video">video</option>
-                </select>
-              </div>
-              <div className=" ">
-                <label className="block mb-2  font-medium text-gray-900 ">Study type</label>
-                <select
-                  className="text-sm rounded-lg  block w-full p-2.5  dark:border-gray-600">
-                  <option value="">--</option>
-                  <option value="exVivo">exVivo</option>
-                  <option value="exposureAssessment">exposureAssessment</option>
-                  <option value="humanStudies">humanStudies</option>
-                  <option value="inVitro">inVitro</option>
-                  <option value="inVivo">inVivo</option>
-                  <option value="riskAssessment">riskAssessment</option>
-                  <option value="simulation">simulation</option>
-                </select>
-              </div> */}
             </div>
             <div>
               <button className="clear-button font-bold w-30 mr-4" type="submit">Clear</button>
@@ -463,7 +257,7 @@ function LoginPage() {
           </form>
         </div>
         <div className='flex flex-row mx-auto w-full mt-10 mb-20'>
-          <div className='w-1/2 flex mx-auto items-center'>
+          <div className=' flex mx-auto items-center'>
           <button className={""} onClick={() => { }}>
             <img width={100} src="./NextGEM_Button.svg" alt="NextGEM" className="mr-[9px] chosen-source" />
           </button>
@@ -475,53 +269,8 @@ function LoginPage() {
           <img width={100} src="./YODA.svg" alt="Yoda" className="" />
           </div>
         </div>
-        <Card className="h-full w-full overflow-scroll hidden">
-          <table className="w-full min-w-max table-auto text-left">
-            <thead>
-              <tr>
-                {TABLE_HEAD.map((head) => (
-                  <th key={head} className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
-                    <Typography
-                      variant="small"
-                      color="blue-gray"
-                      className="font-normal leading-none opacity-70"
-                    >
-                      {head}
-                    </Typography>
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {TABLE_ROWS.map(({ name, job, date }, index) => (
-                <tr key={name} className="even:bg-blue-gray-50/50">
-                  <td className="p-4">
-                    <Typography variant="small" color="blue-gray" className="font-normal">
-                      {name}
-                    </Typography>
-                  </td>
-                  <td className="p-4">
-                    <Typography variant="small" color="blue-gray" className="font-normal">
-                      {job}
-                    </Typography>
-                  </td>
-                  <td className="p-4">
-                    <Typography variant="small" color="blue-gray" className="font-normal">
-                      {date}
-                    </Typography>
-                  </td>
-                  <td className="p-4">
-                    <Typography as="a" href="#" variant="small" color="blue-gray" className="font-medium">
-                      Edit
-                    </Typography>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </Card>
       </div>
     </div>);
 }
 
-export default LoginPage;
+export default SearchPage;
