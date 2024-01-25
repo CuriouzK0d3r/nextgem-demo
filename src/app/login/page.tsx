@@ -33,7 +33,7 @@ function LoginPage() {
                 if (response.ok) {
                     let responseJSON = await response.json();
                     if (responseJSON.loggedin) {
-                        router.push('/login');
+                        router.push('/search');
                     }
                     // window.location.href = "https://example.com/example-page";
                     Cookies.set('token', responseJSON.access_token, { expires: 1, secure: false });
@@ -46,6 +46,8 @@ function LoginPage() {
                 console.error("Error:", error);
             });
     }
+
+    isLoggedIn();
 
     function openTab(evt: any, tabName: any) {
         var i, tabcontent, tablinks;
@@ -85,10 +87,9 @@ function LoginPage() {
         })
             .then((response) => {
                 if (response.ok) {
-                    // window.location.href = "https://example.com/example-page";
-                    router.push('/register');
+                    router.push('/search');
                 } else {
-                    alert("Login failed. Status: " + response.status);
+                    alert("Registration failed. Status: " + response.status);
                     console.error("Registration failed. Status: " + response.status);
                 }
             })

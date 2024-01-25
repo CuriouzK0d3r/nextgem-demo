@@ -219,7 +219,7 @@ function SearchPage() {
             </h5> */}
             <div className="grid gap-8 mb-6 md:grid-cols-2 ">
               <div>
-                <div className='underline text-md mb-8'>
+                <div className='underline decoration-dotted decoration-2 decoration-[#1D2E66] text-lg mb-8'>
                   Description
                 </div>
                 <div>
@@ -236,7 +236,7 @@ function SearchPage() {
                 </div>
               </div>
               <div>
-                <div className='underline text-md mb-8'>
+                <div className='underline decoration-dotted decoration-2 decoration-[#1D2E66] text-lg mb-8'>
                   Indicative Terms
                 </div>
                 <SelectInputComponent label="Frequency Ranges" values={["--", ""]} required={false} />

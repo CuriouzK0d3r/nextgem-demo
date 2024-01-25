@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Header from '../components/header';
+import FileUploader from '../components/file-uploader';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -141,11 +142,26 @@ function InputPage() {
               </div>
             </form>
           </div>
-          <div id="fileTab" className={ " mt-12 " + (activeTab === 'fileTab' ? 'block' : 'hidden')} >
-          <div>
-      <input type="file" multiple onChange={handleFileChange} />
-      <button onClick={handleUpload}>Upload</button>
-    </div>
+          <div id="fileTab" className={ "h-[450px] mt-12 " + (activeTab === 'fileTab' ? 'block' : 'hidden')} >
+            <h2 className='mb-8 text-xl bold underline decoration-dotted decoration-4 decoration-[#1D2E66]'>Upload files of scientific data</h2>
+
+            {/* <label className="flex w-52 items-center px-4 py-2 bg-blue-500 text-white rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue-600 hover:text-white">
+  <svg className="w-8 h-8" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+    <path d="M10 20v-6h5l-6-6-6 6h5v6zM10 0h10v2H10V0z"/>
+  </svg>
+  <span className="ml-2 text-base leading-normal">Select a file</span>
+  <input type='file' className="hidden" multiple onChange={handleFileChange} />
+</label> */}
+
+<FileUploader
+          url={'/api/upload'}
+          acceptedFileTypes={[
+            "application/json",
+          ]}
+          maxFileSize={100}
+          label="Max File Size: 1MB"
+          // labelAlt="Accepted File Types: png, jpeg"
+        />
           </div>
         </div>
 
