@@ -6,12 +6,15 @@ const Header = ({isLoggedIn}) => {
   return (
     <nav className="flex items-center justify-between flex-wrap bg-niki-blue p-6 z-10">
       <div className="flex flex-shrink-0 text-white ml-[8%]">
-        <span className="font-semibold text-xl tracking-tight"><img
+        <span className="font-semibold text-xl tracking-tight">
+          <a href="/">
+          <img
           className="mr-3"
           src="https://subra.ics.forth.gr/wp-content/uploads/2024/01/NIKH-logoname.png"
           alt="logo-img"
           id="logo-img"
-        /></span>
+        />
+        </a></span>
       </div>
       <div className="block lg:hidden">
         <button onClick={() => setIsOpen(!isOpen)} className="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
@@ -50,10 +53,10 @@ const Header = ({isLoggedIn}) => {
           <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-12 text-lg">
             Citizens
           </a>
-          <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-12 text-lg">
+          <a href="/search" className="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-12 text-lg">
             Scientists
           </a>
-          <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-20 text-lg">
+          <a href="/members" className="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-20 text-lg">
             Members
           </a>
         </div>

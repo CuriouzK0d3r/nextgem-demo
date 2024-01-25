@@ -61,7 +61,7 @@ function LoginPage() {
         evt.currentTarget.className += " active";
     }
 
-    function submitRegisterForm( event: any ) {
+    function submitRegisterForm(event: any) {
         event.preventDefault();
         const username = registerUsernameRef.current?.value;
         const password = registerPasswordRef.current?.value;
@@ -130,110 +130,111 @@ function LoginPage() {
     // Add
 
     return (
-        
-<div className="">
-<div className='h-full w-full '>
-    <Header></Header>
-<div className="container w-[40rem] ">
-            <h4>Welcome to</h4>
 
-            <img
-                src="https://www.nextgem.eu/wp-content/uploads/2022/07/cropped-NextGEM_final_transparent.png"
-                alt="logo-img"
-                id="logo-img"
-            />
-            <div className="form-container w-full">
-                <div className="tab">
-                    <button className="tablinks active" onClick={(event) => openTab(event, 'loginTab')}>
-                        Login
-                    </button>
-                    <button className="tablinks" onClick={(event) => openTab(event, 'registerTab')}>
-                        Register
-                    </button>
-                </div>
-
-                {/* <!-- Login Tab --> */}
-                <div id="loginTab" className="tabcontent" style={{display: "block"}}>
-                    {/* <h3>Login</h3> */}
-                    <form className='mt-4' id="loginForm" onSubmit={(event) => submitLoginForm(event)}>
-                        <label htmlFor="loginUsername">Username:</label>
-                        <input
-                            className='rounded'
-                            ref={loginUsernameRef}
-                            type="text"
-                            id="loginUsername"
-                            name="loginUsername"
-                            required
+        <div className="">
+            <div className='h-full w-full '>
+                <Header isLoggedIn={true}></Header>
+                <div className="container w-[40rem] ">
+                    <h4>Welcome to</h4>
+                    <a href='/' >
+                        <img
+                            src="https://www.nextgem.eu/wp-content/uploads/2022/07/cropped-NextGEM_final_transparent.png"
+                            alt="logo-img"
+                            id="logo-img"
                         />
+                    </a>
+                    <div className="form-container w-full">
+                        <div className="tab">
+                            <button className="tablinks active" onClick={(event) => openTab(event, 'loginTab')}>
+                                Login
+                            </button>
+                            <button className="tablinks" onClick={(event) => openTab(event, 'registerTab')}>
+                                Register
+                            </button>
+                        </div>
 
-                        <label htmlFor="loginPassword">Password:</label>
-                        <input
-                        className='rounded'
-                            ref={loginPasswordRef}
-                            type="password"
-                            id="loginPassword"
-                            name="loginPassword"
-                            required
-                        />
+                        {/* <!-- Login Tab --> */}
+                        <div id="loginTab" className="tabcontent" style={{ display: "block" }}>
+                            {/* <h3>Login</h3> */}
+                            <form className='mt-4' id="loginForm" onSubmit={(event) => submitLoginForm(event)}>
+                                <label htmlFor="loginUsername">Username:</label>
+                                <input
+                                    className='rounded'
+                                    ref={loginUsernameRef}
+                                    type="text"
+                                    id="loginUsername"
+                                    name="loginUsername"
+                                    required
+                                />
 
-                        <input type="submit" id="loginBtn" className="btn font-bold" value="Login" />
-                    </form>
-                </div>
+                                <label htmlFor="loginPassword">Password:</label>
+                                <input
+                                    className='rounded'
+                                    ref={loginPasswordRef}
+                                    type="password"
+                                    id="loginPassword"
+                                    name="loginPassword"
+                                    required
+                                />
 
-                {/* <!-- Register Tab --> */}
-                <div id="registerTab" className="tabcontent">
-                    <form className='mt-4' id="registerForm" onSubmit={(event)=>submitRegisterForm(event)}>
-                        <label htmlFor="registerUsername">Username:</label>
-                        <input
-                        className='rounded'
-                            ref={registerUsernameRef}
-                            type="text"
-                            id="registerUsername"
-                            name="registerUsername"
-                            required
-                        />
+                                <input type="submit" id="loginBtn" className="btn font-bold" value="Login" />
+                            </form>
+                        </div>
 
-                        <label htmlFor="registerPassword">Password:</label>
-                        <input
-                        className='rounded'
-                            ref={registerPasswordRef}
-                            type="password"
-                            id="registerPassword"
-                            name="registerPassword"
-                            required
-                        />
+                        {/* <!-- Register Tab --> */}
+                        <div id="registerTab" className="tabcontent">
+                            <form className='mt-4' id="registerForm" onSubmit={(event) => submitRegisterForm(event)}>
+                                <label htmlFor="registerUsername">Username:</label>
+                                <input
+                                    className='rounded'
+                                    ref={registerUsernameRef}
+                                    type="text"
+                                    id="registerUsername"
+                                    name="registerUsername"
+                                    required
+                                />
 
-                        <label htmlFor="registerEmail">Email:</label>
-                        <input
-                        className='rounded'
-                            ref={registerEmailRef}
-                            type="email"
-                            id="registerEmail"
-                            name="registerEmail"
-                            required
-                        />
+                                <label htmlFor="registerPassword">Password:</label>
+                                <input
+                                    className='rounded'
+                                    ref={registerPasswordRef}
+                                    type="password"
+                                    id="registerPassword"
+                                    name="registerPassword"
+                                    required
+                                />
 
-                        <label htmlFor="registerOrg">Organization:</label>
-                        <input
-                        className='rounded'
-                            ref={registerOrgRef}
-                            type="text"
-                            id="registerOrg"
-                            name="registerOrg"
-                            required
-                        />
+                                <label htmlFor="registerEmail">Email:</label>
+                                <input
+                                    className='rounded'
+                                    ref={registerEmailRef}
+                                    type="email"
+                                    id="registerEmail"
+                                    name="registerEmail"
+                                    required
+                                />
 
-                        <input
-                            type="submit"
-                            id="registerBtn"
-                            className="btn font-bold"
-                            value="Register"
-                        />
-                    </form>
+                                <label htmlFor="registerOrg">Organization:</label>
+                                <input
+                                    className='rounded'
+                                    ref={registerOrgRef}
+                                    type="text"
+                                    id="registerOrg"
+                                    name="registerOrg"
+                                    required
+                                />
+
+                                <input
+                                    type="submit"
+                                    id="registerBtn"
+                                    className="btn font-bold"
+                                    value="Register"
+                                />
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        </div>
         </div>
     );
 }
