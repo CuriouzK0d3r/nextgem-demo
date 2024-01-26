@@ -7,7 +7,7 @@ const Footer = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className=" absolute bottom-0">
+    <nav className=" absolute bottom-0 p-0">
       <div className="elementor-element elementor-element-a514b5f e-flex e-con-boxed wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-parent snipcss-Rw5hh" data-id="a514b5f" data-element_type="container" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;content_width&quot;:&quot;boxed&quot;,&quot;_ha_eqh_enable&quot;:false}" data-core-v316-plus="true">
         <div className="e-con-inner">
           <div className="elementor-element elementor-element-befd6e6 e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child" data-id="befd6e6" data-element_type="container" data-settings="{&quot;content_width&quot;:&quot;full&quot;,&quot;_ha_eqh_enable&quot;:false}">
