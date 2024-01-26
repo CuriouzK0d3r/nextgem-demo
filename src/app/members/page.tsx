@@ -51,13 +51,13 @@ function MembersPage() {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
-      tabcontent[i].style.display = "none";
+      // tabcontent[i].style.display = "none";
     }
     tablinks = document.getElementsByClassName("tablinks");
     for (i = 0; i < tablinks.length; i++) {
       tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
-    document.getElementById(tabName).style.display = "block";
+    // document.getElementById(tabName).style.display = "block";
     evt.currentTarget.className += " active";
   };
 
@@ -85,7 +85,7 @@ function MembersPage() {
         <select
           className="text-sm rounded-lg  block p-2.5   w-3/4 dark:border-gray-600">
           {values.map((value: any) => (
-            <option value={value}>{value}</option>
+            <option key={value} value={value}>{value}</option>
           ))
           }
         </select>

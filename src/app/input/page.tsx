@@ -81,7 +81,7 @@ function InputPage() {
         <select
           className="text-sm rounded-lg  block p-2.5   w-3/4 dark:border-gray-600">
           {values.map((value: any) => (
-            <option value={value}>{value}</option>
+            <option key={value} value={value}>{value}</option>
           ))
           }
         </select>
@@ -89,7 +89,7 @@ function InputPage() {
     );
   }
 
-  const handleFileChange = (event) => {
+  const handleFileChange = (event: any) => {
     setSelectedFiles(event.target.files);
   };
 
@@ -143,7 +143,7 @@ function InputPage() {
             </form>
           </div>
           <div id="fileTab" className={ "h-[450px] mt-12 " + (activeTab === 'fileTab' ? 'block' : 'hidden')} >
-            <h2 className='mb-8 text-xl bold underline decoration-dotted decoration-4 decoration-[#1D2E66]'>Upload files of scientific data</h2>
+            <h2 className='mb-8 text-xl bold underline decoration-dotted decoration-4 decoration-[#1D2E66]'>Upload scientific data files</h2>
 
             {/* <label className="flex w-52 items-center px-4 py-2 bg-blue-500 text-white rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue-600 hover:text-white">
   <svg className="w-8 h-8" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">

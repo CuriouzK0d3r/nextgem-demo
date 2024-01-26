@@ -1,16 +1,14 @@
 "use client"
 
-import React, { useEffect, useRef, useState, Fragment } from 'react';
-import { Menu, Transition } from "@headlessui/react";
-import { ChevronDownIcon } from '@heroicons/react/20/solid';
-
+import { useState } from 'react';
 import Cookies from 'js-cookie';
-import { useRouter } from 'next/navigation'
-import { Card, Typography } from "@material-tailwind/react";
+import { useRouter } from 'next/navigation';
 import Header from '../components/header';
+import Footer from '../components/footer';
 
 function SearchPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [chosenSources, setChosenSources] = useState<string[]>([]);
   const router = useRouter();
 
   const checkLoginStatus = () => {
@@ -66,7 +64,7 @@ function SearchPage() {
         <select
           className="text-sm rounded-lg  block p-2.5   w-3/4 dark:border-gray-600">
           {values.map((value: any) => (
-            <option value={value}>{value}</option>
+            <option key={value} value={value}>{value}</option>
           ))
           }
         </select>
@@ -74,6 +72,8 @@ function SearchPage() {
     );
   }
 
+
+  console.log(chosenSources.includes("NextGEM"))
   return (
     <div className='h-full w-full '>
       <Header isLoggedIn={isLoggedIn}></Header>
@@ -82,117 +82,6 @@ function SearchPage() {
         <div className='form-container w-3/4 mx-auto'>
           <form className='flex-1 w-3/4 mx-auto mb-10' >
             <div className="flex">
-              {/* <label className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Your Email</label> */}
-              {/* <Menu as="div" className="relative flex-none text-left w-[150px] h-[74px] bottom-[2px]">
-                <div>
-                  <Menu.Button style={{ borderWidth: "2px", borderTopLeftRadius: "8px" }} id="dropdown-button" data-dropdown-toggle="dropdown"
-                    className=" w-[150px]  h-[74px] flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center 
-            text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none
-             focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700
-              dark:text-white dark:border-gray-600 ">
-                    { }
-                    <ChevronDownIcon className="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
-                  </Menu.Button>
-                </div>
-                <Transition
-                  as={Fragment}
-                  enter="transition ease-out duration-100"
-                  enterFrom="transform opacity-0 scale-95"
-                  enterTo="transform opacity-100 scale-100"
-                  leave="transition ease-in duration-75"
-                  leaveFrom="transform opacity-100 scale-100"
-                  leaveTo="transform opacity-0 scale-95"
-                >
-                  <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                    <div className="py-1 divide-y">
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            onClick={() => { }}
-                            className={classNames(
-                              active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                              'block px-4 py-2 text-sm font-bold'
-                            )}
-                          >
-                            All Fields
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            onClick={() => { }}
-                            className={classNames(
-                              active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                              'block px-4 py-2 text-sm font-bold'
-                            )}
-                          >
-                            Title
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            onClick={() => { }}
-                            className={classNames(
-                              active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                              'block px-4 py-2 text-sm font-bold'
-                            )}
-                          >
-                            Author
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            onClick={() => { }}
-                            href="#"
-                            className={classNames(
-                              active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                              'block px-4 py-2 text-sm font-bold'
-                            )}
-                          >
-                            Abstract
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            onClick={() => { setSearchType('Subject'); setCurrentPage(1); }}
-                            href="#"
-                            className={classNames(
-                              active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                              'block px-4 py-2 text-sm font-bold'
-                            )}
-                          >
-                            Subject
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            onClick={() => { setSearchType('DOI'); setCurrentPage(1); }}
-                            href="#"
-                            className={classNames(
-                              active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                              'block px-4 py-2 text-sm font-bold'
-                            )}
-                          >
-                            DOI
-                          </a>
-                        )}
-                      </Menu.Item>
-                    </div>
-                  </Menu.Items>
-                </Transition>
-              </Menu> */}
               <div className="relative inline-block flex-1 h-full">
                 <input
                   style={{ borderWidth: "2px", borderColor: "#6359E1" }}
@@ -258,18 +147,37 @@ function SearchPage() {
         </div>
         <div className='flex flex-row mx-auto w-full mt-10 mb-20'>
           <div className=' flex mx-auto items-center'>
-          <button className={""} onClick={() => { }}>
-            <img width={100} src="./NextGEM_Button.svg" alt="NextGEM" className="mr-[9px] chosen-source" />
-          </button>
-          <img width={100} src="./CLUE-H_Button.svg" alt="CLUE-H" className="mr-[0px]" />
-          <img width={115} src="./EMF-portal_Button.svg" alt="EMF-Portal" className="mr-[2px]" />
-          <img width={100} src="./Zenodo_Button.svg" alt="Zenodo" className="mr-[9px]" />
-          <img width={100} src="./EHDS_Button.svg" alt="EHDS" className="mr-[8px]" />
-          <img width={105} src="./Dataverse.svg" alt="Dataverse" className="mr-[8px]" />
-          <img width={100} src="./YODA.svg" alt="Yoda" className="" />
+            <button className={""} onClick={() => { chosenSources.includes("NextGEM") ? setChosenSources(chosenSources.filter(function (e) { return e !== 'NextGEM' })) : setChosenSources([...chosenSources, "NextGEM"]) }}>
+              <img width={100} src="./NextGEM_Button.svg" alt="NextGEM" className={"mr-[9px] " + chosenSources.includes("NextGEM") ? " chosen-source" : ""} />
+            </button>
+
+            <button className={""} onClick={() => { chosenSources.includes("CLUE-H") ? setChosenSources(chosenSources.filter(function (e) { return e !== 'CLUE-H' })) : setChosenSources([...chosenSources, "CLUE-H"]) }}>
+              <img width={100} src="./CLUE-H_Button.svg" alt="CLUE-H" className={"mr-[0px]" + chosenSources.includes("CLUE-H") ? " chosen-source" : ""} />
+            </button>
+
+            <button className={""} onClick={() => { chosenSources.includes("EMF") ? setChosenSources(chosenSources.filter(function (e) { return e !== 'EMF' })) : setChosenSources([...chosenSources, "EMF"]) }}>
+              <img width={115} src="./EMF-portal_Button.svg" alt="EMF-Portal" className={"mr-[2px]" + chosenSources.includes("EMF") ? " chosen-source" : ""} />
+            </button>
+
+            <button className={""} onClick={() => { chosenSources.includes("Zenodo") ? setChosenSources(chosenSources.filter(function (e) { return e !== 'Zenodo' })) : setChosenSources([...chosenSources, "Zenodo"]) }}>
+              <img width={100} src="./Zenodo_Button.svg" alt="Zenodo" className={"mr-[9px]" + chosenSources.includes("Zenodo") ? " chosen-source" : ""} />
+            </button>
+
+            <button className={""} onClick={() => { chosenSources.includes("EHDS") ? setChosenSources(chosenSources.filter(function (e) { return e !== 'EHDS' })) : setChosenSources([...chosenSources, "EHDS"]) }}>
+              <img width={100} src="./EHDS_Button.svg" alt="EHDS" className={"mr-[8px]" + chosenSources.includes("EHDS") ? " chosen-source" : ""} />
+            </button>
+
+            <button className={""} onClick={() => { chosenSources.includes("Dataverse") ? setChosenSources(chosenSources.filter(function (e) { return e !== 'Dataverse' })) : setChosenSources([...chosenSources, "Dataverse"]) }}>
+              <img width={105} src="./Dataverse.svg" alt="Dataverse" className={"mr-[8px]" + chosenSources.includes("Dataverse") ? " chosen-source" : ""} />
+            </button>
+
+            <button className={""} onClick={() => { chosenSources.includes("Yoda") ? setChosenSources(chosenSources.filter(function (e) { return e !== 'Yoda' })) : setChosenSources([...chosenSources, "Yoda"]) }}>
+              <img width={100} src="./YODA.svg" alt="Yoda" className={chosenSources.includes("Yoda") ? " chosen-source" : ""} />
+            </button>
           </div>
         </div>
       </div>
+      <Footer></Footer>
     </div>);
 }
 

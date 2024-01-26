@@ -1,68 +1,49 @@
 import React, { useState } from 'react';
 import { Button } from "@material-tailwind/react";
-const Header = ({isLoggedIn}) => {
+
+import '../snipped.css'
+
+const Header = ({isLoggedIn}: {isLoggedIn: boolean}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="flex items-center justify-between flex-wrap bg-niki-blue p-6 z-10">
-      <div className="flex flex-shrink-0 text-white ml-[8%]">
-        <span className="font-semibold text-xl tracking-tight">
-          <a href="/">
-          <img
-          className="mr-3"
-          src="https://subra.ics.forth.gr/wp-content/uploads/2024/01/NIKH-logoname.png"
-          alt="logo-img"
-          id="logo-img"
-        />
-        </a></span>
-      </div>
-      <div className="block lg:hidden">
-        <button onClick={() => setIsOpen(!isOpen)} className="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
-          <svg className="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v15z" /></svg>
-        </button>
-      </div>
-      <div className={`${isOpen ? `block` : `hidden`} w-full block flex-grow lg:flex lg:items-center lg:w-auto ml-28`}>
-        <div className="text-sm w-full ml-10 items-end">
-          <div className="box inline-block mr-8">
-            {/* <div className="rectangle" > */}
-            <div className="w-6/7 flex justify-end items-center relative">
-            <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      className="h-5 w-5 -mr-8 w-10 z-10">
-                      <path
-                          fillRule="evenodd"
-                          d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
-                          clipRule="evenodd" />
-                  </svg>
-            <input
-          type="search"
-          className="relative m-0 block w-full min-w-0 pl-12 flex-auto rounded-xl border border-solid border-neutral-300 bg-white bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
-          id="nav-search"
-          placeholder="Search for EMF studies, papers, journal articles..." />
+    <nav className="absolute w-full top-0 p-0">
+      <div className="ast-primary-header-bar ast-primary-header main-header-bar site-header-focus-item snipcss-g39h2" data-section="section-primary-header-builder" style={{backgroundColor: '#02132f'}}>
+        <div className="site-primary-header-wrap ast-builder-grid-row-container site-header-focus-item ast-container" data-section="section-primary-header-builder">
+          <div className="ast-builder-grid-row ast-builder-grid-row-has-sides ast-builder-grid-row-no-center">
+            <div className="site-header-primary-section-left site-header-section ast-flex site-header-section-left">
+              <div className="ast-builder-layout-element ast-flex site-header-focus-item" data-section="title_tagline">
+                <div className="site-branding ast-site-identity" itemType="https://schema.org/Organization" >
+                  <span className="site-logo-img"><a href="/" className="custom-logo-link transparent-custom-logo" rel="home" itemProp="url" aria-label="NIKH"><img width={120} height={34} src="https://subra.ics.forth.gr/wp-content/uploads/2024/01/NIKH-logoname-120x34.png " className="custom-logo p-0" alt="" decoding="async" /></a><a href="/" className="custom-logo-link ast-transparent-mobile-logo" rel="home" itemProp="url"><img width={120} height={34} src="./NIKH-logoname-120x34.png" className="custom-logo" alt="" decoding="async" /></a></span>
+                </div>
+              </div>
+            </div>
+            <div className="site-header-primary-section-right site-header-section ast-flex ast-grid-right-section">
+              <div className="ast-builder-menu-1 ast-builder-menu ast-flex ast-builder-menu-1-focus-item ast-builder-layout-element site-header-focus-item" data-section="section-hb-menu-1">
+                <div className="ast-main-header-bar-alignment">
+                  <div className="main-header-bar-navigation">
+                    <nav className="site-navigation ast-flex-grow-1 navigation-accessibility site-header-focus-item" id="primary-site-navigation-desktop" aria-label="Site Navigation" itemType="https://schema.org/SiteNavigationElement" >
+                      <div className="main-navigation ast-inline-flex">
+                        <ul id="ast-hf-menu-1" className="main-header-menu ast-menu-shadow ast-nav-menu ast-flex  submenu-with-border stack-on-mobile">
+                          <li id="menu-item-542" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-540 current_page_item menu-item-542"><a href="/" aria-current="page" className="menu-link">Home</a></li>
+                          <li id="menu-item-12" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-12"><a href="/authorities/" className="menu-link">Authorities</a></li>
+                          <li id="menu-item-11" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-11"><a href="/citizens/" className="menu-link">Citizens</a></li>
+                          <li id="menu-item-10" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-10"><a href="/scientists/" className="menu-link">Scientists</a></li>
+                          <li id="menu-item-150" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-150"><a href="/members/" className="menu-link">Members</a></li>
+                        </ul>
+                      </div>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+              <div className="ast-builder-layout-element ast-flex site-header-focus-item ast-header-button-1" data-section="section-hb-button-1">
+                <div className="ast-builder-button-wrap ast-builder-button-size-"><a className="ast-custom-button-link" href="#" target="_blank">
+                    <div className="ast-custom-button">Login</div>
+                  </a><a className="menu-link" href="#" target="_blank">Login</a></div>
+              </div>
+            </div>
           </div>
-            {/* <div className="label">
-      <p className="text-wrapper">Search for EMF studies, papers, journal articles...</p>
-    </div> */}
-              {/* </div> */}
-          </div>
-          <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-12 ml-12 text-lg">
-            Authorities
-          </a>
-          <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-12 text-lg">
-            Citizens
-          </a>
-          <a href="/search" className="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-12 text-lg">
-            Scientists
-          </a>
-          <a href="/members" className="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-20 text-lg">
-            Members
-          </a>
         </div>
-        {!isLoggedIn &&
-        <button className="login-button font-bold w-30 mr-[15%]"><a href='/login'>Login</a></button>
-        }
       </div>
     </nav>
   );

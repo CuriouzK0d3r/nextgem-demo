@@ -17,6 +17,10 @@
 }
 
 
+a {
+  font-family: "Lato", sans-serif;
+}
+
 @layer utilities {
   .light-theme {
     --foreground-rgb: 0, 0, 0;
@@ -74,6 +78,10 @@ box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
   width: 496px;
 }
 
+.entry-content {
+  background-color: #f3f6f6;
+}
+
 .box .rectangle {
   background-color: #f1f1f4;
   border: 1px solid;
@@ -85,6 +93,14 @@ box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
   width: 496px;
 }
 
+.ast-primary-header-bar {
+  background-color: #02132f;
+}
+
+.custom-logo {
+  height: 34px;
+  width: 120px;
+}
 
 .container {
   display: flex;
@@ -119,6 +135,13 @@ h4 {
   margin-top: 1rem;
 }
 
+.site-branding.ast-site-identity {
+  padding: 0px !important;
+}
+
+.site-header-primary-section-right {
+  height: 70px !important;
+}
 
 .login-button {
   background-color: rgba(61, 53, 47, 0.36);
