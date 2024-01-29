@@ -98,11 +98,11 @@ function MembersPage() {
   return (
     <PageLayout isLoggedIn={isLoggedIn}>
       {/* <div id="formTab" className="tabcontent " style={{ display: "block" }}> */}
-      <div className="w-full  mt-32 flex items-center justify-center">
+      <div className="w-full min-h-[58rem] mt-0 flex items-center justify-center">
         <a href='/input?tab=form'>
         <div className="menu-box  mr-8">
             <div className="w-full h-full text-center">
-                <img width={90} className='mx-auto pt-4' src="./input-logo.svg" alt="" />
+                <img width={90} className='mx-auto pt-8' src="./input-logo.svg" alt="" />
                 <span className='text-white'>
                 Input Scientific data
                 </span>
@@ -112,7 +112,7 @@ function MembersPage() {
         <a href='/input?tab=file'>
         <div className="menu-box">
             <div className="w-full h-full text-center">
-                <img width={90} className='mx-auto pt-4' src="./file-logo.svg" alt="" />
+                <img width={90} className='mx-auto pt-8' src="./file-logo.svg" alt="" />
                 <span className='text-white'>
                 Input Files
                 </span>

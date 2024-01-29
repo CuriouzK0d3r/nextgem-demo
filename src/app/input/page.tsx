@@ -62,8 +62,8 @@ function InputPage() {
 
   const TextInputComponent = ({ label, type, required, ref }: any) => {
     return (
-      <div className="flex flex-row mt-4">
-        <label className="mb-2 ttext-based text-gray-900 mr-4">{label}:</label>
+      <div className="flex flex-row mt-4 p-0">
+        <label className="mb-2 text-sm text-gray-900 mr-4 p-0">{label}:</label>
         <input
           className="border border-gray-400 p-2 rounded-lg w-3/4 appearance-none focus:outline-none focus:border-gray-500"
           type={type}
@@ -79,8 +79,8 @@ function InputPage() {
   
   const SelectInputComponent = ({ label, values, required, ref }: any) => {
     return (
-      <div className="flex flex-row mt-4">
-        <label className="mb-2 text-base text-gray-900 mr-4">{label}</label>
+      <div className="flex flex-row mt-4 p-0">
+        <label className="mb-2 text-sm text-gray-900 mr-4 p-0">{label}:</label>
         <select
           className="text-sm rounded-lg  block p-2.5   w-3/4 dark:border-gray-600">
           {values.map((value: any) => (
@@ -106,8 +106,8 @@ function InputPage() {
 
   return (
     <PageLayout isLoggedIn>
-      <div className="w-full mt-16 ">
-        <h3 className='mb-6 text-5xl .title-color text-center mx-auto mt'>Input Data</h3>
+      <div className="w-full mt-16 min-h-[55rem]">
+        <h3 className='mb-6 text-4xl .title-color text-center mx-auto mt'>Input Data</h3>
         <div className='form-container w-3/4 mx-auto'>
           <div className="tab">
             <button className={"tablinks " + (activeTab === 'formTab' ? 'active' : '')} onClick={(event) => setActiveTab('formTab')}>
