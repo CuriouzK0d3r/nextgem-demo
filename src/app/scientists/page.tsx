@@ -74,8 +74,7 @@ function SearchPage() {
     );
   }
 
-
-  console.log(chosenSources.includes("NextGEM"))
+  console.log(chosenSources)
   return (
     <PageLayout isLoggedIn={isLoggedIn}>
       <div className="w-full mt-16 ">
@@ -149,36 +148,36 @@ function SearchPage() {
         <div className='flex flex-row mx-auto w-full mt-10 mb-20'>
           <div className=' flex mx-auto items-center'>
             <button className={""} onClick={() => { chosenSources.includes("NextGEM") ? setChosenSources(chosenSources.filter(function (e) { return e !== 'NextGEM' })) : setChosenSources([...chosenSources, "NextGEM"]) }}>
-              <img width={100} src="./NextGEM_Button.svg" alt="NextGEM" className={"mr-[9px] " + chosenSources.includes("NextGEM") ? " chosen-source" : ""} />
+              <img width={100} src="./NextGEM_Button.svg" alt="NextGEM" className={chosenSources.includes("NextGEM") ? " chosen-source mr-[8px] p-0" : "mr-[8px] p-0"} />
             </button>
 
             <button className={""} onClick={() => { chosenSources.includes("CLUE-H") ? setChosenSources(chosenSources.filter(function (e) { return e !== 'CLUE-H' })) : setChosenSources([...chosenSources, "CLUE-H"]) }}>
-              <img width={100} src="./CLUE-H_Button.svg" alt="CLUE-H" className={"mr-[0px]" + chosenSources.includes("CLUE-H") ? " chosen-source" : ""} />
+              <img width={100} src="./CLUE-H_Button.svg" alt="CLUE-H" className={chosenSources.includes("CLUE-H") ? " chosen-source mr-[4px] p-0" : "mr-[4px] p-0"} />
             </button>
 
             <button className={""} onClick={() => { chosenSources.includes("EMF") ? setChosenSources(chosenSources.filter(function (e) { return e !== 'EMF' })) : setChosenSources([...chosenSources, "EMF"]) }}>
-              <img width={115} src="./EMF-portal_Button.svg" alt="EMF-Portal" className={"mr-[2px]" + chosenSources.includes("EMF") ? " chosen-source" : ""} />
+              <img width={105} src="./EMF-portal_Button.svg" alt="EMF-Portal" className={chosenSources.includes("EMF") ? " chosen-source mr-[4px] p-0" : "mr-[4px] p-0"} />
             </button>
 
             <button className={""} onClick={() => { chosenSources.includes("Zenodo") ? setChosenSources(chosenSources.filter(function (e) { return e !== 'Zenodo' })) : setChosenSources([...chosenSources, "Zenodo"]) }}>
-              <img width={100} src="./Zenodo_Button.svg" alt="Zenodo" className={"mr-[9px]" + chosenSources.includes("Zenodo") ? " chosen-source" : ""} />
+              <img width={100} src="./Zenodo_Button.svg" alt="Zenodo" className={chosenSources.includes("Zenodo") ? " chosen-source mr-[6px] p-0" : "mr-[6px] p-0"} />
             </button>
 
             <button className={""} onClick={() => { chosenSources.includes("EHDS") ? setChosenSources(chosenSources.filter(function (e) { return e !== 'EHDS' })) : setChosenSources([...chosenSources, "EHDS"]) }}>
-              <img width={100} src="./EHDS_Button.svg" alt="EHDS" className={"mr-[8px]" + chosenSources.includes("EHDS") ? " chosen-source" : ""} />
+              <img width={100} src="./EHDS_Button.svg" alt="EHDS" className={chosenSources.includes("EHDS") ? " chosen-source mr-[6px] p-0" : "mr-[6px] p-0"} />
             </button>
 
             <button className={""} onClick={() => { chosenSources.includes("Dataverse") ? setChosenSources(chosenSources.filter(function (e) { return e !== 'Dataverse' })) : setChosenSources([...chosenSources, "Dataverse"]) }}>
-              <img width={105} src="./Dataverse.svg" alt="Dataverse" className={"mr-[8px]" + chosenSources.includes("Dataverse") ? " chosen-source" : ""} />
+              <img width={105} src="./Dataverse.svg" alt="Dataverse" className={chosenSources.includes("Dataverse") ? " chosen-source mr-[6px] p-0" : "mr-[6px] p-0"} />
             </button>
 
             <button className={""} onClick={() => { chosenSources.includes("Yoda") ? setChosenSources(chosenSources.filter(function (e) { return e !== 'Yoda' })) : setChosenSources([...chosenSources, "Yoda"]) }}>
-              <img width={100} src="./YODA.svg" alt="Yoda" className={chosenSources.includes("Yoda") ? " chosen-source" : ""} />
+              <img width={100} src="./YODA.svg" alt="Yoda" className={chosenSources.includes("Yoda") ? " chosen-source p-0" : "p-0"} />
             </button>
           </div>
         </div>
-        </div>
-      </ PageLayout>);
+      </div>
+    </ PageLayout>);
 }
 
 export default SearchPage;
