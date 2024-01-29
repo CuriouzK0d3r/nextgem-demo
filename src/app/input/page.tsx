@@ -5,6 +5,9 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Header from '../components/header';
 import FileUploader from '../components/file-uploader';
+import Footer from '../components/footer';
+import { Page } from 'puppeteer';
+import PageLayout from '../components/page-layout';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -102,9 +105,7 @@ function InputPage() {
   };
 
   return (
-    <div className='h-full w-full '>
-      <Header isLoggedIn={isLoggedIn}></Header>
-      {/* <div id="formTab" className="tabcontent " style={{ display: "block" }}> */}
+    <PageLayout isLoggedIn>
       <div className="w-full mt-16 ">
         <h3 className='mb-6 text-5xl .title-color text-center mx-auto mt'>Input Data</h3>
         <div className='form-container w-3/4 mx-auto'>
@@ -144,15 +145,6 @@ function InputPage() {
           </div>
           <div id="fileTab" className={ "h-[450px] mt-12 " + (activeTab === 'fileTab' ? 'block' : 'hidden')} >
             <h2 className='mb-8 text-xl bold underline decoration-dotted decoration-4 decoration-[#1D2E66]'>Upload scientific data files</h2>
-
-            {/* <label className="flex w-52 items-center px-4 py-2 bg-blue-500 text-white rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue-600 hover:text-white">
-  <svg className="w-8 h-8" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-    <path d="M10 20v-6h5l-6-6-6 6h5v6zM10 0h10v2H10V0z"/>
-  </svg>
-  <span className="ml-2 text-base leading-normal">Select a file</span>
-  <input type='file' className="hidden" multiple onChange={handleFileChange} />
-</label> */}
-
 <FileUploader
           url={'/api/upload'}
           acceptedFileTypes={[
@@ -166,8 +158,7 @@ function InputPage() {
         </div>
 
       </div>
-      {/* </div> */}
-    </div>);
+      </PageLayout>);
 }
 
 export default InputPage;

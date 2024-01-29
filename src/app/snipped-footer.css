@@ -82,9 +82,9 @@ body {
     --flex-shrink:  0; 
 } 
 
-* { 
+/* * { 
     box-sizing: inherit;
-} 
+}  */
 
 body { 
     border: 0; 
@@ -165,7 +165,7 @@ body {
     padding-left: 0px;
 } 
 
-html { 
+/* html { 
     --wp-admin--admin-bar--height: 32px; 
     scroll-padding-top: var(--wp-admin--admin-bar--height);
 } 
@@ -196,7 +196,7 @@ html {
 
 html { 
     font-size: 100%;
-} 
+}  */
 
 :root { 
     --ast-global-color-0: #2FC1FF; 

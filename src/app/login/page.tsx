@@ -1,14 +1,15 @@
 "use client"
 
-import React, { useEffect, useRef, useState } from 'react';
 import Cookies from 'js-cookie';
-import { useRouter } from 'next/navigation'
-import Header from '../components/header';
-import Footer from '../components/footer';
+import { useRouter } from 'next/navigation';
+import { useRef, useState } from 'react';
+import PageLayout from '../components/page-layout';
 
 function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [activeTab, setActiveTab] = useState("loginTab");
+
     const loginUsernameRef = useRef<any>(null);
     const loginPasswordRef = useRef<any>(null);
     const registerUsernameRef = useRef<any>(null);
@@ -51,19 +52,21 @@ function LoginPage() {
     isLoggedIn();
 
     function openTab(evt: any, tabName: any) {
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-            // tabcontent[i].style.display = "none";
-        }
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-        // document.getElementById(tabName).style.display = "block";
-        evt.currentTarget.className += " active";
+        setActiveTab(tabName);
+        // var i, tabcontent, tablinks;
+        // tabcontent = document.getElementsByClassName("tabcontent");
+        // for (i = 0; i < tabcontent.length; i++) {
+        //     // tabcontent[i].style.display = "none";
+        // }
+        // tablinks = document.getElementsByClassName("tablinks");
+        // for (i = 0; i < tablinks.length; i++) {
+        //     tablinks[i].className = tablinks[i].className.replace(" active", "");
+        // }
+        // // document.getElementById(tabName).style.display = "block";
+        // evt.currentTarget.className += " active";
     }
 
+    console.log(activeTab)
     function submitRegisterForm(event: any) {
         event.preventDefault();
         const username = registerUsernameRef.current?.value;
@@ -131,114 +134,114 @@ function LoginPage() {
     }
     // Add
 
+    console.log(activeTab)
+
     return (
+        <PageLayout isLoggedIn={true}>
+            <div className="relative min-h-[60rem] mx-auto container w-[40rem] ">
+                {/* */}
+                <div>
+                <h4 className='text-center'>Welcome to</h4> 
+                <a className='' href='/' >
+                    <img
+                        src="https://www.nextgem.eu/wp-content/uploads/2022/07/cropped-NextGEM_final_transparent.png"
+                        alt="logo-img"
+                        id="logo-img"
+                    />
+                </a>
+                </div>
+                <div className="form-container w-full">
+                    <div className="tab">
+                        <button className={"tablinks " + (activeTab === "loginTab" ? "active" : "")} onClick={(event) => setActiveTab('loginTab')}>
+                            Login
+                        </button>
+                        <button className={"tablinks " + (activeTab === "registerTab" ? "active" : "")} onClick={(event) => setActiveTab('registerTab')}>
+                            Register
+                        </button>
+                    </div>
 
-        <div className="">
-            <div className='h-full w-full '>
-                <Header isLoggedIn={true}></Header>
-                <div className="container w-[40rem] ">
-                    <h4>Welcome to</h4>
-                    <a href='/' >
-                        <img
-                            src="https://www.nextgem.eu/wp-content/uploads/2022/07/cropped-NextGEM_final_transparent.png"
-                            alt="logo-img"
-                            id="logo-img"
-                        />
-                    </a>
-                    <div className="form-container w-full">
-                        <div className="tab">
-                            <button className="tablinks active" onClick={(event) => openTab(event, 'loginTab')}>
-                                Login
-                            </button>
-                            <button className="tablinks" onClick={(event) => openTab(event, 'registerTab')}>
-                                Register
-                            </button>
-                        </div>
+                    {/* <!-- Login Tab --> */}
+                    <div id="loginTab" className={(activeTab === "loginTab" ? "block " : "tabcontent ")}>
+                        {/* <h3>Login</h3> */}
+                        <form className='mt-4' id="loginForm" onSubmit={(event) => submitLoginForm(event)}>
+                            <label htmlFor="loginUsername">Username:</label>
+                            <input
+                                className='rounded'
+                                ref={loginUsernameRef}
+                                type="text"
+                                id="loginUsername"
+                                name="loginUsername"
+                                required
+                            />
 
-                        {/* <!-- Login Tab --> */}
-                        <div id="loginTab" className="tabcontent" style={{ display: "block" }}>
-                            {/* <h3>Login</h3> */}
-                            <form className='mt-4' id="loginForm" onSubmit={(event) => submitLoginForm(event)}>
-                                <label htmlFor="loginUsername">Username:</label>
-                                <input
-                                    className='rounded'
-                                    ref={loginUsernameRef}
-                                    type="text"
-                                    id="loginUsername"
-                                    name="loginUsername"
-                                    required
-                                />
+                            <label htmlFor="loginPassword">Password:</label>
+                            <input
+                                className='rounded'
+                                ref={loginPasswordRef}
+                                type="password"
+                                id="loginPassword"
+                                name="loginPassword"
+                                required
+                            />
 
-                                <label htmlFor="loginPassword">Password:</label>
-                                <input
-                                    className='rounded'
-                                    ref={loginPasswordRef}
-                                    type="password"
-                                    id="loginPassword"
-                                    name="loginPassword"
-                                    required
-                                />
+                            <input type="submit" id="loginBtn" className="btn font-bold" value="Login" />
+                        </form>
+                    </div>
 
-                                <input type="submit" id="loginBtn" className="btn font-bold" value="Login" />
-                            </form>
-                        </div>
+                    {/* <!-- Register Tab --> */}
+                    <div id="registerTab" className={(activeTab === "registerTab" ? "block " : "tabcontent ")}>
+                        <form className={'mt-4 '} id="registerForm" onSubmit={(event) => submitRegisterForm(event)}>
+                            <label htmlFor="registerUsername">Username:</label>
+                            <input
+                                className='rounded'
+                                ref={registerUsernameRef}
+                                type="text"
+                                id="registerUsername"
+                                name="registerUsername"
+                                required
+                            />
 
-                        {/* <!-- Register Tab --> */}
-                        <div id="registerTab" className="tabcontent">
-                            <form className='mt-4' id="registerForm" onSubmit={(event) => submitRegisterForm(event)}>
-                                <label htmlFor="registerUsername">Username:</label>
-                                <input
-                                    className='rounded'
-                                    ref={registerUsernameRef}
-                                    type="text"
-                                    id="registerUsername"
-                                    name="registerUsername"
-                                    required
-                                />
+                            <label htmlFor="registerPassword">Password:</label>
+                            <input
+                                className='rounded'
+                                ref={registerPasswordRef}
+                                type="password"
+                                id="registerPassword"
+                                name="registerPassword"
+                                required
+                            />
 
-                                <label htmlFor="registerPassword">Password:</label>
-                                <input
-                                    className='rounded'
-                                    ref={registerPasswordRef}
-                                    type="password"
-                                    id="registerPassword"
-                                    name="registerPassword"
-                                    required
-                                />
+                            <label htmlFor="registerEmail">Email:</label>
+                            <input
+                                className='rounded'
+                                ref={registerEmailRef}
+                                type="email"
+                                id="registerEmail"
+                                name="registerEmail"
+                                required
+                            />
 
-                                <label htmlFor="registerEmail">Email:</label>
-                                <input
-                                    className='rounded'
-                                    ref={registerEmailRef}
-                                    type="email"
-                                    id="registerEmail"
-                                    name="registerEmail"
-                                    required
-                                />
+                            <label htmlFor="registerOrg">Organization:</label>
+                            <input
+                                className='rounded'
+                                ref={registerOrgRef}
+                                type="text"
+                                id="registerOrg"
+                                name="registerOrg"
+                                required
+                            />
 
-                                <label htmlFor="registerOrg">Organization:</label>
-                                <input
-                                    className='rounded'
-                                    ref={registerOrgRef}
-                                    type="text"
-                                    id="registerOrg"
-                                    name="registerOrg"
-                                    required
-                                />
-
-                                <input
-                                    type="submit"
-                                    id="registerBtn"
-                                    className="btn font-bold"
-                                    value="Register"
-                                />
-                            </form>
-                        </div>
+                            <input
+                                type="submit"
+                                id="registerBtn"
+                                className="btn font-bold"
+                                value="Register"
+                            />
+                        </form>
                     </div>
                 </div>
             </div>
-            <Footer></Footer>
-        </div>
+        </PageLayout>
     );
 }
 

@@ -7,7 +7,7 @@ const Header = ({isLoggedIn}: {isLoggedIn: boolean}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="absolute w-full top-0 p-0">
+    <nav className="relative w-full top-0 p-0">
       <div className="ast-primary-header-bar ast-primary-header main-header-bar site-header-focus-item snipcss-g39h2" data-section="section-primary-header-builder" style={{backgroundColor: '#02132f'}}>
         <div className="site-primary-header-wrap ast-builder-grid-row-container site-header-focus-item ast-container" data-section="section-primary-header-builder">
           <div className="ast-builder-grid-row ast-builder-grid-row-has-sides ast-builder-grid-row-no-center">

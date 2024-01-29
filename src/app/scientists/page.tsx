@@ -5,6 +5,8 @@ import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 import Header from '../components/header';
 import Footer from '../components/footer';
+import { Page } from 'puppeteer';
+import PageLayout from '../components/page-layout';
 
 function SearchPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -43,10 +45,10 @@ function SearchPage() {
 
   const TextInputComponent = ({ label, type, required, ref }: any) => {
     return (
-      <div className="flex flex-row mt-4">
-        <label className="mb-2 ttext-based text-gray-900 mr-4">{label}:</label>
+      <div className="flex flex-row mt-4 p-0">
+        <label className="mb-2 text-sm text-leftg text-gray-900 mr-4 p-0">{label}:</label>
         <input
-          className="border border-gray-400 p-2 rounded-lg w-3/4 appearance-none focus:outline-none focus:border-gray-500"
+          className="border flex-grow border-gray-400 p-2 rounded-lg w-3/4 appearance-none focus:outline-none focus:border-gray-500"
           type={type}
           id={label}
           name={label}
@@ -59,10 +61,10 @@ function SearchPage() {
   }
   const SelectInputComponent = ({ label, values, required, ref }: any) => {
     return (
-      <div className="flex flex-row mt-4">
-        <label className="mb-2 text-base text-gray-900 mr-4">{label}</label>
+      <div className="flex flex-row mt-4 w-full p-0">
+        <label className="mb-2 text-sm text-left text-gray-900 mr-4 p-0">{label}</label>
         <select
-          className="text-sm rounded-lg  block p-2.5   w-3/4 dark:border-gray-600">
+          className="text-sm rounded-lg flex-grow block p-2.5 w-3/4 dark:border-gray-600">
           {values.map((value: any) => (
             <option key={value} value={value}>{value}</option>
           ))
@@ -75,12 +77,11 @@ function SearchPage() {
 
   console.log(chosenSources.includes("NextGEM"))
   return (
-    <div className='h-full w-full '>
-      <Header isLoggedIn={isLoggedIn}></Header>
+    <PageLayout isLoggedIn={isLoggedIn}>
       <div className="w-full mt-16 ">
-        <h3 className='mb-4 text-5xl .title-color text-center mx-auto'>Search Scientific Catalogue</h3>
+        <h3 className='mb-8 text-4xl .title-color text-center mx-auto'>Search Scientific Catalogue</h3>
         <div className='form-container w-3/4 mx-auto'>
-          <form className='flex-1 w-3/4 mx-auto mb-10' >
+          {/* <form className='flex-1 w-3/4 mx-auto mb-10' >
             <div className="flex">
               <div className="relative inline-block flex-1 h-full">
                 <input
@@ -101,17 +102,17 @@ function SearchPage() {
                 </div>
               </div>
             </div>
-          </form>
+          </form> */}
           <form className='mt-4' id="searchForm">
             {/* <h5 className='text-center text-xl mb-10'>
               Search Terms:
             </h5> */}
             <div className="grid gap-8 mb-6 md:grid-cols-2 ">
               <div>
-                <div className='underline decoration-dotted decoration-2 decoration-[#1D2E66] text-lg mb-8'>
+                <div className='underline decoration-dotted decoration-2 decoration-[#1D2E66] text-md mb-8'>
                   Description
                 </div>
-                <div>
+                <div className='p-0'>
                   <TextInputComponent label="Title" type="text" required={false} />
                   <TextInputComponent label="Authors" type="text" required={false} />
                   <SelectInputComponent label="Type of Study" values={["--", "exVivo", "exposureAssessment", "humanStudies", "inVitro", "inVivo", "riskAssesment", "simulation"]} required={false} />
@@ -124,8 +125,8 @@ function SearchPage() {
                   <TextInputComponent label="Identifier" type="text" required={false} />
                 </div>
               </div>
-              <div>
-                <div className='underline decoration-dotted decoration-2 decoration-[#1D2E66] text-lg mb-8'>
+              <div className="p-0">
+                <div className='underline decoration-dotted decoration-2 decoration-[#1D2E66] text-md mb-8'>
                   Indicative Terms
                 </div>
                 <SelectInputComponent label="Frequency Ranges" values={["--", ""]} required={false} />
@@ -176,9 +177,8 @@ function SearchPage() {
             </button>
           </div>
         </div>
-      </div>
-      <Footer></Footer>
-    </div>);
+        </div>
+      </ PageLayout>);
 }
 
 export default SearchPage;

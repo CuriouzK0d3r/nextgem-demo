@@ -8,6 +8,8 @@ import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation'
 import { Card, Typography } from "@material-tailwind/react";
 import Header from '../components/header';
+import Footer from '../components/footer';
+import PageLayout from '../components/page-layout';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -94,8 +96,7 @@ function MembersPage() {
   }
 
   return (
-    <div className='h-full w-full '>
-      <Header isLoggedIn={isLoggedIn}></Header>
+    <PageLayout isLoggedIn={isLoggedIn}>
       {/* <div id="formTab" className="tabcontent " style={{ display: "block" }}> */}
       <div className="w-full  mt-32 flex items-center justify-center">
         <a href='/input?tab=form'>
@@ -120,7 +121,7 @@ function MembersPage() {
         </a>
       </div>
       {/* </div> */}
-    </div>);
+     </ PageLayout>);
 }
 
 export default MembersPage;

@@ -9,9 +9,9 @@
     font-family:'Lato',sans-serif;
     background-image:none; */
   }  
-* { 
+/* * { 
     box-sizing: inherit;
-} 
+}  */
 
 body { 
     border: 0; 
@@ -92,16 +92,16 @@ body {
     padding-left: 0px;
 } 
 
-html { 
+/* html { 
     --wp-admin--admin-bar--height: 32px; 
     scroll-padding-top: var(--wp-admin--admin-bar--height);
-} 
+}  */
 
-html { 
+/* html { 
     margin-top: 32px !important;
-} 
+}  */
 
-html { 
+/* html { 
     border: 0; 
     font-size: 100%; 
     font-style: inherit; 
@@ -110,20 +110,20 @@ html {
     outline: 0; 
     padding: 0; 
     vertical-align: baseline;
-} 
+}  */
 
-html { 
+/* html { 
     -webkit-text-size-adjust: 100%; 
     -ms-text-size-adjust: 100%;
-} 
+}  */
 
-html { 
+/* /* html { 
     box-sizing: border-box;
-} 
+}  */
 
-html { 
+/* html { 
     font-size: 100%;
-} 
+}  */
 
 :root { 
     --ast-global-color-0: #2FC1FF; 
@@ -135,7 +135,7 @@ html {
     --ast-global-color-6: #000000; 
     --ast-global-color-7: #4B4F58; 
     --ast-global-color-8: #F6F7F8;
-} 
+}  */
 
 :root { 
     --ast-border-color: #dddddd;
