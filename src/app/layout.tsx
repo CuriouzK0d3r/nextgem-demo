@@ -5,7 +5,7 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'NextGEM Demo',
+  title: 'NIKH HUB Web App',
   description: 'Created for NextGEM project',
 }
 
@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <title>NextGEM Demo</title>
+        <title>NIKH HUB Web App</title>
       </head>
       <body className={inter.className}>{children}</body>
     </html>
