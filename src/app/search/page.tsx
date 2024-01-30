@@ -169,30 +169,15 @@ function SearchResultsPage() {
             {/* <div id="formTab" className="tabcontent " style={{ display: "block" }}> */}
             <div className="w-full min-h-[68rem] mt-0 flex items-center justify-center ">
                 <Card className="mt-6 w-1/2 min-h-[30rem] mx-auto form-container object-cover object-center shadow-xl shadow-blue-gray-900/50">
-                    <CardHeader floated={false} shadow={false} className="rounded-none bg-[#d9d9d9]">
-                        <div className="mb-4 flex flex-col justify-between gap-8 md:flex-row md:items-center">
-                            <div>
-                                <Typography variant="h3" color="blue-gray">
-                                    Search Results
-                                </Typography>
-
-                            </div>
-                            <div className="flex w-full shrink-0 gap-2 md:w-max">
-                                <div className="w-full md:w-72">
-                                    <Input
-                                        label="Search"
-                                    // icon={<MagnifyingGlassIcon className="h-5 w-5" />}
-                                    />
-                                </div>
-                                <Button className="flex items-center gap-3" size="sm">
-                                    Download
-                                    {/* <ArrowDownTrayIcon strokeWidth={2} className="h-4 w-4" /> Download */}
-                                </Button>
-                            </div>
-                        </div>
+                    <CardHeader className='bg-[#D4D9DD] text-black'>
+                        <Typography variant="h2" className="text-center pb-4 pt-4">
+                            Search Results
+                        </Typography>
+                        {/* <h3 className='mb-8 text-4xl .title-color text-center mx-auto'>Search Scientific Catalogue</h3> */}
                     </CardHeader>
+
                     <CardBody className="overflow-scroll px-0">
-                        <table className="w-full mx-auto table-auto text-left">
+                        <table className="w-full mt-12 mx-auto table-auto text-left">
                             <thead>
                                 <tr>
                                     {TABLE_HEAD.map((head) => (
@@ -240,7 +225,7 @@ function SearchResultsPage() {
                                             <tr key={name}>
                                                 <td className={classes}>
                                                     <div className="flex items-center gap-3">
-                                                       
+
                                                         <Typography
                                                             variant="small"
                                                             color="blue-gray"
@@ -268,51 +253,51 @@ function SearchResultsPage() {
                                                         {typeOfStudy}
                                                     </Typography>
                                                 </td>
-                                               
+
                                                 <td className={classes}>
                                                     <div className="flex items-center gap-3">
-                                                       
+
                                                         <div className="flex flex-col">
                                                             <Typography
                                                                 variant="small"
                                                                 color="blue-gray"
                                                                 className="font-normal capitalize"
                                                             >
-                                                   {outputType}
+                                                                {outputType}
                                                             </Typography>
-                                                            
+
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td className={classes}>
                                                     <div className="flex items-center gap-3">
-                                                       
+
                                                         <div className="flex flex-col">
                                                             <Typography
                                                                 variant="small"
                                                                 color="blue-gray"
                                                                 className="font-normal capitalize"
                                                             >
-                                                   {location}
+                                                                {location}
                                                             </Typography>
-                                                            
+
                                                         </div>
                                                     </div>
                                                 </td>
-                                             
+
                                                 <td className={classes}>
                                                     <div className="w-max">
                                                         <Chip
                                                             size="sm"
                                                             variant="ghost"
                                                             value={status}
-                                                            // color={
-                                                            //     status === "paid"
-                                                            //         ? "green"
-                                                            //         : status === "pending"
-                                                            //             ? "amber"
-                                                            //             : "red"
-                                                            // }
+                                                        // color={
+                                                        //     status === "paid"
+                                                        //         ? "green"
+                                                        //         : status === "pending"
+                                                        //             ? "amber"
+                                                        //             : "red"
+                                                        // }
                                                         />
                                                     </div>
                                                 </td>
