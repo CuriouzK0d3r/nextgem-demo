@@ -174,7 +174,7 @@ function SearchPage() {
               <div>
                 {/* <button className="clear-button font-bold w-30 mr-4" type="submit">Clear</button> */}
                 <Button className="clear-button font-bold w-30 h-12 mr-4 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50" variant="gradient">Clear</Button>
-                <Button id="searchBtn" type="submit" className="btn font-bold w-30 h-12 mr-4 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50" variant="gradient">Search</Button>
+                <Button onClick={()=>window.open("/search", "_blank", "noreferrer")} id="searchBtn" type="submit" className="btn font-bold w-30 h-12 mr-4 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50" variant="gradient">Search</Button>
 
                 {/* <input type="submit" id="searchBtn" className="btn font-bold w-30" value="Search" /> */}
               </div>
