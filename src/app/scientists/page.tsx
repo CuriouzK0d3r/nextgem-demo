@@ -17,10 +17,13 @@ import {
   Input
 } from "@material-tailwind/react";
 import PageLayout from '../components/page-layout';
+import SearchResults from '../components/search-results';
+import { motion, AnimatePresence } from "framer-motion"
 
 function SearchPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [chosenSources, setChosenSources] = useState<string[]>([]);
+  const [mode, setMode] = useState<string>("search");
   const router = useRouter();
 
   const checkLoginStatus = () => {
@@ -96,41 +99,32 @@ function SearchPage() {
     );
   }
 
-  console.log(chosenSources)
   return (
     <PageLayout isLoggedIn={isLoggedIn}>
-      <div className="w-full mt-16 ">
+        <AnimatePresence>
+        {
+        mode == "results" ? (
+          <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 2 }}
+      >
+<SearchResults mode={mode} setMode={setMode} chosenSources={chosenSources} />
+</motion.div>
+        )
+        :
+      (
+      
+      <div className={`w-full mt-28 min-h-[65rem]`}>
         <Card className="mt-6 w-1/2 mx-auto form-container rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50">
           <CardHeader className='bg-[#D4D9DD] text-black'>
             <Typography variant="h2" className="text-center pb-4 pt-4">
               Search Scientific Catalogue
             </Typography>
-            {/* <h3 className='mb-8 text-4xl .title-color text-center mx-auto'>Search Scientific Catalogue</h3> */}
           </CardHeader>
           <CardBody placeholder={''}>
-            {/* <div className='form-container w-3/4 mx-auto'> */}
-            {/* <form className='flex-1 w-3/4 mx-auto mb-10' >
-            <div className="flex">
-              <div className="relative inline-block flex-1 h-full">
-                <input
-                  style={{ borderWidth: "2px", borderColor: "#6359E1" }}
-                  // value={searchQuery}
-                  onChange={(e) => { }}
-                  type="search" id="search-dropdown" className="w-full h-[70px] block p-2.5 pl-9 z-20 text-sm text-gray-900 
-                bg-gray-50 rounded-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 
-                dark:bg-gray-700 dark:border-l-gray-700 mb-0  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
-                dark:focus:border-blue-500" placeholder="Search Titles, DOIs, Authors, Subjects" required />
-                <div className='h-full'>
-                  <button style={{ borderWidth: "2px", borderColor: "#6359E1" }} type="submit" className="w-[100px] absolute top-0 right-0 pl-9 text-sm font-medium h-[70px] text-white bg-niki-blue rounded-r-lg border border-blue-500 hover:bg-niki-blue focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-700">
-                    <svg className="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                      <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                    </svg>
-                    <span className="sr-only">Search</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </form> */}
+
             <form className='mt-4' id="searchForm">
               {/* <h5 className='text-center text-xl mb-10'>
               Search Terms:
@@ -174,7 +168,7 @@ function SearchPage() {
               <div>
                 {/* <button className="clear-button font-bold w-30 mr-4" type="submit">Clear</button> */}
                 <Button className="clear-button font-bold w-30 h-12 mr-4 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50" variant="gradient">Clear</Button>
-                <Button onClick={()=>window.open("/search", "_blank", "noreferrer")} id="searchBtn" type="submit" className="btn font-bold w-30 h-12 mr-4 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50" variant="gradient">Search</Button>
+                <Button onClick={()=> setMode('results')} id="searchBtn" type="submit" className="btn font-bold w-30 h-12 mr-4 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50" variant="gradient">Search</Button>
 
                 {/* <input type="submit" id="searchBtn" className="btn font-bold w-30" value="Search" /> */}
               </div>
@@ -213,6 +207,8 @@ function SearchPage() {
           </div>
         </div>
       </div>
+      )}
+      </AnimatePresence>
     </ PageLayout>);
 }
 

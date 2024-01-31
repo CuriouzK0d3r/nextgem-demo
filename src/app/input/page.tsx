@@ -127,7 +127,7 @@ function InputPage() {
 
   return (
     <PageLayout isLoggedIn>
-      <div className="w-full mt-16 min-h-[55rem]">
+      <div className="w-full mt-40 min-h-[60rem]">
         {/* <h3 className='mb-6 text-4xl .title-color text-center mx-auto mt'>Input Data</h3> */}
 
         <Card className="mt-6 w-1/3 mx-auto form-container object-cover object-center shadow-xl shadow-blue-gray-900/50">

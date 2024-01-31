@@ -1,11 +1,14 @@
-"use client"
+import React from 'react';
 
-import { useState } from 'react';
+// interface SearchResult {
+//     id: number;
+//     name: string;
+//     description: string;
+// }
 
-import Cookies from 'js-cookie';
-import { useRouter } from 'next/navigation';
-import PageLayout from '../components/page-layout';
-
+// interface SearchResultsTableProps {
+//     results: SearchResult[];
+// }
 import {
     Card,
     CardHeader,
@@ -20,13 +23,7 @@ import {
     Input,
 } from "@material-tailwind/react";
 
-function classNames(...classes: string[]) {
-    return classes.filter(Boolean).join(" ");
-}
-
-function SearchResultsPage() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const router = useRouter();
+const SearchResults: React.FC<any> = ({ results, mode, setMode, seletedSources }) => {
     const TABLE_HEAD = ["Title", "Description", "Type of Study", "Output Type", "Location", "Status"];
 
     const TABLE_ROWS = [
@@ -95,41 +92,8 @@ function SearchResultsPage() {
             expiry: "06/2026",
         },
     ];
-
-    const checkLoginStatus = () => {
-        const apiEndpoint = "/api/auth/token";
-
-        fetch(apiEndpoint, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                access_token: Cookies.get('token'),
-            }),
-        })
-            .then(async (response) => {
-                if (response.ok) {
-                    let responseJSON = await response.json();
-                    console.log(responseJSON)
-                    if (responseJSON.loggedin) {
-                        setIsLoggedIn(true);
-                    }
-                } else {
-                    console.error("Login failed. Status: " + response.status);
-                }
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            });
-    }
-
-    checkLoginStatus();
-
     return (
-        <PageLayout isLoggedIn={isLoggedIn}>
-            {/* <div id="formTab" className="tabcontent " style={{ display: "block" }}> */}
-            <div className="w-full min-h-[68rem] mt-0 flex items-center justify-center ">
+        <div className={`w-full min-h-[68rem] mt-0 flex items-center justify-center`}>
                 <Card className="mt-6 w-1/2 min-h-[30rem] mx-auto form-container object-cover object-center shadow-xl shadow-blue-gray-900/50">
                     <CardHeader className='bg-[#D4D9DD] text-black'>
                         <Typography variant="h2" className="text-center pb-4 pt-4">
@@ -139,7 +103,11 @@ function SearchResultsPage() {
                     </CardHeader>
 
                     <CardBody placeholder={""} className=" px-0">
-                        <table className="w-full mt-12 mx-auto table-auto text-left">
+                        <button onClick={() => (setMode('search'))}><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="float-left w-12 h-6">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
+</svg>
+New Search</button>
+                        <table className="w-full mt-6 mx-auto table-auto text-left">
                             <thead>
                                 <tr>
                                     {TABLE_HEAD.map((head) => (
@@ -305,8 +273,7 @@ function SearchResultsPage() {
                     </CardFooter>
                 </Card>
             </div>
-            {/* </div> */}
-        </ PageLayout>);
-}
+    );
+};
 
-export default SearchResultsPage;
+export default SearchResults;

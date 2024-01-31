@@ -17,6 +17,17 @@ const config: Config = withMT({
           100: "#2AB7FF",
         }
       },
+      animation: {
+        fade: 'fadeOut 5s ease-in-out',
+      },
+
+      // that is actual animation
+      keyframes: (theme : any) => ({
+        fadeOut: {
+          '0%': { display: 'block' },
+          '100%': { display: 'none' },
+        },
+      }),
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
