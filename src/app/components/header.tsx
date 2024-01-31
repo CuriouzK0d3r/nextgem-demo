@@ -3,7 +3,7 @@ import { Button } from "@material-tailwind/react";
 
 import '../snipped.css'
 
-const Header = ({isLoggedIn}: {isLoggedIn: boolean}) => {
+const Header = ({isLoggedIn, skipLogin}: {isLoggedIn: boolean, skipLogin: boolean|undefined}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -36,10 +36,10 @@ const Header = ({isLoggedIn}: {isLoggedIn: boolean}) => {
                   </div>
                 </div>
               </div>
-              <div className={`ast-builder-layout-element ast-flex site-header-focus-item ast-header-button-1 ${isLoggedIn ? "invisible" : ""}`} data-section="section-hb-button-1">
+              <div className={`ast-builder-layout-element ast-flex site-header-focus-item ast-header-button-1 ${skipLogin ? "invisible" : ""}`} data-section="section-hb-button-1">
                 <div className="ast-builder-button-wrap ast-builder-button-size-"><a className="ast-custom-button-link" href="/login">
-                    <div className="ast-custom-button">Login</div>
-                  </a><a className="menu-link" href="#" target="_blank">Login</a></div>
+                    <div className="ast-custom-button">{isLoggedIn ? "Logout" : "Login"}</div>
+                  </a></div>
               </div>
             </div>
           </div>

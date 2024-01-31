@@ -148,7 +148,7 @@ function LoginPage() {
     // Add
 
     return (
-        <PageLayout isLoggedIn={true}>
+        <PageLayout isLoggedIn={true} skipLogin={true}>
             <div className="relative min-h-[55rem] mx-auto auth-container w-[40rem] ">
                 {/* */}
                 <div>

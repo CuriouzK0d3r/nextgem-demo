@@ -33,9 +33,9 @@ const Footer = () => {
                 <link rel="stylesheet" href="https://subra.ics.forth.gr/wp-content/plugins/elementor/assets/css/widget-icon-list.min.css" />
                 <ul className="elementor-icon-list-items">
                   <li className="elementor-icon-list-item">
-                    {/* <a href="https://www.ebos.com.cy/" target="_blank">
-                      <span className="elementor-icon-list-text">Designed &amp; Developed by eBOS Technologies Ltd</span>
-                    </a> */}
+                    <a href="https://www.nextgem.eu/" target="_blank">
+                      <span className="elementor-icon-list-text">Designed &amp; Developed by NextGEM</span>
+                    </a>
                   </li>
                 </ul>
               </div>

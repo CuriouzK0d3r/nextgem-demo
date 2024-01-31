@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from 'react';
+import { createRef, useState } from 'react';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 import Header from '../components/header';
@@ -19,6 +19,7 @@ import {
 import PageLayout from '../components/page-layout';
 import SearchResults from '../components/search-results';
 import { motion, AnimatePresence } from "framer-motion"
+import React from 'react';
 
 function SearchPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -34,14 +35,26 @@ function SearchPage() {
       required: false
     },
     {
-      label: "Authors",
-      field: 'authors',
+      label: "Institution",
+      field: 'institution',
       type: "text",
       required: false
     },
     {
+      label: "Keywords",
+      field: 'keywords',
+      type: "text",
+      required: false
+    },
+    // {
+    //   label: "Authors",
+    //   field: 'authors',
+    //   type: "text",
+    //   required: false
+    // },
+    {
       label: "Type of Study",
-      field: 'typeOfStudy',
+      field: 'studyType',
       type: "select",
       required: false,
       values: [
@@ -57,7 +70,7 @@ function SearchPage() {
     },
     {
       label: "Type of Output",
-      field: 'typeOfOutput',
+      field: 'outputType',
       type: "select",
       required: false,
       values: [
@@ -108,91 +121,100 @@ function SearchPage() {
       required: false
     }];
 
-    const indicativeFields = [
-      {
-        label: "Frequency Ranges",
-        field: 'frequencyRanges',
-        type: "select",
-        required: false,
-        values: [
-          "--",
-        ]
-      },
-      {
-        label: "Modulation",
-        field: 'modulation',
-        type: "select",
-        required: false,
-        values: [
-          "--",
-          "NR",
-          "No Modulation"
-        ]
-      },
-      {
-        label: "Exposure Conditions",
-        field: 'exposureConditions',
-        type: "select",
-        required: false,
-        values: [
-          "--",
-        ]
-      },
-      {
-        label: "Exposure Sources",
-        field: 'exposureSources',
-        type: "select",
-        required: false,
-        values: [
-          "--",
-        ]
-      },
-      {
-        label: "Environment",
-        field: 'environment',
-        type: "select",
-        required: false,
-        values: [
-          "--",
-        ]
-      },
-      {
-        label: "Microenvironment",
-        field: 'microenvironment',
-        type: "select",
-        required: false,
-        values: [
-          "--",
-        ]
-      },
-      {
-        label: "Biological Model",
-        field: 'biologicalModel',
-        type: "select",
-        required: false,
-        values: [
-          "--",
-        ]
-      },
-      {
-        label: "BioSpecific Endpoints",
-        field: 'bioSpecificEndpoints',
-        type: "select",
-        required: false,
-        values: [
-          "--",
-        ]
-      },
-      {
-        label: "Methods",
-        field: 'methods',
-        type: "select",
-        required: false,
-        values: [
-          "--",
-        ]
-      }
-    ];
+  const indicativeFields = [
+    {
+      label: "Frequency Ranges",
+      field: 'frequencyRanges',
+      type: "select",
+      required: false,
+      values: [
+        "--",
+      ]
+    },
+    {
+      label: "Modulation",
+      field: 'modulation',
+      type: "select",
+      required: false,
+      values: [
+        "--",
+        "NR",
+        "No Modulation"
+      ]
+    },
+    {
+      label: "Exposure Conditions",
+      field: 'exposureConditions',
+      type: "select",
+      required: false,
+      values: [
+        "--",
+      ]
+    },
+    {
+      label: "Exposure Sources",
+      field: 'exposureSources',
+      type: "select",
+      required: false,
+      values: [
+        "--",
+      ]
+    },
+    {
+      label: "Environment",
+      field: 'environment',
+      type: "select",
+      required: false,
+      values: [
+        "--",
+      ]
+    },
+    {
+      label: "Microenvironment",
+      field: 'microenvironment',
+      type: "select",
+      required: false,
+      values: [
+        "--",
+      ]
+    },
+    {
+      label: "Biological Model",
+      field: 'biologicalModel',
+      type: "select",
+      required: false,
+      values: [
+        "--",
+      ]
+    },
+    {
+      label: "BioSpecific Endpoints",
+      field: 'bioSpecificEndpoints',
+      type: "select",
+      required: false,
+      values: [
+        "--",
+      ]
+    },
+    {
+      label: "Methods",
+      field: 'methods',
+      type: "select",
+      required: false,
+      values: [
+        "--",
+      ]
+    }
+  ];
+
+  let fieldRefs: any = {};
+  descriptionFields.forEach((field) => {
+    fieldRefs[field.field] = createRef();
+  });
+  indicativeFields.forEach((field) => {
+    fieldRefs[field.field] = createRef();
+  });
+
 
   const checkLoginStatus = () => {
     const apiEndpoint = "/api/auth/token";
@@ -226,17 +248,17 @@ function SearchPage() {
 
   checkLoginStatus();
 
-  const TextInputComponent = ({ label, type, required, ref }: any) => {
+  const TextInputComponent = ({ label, type, required, name }: any) => {
     return (
       <div className="flex flex-row mt-4 p-0">
-        <Input className='object-cover object-center shadow-sm shadow-blue-gray-900/50' crossOrigin={true} style={{ color: "black" }} label={label} />
+        <Input inputRef={fieldRefs[name]} name={name} value={inputState[name]} className='object-cover object-center shadow-sm shadow-blue-gray-900/50' crossOrigin={true} style={{ color: "black" }} label={label} />
       </div>
     );
   }
-  const SelectInputComponent = ({ label, values, required, ref }: any) => {
+  const SelectInputComponent = ({ label, values, required, ref, name }: any) => {
     return (
       <div className="flex flex-row mt-4 w-full p-0">
-        <Select className='ct-cover object-center shadow-sm shadow-blue-gray-900/50' label={label} placeholder={label}>
+        <Select ref={fieldRefs[name]} name={name} className='ct-cover object-center shadow-sm shadow-blue-gray-900/50' label={label} placeholder={label}>
           {values.map((value: any) => (
             <Option key={value} value={value}>{value}</Option>
           ))
@@ -246,8 +268,45 @@ function SearchPage() {
     );
   }
 
+  const submitSearch = (event: any) => {
+    event.preventDefault();
+    let formData: any = {};
+    for (const [field, ref] of Object.entries(fieldRefs)) {
+      if (ref.current.value != "") {
+        formData[field] = ref?.current.value;
+      }
+    }
+
+    const apiEndpoint = "/api/search";
+
+    fetch(apiEndpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        formData: formData,
+        chosenSources: chosenSources
+      }),
+    })
+      .then(async (response) => {
+        if (response.ok) {
+          let responseJSON = await response.json();
+
+          if (responseJSON.loggedin) {
+            setIsLoggedIn(true);
+          }
+        } else {
+          console.error("Login failed. Status: " + response.status);
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
   return (
-    <PageLayout isLoggedIn={isLoggedIn}>
+    <PageLayout isLoggedIn={isLoggedIn} skipLogin={false}>
       <AnimatePresence>
         {
           mode == "results" ? (
@@ -271,28 +330,21 @@ function SearchPage() {
                   </CardHeader>
                   <CardBody placeholder={''}>
 
-                    <form className='mt-4' id="searchForm">
-                      {/* <h5 className='text-center text-xl mb-10'>
-              Search Terms:
-            </h5> */}
+                    <form className='mt-4' id="searchForm" onSubmit={(event) => submitSearch(event)}>
                       <div className="grid gap-8 mb-6 md:grid-cols-2 ">
                         <div>
-                          {/* <div className='underline decoration-dotted decoration-2 decoration-[#1D2E66] text-md mb-8'>
-                  Description
-                </div> */}
-                                              
-
                           <Typography variant="h5" placeholder={"Description"}>Description</Typography>
                           <div className='p-0'>
                             {
                               descriptionFields.map((field) => {
+                                console.log(fieldRefs[field.field])
                                 if (field.type == "text") {
                                   return (
-                                    <TextInputComponent classes="object-cover object-center shadow-xl shadow-blue-gray-900/50"  label={field.label} type={field.type} required={field.required} />
+                                    <TextInputComponent name={field.field} classes="object-cover object-center shadow-xl shadow-blue-gray-900/50" label={field.label} type={field.type} required={field.required} />
                                   )
                                 } else if (field.type == "select") {
                                   return (
-                                    <SelectInputComponent label={field.label} values={field.values} required={field.required} />
+                                    <SelectInputComponent name={field.field} label={field.label} values={field.values} required={field.required} />
                                   )
                                 }
                               })
@@ -305,21 +357,21 @@ function SearchPage() {
                             indicativeFields.map((field) => {
                               if (field.type == "text") {
                                 return (
-                                  <TextInputComponent label={field.label} type={field.type} required={field.required} />
+                                  <TextInputComponent name={field.field} label={field.label} type={field.type} required={field.required} />
                                 )
                               } else if (field.type == "select") {
                                 return (
-                                  <SelectInputComponent label={field.label} values={field.values} required={field.required} />
+                                  <SelectInputComponent name={field.field} label={field.label} values={field.values} required={field.required} />
                                 )
                               }
                             })
                           }
                         </div>
                       </div>
-                        <CardFooter className="flex p-0 justify-left">
+                      <CardFooter className="flex p-0 mt-4 justify-left">
                         <Button placeholder={""} className="clear-button font-bold w-30 h-12 mr-4 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50" variant="gradient">Clear</Button>
-                        <Button placeholder={""} onClick={() => setMode('results')} id="searchBtn" type="submit" className="btn font-bold w-30 h-12 mr-4 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50" variant="gradient">Search</Button>
-                          </CardFooter>
+                        <Button placeholder={""} id="searchBtn" type="submit" className="btn font-bold w-30 h-12 mr-4 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50" variant="gradient">Search</Button>
+                      </CardFooter>
                     </form>
                   </CardBody>
                 </Card>
