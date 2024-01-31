@@ -119,6 +119,7 @@ function LoginPage() {
         const password = loginPasswordRef.current?.value;
         const apiEndpoint = "/api/auth/login";
 
+
         fetch(apiEndpoint, {
             method: "POST",
             headers: {
@@ -131,6 +132,7 @@ function LoginPage() {
         })
             .then(async (response) => {
                 if (response.ok) {
+                    console.log(response)
                     let responseJSON = await response.json();
                     Cookies.set('token', responseJSON.access_token, { expires: 1, secure: false });
                     router.push('/search');
@@ -144,8 +146,6 @@ function LoginPage() {
             });
     }
     // Add
-
-    console.log(activeTab)
 
     return (
         <PageLayout isLoggedIn={true}>
@@ -176,32 +176,13 @@ function LoginPage() {
                         <div id="loginTab" className={(activeTab === "loginTab" ? "block " : "tabcontent ")}>
                             {/* <h3>Login</h3> */}
                             <form className='mt-12' id="loginForm" onSubmit={(event) => submitLoginForm(event)}>
-                                <Input  size="lg" crossOrigin={true} id="loginUsername" ref={loginUsernameRef} required style={{ color: "black", padding: "0px" }} label={"Username"} />
-                                {/* <label htmlFor="loginUsername">Username:</label>
-                                <input
-                                    className='rounded'
-                                    ref={loginUsernameRef}
-                                    type="text"
-                                    id="loginUsername"
-                                    name="loginUsername"
-                                    required
-                                /> */}
+                                <Input className='object-cover object-center shadow-sm shadow-blue-gray-900/50'  size="lg" crossOrigin={false} id="loginUsername" inputRef={loginUsernameRef} required style={{ color: "black", padding: "0px" }} label={"Username"} />
+     
                                 <div className='h-6'></div>
 
-                                <Input className='p-0' size="lg" crossOrigin={true} id="loginPassword" ref={loginUsernameRef} type='password' required style={{ color: "black" }} label={"Password"} />
+                                <Input className='p-0 object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin={false} id="loginPassword" inputRef={loginPasswordRef} type='password' required style={{ color: "black" }} label={"Password"} />
 
-                                {/* <label htmlFor="loginPassword">Password:</label>
-                                <input
-                                    className='rounded'
-                                    ref={loginPasswordRef}
-                                    type="password"
-                                    id="loginPassword"
-                                    name="loginPassword"
-                                    required
-                                /> */}
                                 <Button id="loginBtn" type="submit" className="btn font-bold w-full h-12 mt-8 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50" variant="gradient">Login</Button>
-
-                                {/* <input type="submit" id="loginBtn" className="btn font-bold" value="Login" /> */}
                             </form>
                         </div>
 
@@ -210,63 +191,17 @@ function LoginPage() {
                             <form className={'mt-4 '} id="registerForm" onSubmit={(event) => submitRegisterForm(event)}>
                                 <div className='h-8'></div>
 
-                                <Input className='p-0' size="lg" crossOrigin={true} id="registerUsername" ref={registerUsernameRef} required style={{ color: "black" }} label={"Username"} />
+                                <Input className='p-0 object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin={true} id="registerUsername" inputRef={registerUsernameRef} required style={{ color: "black" }} label={"Username"} />
                                 <div className='h-6'></div>
 
-                                <Input className='p-0' size="lg" crossOrigin={true} id="registerPassword" ref={registerPasswordRef} required style={{ color: "black" }} type='password' label={"Password"} />
+                                <Input className='p-0 object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin={true} id="registerPassword" inputRef={registerPasswordRef} required style={{ color: "black" }} type='password' label={"Password"} />
                                 <div className='h-6'></div>
 
-                                {/* <label htmlFor="registerUsername">Username:</label>
-                                <input
-                                    className='rounded'
-                                    ref={registerUsernameRef}
-                                    type="text"
-                                    id="registerUsername"
-                                    name="registerUsername"
-                                    required
-                                />
-
-                                <label htmlFor="registerPassword">Password:</label>
-                                <input
-                                    className='rounded'
-                                    ref={registerPasswordRef}
-                                    type="password"
-                                    id="registerPassword"
-                                    name="registerPassword"
-                                    required
-                                /> */}
-
-                                <Input className='p-0' size="lg" crossOrigin={true} id="registerEmail" type='email' ref={registerEmailRef} required style={{ color: "black" }} label={"E-mail"} />
+                                <Input className='p-0 object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin={true} id="registerEmail" type='email' inputRef={registerEmailRef} required style={{ color: "black" }} label={"E-mail"} />
                                 <div className='h-6'></div>
 
-                                <Input className='p-0' size="lg" crossOrigin={true} id="registerOrg" ref={registerOrgRef} required style={{ color: "black" }} label={"Organization"} />
+                                <Input className='p-0 object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin={true} id="registerOrg" inputRef={registerOrgRef} required style={{ color: "black" }} label={"Organization"} />
 
-                                {/* <label htmlFor="registerEmail">Email:</label>
-                                <input
-                                    className='rounded'
-                                    ref={registerEmailRef}
-                                    type="email"
-                                    id="registerEmail"
-                                    name="registerEmail"
-                                    required
-                                /> */}
-
-                                {/* <label htmlFor="registerOrg">Organization:</label>
-                                <input
-                                    className='rounded'
-                                    ref={registerOrgRef}
-                                    type="text"
-                                    id="registerOrg"
-                                    name="registerOrg"
-                                    required
-                                /> */}
-
-                                {/* <input
-                                type="submit"
-                                id="registerBtn"
-                                className="btn font-bold"
-                                value="Register"
-                            /> */}
                                 <Button id="searchBtn" type="submit" className="btn font-bold w-full h-12 mt-8" variant="gradient">Register</Button>
 
                             </form>

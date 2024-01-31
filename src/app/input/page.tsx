@@ -72,7 +72,7 @@ function InputPage() {
   const TextInputComponent = ({ label, type, required, ref }: any) => {
     return (
       <div className="flex flex-row mt-4 p-0">
-        <Input crossOrigin={true} style={{ color: "black" }} label={label} />
+        <Input className='object-cover object-center shadow-sm shadow-blue-gray-900/50' crossOrigin={true} style={{ color: "black" }} label={label} />
         {/* <label className="mb-2 text-sm text-gray-900 mr-4 p-0">{label}:</label>
         <input
           className="border border-gray-400 p-2 rounded-lg w-3/4 appearance-none focus:outline-none focus:border-gray-500"
@@ -90,52 +90,86 @@ function InputPage() {
   const SelectInputComponent = ({ label, values, required, ref }: any) => {
     return (
       <div className="flex flex-row mt-4 p-0">
-        {/* <label className="mb-2 text-sm text-gray-900 mr-4 p-0">{label}:</label>
-        <select
-          className="text-sm rounded-lg  block p-2.5   w-3/4 dark:border-gray-600">
-          {values.map((value: any) => (
-            <option key={value} value={value}>{value}</option>
-          ))
-          }
-        </select> */}
-        <Select label={label} placeholder={label} >
+        <Select className='object-cover object-center shadow-sm shadow-blue-gray-900/50 text-black' label={label} placeholder={label} >
           {values.map((value: any) => (
             <Option key={value} value={value}>{value}</Option>
           ))
           }
-          {/* <Option>Material Tailwind HTML</Option>
-        <Option>Material Tailwind React</Option>
-        <Option>Material Tailwind Vue</Option>
-        <Option>Material Tailwind Angular</Option>
-        <Option>Material Tailwind Svelte</Option> */}
         </Select>
       </div>
     );
   }
 
-  const handleFileChange = (event: any) => {
-    setSelectedFiles(event.target.files);
-  };
-
-  const handleUpload = () => {
-    const formData = new FormData();
-    for (let i = 0; i < selectedFiles.length; i++) {
-      formData.append(`file${i}`, selectedFiles[i]);
-    }
-    // Now you can send the formData to your server
-  };
+  const inputFields = [
+      {
+        label: "Title",
+        field: 'title',
+        type: "text",
+        required: false
+      },
+      {
+        label: "Description",
+        field: 'description',
+        type: "text",
+        required: false
+      },
+      {
+        label: "Free Keywords",
+        field: 'freeKeywords',
+        type: "text",
+        required: false
+      },
+      {
+        label: "Data Source URL",
+        field: 'dataSourceURL',
+        type: "text",
+        required: false
+      },
+      {
+        label: "Authors",
+        field: 'authors',
+        type: "text",
+        required: false
+      },
+      {
+        label: "Type of Study",
+        field: 'typeOfStudy',
+        type: "select",
+        values: ["--", "exVivo", "exposureAssessment", "humanStudies", "inVitro", "inVivo", "riskAssesment", "simulation"],
+        required: false
+      },
+      {
+        label: "Type of Output",
+        field: 'typeOfOutput',
+        type: "select",
+        values: ["--", "audio", "codebook", "dataset", "deliverable", "image", "poster", "presentation", "publication", "report", "software", "video"],
+        required: false
+      },
+      {
+        label: "Frequency Ranges",
+        field: 'frequencyRanges',
+        type: "select",
+        values: ["--", ""],
+        required: false
+      },
+      {
+        label: "Modulation",
+        field: 'modulation',
+        type: "select",
+        values: ["--", "NR", "No Modulation"],
+        required: false
+      },
+  ];
 
   return (
     <PageLayout isLoggedIn>
       <div className="w-full mt-40 min-h-[60rem]">
-        {/* <h3 className='mb-6 text-4xl .title-color text-center mx-auto mt'>Input Data</h3> */}
-
         <Card className="mt-6 w-1/3 mx-auto form-container object-cover object-center shadow-xl shadow-blue-gray-900/50">
-          <CardHeader className='bg-[#D4D9DD] text-black p-0 divide-y-4 divide-[#fff]'>
-            <Typography variant="h2" className="text-center pb-4 pt-4">
+          <CardHeader className='bg-[#D4D9DD] text-black p-0 divide-y-2 divide-[#fff]'>
+            <Typography placeholder={""} variant="h2" className="text-center pb-4 pt-4">
               Input Data
             </Typography>
-            <div className="tab bt-2 rounded-lg object-cover object-center shadow-3xl shadow-blue-gray-900/50 ">
+            <div className="tab bt-2 object-cover object-center shadow-3xl shadow-blue-gray-900/50 ">
               <button style={{ borderRadius: "4px 4px 0 0" }} className={"tablinks " + (activeTab === 'formTab' ? 'active' : '')} onClick={(event) => setActiveTab('formTab')}>
                 Input Scientific Data
               </button>
@@ -143,28 +177,40 @@ function InputPage() {
                 Input Files
               </button>
             </div>
-            {/* <h3 className='mb-8 text-4xl .title-color text-center mx-auto'>Search Scientific Catalogue</h3> */}
           </CardHeader>
-          <CardBody>
+          <CardBody placeholder={""}>
 
             <div id="formTab" className={" " + (activeTab === 'formTab' ? 'block' : 'hidden')} >
 
               <form className='mt-4' id="inputForm">
-                {/* <h5 className='text-center text-xl mb-10'>
-              Search Terms:
-            </h5> */}
                 <div className="grid gap-8 mb-6 md:grid-cols-1 ">
                   <div>
                     <div>
-                      <TextInputComponent label="Title" type="text" required={false} />
-                      <TextInputComponent label="Description" type="text" required={false} />
-                      <TextInputComponent label="Free Keywords" type="text" required={false} />
-                      <TextInputComponent label="Data Source URL" type="text" required={false} />
-                      {/* <TextInputComponent label="Authors" type="text" required={false} /> */}
-                      <SelectInputComponent label="Type of Study" values={["--", "exVivo", "exposureAssessment", "humanStudies", "inVitro", "inVivo", "riskAssesment", "simulation"]} required={false} />
-                      <SelectInputComponent label="Type of Output" values={["--", "audio", "codebook", "dataset", "deliverable", "image", "poster", "presentation", "publication", "report", "software", "video"]} required={false} />
-                      <SelectInputComponent label="Frequency Ranges" values={["--", ""]} required={false} />
-                      <SelectInputComponent label="Modulation" values={["--", "NR", "No Modulation"]} required={false} />
+                      {
+                        inputFields.map((inputField) => {
+                          if (inputField.type === "text") {
+                            return (
+                              <TextInputComponent
+                                key={inputField.field}
+                                label={inputField.label}
+                                type={inputField.type}
+                                required={inputField.required}
+                              // ref={inputField.field}
+                              />
+                            );
+                          } else if (inputField.type === "select") {
+                            return (
+                              <SelectInputComponent
+                                key={inputField.field}
+                                label={inputField.label}
+                                values={inputField.values}
+                                required={inputField.required}
+                              // ref={inputField.field}
+                              />
+                            );
+                          }
+                        })
+                      }
                     </div>
                   </div>
                 </div>

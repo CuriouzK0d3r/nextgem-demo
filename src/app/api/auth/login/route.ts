@@ -19,7 +19,7 @@ export async function POST(req: Request, res: NextApiResponse) {
             password: password,
         }),
     });
-
+    
     if (response.ok) {
         // window.location.href = "https://example.com/example-page";
         let responseJson = await response.json();
