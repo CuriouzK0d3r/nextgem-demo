@@ -33,6 +33,7 @@ export async function POST(req: Request, res: NextApiResponse) {
     })
 
     const responseJSON = await response.json();
+    console.log(responseJSON);
 
     return Response.json({ searchResults: responseJSON });
 }

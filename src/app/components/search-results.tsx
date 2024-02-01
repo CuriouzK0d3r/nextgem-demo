@@ -23,75 +23,129 @@ import {
     Input,
 } from "@material-tailwind/react";
 
-const SearchResults: React.FC<any> = ({ results, mode, setMode, seletedSources }) => {
+function DefaultPagination() {
+    const [active, setActive] = React.useState(1);
+   
+    const getItemProps = (index) =>
+      ({
+        variant: active === index ? "filled" : "text",
+        color: "gray",
+        onClick: () => setActive(index),
+      } as any);
+   
+    const next = () => {
+      if (active === 5) return;
+   
+      setActive(active + 1);
+    };
+   
+    const prev = () => {
+      if (active === 1) return;
+   
+      setActive(active - 1);
+    };
+   
+    return (
+      <div className="flex items-center gap-4">
+        <Button
+          variant="text"
+          className="flex items-center gap-2"
+          onClick={prev}
+          disabled={active === 1}
+        >
+          <ArrowLeftIcon strokeWidth={2} className="h-4 w-4" /> Previous
+        </Button>
+        <div className="flex items-center gap-2">
+          <IconButton {...getItemProps(1)}>1</IconButton>
+          <IconButton {...getItemProps(2)}>2</IconButton>
+          <IconButton {...getItemProps(3)}>3</IconButton>
+          <IconButton {...getItemProps(4)}>4</IconButton>
+          <IconButton {...getItemProps(5)}>5</IconButton>
+        </div>
+        <Button
+          variant="text"
+          className="flex items-center gap-2"
+          onClick={next}
+          disabled={active === 5}
+        >
+          Next
+          <ArrowRightIcon strokeWidth={2} className="h-4 w-4" />
+        </Button>
+      </div>
+    );
+  }
+
+const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, seletedSources, setSearchResults }) => {
+    console.log(searchResults)
     const TABLE_HEAD = ["Title", "Description", "Type of Study", "Output Type", "Location", "Status"];
 
-    const TABLE_ROWS = [
-        {
-            title: "Epigenetic Tests on HaCat after FR2 limited exposure ",
-            description: "Limited Exposure of HaCat 0.1",
-            typeOfStudy: "In Vitro",
-            outputType: "Publication",
-            location: "CNR",
-            status: "Public",
-            img: "https://docs.material-tailwind.com/img/logos/logo-spotify.svg",
-            name: "Spotify",
-            amount: "$2,500",
-            date: "Wed 3:00pm",
-            //   status: "paid",
-            account: "visa",
-            accountNumber: "1234",
-            expiry: "06/2026",
-        },
-        {
-            title: "Behavioural and developmental dfferentiations in bees by 5G exposure... ",
-            description: "Continuous Exposure of bees",
-            typeOfStudy: "In Vivo",
-            outputType: "Video/Audio",
-            location: "Lorem",
-            status: "Restricted",
-            img: "https://docs.material-tailwind.com/img/logos/logo-spotify.svg",
-            name: "Spotify",
-            amount: "$2,500",
-            date: "Wed 3:00pm",
-            //   status: "paid",
-            account: "visa",
-            accountNumber: "1234",
-            expiry: "06/2026",
-        },
-        {
-            title: "Cumulative 5G Exposure in indoor working environment",
-            description: "Cumulative Exposure in indoor working environment",
-            typeOfStudy: "Simulation",
-            outputType: "Poster",
-            location: "CIMNE",
-            status: "Restricted",
-            img: "https://docs.material-tailwind.com/img/logos/logo-spotify.svg",
-            name: "Spotify",
-            amount: "$2,500",
-            date: "Wed 3:00pm",
-            //   status: "paid",
-            account: "visa",
-            accountNumber: "1234",
-            expiry: "06/2026",
-        },
-        {
-            title: "Combined 5G, WiFi  Exposure",
-            description: "Lorem ipsum dolor sit amet, consectetur ",
-            typeOfStudy: "In Silico",
-            outputType: "Dataset",
-            location: "Lorem",
-            status: "Public",
-            img: "https://docs.material-tailwind.com/img/logos/logo-spotify.svg",
-            name: "Spotify",
-            amount: "$2,500",
-            date: "Wed 3:00pm",
-            //   status: "paid",
-            account: "visa",
-            accountNumber: "1234",
-            expiry: "06/2026",
-        },
-    ];
+    const TABLE_ROWS = searchResults;
+    // const TABLE_ROWS = [
+    //     {
+    //         title: "Epigenetic Tests on HaCat after FR2 limited exposure ",
+    //         description: "Limited Exposure of HaCat 0.1",
+    //         typeOfStudy: "In Vitro",
+    //         outputType: "Publication",
+    //         location: "CNR",
+    //         status: "Public",
+    //         img: "https://docs.material-tailwind.com/img/logos/logo-spotify.svg",
+    //         name: "Spotify",
+    //         amount: "$2,500",
+    //         date: "Wed 3:00pm",
+    //         //   status: "paid",
+    //         account: "visa",
+    //         accountNumber: "1234",
+    //         expiry: "06/2026",
+    //     },
+    //     {
+    //         title: "Behavioural and developmental dfferentiations in bees by 5G exposure... ",
+    //         description: "Continuous Exposure of bees",
+    //         typeOfStudy: "In Vivo",
+    //         outputType: "Video/Audio",
+    //         location: "Lorem",
+    //         status: "Restricted",
+    //         img: "https://docs.material-tailwind.com/img/logos/logo-spotify.svg",
+    //         name: "Spotify",
+    //         amount: "$2,500",
+    //         date: "Wed 3:00pm",
+    //         //   status: "paid",
+    //         account: "visa",
+    //         accountNumber: "1234",
+    //         expiry: "06/2026",
+    //     },
+    //     {
+    //         title: "Cumulative 5G Exposure in indoor working environment",
+    //         description: "Cumulative Exposure in indoor working environment",
+    //         typeOfStudy: "Simulation",
+    //         outputType: "Poster",
+    //         location: "CIMNE",
+    //         status: "Restricted",
+    //         img: "https://docs.material-tailwind.com/img/logos/logo-spotify.svg",
+    //         name: "Spotify",
+    //         amount: "$2,500",
+    //         date: "Wed 3:00pm",
+    //         //   status: "paid",
+    //         account: "visa",
+    //         accountNumber: "1234",
+    //         expiry: "06/2026",
+    //     },
+    //     {
+    //         title: "Combined 5G, WiFi  Exposure",
+    //         description: "Lorem ipsum dolor sit amet, consectetur ",
+    //         typeOfStudy: "In Silico",
+    //         outputType: "Dataset",
+    //         location: "Lorem",
+    //         status: "Public",
+    //         img: "https://docs.material-tailwind.com/img/logos/logo-spotify.svg",
+    //         name: "Spotify",
+    //         amount: "$2,500",
+    //         date: "Wed 3:00pm",
+    //         //   status: "paid",
+    //         account: "visa",
+    //         accountNumber: "1234",
+    //         expiry: "06/2026",
+    //     },
+    // ];
     return (
         <div className={`w-full min-h-[68rem] mt-0 flex items-center justify-center`}>
                 <Card className="mt-6 w-1/2 min-h-[30rem] mx-auto form-container object-cover object-center shadow-xl shadow-blue-gray-900/50">
@@ -103,7 +157,7 @@ const SearchResults: React.FC<any> = ({ results, mode, setMode, seletedSources }
                     </CardHeader>
 
                     <CardBody placeholder={""} className=" px-0">
-                        <button onClick={() => (setMode('search'))}><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="float-left w-12 h-6">
+                        <button onClick={() => (setSearchResults([]))}><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="float-left w-12 h-6">
   <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
 </svg>
 New Search</button>
