@@ -162,9 +162,9 @@ function InputPage() {
   ];
 
   return (
-    <PageLayout isLoggedIn>
+    <PageLayout isLoggedIn pageName='members'>
       <div className="w-full mt-40 min-h-[60rem]">
-        <Card className="mt-6 w-1/3 mx-auto form-container object-cover object-center shadow-xl shadow-blue-gray-900/50">
+        <Card className="mt-6 w-full lg:w-1/2 xl:1/3 mx-auto form-container object-cover object-center shadow-xl shadow-blue-gray-900/50">
           <CardHeader className='bg-[#D4D9DD] text-black p-0 divide-y-2 divide-[#fff]'>
             <Typography placeholder={""} variant="h2" className="text-center pb-4 pt-4">
               Input Data

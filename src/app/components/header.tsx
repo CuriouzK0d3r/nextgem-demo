@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Button } from "@material-tailwind/react";
 
 import '../snipped.css'
+import { log } from 'console';
 
-const Header = ({isLoggedIn, skipLogin}: {isLoggedIn: boolean, skipLogin: boolean|undefined}) => {
+const Header = ({isLoggedIn, skipLogin, pageName}: {isLoggedIn: boolean, skipLogin: boolean|undefined, pageName: string|undefined}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -28,8 +29,8 @@ const Header = ({isLoggedIn, skipLogin}: {isLoggedIn: boolean, skipLogin: boolea
                           <li id="menu-item-542" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-540 current_page_item menu-item-542"><a href="/" aria-current="page" className="menu-link">Home</a></li>
                           <li id="menu-item-12" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-12"><a href="/authorities/" className="menu-link">Authorities</a></li>
                           <li id="menu-item-11" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-11"><a href="/citizens/" className="menu-link">Citizens</a></li>
-                          <li id="menu-item-10" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-10"><a href="/scientists/" className="menu-link">Scientists</a></li>
-                          <li id="menu-item-150" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-150"><a href="/members/" className="menu-link">Members</a></li>
+                          <li id="menu-item-10" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-10"><a href="/scientists/" className={`menu-link ${pageName === 'scientists' ? "active-link" : ""}`}>Scientists</a></li>
+                          <li id="menu-item-150" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-150"><a href="/members/" className={`menu-link ${pageName === 'members' ? "active-link" : ""}`}>Members</a></li>
                         </ul>
                       </div>
                     </nav>

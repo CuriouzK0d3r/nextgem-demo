@@ -272,7 +272,7 @@ function SearchPage() {
   }, []);
 
   return (
-    <PageLayout isLoggedIn={isLoggedIn} skipLogin={false}>
+    <PageLayout isLoggedIn={isLoggedIn} skipLogin={false} pageName={"scientists"}>
       <AnimatePresence>
         {
           searchResults.length > 0 ? (

@@ -343,6 +343,10 @@ label {
     inset 0px -3px 0px rgb(58 65 111 / 50%);
 }
 
+.active-link {
+  color: #2FC1FF !important;
+}
+
 .tabcontent {
   display: none;
 }
