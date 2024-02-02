@@ -240,7 +240,7 @@ function SearchPage() {
   const TextInputComponent = ({ label, type, required, name }: any) => {
     return (
       <div className="flex flex-row mt-4 p-0">
-        <Input inputRef={fieldRefs[name]} name={name} value={inputState[name]} className='object-cover object-center shadow-sm shadow-blue-gray-900/50' crossOrigin={true} style={{ color: "black" }} label={label} />
+        <Input inputRef={fieldRefs[name]} name={name} value={inputState[name]} className='object-cover object-center shadow-sm shadow-blue-gray-900/50 bg-white' crossOrigin={true} style={{ color: "black" }} label={label} />
       </div>
     );
   }
@@ -248,7 +248,7 @@ function SearchPage() {
   const SelectInputComponent = ({ label, values, required, ref, name }: any) => {
     return (
       <div className="flex flex-row mt-4 w-full p-0">
-        <Select ref={fieldRefs[name]} name={name} className='text-black ct-cover object-center shadow-sm shadow-blue-gray-900/50' label={label} placeholder={label}>
+        <Select ref={fieldRefs[name]} name={name} className='bg-white text-black ct-cover object-center shadow-sm shadow-blue-gray-900/50' label={label} placeholder={label}>
           {values.map((value: any) => (
             <Option key={value} value={value}>{value}</Option>
           ))

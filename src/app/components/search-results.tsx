@@ -22,8 +22,9 @@ import {
     Tooltip,
     Input,
 } from "@material-tailwind/react";
+import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/20/solid';
 
-function DefaultPagination() {
+function DefaultPagination({searchResults}: {searchResults: any[]}) {
     const [active, setActive] = React.useState(1);
    
     const getItemProps = (index) =>
@@ -44,10 +45,13 @@ function DefaultPagination() {
    
       setActive(active - 1);
     };
+
+    const pagesNo = Math.ceil(searchResults.length / 5);
    
     return (
       <div className="flex items-center gap-4">
         <Button
+          placeholder={""}
           variant="text"
           className="flex items-center gap-2"
           onClick={prev}
@@ -56,11 +60,16 @@ function DefaultPagination() {
           <ArrowLeftIcon strokeWidth={2} className="h-4 w-4" /> Previous
         </Button>
         <div className="flex items-center gap-2">
-          <IconButton {...getItemProps(1)}>1</IconButton>
+            {
+                [...Array(pagesNo).keys()].map((i) => {
+                    return <IconButton {...getItemProps(i)}>{i+1}</IconButton>;
+                })
+            }
+          {/* <IconButton {...getItemProps(1)}>1</IconButton>
           <IconButton {...getItemProps(2)}>2</IconButton>
           <IconButton {...getItemProps(3)}>3</IconButton>
           <IconButton {...getItemProps(4)}>4</IconButton>
-          <IconButton {...getItemProps(5)}>5</IconButton>
+          <IconButton {...getItemProps(5)}>5</IconButton> */}
         </div>
         <Button
           variant="text"
@@ -77,9 +86,9 @@ function DefaultPagination() {
 
 const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, seletedSources, setSearchResults }) => {
     console.log(searchResults)
-    const TABLE_HEAD = ["Title", "Description", "Type of Study", "Output Type", "Location", "Status"];
+    const TABLE_HEAD = ["Title", "Description", "Type of Study", "Output Type", "Location", "Status", "More"];
 
-    const TABLE_ROWS = searchResults;
+    const TABLE_ROWS = searchResults.slice(0, 5);
     // const TABLE_ROWS = [
     //     {
     //         title: "Epigenetic Tests on HaCat after FR2 limited exposure ",
@@ -295,35 +304,7 @@ New Search</button>
                         </table>
                     </CardBody>
                     <CardFooter className="flex justify-center  border-t border-blue-gray-50 p-4">
-                        <Button variant="outlined" size="sm">
-                            Previous
-                        </Button>
-                        <div className="flex items-center gap-2">
-                            <IconButton variant="outlined" size="sm">
-                                1
-                            </IconButton>
-                            <IconButton variant="text" size="sm">
-                                2
-                            </IconButton>
-                            <IconButton variant="text" size="sm">
-                                3
-                            </IconButton>
-                            <IconButton variant="text" size="sm">
-                                ...
-                            </IconButton>
-                            <IconButton variant="text" size="sm">
-                                8
-                            </IconButton>
-                            <IconButton variant="text" size="sm">
-                                9
-                            </IconButton>
-                            <IconButton variant="text" size="sm">
-                                10
-                            </IconButton>
-                        </div>
-                        <Button variant="outlined" size="sm">
-                            Next
-                        </Button>
+                        <DefaultPagination searchResults={searchResults} />
                     </CardFooter>
                 </Card>
             </div>

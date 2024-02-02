@@ -149,7 +149,7 @@ function LoginPage() {
 
     return (
         <PageLayout isLoggedIn={true} skipLogin={true}>
-            <div className="relative min-h-[55rem] mx-auto auth-container w-[40rem] ">
+            <div className="relative min-h-[48rem] mx-auto auth-container w-[40rem] ">
                 {/* */}
                 <div>
                     <h4 className='text-center'>Welcome to</h4>

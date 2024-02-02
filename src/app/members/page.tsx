@@ -6,11 +6,8 @@ import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 import PageLayout from '../components/page-layout';
 
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
-}
 
-function MembersPage() {
+function DashboardPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
 
@@ -44,33 +41,69 @@ function MembersPage() {
 
   checkLoginStatus();
 
+  const openTab = (evt: any, tabName: any) => {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      // tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    // document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+  };
+
   return (
     <PageLayout isLoggedIn={isLoggedIn}>
       {/* <div id="formTab" className="tabcontent " style={{ display: "block" }}> */}
-      <div className="w-full min-h-[58rem] mt-0 flex items-center justify-center ">
-        <a href='/input?tab=form' className=''>
+      <div className="w-full min-h-[65rem] mt-0 flex items-center justify-center ">
+        <div className="grid grid-cols-2 gap-4">
+        <a href='/input' className='mb-12'>
         <div className="menu-box members-cat  mr-8">
             <div className=" w-full h-full text-center rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900/50">
                 <img width={90} className='mx-auto pt-8' src="./input-logo.svg" alt="" />
                 <span className='text-white'>
-                Input Scientific data
+                Input Data
                 </span>
             </div>
         </div>
         </a>
-        <a href='/input?tab=file'>
+        <a href='#'>
         <div className="menu-box members-cat">
             <div className="w-full h-full text-center rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900/50">
-                <img width={90} className='mx-auto pt-8' src="./file-logo.svg" alt="" />
+                <img width={93} className='mx-auto pt-8' src="./modeling-logo.svg" alt="" />
                 <span className='text-white'>
-                Input Files
+                Modeling
                 </span>
             </div>
         </div>
         </a>
+        <a href='#'>
+        <div className="menu-box members-cat">
+            <div className="w-full h-full text-center rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900/50">
+                <img width={88} className='mx-auto pt-10' src="./ra-logo.svg" alt="" />
+                <span className='text-white'>
+                Risk Assessment Tool
+                </span>
+            </div>
+        </div>
+        </a>
+        <a href='#'>
+        <div className="menu-box members-cat">
+            <div className="w-full h-full text-center rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900/50">
+                <img width={93} className='mx-auto pt-8' src="./ecosystem-logo.svg" alt="" />
+                <span className='text-white'>
+                Ecosystem
+                </span>
+            </div>
+        </div>
+        </a>
+        </div>
       </div>
       {/* </div> */}
      </ PageLayout>);
 }
 
-export default MembersPage;
+export default DashboardPage;
