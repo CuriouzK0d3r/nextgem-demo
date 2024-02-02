@@ -41,20 +41,6 @@ function DashboardPage() {
 
   checkLoginStatus();
 
-  const openTab = (evt: any, tabName: any) => {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-      // tabcontent[i].style.display = "none";
-    }
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    // document.getElementById(tabName).style.display = "block";
-    evt.currentTarget.className += " active";
-  };
-
   return (
     <PageLayout isLoggedIn={isLoggedIn}>
       {/* <div id="formTab" className="tabcontent " style={{ display: "block" }}> */}
@@ -80,7 +66,7 @@ function DashboardPage() {
             </div>
         </div>
         </a>
-        <a href='#'>
+        <a href='/ra-search'>
         <div className="menu-box members-cat">
             <div className="w-full h-full text-center rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900/50">
                 <img width={88} className='mx-auto pt-10' src="./ra-logo.svg" alt="" />

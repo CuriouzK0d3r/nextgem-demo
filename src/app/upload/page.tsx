@@ -72,7 +72,7 @@ function InputPage() {
   const TextInputComponent = ({ label, type, required, ref }: any) => {
     return (
       <div className="flex flex-row mt-4 p-0">
-        <Input className='object-cover object-center shadow-sm shadow-blue-gray-900/50' crossOrigin={true} style={{ color: "black" }} label={label} />
+        <Input className='object-cover bg-white object-center shadow-sm shadow-blue-gray-900/50' crossOrigin={true} style={{ color: "black" }} label={label} />
         {/* <label className="mb-2 text-sm text-gray-900 mr-4 p-0">{label}:</label>
         <input
           className="border border-gray-400 p-2 rounded-lg w-3/4 appearance-none focus:outline-none focus:border-gray-500"
@@ -90,7 +90,7 @@ function InputPage() {
   const SelectInputComponent = ({ label, values, required, ref }: any) => {
     return (
       <div className="flex flex-row mt-4 p-0">
-        <Select className='object-cover object-center shadow-sm shadow-blue-gray-900/50 text-black' label={label} placeholder={label} >
+        <Select className='object-cover bg-white object-center shadow-sm shadow-blue-gray-900/50 text-black' label={label} placeholder={label} >
           {values.map((value: any) => (
             <Option key={value} value={value}>{value}</Option>
           ))

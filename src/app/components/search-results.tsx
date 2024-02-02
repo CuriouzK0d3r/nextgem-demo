@@ -9,86 +9,95 @@ import React from 'react';
 // interface SearchResultsTableProps {
 //     results: SearchResult[];
 // }
-import {
-    Card,
-    CardHeader,
-    Typography,
-    Button,
-    CardBody,
-    Chip,
-    CardFooter,
-    Avatar,
-    IconButton,
-    Tooltip,
-    Input,
-} from "@material-tailwind/react";
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/20/solid';
+import {
+    Button,
+    Card,
+    CardBody,
+    CardFooter,
+    CardHeader,
+    Chip,
+    IconButton,
+    Typography
+} from "@material-tailwind/react";
+import { MoreDialog } from './helpers/more-dialog';
 
-function DefaultPagination({searchResults}: {searchResults: any[]}) {
-    const [active, setActive] = React.useState(1);
-   
-    const getItemProps = (index) =>
-      ({
+function DefaultPagination({ searchResults, active, setActive }: { searchResults: any[], active: number, setActive: React.Dispatch<React.SetStateAction<number>> }) {
+
+    const getItemProps = (index: number) =>
+    ({
         variant: active === index ? "filled" : "text",
         color: "gray",
         onClick: () => setActive(index),
-      } as any);
-   
+    } as any);
+
     const next = () => {
-      if (active === 5) return;
-   
-      setActive(active + 1);
+        if (active === 5) return;
+
+        setActive(active + 1);
     };
-   
+
     const prev = () => {
-      if (active === 1) return;
-   
-      setActive(active - 1);
+        if (active === 1) return;
+
+        setActive(active - 1);
     };
 
     const pagesNo = Math.ceil(searchResults.length / 5);
-   
+
     return (
-      <div className="flex items-center gap-4">
-        <Button
-          placeholder={""}
-          variant="text"
-          className="flex items-center gap-2"
-          onClick={prev}
-          disabled={active === 1}
-        >
-          <ArrowLeftIcon strokeWidth={2} className="h-4 w-4" /> Previous
-        </Button>
-        <div className="flex items-center gap-2">
-            {
-                [...Array(pagesNo).keys()].map((i) => {
-                    return <IconButton {...getItemProps(i)}>{i+1}</IconButton>;
-                })
-            }
-          {/* <IconButton {...getItemProps(1)}>1</IconButton>
+        <div className="flex items-center gap-4">
+            <Button
+                placeholder={""}
+                variant="text"
+                className="flex items-center gap-2"
+                onClick={prev}
+                disabled={active === 0}
+            >
+                <ArrowLeftIcon strokeWidth={2} className="h-4 w-4" /> Previous
+            </Button>
+            <div className="flex items-center gap-2">
+                {
+                    [...Array(pagesNo).keys()].map((i) => {
+                        return <IconButton {...getItemProps(i)}>{i + 1}</IconButton>;
+                    })
+                }
+                {/* <IconButton {...getItemProps(1)}>1</IconButton>
           <IconButton {...getItemProps(2)}>2</IconButton>
           <IconButton {...getItemProps(3)}>3</IconButton>
           <IconButton {...getItemProps(4)}>4</IconButton>
           <IconButton {...getItemProps(5)}>5</IconButton> */}
+            </div>
+            <Button
+                variant="text"
+                className="flex items-center gap-2"
+                onClick={next}
+                disabled={active === pagesNo - 1}
+            >
+                Next
+                <ArrowRightIcon strokeWidth={2} className="h-4 w-4" />
+            </Button>
         </div>
-        <Button
-          variant="text"
-          className="flex items-center gap-2"
-          onClick={next}
-          disabled={active === 5}
-        >
-          Next
-          <ArrowRightIcon strokeWidth={2} className="h-4 w-4" />
-        </Button>
-      </div>
     );
-  }
+}
 
 const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, seletedSources, setSearchResults }) => {
-    console.log(searchResults)
-    const TABLE_HEAD = ["Title", "Description", "Type of Study", "Output Type", "Location", "Status", "More"];
+    const [active, setActive] = React.useState(0);
 
-    const TABLE_ROWS = searchResults.slice(0, 5);
+    const TABLE_HEAD = ["Title", "Type of Study", "Output Type", "Location", "Status", " "];
+
+    const studyTypeMap = {
+        inVitro: "In Vitro",
+        inVivo: "In Vivo",
+        inSilico: "In Silico",
+        exVivo: "Ex Vivo",
+        humanStudies: "Human Studies",
+        simulation: "Simulation",
+        riskAssessment: "Risk Assessment",
+        exposureAssessment: "Exposure Assessment"
+    };
+
+    const TABLE_ROWS = searchResults.slice(active*5, active*5 + 5);
     // const TABLE_ROWS = [
     //     {
     //         title: "Epigenetic Tests on HaCat after FR2 limited exposure ",
@@ -157,79 +166,79 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, seletedSou
     // ];
     return (
         <div className={`w-full min-h-[68rem] mt-0 flex items-center justify-center`}>
-                <Card className="mt-6 w-1/2 min-h-[30rem] mx-auto form-container object-cover object-center shadow-xl shadow-blue-gray-900/50">
-                    <CardHeader className='bg-[#D4D9DD] text-black'>
-                        <Typography variant="h2" className="text-center pb-4 pt-4">
-                            Search Results
+            <Card className="mt-6 w-3/4 min-h-[30rem] mx-auto form-container object-cover object-center shadow-xl shadow-blue-gray-900/50">
+                <CardHeader className='bg-[#D4D9DD] text-black'>
+                    <Typography variant="h2" className="text-center pb-4 pt-4">
+                        Search Results
+                    </Typography>
+                    {/* <h3 className='mb-8 text-4xl .title-color text-center mx-auto'>Search Scientific Catalogue</h3> */}
+                </CardHeader>
+
+                <CardBody placeholder={""} className=" px-0">
+                        <Typography as="a" onClick={() => (setSearchResults([]))} variant="small" color="blue-gray" className="font-medium mb-4 cursor-pointer	">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="float-left w-12 h-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
+                    </svg>
+                        New Search
                         </Typography>
-                        {/* <h3 className='mb-8 text-4xl .title-color text-center mx-auto'>Search Scientific Catalogue</h3> */}
-                    </CardHeader>
 
-                    <CardBody placeholder={""} className=" px-0">
-                        <button onClick={() => (setSearchResults([]))}><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="float-left w-12 h-6">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
-</svg>
-New Search</button>
-                        <table className="w-full mt-6 mx-auto table-auto text-left">
-                            <thead>
-                                <tr>
-                                    {TABLE_HEAD.map((head) => (
-                                        <th
-                                            key={head}
-                                            className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4"
+                    <table className="w-full mt-6 mx-auto table-auto text-left">
+                        <thead>
+                            <tr>
+                                {TABLE_HEAD.map((head) => (
+                                    <th
+                                        key={head}
+                                        className="border-b border-blue-gray-100 bg-blue-gray-50 p-4 pb-0"
+                                    >
+                                        <Typography
+                                            placeholder={""}
+                                            variant="small"
+                                            color="blue-gray"
+                                            className="font-normal leading-none opacity-70"
                                         >
-                                            <Typography
-                                                placeholder={""}
-                                                variant="small"
-                                                color="blue-gray"
-                                                className="font-normal leading-none opacity-70"
-                                            >
-                                                {head}
-                                            </Typography>
-                                        </th>
-                                    ))}
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {TABLE_ROWS.map(
-                                    (
-                                        {
-                                            title,
-                                            description,
-                                            typeOfStudy,
-                                            outputType,
-                                            location,
-                                            img,
-                                            name,
-                                            amount,
-                                            date,
-                                            status,
-                                            account,
-                                            accountNumber,
-                                            expiry,
-                                        },
-                                        index,
-                                    ) => {
-                                        const isLast = index === TABLE_ROWS.length - 1;
-                                        const classes = isLast
-                                            ? "p-4"
-                                            : "p-4 border-b border-blue-gray-50";
+                                            {head}
+                                        </Typography>
+                                    </th>
+                                ))}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {TABLE_ROWS.map(
+                                (
+                                    {
+                                        title,
+                                        description,
+                                        typeOfStudy,
+                                        outputType,
+                                        location,
+                                        institution,
+                                        name,
+                                        studyType,
+                                        date,
+                                        privacyLevel,
+                                    },
+                                    index,
+                                ) => {
+                                    const isLast = index === TABLE_ROWS.length - 1;
+                                    const classes = isLast
+                                        ? "p-4"
+                                        : "p-4 border-b border-blue-gray-50";
 
-                                        return (
-                                            <tr key={name}>
-                                                <td className={classes}>
-                                                    <div className="flex items-center gap-3">
+                                    return (
+                                        <tr key={name} className="even:bg-blue-gray-50/50">
+                                            <td className={classes}>
+                                                <div className="flex items-center">
 
-                                                        <Typography
-                                                            variant="small"
-                                                            color="blue-gray"
-                                                            className="font-bold"
-                                                        >
-                                                            {title}
-                                                        </Typography>
-                                                    </div>
-                                                </td>
-                                                <td className={classes}>
+                                                    <Typography
+                                                        variant="small"
+                                                        color="blue-gray"
+                                                        className="font-bold  w-[42rem]"
+                                                    >
+                                                        {title}
+                                                    </Typography>
+                                                </div>
+                                            </td>
+                                            {/* <td className={classes}>
                                                     <Typography
                                                         variant="small"
                                                         color="blue-gray"
@@ -237,77 +246,81 @@ New Search</button>
                                                     >
                                                         {description}
                                                     </Typography>
-                                                </td>
-                                                <td >
-                                                    <Typography
-                                                        variant="small"
-                                                        color="blue-gray"
-                                                        className="font-normal"
-                                                    >
-                                                        {typeOfStudy}
-                                                    </Typography>
-                                                </td>
+                                                </td> */}
+                                            <td >
+                                                <Typography
+                                                    variant="small"
+                                                    color="blue-gray"
+                                                    className="font-normal"
+                                                >
+                                                    {studyTypeMap[studyType]}
+                                                </Typography>
+                                            </td>
 
-                                                <td className={classes}>
-                                                    <div className="flex items-center gap-3">
+                                            <td className={classes}>
+                                                <div className="flex items-center gap-3">
 
-                                                        <div className="flex flex-col">
-                                                            <Typography
-                                                                variant="small"
-                                                                color="blue-gray"
-                                                                className="font-normal capitalize"
-                                                            >
-                                                                {outputType}
-                                                            </Typography>
+                                                    <div className="flex flex-col">
+                                                        <Typography
+                                                            variant="small"
+                                                            color="blue-gray"
+                                                            className="font-normal capitalize"
+                                                        >
+                                                            {outputType}
+                                                        </Typography>
 
-                                                        </div>
                                                     </div>
-                                                </td>
-                                                <td className={classes}>
-                                                    <div className="flex items-center gap-3">
+                                                </div>
+                                            </td>
+                                            <td className={classes}>
+                                                <div className="flex items-center gap-3">
 
-                                                        <div className="flex flex-col">
-                                                            <Typography
-                                                                variant="small"
-                                                                color="blue-gray"
-                                                                className="font-normal capitalize"
-                                                            >
-                                                                {location}
-                                                            </Typography>
+                                                    <div className="flex flex-col w-30">
+                                                        <Typography
+                                                            variant="small"
+                                                            color="blue-gray"
+                                                            className="font-normal capitalize"
+                                                        >
+                                                            {institution}
+                                                        </Typography>
 
-                                                        </div>
                                                     </div>
-                                                </td>
-
-                                                <td className={classes}>
-                                                    <div className="w-max">
-                                                        <Chip
-                                                            size="sm"
-                                                            variant="ghost"
-                                                            value={status}
-                                                            className='mb-6'
+                                                </div>
+                                            </td>
+                                            <td className={classes}>
+                                                <div className="w-max">
+                                                    <Chip
+                                                        size="sm"
+                                                        variant="ghost"
+                                                        value={privacyLevel}
+                                                        className='mb-6'
                                                         color={
-                                                            status === "Public"
+                                                            privacyLevel === "Public" || privacyLevel === "open"
                                                                 ? "green"
-                                                                : status === "Restricted"
+                                                                : privacyLevel === "restricted" || privacyLevel === "sensitive"
                                                                     ? "orange"
                                                                     : ""
                                                         }
-                                                        />
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        );
-                                    },
-                                )}
-                            </tbody>
-                        </table>
-                    </CardBody>
-                    <CardFooter className="flex justify-center  border-t border-blue-gray-50 p-4">
-                        <DefaultPagination searchResults={searchResults} />
-                    </CardFooter>
-                </Card>
-            </div>
+                                                    />
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <Typography as="a" href="#" variant="small" color="blue-gray" className="font-medium mb-4">
+                                                    <MoreDialog description={description}/>
+                                                </Typography>
+                                            </td>
+                                        </tr>
+                                    );
+                                },
+                            )}
+                        </tbody>
+                    </table>
+                </CardBody>
+                <CardFooter className="flex justify-center  border-t border-blue-gray-50 p-4">
+                    <DefaultPagination active={active} setActive={setActive} searchResults={searchResults} />
+                </CardFooter>
+            </Card>
+        </div>
     );
 };
 
