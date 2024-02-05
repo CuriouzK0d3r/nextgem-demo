@@ -355,9 +355,46 @@ label {
   padding: 0px !important;
 }
 
+
+.pagination>nav>ul>li>button {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.pagination>nav>ul>li>button>svg {
+  margin-top: 2px;
+}
+
+.pagination>nav>ul>li[aria-current="page"]>button {
+  background-color: #2FC1FF;
+}
+
+.pagination>nav>ul>li>button {
+  padding: 10px !important;
+}
+
+.pagination>nav>ul>li {
+  list-style-type: none;
+  
+}
+
+li>button:hover {
+  background-color: #2f7fff !important;
+}
+
+.search-mode > button {
+  border: 0px;
+  background:  transparent !important;
+}
+
 form {
   display: flex;
   flex-direction: column;
+}
+
+.loginInput > div {
+  padding: 0px !important;
+  margin-top: 1rem;
 }
 
 form input {

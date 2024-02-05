@@ -40,7 +40,7 @@ const ExternalSources = ({hasSubmitted, setHasSubmitted, fieldRefs, setSearchRes
   useEffect(() => {
     if (hasSubmitted) {
       submitSearch(fieldRefs);
-      setHasSubmitted(false);
+      // setHasSubmitted(false);
     }
 }, [hasSubmitted]);
 

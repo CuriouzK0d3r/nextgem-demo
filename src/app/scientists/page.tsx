@@ -258,7 +258,6 @@ function SearchPage() {
     );
   }
 
-
   useEffect(() => {
     let fields: any = {};
     descriptionFields.forEach((field) => {

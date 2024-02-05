@@ -15,7 +15,7 @@ const EntryModal: React.FC<any> = ({ showModal, setShowModal, paperAbstract, dat
                         <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-gray-100 dark:bg-gray-700 outline-none focus:outline-none">
                             {/*header*/}
                             <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-                                <h3 className="text-3xl font-semibold text-gray-700 dark:text-white first-letter">
+                                <h3 className="text-3xl pl-8 font-semibold text-gray-700 dark:text-white first-letter">
                                     {paperAbstract ? 'Abstract' : 'Publications Files'}
                                 </h3>
                                 <button
@@ -28,7 +28,7 @@ const EntryModal: React.FC<any> = ({ showModal, setShowModal, paperAbstract, dat
                                 </button>
                             </div>
                             {/*body*/}
-                            <div className="relative p-6 flex-auto dark:text-gray-100 text-gray-900">
+                            <div className="relative p-6 flex-auto text-left dark:text-gray-100 text-gray-900">
                                 {paperAbstract ?
                                     (<p className="my-4 px-4  text-lg leading-relaxed">
                                         {cheerio.load(paperAbstract, { xmlMode: true }).text().includes('Abstract') ? cheerio.load(paperAbstract, { xmlMode: true }).text().split('Abstract')[1] : cheerio.load(paperAbstract, { xmlMode: true }).text()}
@@ -49,7 +49,7 @@ const EntryModal: React.FC<any> = ({ showModal, setShowModal, paperAbstract, dat
                             {/*footer*/}
                             <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
                                 <button
-                                    className="bg-blue-500 rounded-md text-white hover:bg-blue-700 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                    className="bg-blue-500 mr-8 rounded-md text-white hover:bg-blue-700 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                     type="button"
                                     onClick={() => setShowModal(false)}
                                 >

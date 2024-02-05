@@ -64,17 +64,6 @@ function LoginPage() {
 
     function openTab(evt: any, tabName: any) {
         setActiveTab(tabName);
-        // var i, tabcontent, tablinks;
-        // tabcontent = document.getElementsByClassName("tabcontent");
-        // for (i = 0; i < tabcontent.length; i++) {
-        //     // tabcontent[i].style.display = "none";
-        // }
-        // tablinks = document.getElementsByClassName("tablinks");
-        // for (i = 0; i < tablinks.length; i++) {
-        //     tablinks[i].className = tablinks[i].className.replace(" active", "");
-        // }
-        // // document.getElementById(tabName).style.display = "block";
-        // evt.currentTarget.className += " active";
     }
 
     console.log(activeTab)
@@ -145,7 +134,6 @@ function LoginPage() {
                 console.error("Error:", error);
             });
     }
-    // Add
 
     return (
         <PageLayout isLoggedIn={true} skipLogin={true}>
@@ -161,7 +149,7 @@ function LoginPage() {
                         />
                     </a>
                 </div>
-                <Card className="form-container w-full mx-auto form-container mt-0 rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50">
+                <Card placeholder={""} className="form-container w-full mx-auto form-container mt-0 rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50">
                     <CardBody placeholder={''}>
                         <div className="tab">
                             <button className={"tablinks " + (activeTab === "loginTab" ? "active" : "")} onClick={(event) => setActiveTab('loginTab')}>

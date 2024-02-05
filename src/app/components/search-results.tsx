@@ -50,7 +50,7 @@ function DefaultPagination({ searchResults, active, setActive }: { searchResults
             <Button
                 placeholder={""}
                 variant="text"
-                className="flex items-center gap-2"
+                className="flex items-center gap-2 bg-[#eee]"
                 onClick={prev}
                 disabled={active === 0}
             >
@@ -62,11 +62,6 @@ function DefaultPagination({ searchResults, active, setActive }: { searchResults
                         return <IconButton {...getItemProps(i)}>{i + 1}</IconButton>;
                     })
                 }
-                {/* <IconButton {...getItemProps(1)}>1</IconButton>
-          <IconButton {...getItemProps(2)}>2</IconButton>
-          <IconButton {...getItemProps(3)}>3</IconButton>
-          <IconButton {...getItemProps(4)}>4</IconButton>
-          <IconButton {...getItemProps(5)}>5</IconButton> */}
             </div>
             <Button
                 variant="text"
@@ -253,7 +248,7 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, seletedSou
                                                     color="blue-gray"
                                                     className="font-normal"
                                                 >
-                                                    {studyTypeMap[studyType]}
+                                                    { studyType ? studyTypeMap[studyType] : "N/A"}
                                                 </Typography>
                                             </td>
 
@@ -266,7 +261,7 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, seletedSou
                                                             color="blue-gray"
                                                             className="font-normal capitalize"
                                                         >
-                                                            {outputType}
+                                                            {outputType || "N/A"}
                                                         </Typography>
 
                                                     </div>
@@ -281,7 +276,7 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, seletedSou
                                                             color="blue-gray"
                                                             className="font-normal capitalize"
                                                         >
-                                                            {institution}
+                                                            {institution || location}
                                                         </Typography>
 
                                                     </div>

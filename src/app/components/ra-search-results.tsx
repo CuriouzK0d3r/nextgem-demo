@@ -97,8 +97,7 @@ const SearchResultsTable: React.FC<any> = ({ submittedQuery, type, setCurrentPag
             <Menu as="div" className="relative flex-none text-left w-[150px]">
                     <div>
                         <Menu.Button id="dropdown-button" data-dropdown-toggle="dropdown" className=" w-[150px]  h-[35px] flex-shrink-0 z-10 inline-flex items-center ml-4">
-                            {searchMode}
-                            <ChevronDownIcon className="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
+                        <ChevronDownIcon className='-mr-1' height={16} ></ChevronDownIcon>{searchMode}
                         </Menu.Button>
                     </div>
                     <Transition
@@ -136,7 +135,7 @@ const SearchResultsTable: React.FC<any> = ({ submittedQuery, type, setCurrentPag
                                                 'block px-4 py-2 text-sm font-bold'
                                             )}
                                         >
-                                            Zendodo
+                                            Zenodo
                                         </a>
                                     )}
                                 </Menu.Item>
@@ -149,14 +148,14 @@ const SearchResultsTable: React.FC<any> = ({ submittedQuery, type, setCurrentPag
                 <div className='mx-auto'>
                     {submittedQuery.length && !isLoading ? (
                         <div className="flex items-left mb-3 -ml-3">
-                            <h1 className="text-2xl font-semibold mb-6">{filteredResults.length} result{filteredResults.length !== 1 ? 's' : ''} found</h1>
+                            <h1 className="text-xl font-semibold mb-6">{filteredResults.length} result{filteredResults.length !== 1 ? 's' : ''} found</h1>
                             {searchMode === "Publications" && (
                                 <>
                                     <label htmlFor="toggle1" className=" items-center cursor-pointer ml-12 mb-5 mr-4 hidden lg:flex">
                                         <span className='mr-3 font-bold'>PubMed</span>
                                         <div className="relative">
                                             <input type="checkbox" onChange={() => sourcesToggled.includes("pubmed") ? setSourcesToggled(sourcesToggled.filter((el) => el != "pubmed")) : setSourcesToggled([...sourcesToggled, "pubmed"])} checked={sourcesToggled.includes("pubmed")} id="toggle1" className="sr-only" />
-                                            <div className="block bg-gray-600 w-14 h-8 rounded-xl"></div>
+                                            <div className="block bg-gray-600 w-14 h-8 -ml-[10px] rounded-xl"></div>
                                             <div className={`dot absolute left-1 top-1 ${sourcesToggled.includes("pubmed") ? 'bg-blue-500' : 'bg-white'} w-6 h-6 rounded-xl transition ${sourcesToggled.includes("pubmed") ? 'transform translate-x-full' : ''}`}></div>
                                         </div>
                                     </label>
@@ -164,7 +163,7 @@ const SearchResultsTable: React.FC<any> = ({ submittedQuery, type, setCurrentPag
                                         <span className='mr-3 font-bold'>Emf Portal</span>
                                         <div className="relative">
                                             <input type="checkbox" onChange={() => sourcesToggled.includes("emf") ? setSourcesToggled(sourcesToggled.filter((el) => el != "emf")) : setSourcesToggled([...sourcesToggled, "emf"])} checked={sourcesToggled.includes("emf")} id="toggle2" className="sr-only" />
-                                            <div className="block bg-gray-600 w-14 h-8 rounded-xl"></div>
+                                            <div className="block bg-gray-600 w-14 h-8 rounded-xl -ml-[10px]"></div>
                                             <div className={`dot absolute left-1 top-1 ${sourcesToggled.includes("emf") ? 'bg-blue-500' : 'bg-white'} w-6 h-6 rounded-full transition ${sourcesToggled.includes("emf") ? 'transform translate-x-full' : ''}`}></div>
                                         </div>
                                     </label>
@@ -172,7 +171,7 @@ const SearchResultsTable: React.FC<any> = ({ submittedQuery, type, setCurrentPag
                                         <span className='mr-3 font-bold'>Web of Science</span>
                                         <div className="relative">
                                             <input onChange={() => sourcesToggled.includes("wos") ? setSourcesToggled(sourcesToggled.filter((el) => el != "wos")) : setSourcesToggled([...sourcesToggled, "wos"])} checked={sourcesToggled.includes("wos")} type="checkbox" id="toggle3" className="sr-only" />
-                                            <div className="block bg-gray-600 w-14 h-8 rounded-xl"></div>
+                                            <div className="block bg-gray-600 w-14 h-8 -ml-[10px] rounded-xl"></div>
                                             <div className={`dot absolute left-1 top-1 ${sourcesToggled.includes("wos") ? 'bg-blue-500' : 'bg-white'} w-6 h-6 rounded-xl transition ${sourcesToggled.includes("wos") ? 'transform translate-x-full' : ''}`}></div>
                                         </div>
                                     </label>
@@ -185,7 +184,7 @@ const SearchResultsTable: React.FC<any> = ({ submittedQuery, type, setCurrentPag
                     <div className="flex flex-col">
                         <div className="-my-2 flex-1 sm:-mx-6 lg:-mx-8 rounded-xl">
                             <div className=" align-middle rounded inline-block w-full ">
-                                <div className={"shadow rounded-lg" + (submittedQuery.length ? "border-b border-gray-400" : "")}>
+                                <div >
                                     {submittedQuery.length && !isLoading ? (
                                         filteredResults.slice((currentPage - 1) * 10, currentPage * 10).map((document: any, index: number) => searchMode === "Publications" ? (
                                             <SearchCardPub setShowModal={setShowModal} setPaperAbstract={setPaperAbstract} document={document} key={index}></SearchCardPub>
