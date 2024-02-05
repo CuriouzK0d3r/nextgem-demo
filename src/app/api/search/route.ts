@@ -6,6 +6,7 @@ export async function POST(req: Request, res: NextApiResponse) {
         res.status(405).json({ message: 'Method Not Allowed' });
         return;
     }
+
     const hostname = headers().get('host');
     let apiEndpoint = "https://139.91.58.16/metadata/records?";
     const params = await req.json();
@@ -14,6 +15,9 @@ export async function POST(req: Request, res: NextApiResponse) {
     const formData = params["formData"];
     const sources = params["chosenSources"];
     let results = [];
+
+    console.log(formData)
+
 
     if (sources.includes("NextGEM")) {
         for (let i = 0; i < keys.length; i++) {

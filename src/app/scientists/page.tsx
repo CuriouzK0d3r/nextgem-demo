@@ -240,7 +240,7 @@ function SearchPage() {
   const TextInputComponent = ({ label, type, required, name }: any) => {
     return (
       <div className="flex flex-row mt-4 p-0">
-        <Input inputRef={fieldRefs[name]} name={name} value={inputState[name]} className='object-cover object-center shadow-sm shadow-blue-gray-900/50 bg-white' crossOrigin={true} style={{ color: "black" }} label={label} />
+        <Input ref={fieldRefs[name]} value={inputState[name]} onChange={(event) => { event.preventDefault(); setInputState({...inputState, [name]: event.target.value})}} name={name} className='object-cover object-center shadow-sm shadow-blue-gray-900/50 bg-white' crossOrigin={true} style={{ color: "black" }} label={label} />
       </div>
     );
   }
@@ -258,6 +258,7 @@ function SearchPage() {
     );
   }
 
+
   useEffect(() => {
     let fields: any = {};
     descriptionFields.forEach((field) => {
@@ -270,6 +271,7 @@ function SearchPage() {
     setFieldRefs(fields);
   }, []);
 
+  console.log(inputState)
   return (
     <PageLayout isLoggedIn={isLoggedIn} skipLogin={false} pageName={"scientists"}>
       <AnimatePresence>
@@ -304,11 +306,22 @@ function SearchPage() {
                               descriptionFields.map((field) => {
                                 if (field.type == "text") {
                                   return (
-                                    <TextInputComponent name={field.field} classes="object-cover object-center shadow-xl shadow-blue-gray-900/50" label={field.label} type={field.type} required={field.required} />
-                                  )
+                                    <div className="flex flex-row mt-4 p-0">
+                                    <Input ref={fieldRefs[field.field]} value={inputState[field.field]} onChange={(event) => { event.preventDefault(); setInputState({...inputState, [field.field]: event.target.value})}} name={field.field} className='object-cover object-center shadow-sm shadow-blue-gray-900/50 bg-white' crossOrigin={true} style={{ color: "black" }} label={field.label} />
+                                    </div>
+                                    )
                                 } else if (field.type == "select") {
                                   return (
-                                    <SelectInputComponent name={field.field} label={field.label} values={field.values} required={field.required} />
+                                    <div className="flex flex-row mt-4 w-full p-0">
+                                    <Select name={field.field} value={inputState[field.field]} onChange={(event) => setInputState({...inputState, [field.field]: event}) }
+                                       className='bg-white text-black ct-cover object-center shadow-sm shadow-blue-gray-900/50' label={field.label} placeholder={field.label}>
+                                      {field.values.map((value: any) => (
+                                        <Option key={value} value={value}>{value}</Option>
+                                      ))
+                                      }
+                                    </Select>
+                                  </div>
+                                    // <SelectInputComponent name={field.field} label={field.label} values={field.values} required={field.required} />
                                   )
                                 }
                               })
@@ -321,11 +334,20 @@ function SearchPage() {
                             indicativeFields.map((field) => {
                               if (field.type == "text") {
                                 return (
-                                  <TextInputComponent name={field.field} label={field.label} type={field.type} required={field.required} />
-                                )
+                                  <div className="flex flex-row mt-4 p-0">
+                                  <Input ref={fieldRefs[field.field]} value={inputState[field.field]} onChange={(event) => { event.preventDefault(); setInputState({...inputState, [field.field]: event.target.value})}} name={field.field} className='object-cover object-center shadow-sm shadow-blue-gray-900/50 bg-white' crossOrigin={true} style={{ color: "black" }} label={field.label} />
+                                  </div>                                )
                               } else if (field.type == "select") {
                                 return (
-                                  <SelectInputComponent name={field.field} label={field.label} values={field.values} required={field.required} />
+                                  <div className="flex flex-row mt-4 w-full p-0">
+                                    <Select name={field.field} value={inputState[field.field]} onChange={(event) => setInputState({...inputState, [field.field]: event}) }
+                                       className='bg-white text-black ct-cover object-center shadow-sm shadow-blue-gray-900/50' label={field.label} placeholder={field.label}>
+                                      {field.values.map((value: any) => (
+                                        <Option key={value} value={value}>{value}</Option>
+                                      ))
+                                      }
+                                    </Select>
+                                  </div>
                                 )
                               }
                             })
@@ -339,7 +361,7 @@ function SearchPage() {
                     </form>
                   </CardBody>
                 </Card>
-                <ExternalSources hasSubmitted={hasSubmitted} fieldRefs={fieldRefs} setHasSubmitted={setHasSubmitted} setSearchResults={setSearchResults}  />
+                <ExternalSources hasSubmitted={hasSubmitted} fieldRefs={fieldRefs} inputState={inputState} setHasSubmitted={setHasSubmitted} setSearchResults={setSearchResults}  />
               </div>
             )}
       </AnimatePresence>

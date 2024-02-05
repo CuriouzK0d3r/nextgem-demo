@@ -1,16 +1,16 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
-const ExternalSources = ({hasSubmitted, setHasSubmitted, fieldRefs, setSearchResults}) => {
+const ExternalSources = ({hasSubmitted, setHasSubmitted, inputState, setSearchResults}) => {
     const [chosenSources, setChosenSources] = useState<string[]>([]);
 
-  const submitSearch = (fieldRefs) => {
-    let formData: any = {};
+  const submitSearch = (formData) => {
+    // let formData: any = {};
 
-    for (const [field, ref] of Object.entries(fieldRefs)) {
-      if (ref.current.value != "") {
-        formData[field] = ref?.current.value;
-      }
-    }
+    // for (const [field, ref] of Object.entries(fieldRefs)) {
+    //   if (ref.current.value != "") {
+    //     formData[field] = ref?.current.value;
+    //   }
+    // }
 
     const apiEndpoint = "/api/search";
 
@@ -39,7 +39,7 @@ const ExternalSources = ({hasSubmitted, setHasSubmitted, fieldRefs, setSearchRes
 
   useEffect(() => {
     if (hasSubmitted) {
-      submitSearch(fieldRefs);
+      submitSearch(inputState);
       // setHasSubmitted(false);
     }
 }, [hasSubmitted]);
