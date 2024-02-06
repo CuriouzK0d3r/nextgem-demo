@@ -8,7 +8,7 @@ import {
     Dialog,
     Input,
     Typography
-  } from "@material-tailwind/react";import * as cheerio from 'cheerio';
+} from "@material-tailwind/react"; import * as cheerio from 'cheerio';
 
 const SearchCardZenodo: React.FC<any> = ({ document, index, setShowModal, setPaperAbstract, setDataFiles }) => {
     return (
@@ -36,8 +36,8 @@ const SearchCardZenodo: React.FC<any> = ({ document, index, setShowModal, setPap
                     </div>
                     <div className="float-right w-1/6 ">
                         <div className="align-right">
-                        <a href="https://zenodo.org/"  target="_blank"><div className="object-cover object-center shadow-lg shadow-blue-gray-900/50 w-[8rem] text-sm mr-4 text-center  mb-4 mx-auto bg-blue-500 float-right p-3 rounded-lg text-gray-100 invisible lg:visible">📖 Zenodo</div></a>
-                        <a className="cursor-pointer" onClick={() => { setShowModal(true); setPaperAbstract(''); setDataFiles(document.files); }}><div className="object-cover object-center shadow-lg shadow-blue-gray-900/50 w-[8rem] text-center mx-auto text-sm mr-4 bg-blue-500 float-right p-3 rounded-lg text-gray-100 invisible lg:visible">📁 Files</div></a>
+                            <a href="https://zenodo.org/" target="_blank"><div className="object-cover object-center shadow-lg shadow-blue-gray-900/50 w-[8rem] text-sm mr-4 text-center  mb-4 mx-auto bg-blue-500 float-right p-3 rounded-lg text-gray-100 invisible lg:visible">📖 Zenodo</div></a>
+                            <a className="cursor-pointer" onClick={() => { setShowModal(true); setPaperAbstract(''); setDataFiles(document.files); }}><div className="object-cover object-center shadow-lg shadow-blue-gray-900/50 w-[8rem] text-center mx-auto text-sm mr-4 bg-blue-500 float-right p-3 rounded-lg text-gray-100 invisible lg:visible">📁 Files</div></a>
                         </div>
                     </div>
                 </div>

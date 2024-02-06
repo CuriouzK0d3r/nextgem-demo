@@ -66,7 +66,6 @@ function LoginPage() {
         setActiveTab(tabName);
     }
 
-    console.log(activeTab)
     function submitRegisterForm(event: any) {
         event.preventDefault();
         const username = registerUsernameRef.current?.value;
@@ -164,11 +163,11 @@ function LoginPage() {
                         <div id="loginTab" className={(activeTab === "loginTab" ? "block " : "tabcontent ")}>
                             {/* <h3>Login</h3> */}
                             <form className='mt-12' id="loginForm" onSubmit={(event) => submitLoginForm(event)}>
-                                <Input className='object-cover object-center shadow-sm shadow-blue-gray-900/50'  size="lg" crossOrigin={false} id="loginUsername" inputRef={loginUsernameRef} required style={{ color: "black", padding: "0px" }} label={"Username"} />
-     
+                                <Input className='object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin="true" id="loginUsername" inputRef={loginUsernameRef} required style={{ color: "black", padding: "0px" }} label={"Username"} />
+
                                 <div className='h-6'></div>
 
-                                <Input className='p-0 object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin={false} id="loginPassword" inputRef={loginPasswordRef} type='password' required style={{ color: "black" }} label={"Password"} />
+                                <Input className='p-0 object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin="true" id="loginPassword" inputRef={loginPasswordRef} type='password' required style={{ color: "black" }} label={"Password"} />
 
                                 <Button id="loginBtn" type="submit" className="btn font-bold w-full h-12 mt-8 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50" variant="gradient">Login</Button>
                             </form>
@@ -179,16 +178,16 @@ function LoginPage() {
                             <form className={'mt-4 '} id="registerForm" onSubmit={(event) => submitRegisterForm(event)}>
                                 <div className='h-8'></div>
 
-                                <Input className='p-0 object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin={true} id="registerUsername" inputRef={registerUsernameRef} required style={{ color: "black" }} label={"Username"} />
+                                <Input className='p-0 object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin="true" id="registerUsername" inputRef={registerUsernameRef} required style={{ color: "black" }} label={"Username"} />
                                 <div className='h-6'></div>
 
-                                <Input className='p-0 object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin={true} id="registerPassword" inputRef={registerPasswordRef} required style={{ color: "black" }} type='password' label={"Password"} />
+                                <Input className='p-0 object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin="true" id="registerPassword" inputRef={registerPasswordRef} required style={{ color: "black" }} type='password' label={"Password"} />
                                 <div className='h-6'></div>
 
-                                <Input className='p-0 object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin={true} id="registerEmail" type='email' inputRef={registerEmailRef} required style={{ color: "black" }} label={"E-mail"} />
+                                <Input className='p-0 object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin="true" id="registerEmail" type='email' inputRef={registerEmailRef} required style={{ color: "black" }} label={"E-mail"} />
                                 <div className='h-6'></div>
 
-                                <Input className='p-0 object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin={true} id="registerOrg" inputRef={registerOrgRef} required style={{ color: "black" }} label={"Organization"} />
+                                <Input className='p-0 object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin="true" id="registerOrg" inputRef={registerOrgRef} required style={{ color: "black" }} label={"Organization"} />
 
                                 <Button id="searchBtn" type="submit" className="btn font-bold w-full h-12 mt-8" variant="gradient">Register</Button>
 

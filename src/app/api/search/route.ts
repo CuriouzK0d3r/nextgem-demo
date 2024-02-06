@@ -16,9 +16,6 @@ export async function POST(req: Request, res: NextApiResponse) {
     const sources = params["chosenSources"];
     let results = [];
 
-    console.log(formData)
-
-
     if (sources.includes("NextGEM")) {
         for (let i = 0; i < keys.length; i++) {
             const key = keys[i];
@@ -59,7 +56,6 @@ export async function POST(req: Request, res: NextApiResponse) {
     }
 
     if (sources.includes("EMF")) {
-        console.log(formData)
         const response = await fetch(`http://${hostname}/api/search/publications`, {
             method: 'POST',
             headers: {
@@ -68,7 +64,7 @@ export async function POST(req: Request, res: NextApiResponse) {
                 'Access-Control-Allow-Methods': 'GET',
                 'Access-Control-Allow-Headers': 'Content-Type, X-CSRF-TOKEN',
             },
-            body: JSON.stringify({ query: formData["title"], type: "title"})
+            body: JSON.stringify({ query: formData["title"], type: "title" })
         })
 
         const responseJSON = await response.json();

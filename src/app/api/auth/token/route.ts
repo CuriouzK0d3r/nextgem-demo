@@ -12,5 +12,5 @@ export async function POST(req: Request, res: NextApiResponse) {
         },
     });
 
-    return Response.json({loggedin : response.ok});
+    return Response.json({ loggedin: response.ok });
 }

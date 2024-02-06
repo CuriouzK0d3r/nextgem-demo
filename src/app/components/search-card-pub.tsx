@@ -9,7 +9,7 @@ import {
     Dialog,
     Input,
     Typography
-  } from "@material-tailwind/react";
+} from "@material-tailwind/react";
 
 const SearchCardPub: React.FC<any> = ({ document, index, setShowModal, setPaperAbstract }) => {
     const sourceMap: any = {
@@ -25,7 +25,7 @@ const SearchCardPub: React.FC<any> = ({ document, index, setShowModal, setPaperA
     }
 
     return (
-        <div  className=' rounded-lg border-none p-0'>
+        <div className=' rounded-lg border-none p-0'>
             <Card className="w-full mb-4 pt-6 hover:bg-[#eeeeee85]  bg-[#eee] object-cover object-center shadow-xl shadow-blue-gray-900/50">
                 <div className='flex'>
                     <div className="float-left w-5/6">
@@ -48,7 +48,7 @@ const SearchCardPub: React.FC<any> = ({ document, index, setShowModal, setPaperA
                     </div>
                     <div className="float-right w-1/6">
                         <div className="align-right flex flex-col">
-                        <a href={linkMap[document.source]} target="_blank" className=''><div className="w-[8rem] text-sm mr-1 mb-4 mx-auto text-center bg-blue-500 float-right p-3 rounded-lg text-gray-100 invisible lg:visible">📖 {sourceMap[document.source]}</div></a>
+                            <a href={linkMap[document.source]} target="_blank" className=''><div className="w-[8rem] text-sm mr-1 mb-4 mx-auto text-center bg-blue-500 float-right p-3 rounded-lg text-gray-100 invisible lg:visible">📖 {sourceMap[document.source]}</div></a>
                             {document.abstract?.length ? (<a className='cursor-pointer' onClick={() => { setShowModal(true); setPaperAbstract(document.abstract); }} target="_blank"><div className="w-[8rem] text-center mx-auto text-sm mr-1 bg-blue-500 float-right p-3 rounded-lg text-gray-100 invisible lg:visible">📄 Abstract</div></a>) : <></>}
                         </div>
                     </div>

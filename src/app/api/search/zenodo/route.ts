@@ -18,7 +18,7 @@ export async function POST(req: Request) {
 
         const response = await axios.get("https://zenodo.org/api/records?q=" + data.query, requestParams2);
         let returnedObj = filter(response.data["hits"]["hits"]);
-            
+
         for (let i in returnedObj) {
             returnedObj[i].location = "zenodo";
             returnedObj[i].status = returnedObj[i]['access_right'];

@@ -94,10 +94,10 @@ const SearchResultsTable: React.FC<any> = ({ submittedQuery, type, setCurrentPag
     return (
         <div className='h-full w-4/5 mx-auto'>
             <div className='mt-2 -ml-12 search-mode'>
-            <Menu as="div" className="relative flex-none text-left w-[150px]">
+                <Menu as="div" className="relative flex-none text-left w-[150px]">
                     <div>
                         <Menu.Button id="dropdown-button" data-dropdown-toggle="dropdown" className=" w-[150px]  h-[35px] flex-shrink-0 z-10 inline-flex items-center ml-4">
-                        <ChevronDownIcon className='-mr-1' height={16} ></ChevronDownIcon>{searchMode}
+                            <ChevronDownIcon className='-mr-1' height={16} ></ChevronDownIcon>{searchMode}
                         </Menu.Button>
                     </div>
                     <Transition

@@ -142,7 +142,7 @@ const ChatResults: React.FC<any> = ({ submittedQuery, finished, setFinished, set
                                                                                 <span className="px-4 py-3 rounded-xl inline-block bg-blue-500 text-white" >{message}</span>
                                                                             </div>
                                                                         </div>
-                                                                        { }
+                                                                        {}
                                                                     </div>
                                                                 </div>
                                                         ))

@@ -92,7 +92,7 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, seletedSou
         exposureAssessment: "Exposure Assessment"
     };
 
-    const TABLE_ROWS = searchResults.slice(active*5, active*5 + 5);
+    const TABLE_ROWS = searchResults.slice(active * 5, active * 5 + 5);
     // const TABLE_ROWS = [
     //     {
     //         title: "Epigenetic Tests on HaCat after FR2 limited exposure ",
@@ -170,19 +170,19 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, seletedSou
                 </CardHeader>
 
                 <CardBody placeholder={""} className=" px-0">
-                        <Typography as="a" onClick={() => (setSearchResults([]))} variant="small" color="blue-gray" className="font-medium mb-4 cursor-pointer	">
+                    <Typography as="a" onClick={() => (setSearchResults([]))} variant="small" color="blue-gray" className="font-medium mb-4 cursor-pointer	">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="float-left w-12 h-6">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
-                    </svg>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
+                        </svg>
                         New Search
-                        </Typography>
+                    </Typography>
 
                     <table className="w-full mt-6 mx-auto table-auto text-left">
                         <thead>
                             <tr>
-                                {TABLE_HEAD.map((head) => (
+                                {TABLE_HEAD.map((head, index) => (
                                     <th
-                                        key={head}
+                                        key={index}
                                         className="border-b border-blue-gray-100 bg-blue-gray-50 p-4 pb-0"
                                     >
                                         <Typography
@@ -220,7 +220,7 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, seletedSou
                                         : "p-4 border-b border-blue-gray-50";
 
                                     return (
-                                        <tr key={name} className="even:bg-blue-gray-50/50">
+                                        <tr key={index} className="even:bg-blue-gray-50/50">
                                             <td className={classes}>
                                                 <div className="flex items-center">
 
@@ -248,13 +248,11 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, seletedSou
                                                     color="blue-gray"
                                                     className="font-normal"
                                                 >
-                                                    { studyType ? studyTypeMap[studyType] : "N/A"}
+                                                    {studyType ? studyTypeMap[studyType] : "N/A"}
                                                 </Typography>
                                             </td>
-
                                             <td className={classes}>
                                                 <div className="flex items-center gap-3">
-
                                                     <div className="flex flex-col">
                                                         <Typography
                                                             variant="small"
@@ -301,7 +299,7 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, seletedSou
                                             </td>
                                             <td>
                                                 <Typography as="a" href="#" variant="small" color="blue-gray" className="font-medium mb-4">
-                                                    <MoreDialog description={description}/>
+                                                    <MoreDialog description={description} />
                                                 </Typography>
                                             </td>
                                         </tr>

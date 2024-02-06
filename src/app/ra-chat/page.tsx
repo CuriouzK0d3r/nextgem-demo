@@ -82,8 +82,8 @@ function RASearchPage() {
 
                 </div>
             </div>
-      {/* </div> */ }
-     </ PageLayout >);
+            {/* </div> */}
+        </ PageLayout >);
 }
 
 export default RASearchPage;

@@ -1,15 +1,15 @@
 "use client"
 
 import {
-  Button,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Input,
-  Option,
-  Select,
-  Typography
+    Button,
+    Card,
+    CardBody,
+    CardFooter,
+    CardHeader,
+    Input,
+    Option,
+    Select,
+    Typography
 } from "@material-tailwind/react";
 import { AnimatePresence, motion } from "framer-motion";
 import Cookies from 'js-cookie';
@@ -19,353 +19,340 @@ import PageLayout from '../components/page-layout';
 import SearchResults from '../components/search-results';
 
 function SearchPage() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  let chosenSources: string[] = [];
-  const [mode, setMode] = useState<string>("search");
-  const [inputState, setInputState] = useState<any>({});
-  const [fieldRefs, setFieldRefs] = useState<any>({});
-  const [hasSubmitted, setHasSubmitted] = useState<boolean>(false);
-  const [searchResults, setSearchResults] = useState<any>({});
+    const descriptionFields = [
+        {
+            label: "Title",
+            field: 'title',
+            type: "text",
+            required: false
+        },
+        {
+            label: "Institution",
+            field: 'institution',
+            type: "text",
+            required: false
+        },
+        {
+            label: "Keywords",
+            field: 'keywords',
+            type: "text",
+            required: false
+        },
+        // {
+        //   label: "Authors",
+        //   field: 'authors',
+        //   type: "text",
+        //   required: false
+        // },
+        {
+            label: "Type of Study",
+            field: 'studyType',
+            type: "select",
+            required: false,
+            values: [
+                "--",
+                "exVivo",
+                "exposureAssessment",
+                "humanStudies",
+                "inVitro",
+                "inVivo",
+                "riskAssesment",
+                "simulation"
+            ]
+        },
+        {
+            label: "Type of Output",
+            field: 'outputType',
+            type: "select",
+            required: false,
+            values: [
+                "--",
+                "audio",
+                "codebook",
+                "dataset",
+                "deliverable",
+                "image",
+                "poster",
+                "presentation",
+                "publication",
+                "report",
+                "software",
+                "video"
+            ]
+        },
+        {
+            label: "Topics",
+            field: 'topics',
+            type: "select",
+            required: false,
+            values: [
+                "--",
+            ]
+        },
+        {
+            label: "Publication Year",
+            field: 'publicationYear',
+            type: "text",
+            required: false
+        },
+        {
+            label: "Privacy Level",
+            field: 'privacyLevel',
+            type: "select",
+            required: false,
+            values: [
+                "--",
+                "Public",
+                "Restricted"
+            ]
+        },
+        {
+            label: "Identifier",
+            field: 'identifier',
+            type: "text",
+            required: false
+        }];
 
-  const descriptionFields = [
-    {
-      label: "Title",
-      field: 'title',
-      type: "text",
-      required: false
-    },
-    {
-      label: "Institution",
-      field: 'institution',
-      type: "text",
-      required: false
-    },
-    {
-      label: "Keywords",
-      field: 'keywords',
-      type: "text",
-      required: false
-    },
-    // {
-    //   label: "Authors",
-    //   field: 'authors',
-    //   type: "text",
-    //   required: false
-    // },
-    {
-      label: "Type of Study",
-      field: 'studyType',
-      type: "select",
-      required: false,
-      values: [
-        "--",
-        "exVivo",
-        "exposureAssessment",
-        "humanStudies",
-        "inVitro",
-        "inVivo",
-        "riskAssesment",
-        "simulation"
-      ]
-    },
-    {
-      label: "Type of Output",
-      field: 'outputType',
-      type: "select",
-      required: false,
-      values: [
-        "--",
-        "audio",
-        "codebook",
-        "dataset",
-        "deliverable",
-        "image",
-        "poster",
-        "presentation",
-        "publication",
-        "report",
-        "software",
-        "video"
-      ]
-    },
-    {
-      label: "Topics",
-      field: 'topics',
-      type: "select",
-      required: false,
-      values: [
-        "--",
-      ]
-    },
-    {
-      label: "Publication Year",
-      field: 'publicationYear',
-      type: "text",
-      required: false
-    },
-    {
-      label: "Privacy Level",
-      field: 'privacyLevel',
-      type: "select",
-      required: false,
-      values: [
-        "--",
-        "Public",
-        "Restricted"
-      ]
-    },
-    {
-      label: "Identifier",
-      field: 'identifier',
-      type: "text",
-      required: false
-    }];
-
-  const indicativeFields = [
-    {
-      label: "Frequency Ranges",
-      field: 'frequencyRanges',
-      type: "select",
-      required: false,
-      values: [
-        "--",
-      ]
-    },
-    {
-      label: "Modulation",
-      field: 'modulation',
-      type: "select",
-      required: false,
-      values: [
-        "--",
-        "NR",
-        "No Modulation"
-      ]
-    },
-    {
-      label: "Exposure Conditions",
-      field: 'exposureConditions',
-      type: "select",
-      required: false,
-      values: [
-        "--",
-      ]
-    },
-    {
-      label: "Exposure Sources",
-      field: 'exposureSources',
-      type: "select",
-      required: false,
-      values: [
-        "--",
-      ]
-    },
-    {
-      label: "Environment",
-      field: 'environment',
-      type: "select",
-      required: false,
-      values: [
-        "--",
-      ]
-    },
-    {
-      label: "Microenvironment",
-      field: 'microenvironment',
-      type: "select",
-      required: false,
-      values: [
-        "--",
-      ]
-    },
-    {
-      label: "Biological Model",
-      field: 'biologicalModel',
-      type: "select",
-      required: false,
-      values: [
-        "--",
-      ]
-    },
-    {
-      label: "BioSpecific Endpoints",
-      field: 'bioSpecificEndpoints',
-      type: "select",
-      required: false,
-      values: [
-        "--",
-      ]
-    },
-    {
-      label: "Methods",
-      field: 'methods',
-      type: "select",
-      required: false,
-      values: [
-        "--",
-      ]
-    }
-  ];
- 
-  const checkLoginStatus = () => {
-    const apiEndpoint = "/api/auth/token";
-
-    fetch(apiEndpoint, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        access_token: Cookies.get('token'),
-      }),
-    })
-      .then(async (response) => {
-        console.log(response)
-        console.log('yolo')
-        if (response.ok) {
-          let responseJSON = await response.json();
-          console.log(responseJSON)
-          if (responseJSON.loggedin) {
-            setIsLoggedIn(true);
-          }
-        } else {
-          console.error("Login failed. Status: " + response.status);
+    const indicativeFields = [
+        {
+            label: "Frequency Ranges",
+            field: 'frequencyRanges',
+            type: "select",
+            required: false,
+            values: [
+                "--",
+            ]
+        },
+        {
+            label: "Modulation",
+            field: 'modulation',
+            type: "select",
+            required: false,
+            values: [
+                "--",
+                "NR",
+                "No Modulation"
+            ]
+        },
+        {
+            label: "Exposure Conditions",
+            field: 'exposureConditions',
+            type: "select",
+            required: false,
+            values: [
+                "--",
+            ]
+        },
+        {
+            label: "Exposure Sources",
+            field: 'exposureSources',
+            type: "select",
+            required: false,
+            values: [
+                "--",
+            ]
+        },
+        {
+            label: "Environment",
+            field: 'environment',
+            type: "select",
+            required: false,
+            values: [
+                "--",
+            ]
+        },
+        {
+            label: "Microenvironment",
+            field: 'microenvironment',
+            type: "select",
+            required: false,
+            values: [
+                "--",
+            ]
+        },
+        {
+            label: "Biological Model",
+            field: 'biologicalModel',
+            type: "select",
+            required: false,
+            values: [
+                "--",
+            ]
+        },
+        {
+            label: "BioSpecific Endpoints",
+            field: 'bioSpecificEndpoints',
+            type: "select",
+            required: false,
+            values: [
+                "--",
+            ]
+        },
+        {
+            label: "Methods",
+            field: 'methods',
+            type: "select",
+            required: false,
+            values: [
+                "--",
+            ]
         }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  }
+    ];
 
-  const TextInputComponent = ({ label, type, required, name }: any) => {
-    return (
-      <div className="flex flex-row mt-4 p-0">
-        <Input ref={fieldRefs[name]} value={inputState[name]} onChange={(event) => { event.preventDefault(); setInputState({...inputState, [name]: event.target.value})}} name={name} className='object-cover object-center shadow-sm shadow-blue-gray-900/50 bg-white' crossOrigin={true} style={{ color: "black" }} label={label} />
-      </div>
-    );
-  }
-  
-  const SelectInputComponent = ({ label, values, required, ref, name }: any) => {
-    return (
-      <div className="flex flex-row mt-4 w-full p-0">
-        <Select ref={fieldRefs[name]} name={name} className='bg-white text-black ct-cover object-center shadow-sm shadow-blue-gray-900/50' label={label} placeholder={label}>
-          {values.map((value: any) => (
-            <Option key={value} value={value}>{value}</Option>
-          ))
-          }
-        </Select>
-      </div>
-    );
-  }
-
-
-  useEffect(() => {
-    let fields: any = {};
+    let fieldsNames: any={};
     descriptionFields.forEach((field) => {
-      fields[field.field] = createRef();
+        fieldsNames[field.field] = "";
     });
     indicativeFields.forEach((field) => {
-      fields[field.field] = createRef();
+        fieldsNames[field.field] = "";
+        // setInputState({ ...inputState, [field.field]: "" });
     });
-    checkLoginStatus();
-    setFieldRefs(fields);
-  }, []);
+    
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    let chosenSources: string[] = [];
+    const [mode, setMode] = useState<string>("search");
+    const [inputState, setInputState] = useState<any>(fieldsNames);
+    const [fieldRefs, setFieldRefs] = useState<any>({});
+    const [hasSubmitted, setHasSubmitted] = useState<boolean>(false);
+    const [searchResults, setSearchResults] = useState<any>({});
 
-  console.log(inputState)
-  return (
-    <PageLayout isLoggedIn={isLoggedIn} skipLogin={false} pageName={"scientists"}>
-      <AnimatePresence>
-        {
-          searchResults.length > 0 ? (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 2 }}
-            >
-              <SearchResults mode={mode} setMode={setMode} setSearchResults={setSearchResults} searchResults={searchResults} />
-            </motion.div>
-          )
-            :
-            (
-              <div className={`w-full mt-28 min-h-[65rem]`}>
-                <Card className="mt-6 w-1/2 mx-auto form-container rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50">
-                  <CardHeader className='bg-[#D4D9DD] text-black'>
-                    <Typography variant="h2" className="text-center pb-4 pt-4">
-                      Search Scientific Catalogue
-                    </Typography>
-                  </CardHeader>
-                  <CardBody placeholder={''}>
 
-                    <form className='mt-4' id="searchForm" onSubmit={(event) => {event.preventDefault(); setHasSubmitted(true);}}>
-                      <div className="grid gap-8 mb-6 md:grid-cols-2 ">
-                        <div>
-                          <Typography variant="h5" placeholder={"Description"}>Description</Typography>
-                          <div className='p-0'>
-                            {
-                              descriptionFields.map((field) => {
-                                if (field.type == "text") {
-                                  return (
-                                    <div className="flex flex-row mt-4 p-0">
-                                    <Input ref={fieldRefs[field.field]} value={inputState[field.field]} onChange={(event) => { event.preventDefault(); setInputState({...inputState, [field.field]: event.target.value})}} name={field.field} className='object-cover object-center shadow-sm shadow-blue-gray-900/50 bg-white' crossOrigin={true} style={{ color: "black" }} label={field.label} />
-                                    </div>
-                                    )
-                                } else if (field.type == "select") {
-                                  return (
-                                    <div className="flex flex-row mt-4 w-full p-0">
-                                    <Select name={field.field} value={inputState[field.field]} onChange={(event) => setInputState({...inputState, [field.field]: event}) }
-                                       className='bg-white text-black ct-cover object-center shadow-sm shadow-blue-gray-900/50' label={field.label} placeholder={field.label}>
-                                      {field.values.map((value: any) => (
-                                        <Option key={value} value={value}>{value}</Option>
-                                      ))
-                                      }
-                                    </Select>
-                                  </div>
-                                    // <SelectInputComponent name={field.field} label={field.label} values={field.values} required={field.required} />
-                                  )
-                                }
-                              })
-                            }
-                          </div>
-                        </div>
-                        <div className="p-0">
-                          <Typography variant="h5" placeholder={"Indicative Terms"}>Indicative Terms</Typography>
-                          {
-                            indicativeFields.map((field) => {
-                              if (field.type == "text") {
-                                return (
-                                  <div className="flex flex-row mt-4 p-0">
-                                  <Input ref={fieldRefs[field.field]} value={inputState[field.field]} onChange={(event) => { event.preventDefault(); setInputState({...inputState, [field.field]: event.target.value})}} name={field.field} className='object-cover object-center shadow-sm shadow-blue-gray-900/50 bg-white' crossOrigin={true} style={{ color: "black" }} label={field.label} />
-                                  </div>                                )
-                              } else if (field.type == "select") {
-                                return (
-                                  <div className="flex flex-row mt-4 w-full p-0">
-                                    <Select name={field.field} value={inputState[field.field]} onChange={(event) => setInputState({...inputState, [field.field]: event}) }
-                                       className='bg-white text-black ct-cover object-center shadow-sm shadow-blue-gray-900/50' label={field.label} placeholder={field.label}>
-                                      {field.values.map((value: any) => (
-                                        <Option key={value} value={value}>{value}</Option>
-                                      ))
-                                      }
-                                    </Select>
-                                  </div>
-                                )
-                              }
-                            })
-                          }
-                        </div>
-                      </div>
-                      <CardFooter className="flex p-0 mt-4 justify-left">
-                        <Button placeholder={""} className="clear-button font-bold w-30 h-12 mr-4 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50" variant="gradient">Clear</Button>
-                        <Button placeholder={""} id="searchBtn" type="submit" className="btn font-bold w-30 h-12 mr-4 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50" variant="gradient">Search</Button>
-                      </CardFooter>
-                    </form>
-                  </CardBody>
-                </Card>
-                <ExternalSources hasSubmitted={hasSubmitted} fieldRefs={fieldRefs} inputState={inputState} setHasSubmitted={setHasSubmitted} setSearchResults={setSearchResults}  />
-              </div>
-            )}
-      </AnimatePresence>
-    </ PageLayout>);
+    const checkLoginStatus = () => {
+        const apiEndpoint = "/api/auth/token";
+
+        fetch(apiEndpoint, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                access_token: Cookies.get('token'),
+            }),
+        })
+            .then(async (response) => {
+                if (response.ok) {
+                    let responseJSON = await response.json();
+                    if (responseJSON.loggedin) {
+                        setIsLoggedIn(true);
+                    }
+                } else {
+                    console.error("Login failed. Status: " + response.status);
+                }
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
+    }
+
+    useEffect(() => {
+        let fields: any = {};
+        descriptionFields.forEach((field) => {
+            fields[field.field] = createRef();
+            // setInputState({ ...inputState, [field.field]: "" });
+        });
+        indicativeFields.forEach((field) => {
+            fields[field.field] = createRef();
+            // setInputState({ ...inputState, [field.field]: "" });
+        });
+        checkLoginStatus();
+        setFieldRefs(fields);
+    }, []);
+
+
+    return (
+        <PageLayout isLoggedIn={isLoggedIn} skipLogin={false} pageName={"scientists"}>
+            <AnimatePresence>
+                {
+                    searchResults.length > 0 ? (
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 2 }}
+                        >
+                            <SearchResults mode={mode} setMode={setMode} setSearchResults={setSearchResults} searchResults={searchResults} />
+                        </motion.div>
+                    )
+                        :
+                        (
+                            <div className={`w-full mt-28 min-h-[65rem]`}>
+                                <Card className="mt-6 w-1/2 mx-auto form-container rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50">
+                                    <CardHeader className='bg-[#D4D9DD] text-black'>
+                                        <Typography variant="h2" className="text-center pb-4 pt-4">
+                                            Search Scientific Catalogue
+                                        </Typography>
+                                    </CardHeader>
+                                    <CardBody placeholder={''}>
+
+                                        <form className='mt-4' id="searchForm" onSubmit={(event) => { event.preventDefault(); setHasSubmitted(true); }}>
+                                            <div className="grid gap-8 mb-6 md:grid-cols-2 ">
+                                                <div>
+                                                    <Typography variant="h5" placeholder={"Description"}>Description</Typography>
+                                                    <div className='p-0'>
+                                                        {
+                                                            descriptionFields.map((field, index) => {
+                                                                if (field.type == "text") {
+                                                                    return (
+                                                                        <div key={index} className="flex flex-row mt-4 p-0">
+                                                                            <Input crossOrigin="true" ref={fieldRefs[field.field]} value={inputState[field.field]} onChange={(event) => { event.preventDefault(); setInputState({ ...inputState, [field.field]: event.target.value }) }} name={field.field} className='object-cover object-center shadow-sm shadow-blue-gray-900/50 bg-white' style={{ color: "black" }} label={field.label} />
+                                                                        </div>
+                                                                    )
+                                                                } else if (field.type == "select") {
+                                                                    return (
+                                                                        <div key={index} className="flex flex-row mt-4 w-full p-0">
+                                                                            <Select name={field.field} value={inputState[field.field]} onChange={(event) => setInputState({ ...inputState, [field.field]: event })}
+                                                                                className='bg-white text-black ct-cover object-center shadow-sm shadow-blue-gray-900/50' label={field.label} placeholder={field.label}>
+                                                                                {field.values.map((value: any, index: number) => (
+                                                                                    <Option key={index} value={value}>{value}</Option>
+                                                                                ))
+                                                                                }
+                                                                            </Select>
+                                                                        </div>
+                                                                        // <SelectInputComponent name={field.field} label={field.label} values={field.values} required={field.required} />
+                                                                    )
+                                                                }
+                                                            })
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <div className="p-0">
+                                                    <Typography variant="h5" placeholder={"Indicative Terms"}>Indicative Terms</Typography>
+                                                    {
+                                                        indicativeFields.map((field, index) => {
+                                                            if (field.type == "text") {
+                                                                return (
+                                                                    <div key={index} className="flex flex-row mt-4 p-0">
+                                                                        <Input ref={fieldRefs[field.field]} value={inputState[field.field]} onChange={(event) => { event.preventDefault(); setInputState({ ...inputState, [field.field]: event.target.value }) }} name={field.field} className='object-cover object-center shadow-sm shadow-blue-gray-900/50 bg-white' crossOrigin={true} style={{ color: "black" }} label={field.label} />
+                                                                    </div>)
+                                                            } else if (field.type == "select") {
+                                                                return (
+                                                                    <div key={index}  className="flex flex-row mt-4 w-full p-0">
+                                                                        <Select name={field.field} value={inputState[field.field]} onChange={(event) => setInputState({ ...inputState, [field.field]: event })}
+                                                                            className='bg-white text-black ct-cover object-center shadow-sm shadow-blue-gray-900/50' label={field.label} placeholder={field.label}>
+                                                                            {field.values.map((value: any) => (
+                                                                                <Option key={value} value={value}>{value}</Option>
+                                                                            ))
+                                                                            }
+                                                                        </Select>
+                                                                    </div>
+                                                                )
+                                                            }
+                                                        })
+                                                    }
+                                                </div>
+                                            </div>
+                                            <CardFooter placeholder={""} className="flex p-0 mt-4 justify-left">
+                                                <Button placeholder={""} className="clear-button font-bold w-40 h-12 mr-4 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50" variant="gradient">Clear</Button>
+                                                <Button placeholder={""} id="searchBtn" type="submit" className="btn font-bold w-40 h-12 mr-4 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50" variant="gradient">Search</Button>
+                                            </CardFooter>
+                                        </form>
+                                    </CardBody>
+                                </Card>
+                                <ExternalSources hasSubmitted={hasSubmitted} inputState={inputState} setHasSubmitted={setHasSubmitted} setSearchResults={setSearchResults} />
+                            </div>
+                        )}
+            </AnimatePresence>
+        </ PageLayout>);
 }
 
 export default SearchPage;

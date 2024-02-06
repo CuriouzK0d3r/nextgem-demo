@@ -134,7 +134,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ handleSearch, searchType, setSe
                 </Menu>
                 <div className="relative inline-block flex-1">
                     <input
-                        style={{ borderWidth: "2px", borderColor: "#6359E1"}}
+                        style={{ borderWidth: "2px", borderColor: "#6359E1" }}
                         value={searchQuery}
                         onChange={(e) => { setSearchQuery(e.target.value); }}
                         type="search" id="search-dropdown" className="w-full h-[70px] block p-2.5 z-20 text-sm text-gray-800 

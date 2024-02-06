@@ -255,13 +255,13 @@ function SearchResultsPage() {
                                                             variant="ghost"
                                                             value={status}
                                                             className='mb-6'
-                                                        color={
-                                                            status === "Public"
-                                                                ? "green"
-                                                                : status === "Restricted"
-                                                                    ? "orange"
-                                                                    : ""
-                                                        }
+                                                            color={
+                                                                status === "Public"
+                                                                    ? "green"
+                                                                    : status === "Restricted"
+                                                                        ? "orange"
+                                                                        : ""
+                                                            }
                                                         />
                                                     </div>
                                                 </td>
