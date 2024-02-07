@@ -14,7 +14,6 @@ import {
 import { MoreDialog } from './helpers/more-dialog';
 
 function DefaultPagination({ searchResults, active, setActive }: { searchResults: any[], active: number, setActive: React.Dispatch<React.SetStateAction<number>> }) {
-
     const getItemProps = (index: number) =>
     ({
         variant: active === index ? "filled" : "text",
@@ -22,14 +21,14 @@ function DefaultPagination({ searchResults, active, setActive }: { searchResults
         onClick: () => setActive(index),
     } as any);
 
-    const next = () => {
-        if (active === 5) return;
+    const next = (pagesNo: number) => {
+        if (active === pagesNo) return;
 
         setActive(active + 1);
     };
 
     const prev = () => {
-        if (active === 1) return;
+        if (active === 0) return;
 
         setActive(active - 1);
     };
@@ -37,7 +36,7 @@ function DefaultPagination({ searchResults, active, setActive }: { searchResults
     const pagesNo = Math.ceil(searchResults.length / 5);
 
     return (
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 mt-4">
             <Button
                 placeholder={""}
                 variant="text"
@@ -48,17 +47,19 @@ function DefaultPagination({ searchResults, active, setActive }: { searchResults
                 <ArrowLeftIcon strokeWidth={2} className="h-4 w-4" /> Previous
             </Button>
             <div className="flex items-center gap-2">
+                {active >= 3 ? "...": ""}
                 {
-                    Array.from(Array(pagesNo).keys()).map((i, index) => {
+                    Array.from(Array(pagesNo).keys()).slice(active > 2 ? active - 2 : 0, active > 3 ? active + 3 : active + 5).map((i, index) => {
                         return <IconButton key={index} {...getItemProps(i)}>{i + 1}</IconButton>;
                     })
                 }
+                {active <= (pagesNo - 4) ? "...": ""}
             </div>
             <Button
                 placeholder={""}
                 variant="text"
                 className="flex items-center gap-2"
-                onClick={next}
+                onClick={() => next(pagesNo)}
                 disabled={active === pagesNo - 1}
             >
                 Next
@@ -175,7 +176,7 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, seletedSou
                                 {TABLE_HEAD.map((head, index) => (
                                     <th
                                         key={index}
-                                        className="border-b border-blue-gray-100 bg-blue-gray-50 p-4 pb-0"
+                                        className={`border-b border-blue-gray-100 bg-blue-gray-50 p-4 pb-0 ${['More', 'Status', 'Output Type', 'Type of Study'].includes(head) ? 'hidden lg:table-cell': ''}`}
                                     >
                                         <Typography
                                             placeholder={""}
@@ -212,13 +213,13 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, seletedSou
                                     return (
                                         <tr key={index} className="even:bg-blue-gray-50/50">
                                             <td className={classes}>
-                                                <div className="flex items-center">
+                                                <div className="flex items-center w-[15rem] md:w-[25rem] xl:w-[42rem]">
 
                                                     <Typography
-                                                    placeholder=""
+                                                        placeholder=""
                                                         variant="small"
                                                         color="blue-gray"
-                                                        className="font-bold  w-[42rem]"
+                                                        className="font-bold"
                                                     >
                                                         {title}
                                                     </Typography>
@@ -233,24 +234,24 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, seletedSou
                                                         {description}
                                                     </Typography>
                                                 </td> */}
-                                            <td >
+                                            <td className='hidden lg:table-cell'>
                                                 <Typography
-                                                placeholder=""
+                                                    placeholder=""
                                                     variant="small"
                                                     color="blue-gray"
-                                                    className="font-normal"
+                                                    className="font-normal hidden lg:table-cell"
                                                 >
                                                     {studyType ? studyTypeMap[studyType] : "N/A"}
                                                 </Typography>
                                             </td>
-                                            <td className={classes}>
+                                            <td className={classes + ' hidden lg:table-cell'}>
                                                 <div className="flex items-center gap-3">
                                                     <div className="flex flex-col">
                                                         <Typography
-                                                        placeholder=""
+                                                            placeholder=""
                                                             variant="small"
                                                             color="blue-gray"
-                                                            className="font-normal capitalize"
+                                                            className="font-normal capitalize "
                                                         >
                                                             {outputType || "N/A"}
                                                         </Typography>
@@ -260,13 +261,12 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, seletedSou
                                             </td>
                                             <td className={classes}>
                                                 <div className="flex items-center gap-3">
-
-                                                    <div className="flex flex-col w-30">
+                                                    <div className="flex flex-col w-30 text-left">
                                                         <Typography
-                                                        placeholder=""
+                                                            placeholder=""
                                                             variant="small"
                                                             color="blue-gray"
-                                                            className="font-normal capitalize"
+                                                            className="font-normal capitalize  text-left"
                                                         >
                                                             {institution || location}
                                                         </Typography>
@@ -274,8 +274,8 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, seletedSou
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td className={classes}>
-                                                <div className="w-max">
+                                            <td className={classes + ' hidden lg:table-cell'}>
+                                                <div className="w-max hidden lg:table-cell">
                                                     <Chip
                                                         size="sm"
                                                         variant="ghost"
@@ -292,7 +292,7 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, seletedSou
                                                 </div>
                                             </td>
                                             <td>
-                                                <Typography placeholder={""} as="a" href="#" variant="small" color="blue-gray" className="font-medium mb-4">
+                                                <Typography placeholder={""} as="a" href="#" variant="small" color="blue-gray" className="font-medium mb-4 hidden lg:table-cell">
                                                     <MoreDialog description={description} />
                                                 </Typography>
                                             </td>

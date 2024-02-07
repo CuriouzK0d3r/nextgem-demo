@@ -117,7 +117,7 @@ function LoginPage() {
             .then(async (response) => {
                 if (response.ok && response.status === 200) {
                     let responseJSON = await response.json();
-                   router.push('/scientists');
+                    router.push('/scientists');
                     Cookies.set('token', responseJSON.access_token, { expires: 1, secure: false });
                 } else {
                     alert("Login failed. Status: " + response.status);

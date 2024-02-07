@@ -86,7 +86,7 @@ function InputPage() {
         },
     ];
 
-    let fieldsNames: any={};
+    let fieldsNames: any = {};
     inputFields.forEach((field) => {
         fieldsNames[field.field] = "";
     });
@@ -134,7 +134,7 @@ function InputPage() {
     checkLoginStatus();
 
     const clearState = () => {
-        let fieldsNames: any={};
+        let fieldsNames: any = {};
         inputFields.forEach((field) => {
             fieldsNames[field.field] = "";
         });
@@ -193,7 +193,7 @@ function InputPage() {
                                     </div>
                                 </div>
                                 <div>
-                                    <Button  placeholder={""}className="clear-button font-bold w-30 h-12 mr-4" variant="gradient" onClick={clearState}>Clear</Button>
+                                    <Button placeholder={""} className="clear-button font-bold w-30 h-12 mr-4" variant="gradient" onClick={clearState}>Clear</Button>
                                     <Button placeholder={""} id="searchBtn" type="submit" className="btn font-bold w-30 h-12 mr-4" variant="gradient">Upload</Button>
 
                                     {/* <input type="submit" id="UploadBtn" className="btn font-bold w-30" value="Upload" /> */}

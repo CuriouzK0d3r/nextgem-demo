@@ -1,16 +1,8 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
-const ExternalSources = ({ hasSubmitted, inputState, setSearchResults }: { hasSubmitted: boolean, inputState: any, setSearchResults: any }) => {
-    const [chosenSources, setChosenSources] = useState<string[]>([]);
+const ExternalSources = ({ hasSubmitted, setHasSubmitted, inputState, setSearchResults, chosenSources, setChosenSources }: { hasSubmitted: boolean, setHasSubmitted:any, inputState: any, setSearchResults: any, chosenSources: any, setChosenSources: any }) => {
 
     const submitSearch = (formData: any) => {
-        // let formData: any = {};
-
-        // for (const [field, ref] of Object.entries(fieldRefs)) {
-        //   if (ref.current.value != "") {
-        //     formData[field] = ref?.current.value;
-        //   }
-        // }
 
         const apiEndpoint = "/api/search";
 
@@ -28,6 +20,7 @@ const ExternalSources = ({ hasSubmitted, inputState, setSearchResults }: { hasSu
                 if (response.ok) {
                     const repJSON = await response.json();
                     setSearchResults(repJSON.searchResults);
+                    setHasSubmitted(false);
                 } else {
                     console.error("Login failed. Status: " + response.status);
                 }
@@ -39,37 +32,37 @@ const ExternalSources = ({ hasSubmitted, inputState, setSearchResults }: { hasSu
 
     useEffect(() => {
         if (hasSubmitted) {
-            if (chosenSources.length == 0)
+            if (chosenSources.length == 0) {
                 alert("Please select at least one source");
-            else
+                setHasSubmitted(false);
+            }else
                 submitSearch(inputState);
-            // setHasSubmitted(false);
         }
     }, [hasSubmitted]);
 
     return (
         <div className='flex flex-row mx-auto w-full mt-10 mb-20'>
             <div className=' flex mx-auto items-center'>
-                <button className={""} onClick={() => { chosenSources.includes("NextGEM") ? setChosenSources(chosenSources.filter(function(e) { return e !== 'NextGEM' })) : setChosenSources([...chosenSources, "NextGEM"]) }}>
+                <button className={""} onClick={() => { chosenSources.includes("NextGEM") ? setChosenSources(chosenSources.filter(function(e: any) { return e !== 'NextGEM' })) : setChosenSources([...chosenSources, "NextGEM"]) }}>
                     <img width={100} src="./NextGEM_Button.svg" alt="NextGEM" className={chosenSources.includes("NextGEM") ? "custom-bounce chosen-source mr-[8px] p-0 rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50" : "mr-[8px] p-0 rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50"} />
                 </button>
-{/* 
+                {/* 
                 <button className={""} onClick={() => { chosenSources.includes("CLUE-H") ? setChosenSources(chosenSources.filter(function(e) { return e !== 'CLUE-H' })) : setChosenSources([...chosenSources, "CLUE-H"]) }}>
                     <img width={100} src="./CLUE-H_Button.svg" alt="CLUE-H" className={chosenSources.includes("CLUE-H") ? " custom-bounce chosen-source mr-[4px] p-0 rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50" : "mr-[4px] p-0 rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50"} />
                 </button> */}
 
-                <button className={""} onClick={() => { chosenSources.includes("EMF") ? setChosenSources(chosenSources.filter(function(e) { return e !== 'EMF' })) : setChosenSources([...chosenSources, "EMF"]) }}>
+                <button className={""} onClick={() => { chosenSources.includes("EMF") ? setChosenSources(chosenSources.filter(function(e: any) { return e !== 'EMF' })) : setChosenSources([...chosenSources, "EMF"]) }}>
                     <img width={105} src="./EMF-portal_Button.svg" alt="EMF-Portal" className={chosenSources.includes("EMF") ? " custom-bounce chosen-source mr-[4px] p-0 rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50" : "mr-[4px] p-0 rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50"} />
                 </button>
 
-                <button className={""} onClick={() => { chosenSources.includes("Zenodo") ? setChosenSources(chosenSources.filter(function(e) { return e !== 'Zenodo' })) : setChosenSources([...chosenSources, "Zenodo"]) }}>
+                <button className={""} onClick={() => { chosenSources.includes("Zenodo") ? setChosenSources(chosenSources.filter(function(e: any) { return e !== 'Zenodo' })) : setChosenSources([...chosenSources, "Zenodo"]) }}>
                     <img width={100} src="./Zenodo_Button.svg" alt="Zenodo" className={chosenSources.includes("Zenodo") ? " custom-bounce chosen-source mr-[6px] p-0 rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50" : "mr-[6px] p-0 rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50"} />
                 </button>
-                
-                <button className={""} onClick={() => { chosenSources.includes("Pubmed") ? setChosenSources(chosenSources.filter(function(e) { return e !== 'Pubmed' })) : setChosenSources([...chosenSources, "Pubmed"]) }}>
+
+                <button className={""} onClick={() => { chosenSources.includes("Pubmed") ? setChosenSources(chosenSources.filter(function(e: any) { return e !== 'Pubmed' })) : setChosenSources([...chosenSources, "Pubmed"]) }}>
                     <img width={105} src="./pubmed-logo.svg" alt="Pubmed" className={chosenSources.includes("Pubmed") ? " custom-bounce chosen-source mr-[6px] p-0 rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50" : "mr-[6px] p-0 rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50"} />
                 </button>
-{/* 
+                {/* 
                 <button className={""} onClick={() => { chosenSources.includes("EHDS") ? setChosenSources(chosenSources.filter(function(e) { return e !== 'EHDS' })) : setChosenSources([...chosenSources, "EHDS"]) }}>
                     <img width={100} src="./EHDS_Button.svg" alt="EHDS" className={chosenSources.includes("EHDS") ? " custom-bounce chosen-source mr-[6px] p-0 rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50" : "mr-[6px] p-0 rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50"} />
                 </button>

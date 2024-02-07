@@ -21,7 +21,7 @@ export function MoreDialog({ description }: { description: string }) {
             </Typography>
             {/* </Button> */}
             <Dialog
-            placeholder={""}
+                placeholder={""}
                 open={open}
                 handler={handleOpen}
                 animate={{
@@ -32,7 +32,7 @@ export function MoreDialog({ description }: { description: string }) {
                 <DialogHeader placeholder={""} className="ml-4">More data</DialogHeader>
                 <DialogBody placeholder={""}>
                     <p><Typography
-                    placeholder={""}
+                        placeholder={""}
                         variant="h5"
                         color="blue-gray"
                         className="font-bold  w-[42rem]"
@@ -43,7 +43,7 @@ export function MoreDialog({ description }: { description: string }) {
                 </DialogBody>
                 <DialogFooter placeholder={""}>
                     <Button
-                    placeholder={""}
+                        placeholder={""}
                         variant="text"
                         color="red"
                         onClick={handleOpen}

@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect } from 'react';
 import Header from './header';
 import Footer from './footer';
@@ -21,6 +22,7 @@ import { useRouter } from 'next/navigation';
 const PageLayout = ({ isLoggedIn, skipLogin, children, pageName }: { isLoggedIn: boolean, skipLogin: boolean, children: React.ReactNode, pageName: string | undefined }) => {
     const router = useRouter();
     const [open, setOpen] = useState(false);
+    const [isModalLoggedIn, setIsModalLoggedIn] = useState(false);
     const loginUsernameRef = useRef<any>(null);
     const loginPasswordRef = useRef<any>(null);
 
@@ -28,19 +30,19 @@ const PageLayout = ({ isLoggedIn, skipLogin, children, pageName }: { isLoggedIn:
 
     useEffect(() => {
         if (pageName === "members" && !skipLogin && !isLoggedIn) {
-            // setOpen(true);
-        }
-    }
-        , [skipLogin]);
+            setOpen(true);
+        } else if (isLoggedIn)
+            setOpen(false);
+    }, [skipLogin, isLoggedIn]);
 
-    function submitLoginForm(event: any) {
+    async function submitLoginForm(event: any) {
         event.preventDefault();
+        console.log('sdflsdkjfjksdfds')
         const username = loginUsernameRef.current?.value;
         const password = loginPasswordRef.current?.value;
         const apiEndpoint = "/api/auth/login";
-
-
-        fetch(apiEndpoint, {
+        console.log('fsdfsdfsdfd')
+        await fetch(apiEndpoint, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -51,11 +53,13 @@ const PageLayout = ({ isLoggedIn, skipLogin, children, pageName }: { isLoggedIn:
             }),
         })
             .then(async (response) => {
-                if (response.ok) {
+                console.log(response.status)
+                if (response.ok && response.status === 200) {
                     console.log(response)
                     let responseJSON = await response.json();
                     Cookies.set('token', responseJSON.access_token, { expires: 1, secure: false });
                     setOpen(false);
+                    setIsModalLoggedIn(true);
                 } else {
                     alert("Login failed. Status: " + response.status);
                     console.error("Login failed. Status: " + response.status);
@@ -66,12 +70,10 @@ const PageLayout = ({ isLoggedIn, skipLogin, children, pageName }: { isLoggedIn:
             });
     }
 
-
-
     return (
         <div className="page-layout p-0 h-full w-full bg-white">
             <div className='h-full w-full flex flex-col gap-0'>
-                <Header isLoggedIn={isLoggedIn} skipLogin={skipLogin} pageName={pageName} />
+                <Header isLoggedIn={isLoggedIn || isModalLoggedIn} skipLogin={skipLogin} pageName={pageName} />
                 <div className='flex-grow p-0'>
                     {children}
                     <Footer />
@@ -92,7 +94,7 @@ const PageLayout = ({ isLoggedIn, skipLogin, children, pageName }: { isLoggedIn:
                                 Log In
                             </Typography>
                             <Typography
-                            placeholder={""}
+                                placeholder={""}
                                 className="mb-0 mt-4 font-normal"
                                 variant="paragraph"
                                 color="red"
@@ -100,19 +102,19 @@ const PageLayout = ({ isLoggedIn, skipLogin, children, pageName }: { isLoggedIn:
                                 Please login to access this page.
                             </Typography>
                             <div className='loginInput p-0'>
-                                <Input className='object-cover object-center shadow-sm shadow-blue-gray-900/50 w-full' size="lg" crossOrigin="true" id="loginUsername" required style={{ color: "black", padding: "0px" }} label={"Username"} />
+                                <Input className='object-cover object-center shadow-sm shadow-blue-gray-900/50 w-full' size="lg" crossOrigin="true" id="loginUsername" required style={{ color: "black" }} label={"Username"} />
 
-                                <Input className='p-0 object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin="true" id="loginPassword" type='password' required style={{ color: "black", padding: "0px" }} label={"Password"} />
+                                <Input className='p-0 object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin="true" id="loginPassword" type='password' required style={{ color: "black" }} label={"Password"} />
                             </div>
                         </CardBody>
                         <CardFooter placeholder={""} className="pt-0 mr-8">
-                            <Button placeholder={""} variant="gradient" onClick={handleOpen} className='w-full'>
+                            <Button type='submit' placeholder={""} variant="gradient" onClick={handleOpen} className='w-full'>
                                 Sign In
                             </Button>
                             <Typography placeholder={""} variant="small" className="mt-4 flex justify-center">
                                 Don&apos;t have an account?
                                 <Typography
-                                placeholder={""}
+                                    placeholder={""}
                                     as="a"
                                     href="/login"
                                     variant="small"

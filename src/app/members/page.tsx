@@ -31,12 +31,12 @@ function DashboardPage() {
             .then(async (response) => {
                 if (response.ok) {
                     let responseJSON = await response.json();
-                    console.log(responseJSON)
+
                     if (responseJSON.loggedin) {
                         setIsLoggedIn(true);
                     } else {
                         // router.push('/login');
-                        setOpen(true);
+                        // setOpen(true);
                     }
                 } else {
                     console.error("Login failed. Status: " + response.status);
@@ -48,40 +48,6 @@ function DashboardPage() {
     }
 
     checkLoginStatus();
-
-
-    function submitLoginForm(event: any) {
-        event.preventDefault();
-        const username = loginUsernameRef.current?.value;
-        const password = loginPasswordRef.current?.value;
-        const apiEndpoint = "/api/auth/login";
-
-
-        fetch(apiEndpoint, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                username: username,
-                password: password,
-            }),
-        })
-            .then(async (response) => {
-                if (response.ok) {
-                    console.log(response)
-                    let responseJSON = await response.json();
-                    Cookies.set('token', responseJSON.access_token, { expires: 1, secure: false });
-                    setOpen(false);
-                } else {
-                    alert("Login failed. Status: " + response.status);
-                    console.error("Login failed. Status: " + response.status);
-                }
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            });
-    }
 
     return (
         <PageLayout skipLogin={false} isLoggedIn={isLoggedIn} pageName='members'>
