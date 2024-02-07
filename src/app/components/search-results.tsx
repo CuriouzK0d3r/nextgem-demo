@@ -1,14 +1,5 @@
 import React from 'react';
 
-// interface SearchResult {
-//     id: number;
-//     name: string;
-//     description: string;
-// }
-
-// interface SearchResultsTableProps {
-//     results: SearchResult[];
-// }
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/20/solid';
 import {
     Button,
@@ -58,12 +49,13 @@ function DefaultPagination({ searchResults, active, setActive }: { searchResults
             </Button>
             <div className="flex items-center gap-2">
                 {
-                    [...Array(pagesNo).keys()].map((i) => {
-                        return <IconButton {...getItemProps(i)}>{i + 1}</IconButton>;
+                    Array.from(Array(pagesNo).keys()).map((i, index) => {
+                        return <IconButton key={index} {...getItemProps(i)}>{i + 1}</IconButton>;
                     })
                 }
             </div>
             <Button
+                placeholder={""}
                 variant="text"
                 className="flex items-center gap-2"
                 onClick={next}
@@ -81,7 +73,7 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, seletedSou
 
     const TABLE_HEAD = ["Title", "Type of Study", "Output Type", "Location", "Status", " "];
 
-    const studyTypeMap = {
+    const studyTypeMap: any = {
         inVitro: "In Vitro",
         inVivo: "In Vivo",
         inSilico: "In Silico",
@@ -161,16 +153,16 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, seletedSou
     // ];
     return (
         <div className={`w-full min-h-[68rem] mt-0 flex items-center justify-center`}>
-            <Card className="mt-6 w-3/4 min-h-[30rem] mx-auto form-container object-cover object-center shadow-xl shadow-blue-gray-900/50">
-                <CardHeader className='bg-[#D4D9DD] text-black'>
-                    <Typography variant="h2" className="text-center pb-4 pt-4">
+            <Card placeholder="" className="mt-6 w-3/4 min-h-[30rem] mx-auto form-container object-cover object-center shadow-xl shadow-blue-gray-900/50">
+                <CardHeader placeholder="" className='bg-[#D4D9DD] text-black'>
+                    <Typography placeholder="" variant="h2" className="text-center pb-4 pt-4">
                         Search Results
                     </Typography>
                     {/* <h3 className='mb-8 text-4xl .title-color text-center mx-auto'>Search Scientific Catalogue</h3> */}
                 </CardHeader>
 
                 <CardBody placeholder={""} className=" px-0">
-                    <Typography as="a" onClick={() => (setSearchResults([]))} variant="small" color="blue-gray" className="font-medium mb-4 cursor-pointer	">
+                    <Typography as="a" placeholder="" onClick={() => (setSearchResults([]))} variant="small" color="blue-gray" className="font-medium mb-4 cursor-pointer	">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="float-left w-12 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
                         </svg>
@@ -207,12 +199,10 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, seletedSou
                                         outputType,
                                         location,
                                         institution,
-                                        name,
                                         studyType,
-                                        date,
                                         privacyLevel,
-                                    },
-                                    index,
+                                    }: any,
+                                    index: number,
                                 ) => {
                                     const isLast = index === TABLE_ROWS.length - 1;
                                     const classes = isLast
@@ -225,6 +215,7 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, seletedSou
                                                 <div className="flex items-center">
 
                                                     <Typography
+                                                    placeholder=""
                                                         variant="small"
                                                         color="blue-gray"
                                                         className="font-bold  w-[42rem]"
@@ -244,6 +235,7 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, seletedSou
                                                 </td> */}
                                             <td >
                                                 <Typography
+                                                placeholder=""
                                                     variant="small"
                                                     color="blue-gray"
                                                     className="font-normal"
@@ -255,6 +247,7 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, seletedSou
                                                 <div className="flex items-center gap-3">
                                                     <div className="flex flex-col">
                                                         <Typography
+                                                        placeholder=""
                                                             variant="small"
                                                             color="blue-gray"
                                                             className="font-normal capitalize"
@@ -270,6 +263,7 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, seletedSou
 
                                                     <div className="flex flex-col w-30">
                                                         <Typography
+                                                        placeholder=""
                                                             variant="small"
                                                             color="blue-gray"
                                                             className="font-normal capitalize"
@@ -292,13 +286,13 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, seletedSou
                                                                 ? "green"
                                                                 : privacyLevel === "restricted" || privacyLevel === "sensitive"
                                                                     ? "orange"
-                                                                    : ""
+                                                                    : "gray"
                                                         }
                                                     />
                                                 </div>
                                             </td>
                                             <td>
-                                                <Typography as="a" href="#" variant="small" color="blue-gray" className="font-medium mb-4">
+                                                <Typography placeholder={""} as="a" href="#" variant="small" color="blue-gray" className="font-medium mb-4">
                                                     <MoreDialog description={description} />
                                                 </Typography>
                                             </td>
@@ -309,7 +303,7 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, seletedSou
                         </tbody>
                     </table>
                 </CardBody>
-                <CardFooter className="flex justify-center  border-t border-blue-gray-50 p-4">
+                <CardFooter placeholder={""} className="flex justify-center  border-t border-blue-gray-50 p-4">
                     <DefaultPagination active={active} setActive={setActive} searchResults={searchResults} />
                 </CardFooter>
             </Card>

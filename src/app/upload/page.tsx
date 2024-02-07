@@ -1,22 +1,20 @@
 "use client"
 
+import {
+    Button,
+    Card,
+    CardBody,
+    CardHeader,
+    Input,
+    Option,
+    Select,
+    Typography
+} from "@material-tailwind/react";
 import Cookies from 'js-cookie';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import Header from '../components/header';
 import FileUploader from '../components/file-uploader';
-import Footer from '../components/footer';
-import {
-    Card,
-    CardHeader,
-    CardBody,
-    CardFooter,
-    Typography,
-    Button,
-    Select,
-    Option,
-    Input
-} from "@material-tailwind/react"; import PageLayout from '../components/page-layout';
+import PageLayout from '../components/page-layout';
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(" ");
@@ -72,13 +70,13 @@ function InputPage() {
             values: ["--", "audio", "codebook", "dataset", "deliverable", "image", "poster", "presentation", "publication", "report", "software", "video"],
             required: false
         },
-        {
-            label: "Frequency Ranges",
-            field: 'frequencyRanges',
-            type: "select",
-            values: ["--", ""],
-            required: false
-        },
+        // {
+        //     label: "Frequency Ranges",
+        //     field: 'frequencyRanges',
+        //     type: "select",
+        //     values: ["--", ""],
+        //     required: false
+        // },
         {
             label: "Modulation",
             field: 'modulation',
@@ -144,10 +142,10 @@ function InputPage() {
     }
 
     return (
-        <PageLayout isLoggedIn pageName='members'>
+        <PageLayout skipLogin={false} isLoggedIn pageName='members'>
             <div className="w-full mt-40 min-h-[60rem]">
-                <Card className="mt-6 w-full lg:w-1/2 xl:1/3 mx-auto form-container object-cover object-center shadow-xl shadow-blue-gray-900/50">
-                    <CardHeader className='bg-[#D4D9DD] text-black p-0 divide-y-2 divide-[#fff]'>
+                <Card placeholder={""} className="mt-6 w-full lg:w-1/2 xl:1/3 mx-auto form-container object-cover object-center shadow-xl shadow-blue-gray-900/50">
+                    <CardHeader placeholder={""} className='bg-[#D4D9DD] text-black p-0 divide-y-2 divide-[#fff]'>
                         <Typography placeholder={""} variant="h2" className="text-center pb-4 pt-4">
                             Input Data
                         </Typography>
@@ -172,15 +170,15 @@ function InputPage() {
                                                 inputFields.map((inputField, index) => {
                                                     if (inputField.type === "text") {
                                                         return (
-                                                            <div className="flex flex-row mt-4 p-0">
+                                                            <div key={index} className="flex flex-row mt-4 p-0">
                                                                 <Input key={index} className='object-cover bg-white object-center shadow-sm shadow-blue-gray-900/50' value={inputState[inputField.field]} onChange={(event) => { event.preventDefault(); setInputState({ ...inputState, [inputField.field]: event.target.value }) }} crossOrigin="true" style={{ color: "black" }} label={inputField.label} />
                                                             </div>
                                                         );
                                                     } else if (inputField.type === "select") {
                                                         return (
-                                                            <div className="flex flex-row mt-4 p-0">
+                                                            <div key={index} className="flex flex-row mt-4 p-0">
                                                                 <Select key={index} className='object-cover bg-white object-center shadow-sm shadow-blue-gray-900/50 text-black' label={inputField.label} placeholder={inputField.label} value={inputState[inputField.field]} onChange={(event) => setInputState({ ...inputState, [inputField.field]: event })}>
-                                                                    {inputField.values.map((value: any) => (
+                                                                    {inputField.values?.map((value: any) => (
                                                                         <Option key={value} value={value}>{value}</Option>
                                                                     ))
                                                                     }
@@ -195,8 +193,8 @@ function InputPage() {
                                     </div>
                                 </div>
                                 <div>
-                                    <Button className="clear-button font-bold w-30 h-12 mr-4" variant="gradient" onClick={clearState}>Clear</Button>
-                                    <Button id="searchBtn" type="submit" className="btn font-bold w-30 h-12 mr-4" variant="gradient">Upload</Button>
+                                    <Button  placeholder={""}className="clear-button font-bold w-30 h-12 mr-4" variant="gradient" onClick={clearState}>Clear</Button>
+                                    <Button placeholder={""} id="searchBtn" type="submit" className="btn font-bold w-30 h-12 mr-4" variant="gradient">Upload</Button>
 
                                     {/* <input type="submit" id="UploadBtn" className="btn font-bold w-30" value="Upload" /> */}
                                 </div>

@@ -31,7 +31,7 @@ const EntryModal: React.FC<any> = ({ showModal, setShowModal, paperAbstract, dat
                             <div className="relative p-6 flex-auto text-left dark:text-gray-100 text-gray-900">
                                 {paperAbstract ?
                                     (<p className="my-4 px-4  text-lg leading-relaxed">
-                                        {cheerio.load(paperAbstract, { xmlMode: true }).text().includes('Abstract') ? cheerio.load(paperAbstract, { xmlMode: true }).text().split('Abstract')[1] : cheerio.load(paperAbstract, { xmlMode: true }).text()}
+                                        {(cheerio.load(paperAbstract, { xmlMode: true }) as any).text().includes('Abstract') ? (cheerio.load(paperAbstract, { xmlMode: true }) as any).text().split('Abstract')[1] : (cheerio.load(paperAbstract, { xmlMode: true }) as any).text()}
                                     </p>) : (
                                         <ol>
                                             {
@@ -49,7 +49,7 @@ const EntryModal: React.FC<any> = ({ showModal, setShowModal, paperAbstract, dat
                             {/*footer*/}
                             <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
                                 <button
-                                    className="bg-blue-500 mr-8 rounded-md text-white hover:bg-blue-700 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                    className="bg-blue-500 mr-8 rounded-md text-white hover:bg-blue-700 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mb-1 ease-linear transition-all duration-150"
                                     type="button"
                                     onClick={() => setShowModal(false)}
                                 >

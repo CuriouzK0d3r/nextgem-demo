@@ -16,11 +16,12 @@ export function MoreDialog({ description }: { description: string }) {
     return (
         <>
             {/* <Button onClick={handleOpen} variant="gradient"> */}
-            <Typography as="a" onClick={handleOpen} variant="small" color="blue-gray" className="font-medium mb-4">
+            <Typography placeholder={""} as="a" onClick={handleOpen} variant="small" color="blue-gray" className="font-medium mb-4">
                 More
             </Typography>
             {/* </Button> */}
             <Dialog
+            placeholder={""}
                 open={open}
                 handler={handleOpen}
                 animate={{
@@ -28,9 +29,10 @@ export function MoreDialog({ description }: { description: string }) {
                     unmount: { scale: 0.9, y: -100 },
                 }}
             >
-                <DialogHeader className="ml-4">More data</DialogHeader>
-                <DialogBody>
+                <DialogHeader placeholder={""} className="ml-4">More data</DialogHeader>
+                <DialogBody placeholder={""}>
                     <p><Typography
+                    placeholder={""}
                         variant="h5"
                         color="blue-gray"
                         className="font-bold  w-[42rem]"
@@ -39,8 +41,9 @@ export function MoreDialog({ description }: { description: string }) {
                         description
                     }
                 </DialogBody>
-                <DialogFooter>
+                <DialogFooter placeholder={""}>
                     <Button
+                    placeholder={""}
                         variant="text"
                         color="red"
                         onClick={handleOpen}

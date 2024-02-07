@@ -13,9 +13,9 @@ export async function POST(req: Request) {
         // console.log(data)
         // data = data[0];
 
-        let result;
+        let results;
         let cursor;
-        console.log(data);
+
         const filters = [
             {
                 'title': {
@@ -48,38 +48,44 @@ export async function POST(req: Request) {
             case "title":
                 let cursorTitle = collection.find(filters[0]);
                 let resultTitle = await cursorTitle.toArray();
-                result = resultTitle;
+                results = resultTitle;
                 break;
             case "author":
                 let cursorAuthor = collection.find(filters[1]);
                 let resultAuthor = await cursorAuthor.toArray();
-                result = resultAuthor;
+                results = resultAuthor;
                 break;
             case "doi":
                 let cursorDOI = collection.find(filters[2]);
                 let resultDOI = await cursorDOI.toArray();
-                result = resultDOI;
+                results = resultDOI;
                 break;
             case "subject":
                 let cursorSubject = collection.find(filters[3]);
                 let resultSubject = await cursorSubject.toArray();
-                result = resultSubject;
+                results = resultSubject;
                 break;
             case "abstract":
                 let cursorAbstract = collection.find(filters[4]);
                 let resultAbstract = await cursorAbstract.toArray();
-                result = resultAbstract;
+                results = resultAbstract;
                 break;
             case "all fields":
                 const filter = {
                     $or: filters
                 };
                 const cursor = collection.find(filter);
-                result = await cursor.toArray();
+                results = await cursor.toArray();
                 break;
         }
-        console.log(result);
-        return Response.json(result)
+        results = results?.map((result) => {
+            return {
+                ...result,
+                location: result.source.toUpperCase(),
+                privacyLevel: "open",
+            }
+        });
+        return Response.json(results)
     } catch (err) {
         console.error(err);
         return Response.json([])

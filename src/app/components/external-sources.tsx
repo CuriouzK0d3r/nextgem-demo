@@ -1,9 +1,9 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
-const ExternalSources = ({ hasSubmitted, setHasSubmitted, inputState, setSearchResults }) => {
+const ExternalSources = ({ hasSubmitted, inputState, setSearchResults }: { hasSubmitted: boolean, inputState: any, setSearchResults: any }) => {
     const [chosenSources, setChosenSources] = useState<string[]>([]);
 
-    const submitSearch = (formData) => {
+    const submitSearch = (formData: any) => {
         // let formData: any = {};
 
         // for (const [field, ref] of Object.entries(fieldRefs)) {
@@ -64,6 +64,10 @@ const ExternalSources = ({ hasSubmitted, setHasSubmitted, inputState, setSearchR
 
                 <button className={""} onClick={() => { chosenSources.includes("Zenodo") ? setChosenSources(chosenSources.filter(function(e) { return e !== 'Zenodo' })) : setChosenSources([...chosenSources, "Zenodo"]) }}>
                     <img width={100} src="./Zenodo_Button.svg" alt="Zenodo" className={chosenSources.includes("Zenodo") ? " custom-bounce chosen-source mr-[6px] p-0 rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50" : "mr-[6px] p-0 rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50"} />
+                </button>
+                
+                <button className={""} onClick={() => { chosenSources.includes("Pubmed") ? setChosenSources(chosenSources.filter(function(e) { return e !== 'Pubmed' })) : setChosenSources([...chosenSources, "Pubmed"]) }}>
+                    <img width={105} src="./pubmed-logo.svg" alt="Pubmed" className={chosenSources.includes("Pubmed") ? " custom-bounce chosen-source mr-[6px] p-0 rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50" : "mr-[6px] p-0 rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50"} />
                 </button>
 {/* 
                 <button className={""} onClick={() => { chosenSources.includes("EHDS") ? setChosenSources(chosenSources.filter(function(e) { return e !== 'EHDS' })) : setChosenSources([...chosenSources, "EHDS"]) }}>

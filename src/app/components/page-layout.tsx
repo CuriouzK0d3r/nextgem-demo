@@ -87,11 +87,12 @@ const PageLayout = ({ isLoggedIn, skipLogin, children, pageName }: { isLoggedIn:
             >
                 <form onSubmit={(event) => submitLoginForm(event)}>
                     <Card placeholder={""} className="mx-auto w-full ">
-                        <CardBody className="flex flex-col gap-4" style={{ padding: "2rem" }}>
-                            <Typography variant="h4" color="blue-gray">
+                        <CardBody placeholder={""} className="flex flex-col gap-4" style={{ padding: "2rem" }}>
+                            <Typography placeholder={""} variant="h4" color="blue-gray">
                                 Log In
                             </Typography>
                             <Typography
+                            placeholder={""}
                                 className="mb-0 mt-4 font-normal"
                                 variant="paragraph"
                                 color="red"
@@ -104,13 +105,14 @@ const PageLayout = ({ isLoggedIn, skipLogin, children, pageName }: { isLoggedIn:
                                 <Input className='p-0 object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin="true" id="loginPassword" type='password' required style={{ color: "black", padding: "0px" }} label={"Password"} />
                             </div>
                         </CardBody>
-                        <CardFooter className="pt-0 mr-8">
-                            <Button variant="gradient" onClick={handleOpen} className='w-full'>
+                        <CardFooter placeholder={""} className="pt-0 mr-8">
+                            <Button placeholder={""} variant="gradient" onClick={handleOpen} className='w-full'>
                                 Sign In
                             </Button>
-                            <Typography variant="small" className="mt-4 flex justify-center">
+                            <Typography placeholder={""} variant="small" className="mt-4 flex justify-center">
                                 Don&apos;t have an account?
                                 <Typography
+                                placeholder={""}
                                     as="a"
                                     href="/login"
                                     variant="small"

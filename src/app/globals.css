@@ -61,7 +61,6 @@ body {
   margin: 0;
   padding: 0;
   background-color: #F6FFF4;
-  /* background-image: url(https://www.nextgem.eu/wp-content/uploads/2022/07/background-overlay.png); */
   background-repeat: no-repeat;
   background-size: cover;
   opacity: 1;
@@ -141,10 +140,6 @@ box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
   justify-content: center;
   align-items: center;
   position: relative;
-  /* top: 45%;
-  left: 50%; */
-  /* transform: translate(-50%, -50%);
-  gap: 2rem; */
 }
 
 #logo-img {
@@ -153,7 +148,6 @@ box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
 
 h3 {
   color: #878C90;
-  /* font-size: 16px; */
 }
 
 h4 {
@@ -169,7 +163,6 @@ h4 {
 }
 
 .font-lato {
-  /* padding-left: 0px !important; */
   font-family: "Lato", sans-serif !important;
 }
 
@@ -230,22 +223,11 @@ ul {
 .clear-button {
   background: rgb(15, 21, 62);
   display: inline-block;
-  /* font-family: "Baloo 2", sans-serif;
-  font-size: 14px;
-  outline: 0;
-  border: 0; */
   cursor: pointer;
   will-change: box-shadow, transform;
-  /* box-shadow: 0px 2px 4px rgb(45 35 66 / 40%),
-    0px 7px 13px -3px rgb(45 35 66 / 30%),
-    inset 0px -3px 0px rgb(58 65 111 / 50%); */
-  /* padding: 0 32px;
-  border-radius: 6px; */
   color: #fff;
-  /* height: 48px; */
   text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
   transition: box-shadow 0.15s ease, transform 0.15s ease;
-  /* margin-top: 1rem; */
 }
 
 .clear-button:hover {
@@ -262,7 +244,6 @@ ul {
 
 .btn {
   display: inline-block;
-  /* font-family: "Lato", sans-serif; */
   font-size: 14px;
   outline: 0;
   border: 0;
@@ -271,16 +252,9 @@ ul {
   background: radial-gradient(100% 100% at 100% 0%,
   #1d3f66 0%,
   #1D2E66 100%);
-  /* box-shadow: 0px 2px 4px rgb(45 35 66 / 40%),
-    0px 7px 13px -3px rgb(45 35 66 / 30%),
-    inset 0px -3px 0px rgb(58 65 111 / 50%);
-  padding: 0 32px;
-  border-radius: 6px; */
   color: #fff;
-  /* height: 48px; */
   text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
   transition: box-shadow 0.15s ease, transform 0.15s ease;
-  /* margin-top: 1rem; */
 }
 
 .btn:hover {
@@ -296,16 +270,12 @@ ul {
 
 .form-container {
   background-color: #D9D9D9;
-  /* margin-top: 10rem; */
    padding: 0 2rem 2rem 2rem !important;
-  /* border-radius: 30px; */
-  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
-  /* height: 20rem; */
 }
 
 label {
   color: rgba(0, 0, 0, 0.811) !important;
-  opacity: 1; /* Firefox */
+  opacity: 1;
 }
 
 .tab {
@@ -398,17 +368,9 @@ form {
 }
 
 form input {
-  /* border: none;
-  padding: 12px; */
   background: #eee;
-  /* font-size: 16px; */
   color: #02132f;
-  /* margin: 0 0 15px 0; */
-  /* width: 16rem; */
-  /* font-weight: 100; */
-  /* outline: none; */
   font-family: "Lato", sans-serif;
-  /* border-radius: 8px; */
 }
 
 .chosen-source {
@@ -420,11 +382,8 @@ select option {
   padding: 12px;
   background: #eee;
   font-size: 16px;
-  /* margin: 0 0 15px 0; */
   margin-left: 4px;
-  /* width: 300px; */
   font-weight: 100;
-  /* outline: none; */
   font-family: "Lato", sans-serif;
 }
 

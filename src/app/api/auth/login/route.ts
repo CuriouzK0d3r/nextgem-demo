@@ -23,11 +23,12 @@ export async function POST(req: Request, res: NextApiResponse) {
     if (response.ok) {
         // window.location.href = "https://example.com/example-page";
         let responseJson = await response.json();
-        return Response.json({ message: 'Login successful', access_token: responseJson.access_token });
+        return Response.json({ status: 200, message: 'Login successful', access_token: responseJson.access_token });
         // console.log("User " + username + " successfully logged in!");
     } else {
         // Login failed
-        return Response.json({ message: 'Invalid email or password' });
+        console.log(response.status, response.statusText)
+        return Response.json({ status: 400, message: 'Invalid email or password' });
     }
     // Login successful
 }

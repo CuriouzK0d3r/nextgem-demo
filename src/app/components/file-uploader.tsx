@@ -1,7 +1,6 @@
 'use client'
 import { Button } from '@material-tailwind/react';
 import React, { useState, ChangeEvent, useRef } from 'react';
-// import { FaCheck, FaTimes } from 'react-icons/fa';
 
 interface FileUploaderProps {
     acceptedFileTypes?: string[] | null;
@@ -142,7 +141,7 @@ export default function FileUploader(props: FileUploaderProps) {
                                 <input id="dropzone-file" type="file" onChange={fileSelectedHandler} accept={acceptedFileTypes ? acceptedFileTypes.join(',') : undefined} className="hidden" ref={fileInputRef} multiple />
                             </label>
                         </div>
-                        <Button id="uploadBtn" onClick={() => console.log(fileStatus)} type="submit" className="btn font-bold w-30 h-12 mt-8" variant="gradient">Upload Files</Button>
+                        <Button placeholder={""} id="uploadBtn" onClick={() => console.log(fileStatus)} type="submit" className="btn font-bold w-30 h-12 mt-8" variant="gradient">Upload Files</Button>
                     </div>
             }
 

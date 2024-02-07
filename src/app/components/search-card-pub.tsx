@@ -26,7 +26,7 @@ const SearchCardPub: React.FC<any> = ({ document, index, setShowModal, setPaperA
 
     return (
         <div className=' rounded-lg border-none p-0'>
-            <Card className="w-full mb-4 pt-6 hover:bg-[#eeeeee85]  bg-[#eee] object-cover object-center shadow-xl shadow-blue-gray-900/50">
+            <Card placeholder={""} className="w-full mb-4 pt-6 hover:bg-[#eeeeee85]  bg-[#eee] object-cover object-center shadow-xl shadow-blue-gray-900/50">
                 <div className='flex'>
                     <div className="float-left w-5/6">
                         <h3 className="ml-3 text-left mb-3 text-lg">{document.title}.</h3>

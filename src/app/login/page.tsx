@@ -62,10 +62,6 @@ function LoginPage() {
 
     isLoggedIn();
 
-    function openTab(evt: any, tabName: any) {
-        setActiveTab(tabName);
-    }
-
     function submitRegisterForm(event: any) {
         event.preventDefault();
         const username = registerUsernameRef.current?.value;
@@ -89,8 +85,8 @@ function LoginPage() {
             }),
         })
             .then((response) => {
-                if (response.ok) {
-                    router.push('/search');
+                if (response.ok && response.status === 200) {
+                    router.push('/scientists');
                 } else {
                     alert("Registration failed. Status: " + response.status);
                     console.error("Registration failed. Status: " + response.status);
@@ -119,11 +115,10 @@ function LoginPage() {
             }),
         })
             .then(async (response) => {
-                if (response.ok) {
-                    console.log(response)
+                if (response.ok && response.status === 200) {
                     let responseJSON = await response.json();
+                   router.push('/scientists');
                     Cookies.set('token', responseJSON.access_token, { expires: 1, secure: false });
-                    router.push('/search');
                 } else {
                     alert("Login failed. Status: " + response.status);
                     console.error("Login failed. Status: " + response.status);
@@ -135,7 +130,7 @@ function LoginPage() {
     }
 
     return (
-        <PageLayout isLoggedIn={true} skipLogin={true}>
+        <PageLayout pageName='login' isLoggedIn={true} skipLogin={true}>
             <div className="relative min-h-[48rem] mx-auto auth-container w-[40rem] ">
                 {/* */}
                 <div>
@@ -163,13 +158,13 @@ function LoginPage() {
                         <div id="loginTab" className={(activeTab === "loginTab" ? "block " : "tabcontent ")}>
                             {/* <h3>Login</h3> */}
                             <form className='mt-12' id="loginForm" onSubmit={(event) => submitLoginForm(event)}>
-                                <Input className='object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin="true" id="loginUsername" inputRef={loginUsernameRef} required style={{ color: "black", padding: "0px" }} label={"Username"} />
+                                <Input className='object-cover p-0 object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin="true" id="loginUsername" inputRef={loginUsernameRef} required style={{ color: "black" }} label={"Username"} />
 
                                 <div className='h-6'></div>
 
                                 <Input className='p-0 object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin="true" id="loginPassword" inputRef={loginPasswordRef} type='password' required style={{ color: "black" }} label={"Password"} />
 
-                                <Button id="loginBtn" type="submit" className="btn font-bold w-full h-12 mt-8 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50" variant="gradient">Login</Button>
+                                <Button placeholder={""} id="loginBtn" type="submit" className="btn font-bold w-full h-12 mt-8 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50" variant="gradient">Login</Button>
                             </form>
                         </div>
 
@@ -189,7 +184,7 @@ function LoginPage() {
 
                                 <Input className='p-0 object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin="true" id="registerOrg" inputRef={registerOrgRef} required style={{ color: "black" }} label={"Organization"} />
 
-                                <Button id="searchBtn" type="submit" className="btn font-bold w-full h-12 mt-8" variant="gradient">Register</Button>
+                                <Button placeholder={""} id="searchBtn" type="submit" className="btn font-bold w-full h-12 mt-8" variant="gradient">Register</Button>
 
                             </form>
                         </div>
