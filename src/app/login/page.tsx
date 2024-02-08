@@ -46,7 +46,7 @@ function LoginPage() {
                 if (response.ok) {
                     let responseJSON = await response.json();
                     if (responseJSON.loggedin) {
-                        router.push('/search');
+                        router.push('/scientists');
                     }
                     // window.location.href = "https://example.com/example-page";
                     Cookies.set('token', responseJSON.access_token, { expires: 1, secure: false });
@@ -68,7 +68,7 @@ function LoginPage() {
         const password = registerPasswordRef.current?.value;
         const email = registerEmailRef.current?.value;
         const organization = registerOrgRef?.current?.value;
-        const apiEndpoint = "http://139.91.58.16/nikh-auth/register";
+        const apiEndpoint = "/api/auth/register";
 
         fetch(apiEndpoint, {
             method: "POST",
@@ -79,14 +79,15 @@ function LoginPage() {
                 username: username,
                 password: password,
                 email: email,
-                organizationId: [organization],
-                firstName: "Random",
+                organizationId: organization,
+                firstName: "",
                 roles: ["user"]
             }),
         })
             .then((response) => {
                 if (response.ok && response.status === 200) {
-                    router.push('/scientists');
+                    alert('Registration successful!');
+                    router.push('/login');
                 } else {
                     alert("Registration failed. Status: " + response.status);
                     console.error("Registration failed. Status: " + response.status);
@@ -158,11 +159,11 @@ function LoginPage() {
                         <div id="loginTab" className={(activeTab === "loginTab" ? "block " : "tabcontent ")}>
                             {/* <h3>Login</h3> */}
                             <form className='mt-12' id="loginForm" onSubmit={(event) => submitLoginForm(event)}>
-                                <Input className='object-cover p-0 object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin="true" id="loginUsername" inputRef={loginUsernameRef} required style={{ color: "black" }} label={"Username"} />
+                                <Input className='object-cover bg-white p-0 object-center shadow-sm shadow-blue-gray-900/50 ' size="lg" crossOrigin="true" id="loginUsername" inputRef={loginUsernameRef} required style={{ color: "black" }} label={"Username"} />
 
                                 <div className='h-6'></div>
 
-                                <Input className='p-0 object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin="true" id="loginPassword" inputRef={loginPasswordRef} type='password' required style={{ color: "black" }} label={"Password"} />
+                                <Input className='bg-white p-0 object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin="true" id="loginPassword" inputRef={loginPasswordRef} type='password' required style={{ color: "black" }} label={"Password"} />
 
                                 <Button placeholder={""} id="loginBtn" type="submit" className="btn font-bold w-full h-12 mt-8 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50" variant="gradient">Login</Button>
                             </form>
@@ -173,16 +174,16 @@ function LoginPage() {
                             <form className={'mt-4 '} id="registerForm" onSubmit={(event) => submitRegisterForm(event)}>
                                 <div className='h-8'></div>
 
-                                <Input className='p-0 object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin="true" id="registerUsername" inputRef={registerUsernameRef} required style={{ color: "black" }} label={"Username"} />
+                                <Input className=' bg-white p-0 object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin="true" id="registerUsername" inputRef={registerUsernameRef} required style={{ color: "black" }} label={"Username"} />
                                 <div className='h-6'></div>
 
-                                <Input className='p-0 object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin="true" id="registerPassword" inputRef={registerPasswordRef} required style={{ color: "black" }} type='password' label={"Password"} />
+                                <Input className='bg-white p-0 object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin="true" id="registerPassword" inputRef={registerPasswordRef} required style={{ color: "black" }} type='password' label={"Password"} />
                                 <div className='h-6'></div>
 
-                                <Input className='p-0 object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin="true" id="registerEmail" type='email' inputRef={registerEmailRef} required style={{ color: "black" }} label={"E-mail"} />
+                                <Input className='bg-white p-0 object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin="true" id="registerEmail" type='email' inputRef={registerEmailRef} required style={{ color: "black" }} label={"E-mail"} />
                                 <div className='h-6'></div>
 
-                                <Input className='p-0 object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin="true" id="registerOrg" inputRef={registerOrgRef} required style={{ color: "black" }} label={"Organization"} />
+                                <Input className='bg-white p-0 object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin="true" id="registerOrg" inputRef={registerOrgRef} required style={{ color: "black" }} label={"Organization"} />
 
                                 <Button placeholder={""} id="searchBtn" type="submit" className="btn font-bold w-full h-12 mt-8" variant="gradient">Register</Button>
 

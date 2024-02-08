@@ -36,7 +36,7 @@ function DefaultPagination({ searchResults, active, setActive }: { searchResults
     const pagesNo = Math.ceil(searchResults.length / 5);
 
     return (
-        <div className="flex items-center gap-4 mt-4">
+        <div className="flex items-center mx-auto gap-4 mt-4">
             <Button
                 placeholder={""}
                 variant="text"
@@ -303,8 +303,11 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, seletedSou
                         </tbody>
                     </table>
                 </CardBody>
-                <CardFooter placeholder={""} className="flex justify-center  border-t border-blue-gray-50 p-4">
+                <CardFooter placeholder={""} className=" w-full border-t border-blue-gray-50 p-4">
+                    <div className='flex justify-center mx-auto flex-col'>
+                    <div className='text-center text-gray-900'>{searchResults.length} results found.</div> 
                     <DefaultPagination active={active} setActive={setActive} searchResults={searchResults} />
+                    </div>
                 </CardFooter>
             </Card>
         </div>

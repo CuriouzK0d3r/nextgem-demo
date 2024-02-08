@@ -1,8 +1,10 @@
+"use client"
+
 import React, { useState } from 'react';
-import { Button } from "@material-tailwind/react";
+
+import Cookies from 'js-cookie';
 
 import '../snipped.css'
-import { log } from 'console';
 
 const Header = ({ isLoggedIn, skipLogin, pageName }: { isLoggedIn: boolean, skipLogin: boolean | undefined, pageName: string | undefined }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -26,11 +28,11 @@ const Header = ({ isLoggedIn, skipLogin, pageName }: { isLoggedIn: boolean, skip
                                         <nav className="site-navigation ast-flex-grow-1 navigation-accessibility site-header-focus-item" id="primary-site-navigation-desktop" aria-label="Site Navigation" itemType="https://schema.org/SiteNavigationElement" >
                                             <div className="main-navigation ast-inline-flex">
                                                 <ul id="ast-hf-menu-1" className="main-header-menu ast-menu-shadow ast-nav-menu ast-flex  submenu-with-border stack-on-mobile">
-                                                    <li id="menu-item-542" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-540 current_page_item menu-item-542"><a href="/" aria-current="page" className="menu-link">Home</a></li>
-                                                    <li id="menu-item-12" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-12"><a href="/authorities/" className="menu-link">Authorities</a></li>
-                                                    <li id="menu-item-11" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-11"><a href="/citizens/" className="menu-link">Citizens</a></li>
+                                                    <li id="menu-item-542" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-540 current_page_item menu-item-542"><a href="https://subra.ics.forth.gr/" aria-current="page" className="menu-link">Home</a></li>
+                                                    <li id="menu-item-12" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-12"><a href="https://subra.ics.forth.gr/authorities/" className="menu-link">Authorities</a></li>
+                                                    <li id="menu-item-11" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-11"><a href="https://subra.ics.forth.gr/citizens/" className="menu-link">Citizens</a></li>
                                                     <li id="menu-item-10" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-10"><a href="/scientists/" className={`menu-link ${pageName === 'scientists' ? "active-link" : ""}`}>Scientists</a></li>
-                                                    <li id="menu-item-150" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-150"><a href="/members/" className={`menu-link ${pageName === 'members' ? "active-link" : ""}`}>Members</a></li>
+                                                    <li id="menu-item-150" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-150"><a href="/tools/" className={`menu-link ${pageName === 'members' ? "active-link" : ""}`}>Tools</a></li>
                                                 </ul>
                                             </div>
                                         </nav>
@@ -38,9 +40,15 @@ const Header = ({ isLoggedIn, skipLogin, pageName }: { isLoggedIn: boolean, skip
                                 </div>
                             </div>
                             <div className={`ast-builder-layout-element ast-flex site-header-focus-item ast-header-button-1 ${skipLogin ? "invisible" : ""}`} data-section="section-hb-button-1">
-                                <div className="ast-builder-button-wrap ast-builder-button-size-"><a className="ast-custom-button-link" href="/login">
-                                    <div className="ast-custom-button">{isLoggedIn ? "Logout" : "Login"}</div>
-                                </a></div>
+                                {
+                                    isLoggedIn ?
+                                        <div className="ast-builder-button-wrap ast-builder-button-size-"><a className="ast-custom-button-link" onClick={() => { Cookies.remove('token', { path: '' }); window.location.reload();}}>
+                                            <div style={{paddingLeft: '32px', paddingRight: "33px"}} className="ast-custom-button cursor-pointer">Logout</div>
+                                        </a></div> :
+                                        <div className="ast-builder-button-wrap ast-builder-button-size-"><a className="ast-custom-button-link" href="/login">
+                                            <div className="ast-custom-button">Login</div>
+                                        </a></div>
+                                }
                             </div>
                         </div>
                     </div>

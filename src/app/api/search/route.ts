@@ -2,11 +2,6 @@ import { NextApiResponse } from 'next';
 import { headers } from 'next/headers';
 
 export async function POST(req: Request, res: NextApiResponse) {
-    if (req.method !== 'POST') {
-        res.status(405).json({ message: 'Method Not Allowed' });
-        return;
-    }
-
     const hostname = headers().get('host');
     let apiEndpoint = "https://139.91.58.16/metadata/records?";
     const params = await req.json();
@@ -64,7 +59,23 @@ export async function POST(req: Request, res: NextApiResponse) {
                 'Access-Control-Allow-Methods': 'GET',
                 'Access-Control-Allow-Headers': 'Content-Type, X-CSRF-TOKEN',
             },
-            body: JSON.stringify({ query: formData["title"], type: "title" })
+            body: JSON.stringify({ query: formData, source: "emf"})
+        })
+
+        const responseJSON = await response.json();
+        results = results.concat(responseJSON);
+    }
+
+    if (sources.includes("PubMed")) {
+        const response = await fetch(`http://${hostname}/api/search/publications`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET',
+                'Access-Control-Allow-Headers': 'Content-Type, X-CSRF-TOKEN',
+            },
+            body: JSON.stringify({ query: formData, source: "pubmed"})
         })
 
         const responseJSON = await response.json();

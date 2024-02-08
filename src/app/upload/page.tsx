@@ -104,6 +104,35 @@ function InputPage() {
             setActiveTab('formTab');
     }, [search]);
 
+    const uploadForm = (event: any) => {
+        event.preventDefault();
+
+        const apiEndpoint = "/api/upload";
+
+        fetch(apiEndpoint, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                formData: inputState,
+                access_token: Cookies.get('token'),
+            }),
+        })
+            .then(async (response) => {
+                if (response.ok) {
+                    const repJSON = await response.json();
+                    alert("Data uploaded successfully");
+                } else {
+                    console.error("Login failed. Status: " + response.status);
+                }
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
+    };
+
+
     const checkLoginStatus = () => {
         const apiEndpoint = "/api/auth/token";
 
@@ -162,7 +191,7 @@ function InputPage() {
 
                         <div id="formTab" className={" " + (activeTab === 'formTab' ? 'block' : 'hidden')} >
 
-                            <form className='mt-4' id="inputForm">
+                            <form className='mt-4' id="inputForm" onSubmit={uploadForm}>
                                 <div className="grid gap-8 mb-6 md:grid-cols-1 ">
                                     <div>
                                         <div>

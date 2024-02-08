@@ -9,75 +9,59 @@ export async function POST(req: Request) {
         const database = client.db('risk_assesment'); // replace with your database name
         const collection = database.collection('pub_metadata'); // replace with your collection name
         let filter = {};
-        let data = await req.json();
-        // console.log(data)
-        // data = data[0];
-
+        let json = await req.json();
+        const source = json.source;
+        let data = json.query;
         let results;
         let cursor;
+        let filters: any[] = [];
 
-        const filters = [
-            {
-                'title': {
-                    '$regex': data.query
-                }
-            },
-            {
-                'author.given': {
-                    '$regex': data.query
-                }
-            },
-            {
-                'DOI': {
-                    '$regex': data.query
-                }
-            },
-            {
-                'subject.': {
-                    '$regex': data.query
-                }
-            },
-            {
-                'abstract': {
-                    '$regex': data.query
-                }
+        // const filters = [
+        //     {
+        //         'title': {
+        //             '$regex': data.query
+        //         }
+        //     },
+        //     {
+        //         'author.given': {
+        //             '$regex': data.query
+        //         }
+        //     },
+        //     {
+        //         'DOI': {
+        //             '$regex': data.query
+        //         }
+        //     },
+        //     {
+        //         'subject.': {
+        //             '$regex': data.query
+        //         }
+        //     },
+        //     {
+        //         'abstract': {
+        //             '$regex': data.query
+        //         }
+        //     }
+        // ];
+
+        Object.keys(data).forEach((key: string) => {
+            if (!["title", 'doi', 'abstract'].includes(key as never)) {
+                return;
             }
-        ];
+            let filter: any = {};
+            filter[key] = {
+                '$regex': data[key]
+            }
+            filters.push(filter);
+        });
+        filters.push({source: source});
 
-        switch (data.type) {
-            case "title":
-                let cursorTitle = collection.find(filters[0]);
-                let resultTitle = await cursorTitle.toArray();
-                results = resultTitle;
-                break;
-            case "author":
-                let cursorAuthor = collection.find(filters[1]);
-                let resultAuthor = await cursorAuthor.toArray();
-                results = resultAuthor;
-                break;
-            case "doi":
-                let cursorDOI = collection.find(filters[2]);
-                let resultDOI = await cursorDOI.toArray();
-                results = resultDOI;
-                break;
-            case "subject":
-                let cursorSubject = collection.find(filters[3]);
-                let resultSubject = await cursorSubject.toArray();
-                results = resultSubject;
-                break;
-            case "abstract":
-                let cursorAbstract = collection.find(filters[4]);
-                let resultAbstract = await cursorAbstract.toArray();
-                results = resultAbstract;
-                break;
-            case "all fields":
-                const filter = {
-                    $or: filters
-                };
-                const cursor = collection.find(filter);
-                results = await cursor.toArray();
-                break;
-        }
+        let cursorTitle = collection.find({
+            $and: filters
+        });
+        let resultTitle = await cursorTitle.toArray();
+        results = resultTitle;
+
         results = results?.map((result) => {
             return {
                 ...result,
@@ -85,6 +69,7 @@ export async function POST(req: Request) {
                 privacyLevel: "open",
             }
         });
+        console.log(results)
         return Response.json(results)
     } catch (err) {
         console.error(err);
