@@ -1,12 +1,12 @@
 import { MongoClient } from 'mongodb';
 
-const uri = 'mongodb://admin:pass@localhost:27017/?authMechanism=DEFAULT'; // replace with your MongoDB URI
+const uri = 'mongodb+srv://kornilak:testpassdelete@nextgem.prxatax.mongodb.net/?retryWrites=true&w=majority'; // replace with your MongoDB URI
 const client = new MongoClient(uri, {});
 
 export async function POST(req: Request) {
     try {
         await client.connect();
-        const database = client.db('risk_assesment'); // replace with your database name
+        const database = client.db('test'); // replace with your database name
         const collection = database.collection('pub_metadata'); // replace with your collection name
         let filter = {};
         let json = await req.json();
@@ -56,10 +56,10 @@ export async function POST(req: Request) {
         });
         filters.push({source: source});
 
-        let cursorTitle = collection.find({
+        let cursorFilter = collection.find({
             $and: filters
         });
-        let resultTitle = await cursorTitle.toArray();
+        let resultTitle = await cursorFilter.toArray();
         results = resultTitle;
 
         results = results?.map((result) => {
@@ -69,7 +69,7 @@ export async function POST(req: Request) {
                 privacyLevel: "open",
             }
         });
-        console.log(results)
+
         return Response.json(results)
     } catch (err) {
         console.error(err);
