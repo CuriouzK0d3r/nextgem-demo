@@ -33,6 +33,12 @@ function InputPage() {
             required: false
         },
         {
+            label: "Institution",
+            field: 'institution',
+            type: "text",
+            required: true
+        },
+        {
             label: "Description",
             field: 'description',
             type: "text",
@@ -108,6 +114,7 @@ function InputPage() {
         event.preventDefault();
 
         const apiEndpoint = "/api/upload";
+        console.log(Cookies.get('token'));
 
         fetch(apiEndpoint, {
             method: "POST",
@@ -133,34 +140,34 @@ function InputPage() {
     };
 
 
-    const checkLoginStatus = () => {
-        const apiEndpoint = "/api/auth/token";
+    // const checkLoginStatus = () => {
+    //     const apiEndpoint = "/api/auth/token";
 
-        fetch(apiEndpoint, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                access_token: Cookies.get('token'),
-            }),
-        })
-            .then(async (response) => {
-                if (response.ok) {
-                    let responseJSON = await response.json();
-                    if (responseJSON.loggedin) {
-                        setIsLoggedIn(true);
-                    }
-                } else {
-                    // console.error("Login failed. Status: " + response.status);
-                }
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            });
-    }
+    //     fetch(apiEndpoint, {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //         },
+    //         body: JSON.stringify({
+    //             access_token: Cookies.get('token'),
+    //         }),
+    //     })
+    //         .then(async (response) => {
+    //             if (response.ok) {
+    //                 let responseJSON = await response.json();
+    //                 if (responseJSON.loggedin) {
+    //                     setIsLoggedIn(true);
+    //                 }
+    //             } else {
+    //                 // console.error("Login failed. Status: " + response.status);
+    //             }
+    //         })
+    //         .catch((error) => {
+    //             console.error("Error:", error);
+    //         });
+    // }
 
-    checkLoginStatus();
+    // checkLoginStatus();
 
     const clearState = () => {
         let fieldsNames: any = {};
@@ -171,7 +178,7 @@ function InputPage() {
     }
 
     return (
-        <PageLayout skipLogin={false} isLoggedIn pageName='members'>
+        <PageLayout skipLogin={false} isLoggedIn={isLoggedIn} pageName='members'>
             <div className="w-full mt-40 min-h-[60rem]">
                 <Card placeholder={""} className="mt-6 w-full lg:w-1/2 xl:1/3 mx-auto form-container object-cover object-center shadow-xl shadow-blue-gray-900/50">
                     <CardHeader placeholder={""} className='bg-[#D4D9DD] text-black p-0 divide-y-2 divide-[#fff]'>
@@ -200,7 +207,7 @@ function InputPage() {
                                                     if (inputField.type === "text") {
                                                         return (
                                                             <div key={index} className="flex flex-row mt-4 p-0">
-                                                                <Input key={index} className='object-cover bg-white object-center shadow-sm shadow-blue-gray-900/50' value={inputState[inputField.field]} onChange={(event) => { event.preventDefault(); setInputState({ ...inputState, [inputField.field]: event.target.value }) }} crossOrigin="true" style={{ color: "black" }} label={inputField.label} />
+                                                                <Input required key={index} className='object-cover bg-white object-center shadow-sm shadow-blue-gray-900/50' value={inputState[inputField.field]} onChange={(event) => { event.preventDefault(); setInputState({ ...inputState, [inputField.field]: event.target.value }) }} crossOrigin="true" style={{ color: "black" }} label={inputField.label} />
                                                             </div>
                                                         );
                                                     } else if (inputField.type === "select") {

@@ -25,23 +25,50 @@ const PageLayout = ({ isLoggedIn, skipLogin, children, pageName }: { isLoggedIn:
     const [isModalLoggedIn, setIsModalLoggedIn] = useState(false);
     const loginUsernameRef = useRef<any>(null);
     const loginPasswordRef = useRef<any>(null);
+    const [isLogged, setIsLogged] = useState(false);
 
     const handleOpen = () => setOpen((cur) => !cur);
 
-    useEffect(() => {
-        if (pageName === "members" && !skipLogin && !isLoggedIn) {
-            setOpen(true);
-        } else if (isLoggedIn)
-            setOpen(false);
-    }, [skipLogin, isLoggedIn]);
+    const checkLoginStatus = () => {
+        const apiEndpoint = "/api/auth/token";
+
+        fetch(apiEndpoint, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                access_token: Cookies.get('token'),
+            }),
+        })
+            .then(async (response) => {
+                if (response.ok) {                    
+                    let responseJSON = await response.json();
+                    if (responseJSON.loggedin) {
+                        setIsLogged(true);
+                    } else {
+                        router.push('/login?message="Please login to access this page."');
+                        // setOpen(true);
+                    }
+                } else {
+                    // console.error("Login failed. Status: " + response.status);
+                    setOpen(false);
+                }
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
+    }
+
+    if (pageName === "members" && !skipLogin && !isLoggedIn) {
+        checkLoginStatus();
+    }
 
     async function submitLoginForm(event: any) {
         event.preventDefault();
-        console.log('sdflsdkjfjksdfds')
         const username = loginUsernameRef.current?.value;
         const password = loginPasswordRef.current?.value;
         const apiEndpoint = "/api/auth/login";
-        console.log('fsdfsdfsdfd')
         await fetch(apiEndpoint, {
             method: "POST",
             headers: {
@@ -53,11 +80,10 @@ const PageLayout = ({ isLoggedIn, skipLogin, children, pageName }: { isLoggedIn:
             }),
         })
             .then(async (response) => {
-                console.log(response.status)
+                                    console.log(response)
                 if (response.ok && response.status === 200) {
-                    console.log(response)
                     let responseJSON = await response.json();
-                    Cookies.set('token', responseJSON.access_token, { expires: 1, secure: false });
+                    Cookies.set('token', responseJSON.access_token, { expires: 1, secure: false, sameSite: "Lax" });
                     setOpen(false);
                     setIsModalLoggedIn(true);
                 } else {
@@ -73,7 +99,7 @@ const PageLayout = ({ isLoggedIn, skipLogin, children, pageName }: { isLoggedIn:
     return (
         <div className="page-layout p-0 h-full w-full bg-white">
             <div className='h-full w-full flex flex-col gap-0'>
-                <Header isLoggedIn={isLoggedIn || isModalLoggedIn} skipLogin={skipLogin} pageName={pageName} />
+                <Header isLoggedIn={isLoggedIn || isModalLoggedIn || isLogged} skipLogin={skipLogin} pageName={pageName} />
                 <div className='flex-grow p-0'>
                     {children}
                     <Footer />

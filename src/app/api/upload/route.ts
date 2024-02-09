@@ -13,7 +13,7 @@ async function postRecords(formData: any, access_token: string) {
         "email": '',
         "externalId": "",
         "frequency": "fiveGFR1",
-        "institution": '',
+        "institution": formData['institution'],
         "keywords": formData['freeKeywords'],
         "language": "english",
         "modulation": formData['modulation'],
@@ -35,12 +35,12 @@ async function postRecords(formData: any, access_token: string) {
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Methods': 'GET',
                 'Access-Control-Allow-Headers': 'Content-Type, X-CSRF-TOKEN',
-                'Bearer': access_token,
+                "Authorization": "Bearer " + access_token
             },
             body: JSON.stringify(data)
     })
     const respp = await resp.text();
-
+    console.log(resp.status)
     return respp;
 }
 
@@ -52,6 +52,7 @@ export async function POST(req: Request, res: NextApiResponse) {
     const data = await req.json();
     const formData = data['formData'];
     const access_token = data['access_token'];
+    console.log(access_token)
 
     if (!formData['files']) {
         return Response.json({ message: await postRecords(formData, access_token)});

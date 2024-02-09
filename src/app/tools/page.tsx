@@ -16,38 +16,38 @@ function DashboardPage() {
 
     const handleOpen = () => setOpen((cur) => !cur);
 
-    const checkLoginStatus = () => {
-        const apiEndpoint = "/api/auth/token";
+    // const checkLoginStatus = () => {
+    //     const apiEndpoint = "/api/auth/token";
 
-        fetch(apiEndpoint, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                access_token: Cookies.get('token'),
-            }),
-        })
-            .then(async (response) => {
-                if (response.ok) {
-                    let responseJSON = await response.json();
+    //     fetch(apiEndpoint, {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //         },
+    //         body: JSON.stringify({
+    //             access_token: Cookies.get('token'),
+    //         }),
+    //     })
+    //         .then(async (response) => {
+    //             if (response.ok) {
+    //                 let responseJSON = await response.json();
 
-                    if (responseJSON.loggedin) {
-                        setIsLoggedIn(true);
-                    } else {
-                        // router.push('/login');
-                        // setOpen(true);
-                    }
-                } else {
-                    console.error("Login failed. Status: " + response.status);
-                }
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            });
-    }
+    //                 if (responseJSON.loggedin) {
+    //                     setIsLoggedIn(true);
+    //                 } else {
+    //                     // router.push('/login');
+    //                     // setOpen(true);
+    //                 }
+    //             } else {
+    //                 console.error("Login failed. Status: " + response.status);
+    //             }
+    //         })
+    //         .catch((error) => {
+    //             console.error("Error:", error);
+    //         });
+    // }
 
-    checkLoginStatus();
+    // checkLoginStatus();
 
     return (
         <PageLayout skipLogin={false} isLoggedIn={isLoggedIn} pageName='members'>

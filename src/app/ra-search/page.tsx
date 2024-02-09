@@ -54,12 +54,12 @@ function RASearchPage() {
                         <MenuList placeholder={""} className="max-h-[20rem] max-w-[18rem] text-gray-800 text-lg">
                             <MenuItem placeholder={""}
 
-                                className="flex items-center gap-2"
-                            ><Link href="/ra-search">Search Engine</Link></MenuItem>
+                                className="flex items-center gap-2 "
+                            ><Link href="/ra-search" className='text-gray-800'>Search Engine</Link></MenuItem>
                             <MenuItem placeholder={""}
 
                                 className="flex items-center gap-2"
-                            ><Link href="/ra-chat">AI Chat</Link></MenuItem>
+                            ><Link href="/ra-chat" className='text-gray-800'>AI Chat</Link></MenuItem>
                         </MenuList>
                     </Menu></h1> : <></>
                 }

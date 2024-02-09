@@ -49,10 +49,10 @@ function LoginPage() {
                         router.push('/scientists');
                     }
                     // window.location.href = "https://example.com/example-page";
-                    Cookies.set('token', responseJSON.access_token, { expires: 1, secure: false });
+                    // Cookies.set('token', responseJSON.access_token, { expires: 1, secure: false });
                 } else {
                     // alert("Login failed. Status: " + response.status);
-                    console.error("Login failed. Status: " + response.status);
+                    // console.error("Login failed. Status: " + response.status);
                 }
             })
             .catch((error) => {
@@ -119,7 +119,7 @@ function LoginPage() {
                 if (response.ok && response.status === 200) {
                     let responseJSON = await response.json();
                     router.push('/scientists');
-                    Cookies.set('token', responseJSON.access_token, { expires: 1, secure: false });
+                    Cookies.set('token', responseJSON.access_token, { expires: 1, secure: false, sameSite: "Lax"});
                 } else {
                     alert("Login failed. Status: " + response.status);
                     console.error("Login failed. Status: " + response.status);
