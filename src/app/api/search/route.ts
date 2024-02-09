@@ -9,7 +9,7 @@ export async function POST(req: Request, res: NextApiResponse) {
     const keys = Object.keys(params["formData"]);
     const formData = params["formData"];
     const sources = params["chosenSources"];
-    let results = [];
+    let results: any[] = [];
 
     if (sources.includes("NextGEM")) {
         for (let i = 0; i < keys.length; i++) {
@@ -20,7 +20,7 @@ export async function POST(req: Request, res: NextApiResponse) {
             }
             apiEndpoint += `${key}=${value}&`;
         }
-
+        console.log(apiEndpoint)
         const response = await fetch(apiEndpoint, {
             method: 'GET',
             headers: {
@@ -32,7 +32,8 @@ export async function POST(req: Request, res: NextApiResponse) {
         })
 
         const responseJSON = await response.json();
-        results.push(responseJSON);
+
+        results = results.concat(responseJSON);
     }
     if (sources.includes("Zenodo")) {
         const response = await fetch(`http://${hostname}/api/search/zenodo`, {
@@ -60,6 +61,22 @@ export async function POST(req: Request, res: NextApiResponse) {
                 'Access-Control-Allow-Headers': 'Content-Type, X-CSRF-TOKEN',
             },
             body: JSON.stringify({ query: formData, source: "emf"})
+        })
+
+        const responseJSON = await response.json();
+        results = results.concat(responseJSON);
+    }
+
+    if (sources.includes("WOS")) {
+        const response = await fetch(`http://${hostname}/api/search/publications`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET',
+                'Access-Control-Allow-Headers': 'Content-Type, X-CSRF-TOKEN',
+            },
+            body: JSON.stringify({ query: formData, source: "wos"})
         })
 
         const responseJSON = await response.json();

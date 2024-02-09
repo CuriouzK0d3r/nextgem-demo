@@ -246,6 +246,14 @@ function SearchPage() {
             });
     }
 
+    function clearState() {
+        let inputs: any = {};
+        for (let i = 0; i < inputFields.length; i++) {
+            inputs[inputFields[i].fieldName] = "";
+        }
+        setInputState(inputs);
+    }
+
     useEffect(() => {
         fetch("/api/fields", {
             method: "GET",
@@ -257,11 +265,7 @@ function SearchPage() {
                 if (response.ok) {
                     let responseJSON = await response.json();
                     setInputFields(responseJSON.fields);
-                    let inputs: any = {};
-                    for (let i = 0; i < responseJSON.fields.length; i++) {
-                        inputs[responseJSON.fields[i].fieldName] = "";
-                    }
-                    setInputState(inputs);
+                    clearState();
                 } else {
                     console.error("Request failed. Status: " + response.status);
                 }
@@ -312,7 +316,6 @@ function SearchPage() {
                                                         {
                                                             inputFields.map((field: any, index: any) => {
                                                                 const words = field.fieldName.replace(/([a-z])([A-Z])/g, '$1 $2');
-                                                                console.log(field.type);
 
                                                                 if (field.type == "String") {
                                                                     return (
@@ -364,13 +367,13 @@ function SearchPage() {
                                                 </div>
                                             </div>
                                             <CardFooter placeholder={""} className="flex p-0 mt-4 justify-left">
-                                                <Button placeholder={""} onClick={() => { setInputState(inputFields); setChosenSources([]) }} className="clear-button font-bold w-30 h-12 mr-4 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50" variant="gradient">Clear</Button>
+                                                <Button placeholder={""} onClick={() => { setInputState(inputFields); setChosenSources([]); clearState() }} className="clear-button font-bold w-30 h-12 mr-4 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50" variant="gradient">Clear</Button>
                                                 <Button placeholder={""} id="searchBtn" type="submit" className="btn font-bold w-30 h-12 mr-4 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50" variant="gradient">Search</Button>
                                             </CardFooter>
                                         </form>
                                     </CardBody>
                                 </Card>
-                                <ExternalSources hasSubmitted={hasSubmitted} setHasSubmitted={setHasSubmitted} inputState={inputState} setSearchResults={setSearchResults} chosenSources={chosenSources} setChosenSources={setChosenSources} />
+                                <ExternalSources hasSubmitted={hasSubmitted} setHasSubmitted={setHasSubmitted} inputState={inputState} setSearchResults={setSearchResults} isLoggedIn={isLoggedIn} chosenSources={chosenSources} setChosenSources={setChosenSources} />
                             </div>
                         )}
             </AnimatePresence>

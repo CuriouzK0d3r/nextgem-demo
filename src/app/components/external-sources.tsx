@@ -19,8 +19,12 @@ const ExternalSources = ({ hasSubmitted, setHasSubmitted, inputState, setSearchR
             .then(async (response) => {
                 if (response.ok) {
                     const repJSON = await response.json();
+                    console.log(repJSON)
                     setSearchResults(repJSON.searchResults);
                     setHasSubmitted(false);
+                    if (repJSON.searchResults.length == 0) {
+                        alert("No results found");
+                    }
                 } else {
                     console.error("Login failed. Status: " + response.status);
                 }
@@ -61,6 +65,10 @@ const ExternalSources = ({ hasSubmitted, setHasSubmitted, inputState, setSearchR
 
                 <button className={""} onClick={() => { chosenSources.includes("PubMed") ? setChosenSources(chosenSources.filter(function(e: any) { return e !== 'PubMed' })) : setChosenSources([...chosenSources, "PubMed"]) }}>
                     <img width={105} src="./pubmed-logo.svg" alt="PubMed" className={chosenSources.includes("PubMed") ? " custom-bounce chosen-source mr-[6px] p-0 rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50" : "mr-[6px] p-0 rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50"} />
+                </button>
+
+                <button className={""} onClick={() => { chosenSources.includes("WOS") ? setChosenSources(chosenSources.filter(function(e: any) { return e !== 'WOS' })) : setChosenSources([...chosenSources, "WOS"]) }}>
+                    <img width={100} src="./wos-logo.svg" alt="WOS" className={chosenSources.includes("WOS") ? " custom-bounce chosen-source mr-[6px] p-0 rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50" : "mr-[6px] p-0 rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50"} />
                 </button>
                 {/* 
                 <button className={""} onClick={() => { chosenSources.includes("EHDS") ? setChosenSources(chosenSources.filter(function(e) { return e !== 'EHDS' })) : setChosenSources([...chosenSources, "EHDS"]) }}>

@@ -69,7 +69,7 @@ function DefaultPagination({ searchResults, active, setActive }: { searchResults
     );
 }
 
-const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, seletedSources, setSearchResults }) => {
+const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, isLoggedIn, seletedSources, setSearchResults }) => {
     const [active, setActive] = React.useState(0);
 
     const TABLE_HEAD = ["Title", "Type of Study", "Output Type", "Location", "Status", " "];
@@ -152,6 +152,7 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, seletedSou
     //         expiry: "06/2026",
     //     },
     // ];
+    console.log(searchResults)
     return (
         <div className={`w-full min-h-[68rem] mt-0 flex items-center justify-center`}>
             <Card placeholder="" className="mt-6 w-3/4 min-h-[30rem] mx-auto form-container object-cover object-center shadow-xl shadow-blue-gray-900/50">
@@ -169,8 +170,8 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, seletedSou
                         </svg>
                         New Search
                     </Typography>
-
-                    <table className="w-full mt-6 mx-auto table-auto text-left">
+                    { searchResults.length ?
+                    (<table className="w-full mt-6 mx-auto table-auto text-left">
                         <thead>
                             <tr>
                                 {TABLE_HEAD.map((head, index) => (
@@ -234,7 +235,9 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, seletedSou
                                                         {description}
                                                     </Typography>
                                                 </td> */}
-                                            <td className='hidden lg:table-cell'>
+                                            <td className={classes + ' hidden lg:table-cell '}>
+                                            <div className="flex items-center gap-3">
+                                                    <div className="flex flex-col">
                                                 <Typography
                                                     placeholder=""
                                                     variant="small"
@@ -243,6 +246,8 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, seletedSou
                                                 >
                                                     {studyType ? studyTypeMap[studyType] : "N/A"}
                                                 </Typography>
+                                                </div>
+                                                </div>
                                             </td>
                                             <td className={classes + ' hidden lg:table-cell'}>
                                                 <div className="flex items-center gap-3">
@@ -292,8 +297,8 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, seletedSou
                                                 </div>
                                             </td>
                                             <td>
-                                                <Typography placeholder={""} as="a" href="#" variant="small" color="blue-gray" className="font-medium mb-4 hidden lg:table-cell">
-                                                    <MoreDialog description={description} />
+                                                <Typography placeholder={""} as="a" href="#" variant="small" color="blue-gray" className="font-medium underline mb-4 hidden lg:table-cell">
+                                                    <MoreDialog description={description} source={location} isLoggedIn={isLoggedIn} />
                                                 </Typography>
                                             </td>
                                         </tr>
@@ -301,13 +306,13 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, seletedSou
                                 },
                             )}
                         </tbody>
-                    </table>
+                    </table>) : <div className='text-center text-gray-900'>No results found.</div>}
                 </CardBody>
                 <CardFooter placeholder={""} className=" w-full border-t border-blue-gray-50 p-4">
-                    <div className='flex justify-center mx-auto flex-col'>
+                { searchResults.length ? <div className='flex justify-center mx-auto flex-col'>
                     <div className='text-center text-gray-900'>{searchResults.length} results found.</div> 
                     <DefaultPagination active={active} setActive={setActive} searchResults={searchResults} />
-                    </div>
+                    </div> : <></>}
                 </CardFooter>
             </Card>
         </div>

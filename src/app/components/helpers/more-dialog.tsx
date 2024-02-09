@@ -8,7 +8,7 @@ import {
     Typography,
 } from "@material-tailwind/react";
 
-export function MoreDialog({ description }: { description: string }) {
+export function MoreDialog({ description, source, isLoggedIn }: { description: string, source: string, isLoggedIn: boolean}) {
     const [open, setOpen] = React.useState(false);
 
     const handleOpen = () => setOpen(!open);
@@ -29,16 +29,28 @@ export function MoreDialog({ description }: { description: string }) {
                     unmount: { scale: 0.9, y: -100 },
                 }}
             >
-                <DialogHeader placeholder={""} className="ml-4">More data</DialogHeader>
+                <DialogHeader placeholder={""} className="ml-4">Additional Data</DialogHeader>
                 <DialogBody placeholder={""}>
-                    <p><Typography
+                {
+                    description ?
+                    (<><p><Typography
                         placeholder={""}
                         variant="h5"
                         color="blue-gray"
-                        className="font-bold  w-[42rem]"
+                        className="font-bold  w-[42rem] mb-8"
                     >Description:</Typography></p>
                     {
                         description
+                    }
+                    </>) : <></>}
+                    {
+                        source === 'emf' && isLoggedIn ? 
+                        <Button
+                            placeholder={""}
+                            variant="text"
+                            className="mt-4 btn font-bold w-30 h-12 mr-4 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50">
+                                    Download Data
+                            </Button> : <></>
                     }
                 </DialogBody>
                 <DialogFooter placeholder={""}>
