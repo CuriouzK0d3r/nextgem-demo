@@ -46,7 +46,6 @@ const PageLayout = ({ isLoggedIn, skipLogin, children, pageName }: { isLoggedIn:
                     if (responseJSON.loggedin) {
                         setIsLogged(true);
                     } else {
-                        alert("Please login to access this page.");
                         router.push('/login?message="Please login to access this page."');
                         // setOpen(true);
                     }
@@ -61,7 +60,7 @@ const PageLayout = ({ isLoggedIn, skipLogin, children, pageName }: { isLoggedIn:
     }
 
     if (pageName === "members" && !skipLogin && !isLoggedIn) {
-        checkLoginStatus();
+        useEffect(()=> checkLoginStatus(), []);
     }
 
     async function submitLoginForm(event: any) {
