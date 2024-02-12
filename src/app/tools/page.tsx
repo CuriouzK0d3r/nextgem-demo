@@ -53,7 +53,7 @@ function DashboardPage() {
         <PageLayout skipLogin={false} isLoggedIn={isLoggedIn} pageName='members'>
             {/* <div id="formTab" className="tabcontent " style={{ display: "block" }}> */}
 
-            <div className="w-full min-h-[65rem] mt-0 flex items-center justify-center ">
+            <div className="w-full min-h-[45rem] mt-0 flex items-center justify-center ">
                 <div className="grid grid-cols-2 gap-4">
                     <a href='/input' className='mb-12'>
                         <div className="menu-box members-cat  mr-8">

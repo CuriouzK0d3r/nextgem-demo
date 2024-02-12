@@ -15,7 +15,6 @@ import {
 
 import { useRef, useState } from 'react';
 
-
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 
@@ -47,6 +46,7 @@ const PageLayout = ({ isLoggedIn, skipLogin, children, pageName }: { isLoggedIn:
                     if (responseJSON.loggedin) {
                         setIsLogged(true);
                     } else {
+                        alert("Please login to access this page.");
                         router.push('/login?message="Please login to access this page."');
                         // setOpen(true);
                     }
@@ -80,7 +80,6 @@ const PageLayout = ({ isLoggedIn, skipLogin, children, pageName }: { isLoggedIn:
             }),
         })
             .then(async (response) => {
-                                    console.log(response)
                 if (response.ok && response.status === 200) {
                     let responseJSON = await response.json();
                     Cookies.set('token', responseJSON.access_token, { expires: 1, secure: false, sameSite: "Lax" });

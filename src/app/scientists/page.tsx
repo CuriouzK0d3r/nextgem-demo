@@ -300,7 +300,7 @@ function SearchPage() {
                     )
                         :
                         (
-                            <div className={`w-full mt-28 min-h-[65rem]`}>
+                            <div className={`w-full mt-32 min-h-[65rem]`}>
                                 <Card placeholder={""} className="mt-6 w-1/2 mx-auto form-container rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50">
                                     <CardHeader placeholder={""} className='bg-[#D4D9DD] text-black'>
                                         <Typography placeholder={""} variant="h2" className="text-center pb-4 pt-4">

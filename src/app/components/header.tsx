@@ -40,7 +40,7 @@ const Header = ({ isLoggedIn, skipLogin, pageName }: { isLoggedIn: boolean, skip
                                                     <li id="menu-item-12" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-12"><a href="https://subra.ics.forth.gr/authorities/" className="menu-link">Authorities</a></li>
                                                     <li id="menu-item-11" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-11"><a href="https://subra.ics.forth.gr/citizens/" className="menu-link">Citizens</a></li>
                                                     <li id="menu-item-10" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-10"><a href="/scientists/" className={`menu-link ${pageName === 'scientists' ? "active-link" : ""}`}>Scientists</a></li>
-                                                    <li id="menu-item-150" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-150"><a href="/tools/" className={`menu-link ${pageName === 'members' ? "active-link" : ""}`}>Members</a></li>
+                                                    <li id="menu-item-150" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-150"><a href="/tools/" className={`menu-link ${pageName === 'members' ? "active-link" : ""}`}>Tools</a></li>
                                                 </ul>
                                             </div>
                                         </nav>
@@ -94,7 +94,7 @@ const Header = ({ isLoggedIn, skipLogin, pageName }: { isLoggedIn: boolean, skip
                             }}
                           />
                           <h1 className="elementor-heading-title elementor-size-default left">
-                            Scientists
+                            {pageName === 'members' ? 'Tools' : pageName}
                           </h1>{" "}
                         </div>
                       </div>
