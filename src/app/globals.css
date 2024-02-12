@@ -67,6 +67,11 @@ body {
   transition: background 0.3s, border-radius 0.3s, opacity 0.3s;
 }
 
+a.menu-link:hover {
+  color: #fff !important;
+
+}
+
 .menu-box {
   width: 358px;
 height: 168px;
@@ -173,7 +178,7 @@ h4 {
 .site-header-primary-section-right {
   height: 70px !important;
   padding: 0px;
-  margin-right: 20px !important;
+  margin-right: 12px !important;
 }
 
 .login-button {
@@ -201,6 +206,11 @@ h4 {
 ul > li {
   margin-left: 1rem;
 }
+
+ul.main-header-menu > li {
+  margin-left: 0rem !important;
+}
+
 
 .members-cat {
   transition: box-shadow 0.15s ease, transform 0.15s ease;

@@ -10,14 +10,22 @@ const Header = ({ isLoggedIn, skipLogin, pageName }: { isLoggedIn: boolean, skip
     const [isOpen, setIsOpen] = useState(false);
 
     return (
+        <div className="entry-content clear p-0" itemProp="text">
+          <div
+            id="niki-bg"
+                data-elementor-type="wp-post"
+                data-elementor-id={7}
+                className="elementor elementor-7"
+              >
         <nav className="relative w-full top-0 p-0">
-            <div className="ast-primary-header-bar ast-primary-header main-header-bar site-header-focus-item snipcss-g39h2" data-section="section-primary-header-builder" style={{ backgroundColor: '#02132f' }}>
+            
+            <div className="ast-primary-header-bar ast-primary-header main-header-bar site-header-focus-item snipcss-g39h2" data-section="section-primary-header-builder" >
                 <div className="site-primary-header-wrap ast-builder-grid-row-container site-header-focus-item ast-container" data-section="section-primary-header-builder">
                     <div className="ast-builder-grid-row ast-builder-grid-row-has-sides ast-builder-grid-row-no-center">
                         <div className="site-header-primary-section-left site-header-section ast-flex site-header-section-left">
                             <div className="ast-builder-layout-element ast-flex site-header-focus-item" data-section="title_tagline">
-                                <div className="site-branding ast-site-identity" itemType="https://schema.org/Organization" >
-                                    <span className="site-logo-img"><a href="/" className="custom-logo-link transparent-custom-logo" rel="home" itemProp="url" aria-label="NIKH"><img width={120} height={34} src="https://subra.ics.forth.gr/wp-content/uploads/2024/01/NIKH-logoname-120x34.png " className="custom-logo p-0" alt="" decoding="async" /></a><a href="/" className="custom-logo-link ast-transparent-mobile-logo" rel="home" itemProp="url"><img width={120} height={34} src="./NIKH-logoname-120x34.png" className="custom-logo" alt="" decoding="async" /></a></span>
+                                <div className="site-branding ml-2 ast-site-identity" itemType="https://schema.org/Organization" >
+                                    <span className="site-logo-img "><a href="/" className="custom-logo-link transparent-custom-logo" rel="home" itemProp="url" aria-label="NIKH"><img width={120} height={34} src="https://subra.ics.forth.gr/wp-content/uploads/2024/01/NIKH-logoname-120x34.png " className="custom-logo p-0" alt="" decoding="async" /></a><a href="/" className="custom-logo-link ast-transparent-mobile-logo" rel="home" itemProp="url"><img width={120} height={34} src="./NIKH-logoname-120x34.png" className="custom-logo" alt="" decoding="async" /></a></span>
                                 </div>
                             </div>
                         </div>
@@ -32,7 +40,7 @@ const Header = ({ isLoggedIn, skipLogin, pageName }: { isLoggedIn: boolean, skip
                                                     <li id="menu-item-12" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-12"><a href="https://subra.ics.forth.gr/authorities/" className="menu-link">Authorities</a></li>
                                                     <li id="menu-item-11" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-11"><a href="https://subra.ics.forth.gr/citizens/" className="menu-link">Citizens</a></li>
                                                     <li id="menu-item-10" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-10"><a href="/scientists/" className={`menu-link ${pageName === 'scientists' ? "active-link" : ""}`}>Scientists</a></li>
-                                                    <li id="menu-item-150" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-150"><a href="/tools/" className={`menu-link ${pageName === 'members' ? "active-link" : ""}`}>Tools</a></li>
+                                                    <li id="menu-item-150" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-150"><a href="/tools/" className={`menu-link ${pageName === 'members' ? "active-link" : ""}`}>Members</a></li>
                                                 </ul>
                                             </div>
                                         </nav>
@@ -54,7 +62,47 @@ const Header = ({ isLoggedIn, skipLogin, pageName }: { isLoggedIn: boolean, skip
                     </div>
                 </div>
             </div>
-        </nav>
+            </nav>
+
+    
+                <div
+                  className="elementor-element elementor-element-24aa96b e-flex e-con-boxed wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-parent"
+                  data-id="24aa96b"
+                  data-element_type="container"
+                  data-settings='{"background_background":"classic","content_width":"boxed","_ha_eqh_enable":false}'
+                  data-core-v316-plus="true"
+                >
+                  <div className="left e-con-inner " style={{paddingLeft: "173px"}}>
+                    <div
+                      className="left elementor-element elementor-element-bc7410c p-[10px] e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child"
+                      data-id="bc7410c"
+                      data-element_type="container"
+                      data-settings='{"content_width":"full","_ha_eqh_enable":false}'
+                      style={{ padding: "10px", marginLeft: "-165px" }}
+                    >
+                      <div
+                        className="left elementor-element elementor-element-eb5b40e elementor-widget elementor-widget-heading"
+                        data-id="eb5b40e"
+                        data-element_type="widget"
+                        data-widget_type="heading.default"
+                      >
+                        <div className="elementor-widget-container">
+                          <style
+                            dangerouslySetInnerHTML={{
+                              __html:
+                                "/*! elementor - v3.19.0 - 07-02-2024 */\n.elementor-heading-title{padding:0;margin:0;line-height:1}.elementor-widget-heading .elementor-heading-title[class*=elementor-size-]>a{color:inherit;font-size:inherit;line-height:inherit}.elementor-widget-heading .elementor-heading-title.elementor-size-small{font-size:15px}.elementor-widget-heading .elementor-heading-title.elementor-size-medium{font-size:19px}.elementor-widget-heading .elementor-heading-title.elementor-size-large{font-size:29px}.elementor-widget-heading .elementor-heading-title.elementor-size-xl{font-size:39px}.elementor-widget-heading .elementor-heading-title.elementor-size-xxl{font-size:59px}"
+                            }}
+                          />
+                          <h1 className="elementor-heading-title elementor-size-default left">
+                            Scientists
+                          </h1>{" "}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
     );
 };
 
