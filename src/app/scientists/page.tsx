@@ -12,8 +12,7 @@ import {
     Typography
 } from "@material-tailwind/react";
 import { AnimatePresence, motion } from "framer-motion";
-import Cookies from 'js-cookie';
-import { createRef, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import ExternalSources from '../components/external-sources';
 import PageLayout from '../components/page-layout';
 import SearchResults from '../components/search-results';
@@ -288,7 +287,6 @@ function SearchPage() {
                                                         {
                                                             inputFields.map((field: any, index: any) => {
                                                                 const words = field.fieldName.replace(/([a-z])([A-Z])/g, '$1 $2');
-
                                                                 if (field.type == "String") {
                                                                     return (
                                                                         <div key={index} className=" mt-4 p-0">

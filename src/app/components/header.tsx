@@ -25,7 +25,7 @@ const Header = ({ isLoggedIn, skipLogin, pageName }: { isLoggedIn: boolean, skip
                         <div className="site-header-primary-section-left site-header-section ast-flex site-header-section-left">
                             <div className="ast-builder-layout-element ast-flex site-header-focus-item" data-section="title_tagline">
                                 <div className="site-branding ml-2 ast-site-identity" itemType="https://schema.org/Organization" >
-                                    <span className="site-logo-img "><a href="/" className="custom-logo-link transparent-custom-logo" rel="home" itemProp="url" aria-label="NIKH"><img width={120} height={34} src="https://subra.ics.forth.gr/wp-content/uploads/2024/01/NIKH-logoname-120x34.png " className="custom-logo p-0" alt="" decoding="async" /></a><a href="/" className="custom-logo-link ast-transparent-mobile-logo" rel="home" itemProp="url"><img width={120} height={34} src="./NIKH-logoname-120x34.png" className="custom-logo" alt="" decoding="async" /></a></span>
+                                    <span className="site-logo-img "><a href="https://subra.ics.forth.gr/" className="custom-logo-link transparent-custom-logo" rel="home" itemProp="url" aria-label="NIKH"><img width={120} height={34} src="https://subra.ics.forth.gr/wp-content/uploads/2024/01/NIKH-logoname-120x34.png " className="custom-logo p-0" alt="" decoding="async" /></a><a href="https://subra.ics.forth.gr/" className="custom-logo-link ast-transparent-mobile-logo" rel="home" itemProp="url"><img width={120} height={34} src="./NIKH-logoname-120x34.png" className="custom-logo" alt="" decoding="async" /></a></span>
                                 </div>
                             </div>
                         </div>

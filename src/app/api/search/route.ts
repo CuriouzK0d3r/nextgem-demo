@@ -36,6 +36,15 @@ export async function POST(req: Request, res: NextApiResponse) {
         results = results.concat(responseJSON);
     }
     if (sources.includes("Zenodo")) {
+        let query = "";
+
+        for (let i = 0; i < Object.keys(formData).length; i++) {
+            if (Object.keys(formData)[i] !== undefined && formData[Object.keys(formData)[i]] !== "") {
+                query += `+AND+${formData[Object.keys(formData)[i]]}`;
+            }
+        }
+
+        console.log(query)
         const response = await fetch(`http://${hostname}/api/search/zenodo`, {
             method: 'POST',
             headers: {
@@ -44,9 +53,9 @@ export async function POST(req: Request, res: NextApiResponse) {
                 'Access-Control-Allow-Methods': 'GET',
                 'Access-Control-Allow-Headers': 'Content-Type, X-CSRF-TOKEN',
             },
-            body: JSON.stringify({ query: formData["title"] })
+            body: JSON.stringify({ query: query })
         })
-
+        
         const responseJSON = await response.json();
         results = results.concat(JSON.parse(responseJSON));
     }

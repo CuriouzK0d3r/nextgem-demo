@@ -31,7 +31,7 @@ function LoginPage() {
     const router = useRouter();
 
     function isLoggedIn() {
-        let apiEndpoint = "/api/auth/token";
+        let apiEndpoint = "http://subra.ics.forth.gr:3000/api/auth/token";
 
         fetch(apiEndpoint, {
             method: "POST",

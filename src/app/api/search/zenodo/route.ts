@@ -11,7 +11,6 @@ const filter = (data: any): any[] => {
 }
 
 export async function POST(req: Request) {
-    console.log("zenodo")
     try {
         const requestParams2 = { params: { 'access_token': 'I2ZxABWJ9EsaQGJiZyqRpaY8AIwExSOm5zUrTA5ISnStDHjjCo31cM1Z9CSs' }, headers: { "Content-Type": "application/json" } }
         let data = await req.json();

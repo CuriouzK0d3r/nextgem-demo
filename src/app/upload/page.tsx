@@ -16,14 +16,10 @@ import { useEffect, useState } from 'react';
 import FileUploader from '../components/file-uploader';
 import PageLayout from '../components/page-layout';
 
-function classNames(...classes: string[]) {
-    return classes.filter(Boolean).join(" ");
-}
-
 function InputPage() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [activeTab, setActiveTab] = useState("");
-    const router = useRouter();
+    // const router = useRouter();
     const [selectedFiles, setSelectedFiles] = useState([]);
     const inputFields = [
         {
@@ -195,9 +191,7 @@ function InputPage() {
                         </div>
                     </CardHeader>
                     <CardBody placeholder={""}>
-
                         <div id="formTab" className={" " + (activeTab === 'formTab' ? 'block' : 'hidden')} >
-
                             <form className='mt-4' id="inputForm" onSubmit={uploadForm}>
                                 <div className="grid gap-8 mb-6 md:grid-cols-1 ">
                                     <div>
@@ -213,7 +207,7 @@ function InputPage() {
                                                     } else if (inputField.type === "select") {
                                                         return (
                                                             <div key={index} className="flex flex-row mt-4 p-0">
-                                                                <Select key={index} className='object-cover bg-white object-center shadow-sm shadow-blue-gray-900/50 text-black' label={inputField.label} placeholder={inputField.label} value={inputState[inputField.field]} onChange={(event) => setInputState({ ...inputState, [inputField.field]: event })}>
+                                                                <Select key={index} className='object-cover bg-white object-center shadow-sm shadow-blue-gray-900/50 text-black' label={inputField.label} placeholder={inputField.label} value={inputState[inputField.field]} onChange={(event: any) => setInputState({ ...inputState, [inputField.field]: event })}>
                                                                     {inputField.values?.map((value: any) => (
                                                                         <Option key={value} value={value}>{value}</Option>
                                                                     ))
@@ -240,7 +234,7 @@ function InputPage() {
                             <Typography variant="h5" placeholder={"Description"}>Upload scientific data files</Typography>
 
                             {/* <h2 className='mb-8 text-xl bold underline decoration-dotted decoration-4 decoration-[#1D2E66]'>Upload scientific data files</h2> */}
-                            <FileUploader
+                            {/* <FileUploader
                                 url={'/api/upload'}
                                 acceptedFileTypes={[
                                     "application/json",
@@ -248,7 +242,7 @@ function InputPage() {
                                 maxFileSize={100}
                                 label="Max File Size: 1MB"
                             // labelAlt="Accepted File Types: png, jpeg"
-                            />
+                            /> */}
                         </div>
                         {/* </div> */}
                     </CardBody>
