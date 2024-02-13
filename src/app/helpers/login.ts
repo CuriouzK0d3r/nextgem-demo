@@ -2,7 +2,7 @@ import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 
 export const checkLoginStatus = (setIsLoggedIn: any, redirectToLogin: boolean = false, router: any = undefined) => {
-    const apiEndpoint = "http://localhost:3001/api/auth/token";
+    const apiEndpoint = "/api/auth/token";
 
     fetch(apiEndpoint, {
         method: "POST",
