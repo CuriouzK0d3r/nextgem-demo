@@ -11,7 +11,7 @@ import {
     Typography
 } from "@material-tailwind/react";
 import Cookies from 'js-cookie';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import FileUploader from '../components/file-uploader';
 import PageLayout from '../components/page-layout';
