@@ -66,7 +66,7 @@ export async function POST(req: Request, res: NextApiResponse) {
                 if (typeof reader.result !== 'string') {
                     return;
                 }
-                await postRecords(JSON.parse(reader.result));
+                await postRecords(JSON.parse(reader.result), access_token);
             }
         });
         return Response.json({ message: "success" });

@@ -3,7 +3,6 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 const ExternalSources = ({ hasSubmitted, setHasSubmitted, inputState, setSearchResults, chosenSources, setChosenSources }: { hasSubmitted: boolean, setHasSubmitted:any, inputState: any, setSearchResults: any, chosenSources: any, setChosenSources: any }) => {
 
     const submitSearch = (formData: any) => {
-
         const apiEndpoint = "/api/search";
 
         fetch(apiEndpoint, {
@@ -19,7 +18,6 @@ const ExternalSources = ({ hasSubmitted, setHasSubmitted, inputState, setSearchR
             .then(async (response) => {
                 if (response.ok) {
                     const repJSON = await response.json();
-                    console.log(repJSON)
                     setSearchResults(repJSON.searchResults);
                     setHasSubmitted(false);
                     if (repJSON.searchResults.length == 0) {

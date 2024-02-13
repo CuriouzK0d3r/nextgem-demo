@@ -1,4 +1,5 @@
 "use client"
+
 import React, { useEffect } from 'react';
 import Header from './header';
 import Footer from './footer';
@@ -17,6 +18,7 @@ import { useRef, useState } from 'react';
 
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
+import { checkLoginStatus } from '../helpers/login';
 
 const PageLayout = ({ isLoggedIn, skipLogin, children, pageName }: { isLoggedIn: boolean, skipLogin: boolean, children: React.ReactNode, pageName: string | undefined }) => {
     const router = useRouter();
@@ -28,39 +30,8 @@ const PageLayout = ({ isLoggedIn, skipLogin, children, pageName }: { isLoggedIn:
 
     const handleOpen = () => setOpen((cur) => !cur);
 
-    const checkLoginStatus = () => {
-        const apiEndpoint = "/api/auth/token";
-
-        fetch(apiEndpoint, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                access_token: Cookies.get('token'),
-            }),
-        })
-            .then(async (response) => {
-                if (response.ok) {                    
-                    let responseJSON = await response.json();
-                    if (responseJSON.loggedin) {
-                        setIsLogged(true);
-                    } else {
-                        router.push('/login?message="Please login to access this page."');
-                        // setOpen(true);
-                    }
-                } else {
-                    // console.error("Login failed. Status: " + response.status);
-                    setOpen(false);
-                }
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            });
-    }
-
     if (pageName === "members" && !skipLogin && !isLoggedIn) {
-        useEffect(()=> checkLoginStatus(), []);
+        checkLoginStatus(setIsLogged, true, router);
     }
 
     async function submitLoginForm(event: any) {

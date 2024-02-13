@@ -17,6 +17,7 @@ import { createRef, useEffect, useState } from 'react';
 import ExternalSources from '../components/external-sources';
 import PageLayout from '../components/page-layout';
 import SearchResults from '../components/search-results';
+import { checkLoginStatus } from "../helpers/login";
 
 function SearchPage() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -58,36 +59,36 @@ function SearchPage() {
     //         field: 'studyType',
     //         type: "select",
     //         required: false,
-    //         values: [
-    //             "--",
-    //             "exVivo",
-    //             "exposureAssessment",
-    //             "humanStudies",
-    //             "inVitro",
-    //             "inVivo",
-    //             "riskAssesment",
-    //             "simulation"
-    //         ]
+            // values: [
+            //     "--",
+            //     "exVivo",
+            //     "exposureAssessment",
+            //     "humanStudies",
+            //     "inVitro",
+            //     "inVivo",
+            //     "riskAssesment",
+            //     "simulation"
+            // ]
     //     },
     //     {
     //         label: "Type of Output",
     //         field: 'outputType',
     //         type: "select",
     //         required: false,
-    //         values: [
-    //             "--",
-    //             "audio",
-    //             "codebook",
-    //             "dataset",
-    //             "deliverable",
-    //             "image",
-    //             "poster",
-    //             "presentation",
-    //             "publication",
-    //             "report",
-    //             "software",
-    //             "video"
-    //         ]
+            // values: [
+            //     "--",
+            //     "audio",
+            //     "codebook",
+            //     "dataset",
+            //     "deliverable",
+            //     "image",
+            //     "poster",
+            //     "presentation",
+            //     "publication",
+            //     "report",
+            //     "software",
+            //     "video"
+            // ]
     //     },
     //     {
     //         label: "Topics",
@@ -217,35 +218,6 @@ function SearchPage() {
     //     inputFields[field.field] = "";
     // });
 
-
-
-    const checkLoginStatus = () => {
-        const apiEndpoint = "/api/auth/token";
-
-        fetch(apiEndpoint, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                access_token: Cookies.get('token'),
-            }),
-        })
-            .then(async (response) => {
-                if (response.ok) {
-                    let responseJSON = await response.json();
-                    if (responseJSON.loggedin) {
-                        setIsLoggedIn(true);
-                    }
-                } else {
-                    console.error("Login failed. Status: " + response.status);
-                }
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            });
-    }
-
     function clearState() {
         let inputs: any = {};
         for (let i = 0; i < inputFields.length; i++) {
@@ -279,7 +251,7 @@ function SearchPage() {
         // indicativeFields.forEach((field) => {
         //   fields[field.field] = createRef();
         // });
-        checkLoginStatus();
+        checkLoginStatus(setIsLoggedIn);
         // setFieldRefs(fields);
     }, []);
 
@@ -328,10 +300,10 @@ function SearchPage() {
                                                                     return (<div key={index} className=" mt-4 w-full p-0">
                                                                         <Select name={field.fieldName} value={inputState[field.fieldName]} onChange={(event) => setInputState({ ...inputState, [field.fieldName]: event })}
                                                                             className='bg-white text-black ct-cover object-center shadow-sm shadow-blue-gray-900/50' label={words.charAt(0).toUpperCase() + words.slice(1)} placeholder={field.fieldName}>
-                                                                            <Option key={index} value={"-"}>{"-"}</Option>
-                                                                            {/* {field.values.map((value: any) => (
+                                                                            {/* <Option key={index} value={"-"}>{"-"}</Option> */}
+                                                                            {field.enumValues.map((value: any) => (
                                                                                 <Option key={value} value={value}>{value}</Option>
-                                                                            )) */}
+                                                                            ))}
 
                                                                         </Select>
                                                                     </div>);
@@ -373,7 +345,7 @@ function SearchPage() {
                                         </form>
                                     </CardBody>
                                 </Card>
-                                <ExternalSources hasSubmitted={hasSubmitted} setHasSubmitted={setHasSubmitted} inputState={inputState} setSearchResults={setSearchResults} isLoggedIn={isLoggedIn} chosenSources={chosenSources} setChosenSources={setChosenSources} />
+                                <ExternalSources hasSubmitted={hasSubmitted} setHasSubmitted={setHasSubmitted} inputState={inputState} setSearchResults={setSearchResults} chosenSources={chosenSources} setChosenSources={setChosenSources} />
                             </div>
                         )}
             </AnimatePresence>

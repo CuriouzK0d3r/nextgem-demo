@@ -31,7 +31,7 @@ function LoginPage() {
     const router = useRouter();
 
     function isLoggedIn() {
-        let apiEndpoint = "/api/auth/token";
+        let apiEndpoint = "http://localhost:3001/api/auth/token";
 
         fetch(apiEndpoint, {
             method: "POST",

@@ -50,7 +50,7 @@ const Header = ({ isLoggedIn, skipLogin, pageName }: { isLoggedIn: boolean, skip
                             <div className={`ast-builder-layout-element ast-flex site-header-focus-item ast-header-button-1 ${skipLogin ? "invisible" : ""}`} data-section="section-hb-button-1">
                                 {
                                     isLoggedIn ?
-                                        <div className="ast-builder-button-wrap ast-builder-button-size-"><a className="ast-custom-button-link" onClick={() => { Cookies.remove('token', { path: '' }); window.location.reload();}}>
+                                        <div className="ast-builder-button-wrap ast-builder-button-size-"><a className="ast-custom-button-link" onClick={() => { Cookies.remove('token', { path: '' }); window.location.reload(); }}>
                                             <div style={{paddingLeft: '32px', paddingRight: "33px"}} className="ast-custom-button cursor-pointer">Logout</div>
                                         </a></div> :
                                         <div className="ast-builder-button-wrap ast-builder-button-size-"><a className="ast-custom-button-link" href="/login">

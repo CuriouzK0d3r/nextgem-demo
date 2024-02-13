@@ -207,7 +207,7 @@ function InputPage() {
                                                     if (inputField.type === "text") {
                                                         return (
                                                             <div key={index} className="flex flex-row mt-4 p-0">
-                                                                <Input required key={index} className='object-cover bg-white object-center shadow-sm shadow-blue-gray-900/50' value={inputState[inputField.field]} onChange={(event) => { event.preventDefault(); setInputState({ ...inputState, [inputField.field]: event.target.value }) }} crossOrigin="true" style={{ color: "black" }} label={inputField.label} />
+                                                                <Input required key={index} className='object-cover bg-white object-center shadow-sm shadow-blue-gray-900/50' value={inputState[inputField.field]} onChange={(event: any ) => { event.preventDefault(); setInputState({ ...inputState, [inputField.field]: event.target.value }) }} crossOrigin="true" style={{ color: "black" }} label={inputField.label} />
                                                             </div>
                                                         );
                                                     } else if (inputField.type === "select") {
