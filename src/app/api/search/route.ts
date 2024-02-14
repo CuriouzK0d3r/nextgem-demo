@@ -12,15 +12,15 @@ export async function POST(req: Request, res: NextApiResponse) {
     let results: any[] = [];
 
     if (sources.includes("NextGEM")) {
-        for (let i = 0; i < keys.length; i++) {
-            const key = keys[i];
-            const value = formData[key];
-            if (value === '') {
-                continue
-            }
-            apiEndpoint += `${key}=${value}&`;
-        }
-        console.log(apiEndpoint)
+        // for (let i = 0; i < keys.length; i++) {
+        //     const key = keys[i];
+        //     const value = formData[key];
+        //     if (value === '') {
+        //         continue
+        //     }
+        //     apiEndpoint += `${key}=${value}&`;
+        // }
+
         const response = await fetch(apiEndpoint, {
             method: 'GET',
             headers: {
@@ -28,12 +28,19 @@ export async function POST(req: Request, res: NextApiResponse) {
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Methods': 'GET',
                 'Access-Control-Allow-Headers': 'Content-Type, X-CSRF-TOKEN',
-            }
+            }, 
         })
+
+        let resJ: any[] = [];
 
         const responseJSON = await response.json();
 
-        results = results.concat(responseJSON);
+        responseJSON.forEach((record: any) => {
+            if (record.title.toLowerCase().includes(formData['title'].toLowerCase()))
+                resJ.push(record);
+        });
+
+        results = results.concat(resJ);
     }
     if (sources.includes("Zenodo")) {
         let query = "";

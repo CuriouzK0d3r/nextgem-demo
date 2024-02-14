@@ -234,7 +234,7 @@ function InputPage() {
                             <Typography variant="h5" placeholder={"Description"}>Upload scientific data files</Typography>
 
                             {/* <h2 className='mb-8 text-xl bold underline decoration-dotted decoration-4 decoration-[#1D2E66]'>Upload scientific data files</h2> */}
-                            {/* <FileUploader
+                             <FileUploader
                                 url={'/api/upload'}
                                 acceptedFileTypes={[
                                     "application/json",
@@ -242,7 +242,7 @@ function InputPage() {
                                 maxFileSize={100}
                                 label="Max File Size: 1MB"
                             // labelAlt="Accepted File Types: png, jpeg"
-                            /> */}
+                            />
                         </div>
                         {/* </div> */}
                     </CardBody>
