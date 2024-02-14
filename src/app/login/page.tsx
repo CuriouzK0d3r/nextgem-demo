@@ -116,10 +116,14 @@ function LoginPage() {
             }),
         })
             .then(async (response) => {
-                if (response.ok && response.status === 200) {
+                if (response.ok) {
                     let responseJSON = await response.json();
-                    router.push('/scientists');
-                    Cookies.set('token', responseJSON.access_token, { expires: 1, secure: false, sameSite: "Lax"});
+                    if (responseJSON.status !== 200) 
+                        alert('Wrong Credentials!');
+                    else {
+                        Cookies.set('token', responseJSON.access_token, { expires: 1, secure: false, sameSite: "Lax"});
+                        router.push('/scientists');
+                    }
                 } else {
                     alert("Login failed. Status: " + response.status);
                     console.error("Login failed. Status: " + response.status);

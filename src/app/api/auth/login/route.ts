@@ -27,8 +27,6 @@ export async function POST(req: Request, res: NextApiResponse) {
         // console.log("User " + username + " successfully logged in!");
     } else {
         // Login failed
-            console.log('dsfsdfdsf')
-        console.log(response.status, response.statusText)
         return Response.json({ status: 400, message: 'Invalid email or password' });
     }
     // Login successful
