@@ -39,12 +39,11 @@ export async function POST(req: Request, res: NextApiResponse) {
         let query = "";
 
         for (let i = 0; i < Object.keys(formData).length; i++) {
-            if (Object.keys(formData)[i] !== undefined && formData[Object.keys(formData)[i]] !== "") {
-                query += `+AND+${formData[Object.keys(formData)[i]]}`;
+            if (Object.keys(formData)[i] !== undefined && Object.keys(formData)[i] !== 'title' && formData[Object.keys(formData)[i]] !== "") {
+                query += ` ${formData[Object.keys(formData)[i]]} `;
             }
         }
 
-        console.log(query)
         const response = await fetch(`http://${hostname}/api/search/zenodo`, {
             method: 'POST',
             headers: {
@@ -53,7 +52,7 @@ export async function POST(req: Request, res: NextApiResponse) {
                 'Access-Control-Allow-Methods': 'GET',
                 'Access-Control-Allow-Headers': 'Content-Type, X-CSRF-TOKEN',
             },
-            body: JSON.stringify({ query: query })
+            body: JSON.stringify({ query: `(title: ${formData['title']}) ${query.length > 0 ? ` OR (description:${query})` : ""}`})
         })
         
         const responseJSON = await response.json();
