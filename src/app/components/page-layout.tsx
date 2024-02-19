@@ -30,7 +30,7 @@ const PageLayout = ({ isLoggedIn, skipLogin, children, pageName }: { isLoggedIn:
 
     const handleOpen = () => setOpen((cur) => !cur);
 
-    if (pageName === "members" && !skipLogin && !isLoggedIn) {
+    if ((pageName === "members" || pageName === 'input') && !skipLogin && !isLoggedIn) {
         checkLoginStatus(setIsLogged, true, router);
     }
 
@@ -66,13 +66,13 @@ const PageLayout = ({ isLoggedIn, skipLogin, children, pageName }: { isLoggedIn:
     }
 
     return (
-        <div className="page-layout p-0 h-full w-full bg-white">
-            <div className='h-full w-full flex flex-col gap-0'>
+        <div className=" flex flex-col min-h-screen p-0 w-full bg-white">
+            <div className='page-layout flex flex-col min-h-screen w-full gap-0'>
                 <Header isLoggedIn={isLoggedIn || isModalLoggedIn || isLogged} skipLogin={skipLogin} pageName={pageName} />
                 <div className='flex-grow p-0'>
                     {children}
-                    <Footer />
                 </div>
+                <Footer />
             </div>
             <Dialog
                 placeholder={""}

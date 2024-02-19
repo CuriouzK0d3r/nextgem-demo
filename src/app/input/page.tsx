@@ -18,7 +18,7 @@ function InputPage() {
     checkLoginStatus(setIsLoggedIn);
 
     return (
-        <PageLayout isLoggedIn={isLoggedIn} pageName='members' skipLogin={false}>
+        <PageLayout isLoggedIn={isLoggedIn} pageName='input' skipLogin={false}>
             {/* <div id="formTab" className="tabcontent " style={{ display: "block" }}> */}
             <div className="w-full min-h-[58rem] mt-0 flex items-center justify-center ">
                 <a href='/upload?tab=form' className=''>
