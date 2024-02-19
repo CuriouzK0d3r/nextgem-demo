@@ -12,15 +12,6 @@ export async function POST(req: Request, res: NextApiResponse) {
     let results: any[] = [];
 
     if (sources.includes("NextGEM")) {
-        // for (let i = 0; i < keys.length; i++) {
-        //     const key = keys[i];
-        //     const value = formData[key];
-        //     if (value === '') {
-        //         continue
-        //     }
-        //     apiEndpoint += `${key}=${value}&`;
-        // }
-
         const response = await fetch(apiEndpoint, {
             method: 'GET',
             headers: {

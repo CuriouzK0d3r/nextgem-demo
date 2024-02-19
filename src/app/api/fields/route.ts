@@ -59,18 +59,6 @@ export async function GET(req: Request, res: NextApiResponse) {
 
     const responseFIELDS = await response.json();
 
-    // let response2 = await fetch(apiEndpoint2, {
-    //     method: 'GET',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //         'Access-Control-Allow-Origin': '*',
-    //         'Access-Control-Allow-Methods': 'GET',
-    //         'Access-Control-Allow-Headers': 'Content-Type, X-CSRF-TOKEN',
-    //         // "Authorization": "Bearer " + access_token
-    //     }
-    // });
-    // console.log(response2.status)
-    // let responseENUM = await response2.json();
     let fields = [];
 
     for (let i = 0; i < responseFIELDS.length; i++) {

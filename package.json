@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "NODE_TLS_REJECT_UNAUTHORIZED=0 next dev",
-    "build": "next build",
-    "start": "NODE_TLS_REJECT_UNAUTHORIZED=0 next start",
+    "dev": "NODE_TLS_REJECT_UNAUTHORIZED=0 nx dev",
+    "build": "nx build",
+    "start": "NODE_TLS_REJECT_UNAUTHORIZED=0 nx start",
     "lint": "next lint"
   },
   "dependencies": {
@@ -27,15 +27,29 @@
     "react-router-dom": "^6.21.1"
   },
   "devDependencies": {
+    "@nx/cypress": "18.0.4",
+    "@nx/devkit": "18.0.4",
+    "@nx/eslint": "18.0.4",
+    "@nx/next": "18.0.4",
+    "@nx/playwright": "18.0.4",
+    "@playwright/test": "^1.36.0",
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^20.10.7",
     "@types/react": "^18.2.47",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
+    "cypress": "^13.6.4",
+    "cypress-plugin-snapshots": "^1.4.4",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
+    "eslint-plugin-cypress": "^2.13.4",
+    "eslint-plugin-playwright": "^0.15.3",
+    "nx": "18.0.4",
     "postcss": "^8.4.33",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
+  },
+  "nx": {
+    "includedScripts": []
   }
 }

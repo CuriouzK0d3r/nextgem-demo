@@ -1,0 +1,25 @@
+{
+  "name": "frontend-e2e",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "frontend-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "frontend-e2e/cypress.config.ts",
+        "devServerTarget": "nextgem-demo:dev",
+        "testingType": "e2e"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "nextgem-demo:start"
+        }
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": [
+    "nextgem-demo"
+  ]
+}
