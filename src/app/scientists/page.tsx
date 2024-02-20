@@ -108,7 +108,6 @@ function SearchPage() {
                                                                             {field.enumValues.map((value: any) => (
                                                                                 <Option key={value} value={value}>{value}</Option>
                                                                             ))}
-
                                                                         </Select>
                                                                     </div>);
                                                                 }
@@ -117,7 +116,7 @@ function SearchPage() {
                                                     </div>
                                                 </div>
                                                 <div className="p-0">
-   
+                                                        
                                                 </div>
                                             </div>
                                             <CardFooter placeholder={""} className="flex p-0 mt-4 justify-left">

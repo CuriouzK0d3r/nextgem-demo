@@ -199,7 +199,7 @@ body {
 
 .site-primary-header-wrap  { 
     min-height: 70px;
-    padding-left: 20px !important;
+    padding-left: 12px !important;
 } 
 
 .ast-builder-grid-row { 
@@ -693,12 +693,26 @@ li {
 }
 
 .elementor-heading-title {
-    font-size: 64px;
-    font-family: 'Poppins',sans-serif;
-    line-height: 1.4em;
+    font-size: 4rem;
+    font-family: 'Poppins',sans-serif !important;
+    line-height: 1em;
     color: #fff !important;
-    font-weight: 1000;
+    font-weight: 700;
     padding: 0px;
     letter-spacing :0.02em;
     text-transform: capitalize;
+}
+
+#bg-container {
+    background-image: url("https://subra.ics.forth.gr/wp-content/uploads/2024/01/NIKH-Platform-pages.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+#bg-container::before {
+    --background-overlay: '';
+    background-color: #1D2E66;
+
 }

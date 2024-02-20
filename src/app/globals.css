@@ -383,7 +383,7 @@ form input {
 }
 
 .chosen-source {
-  border: 2px solid #1D2E66;
+  border: 2.5px dashed #1D2E66;
 }
 
 select option {
