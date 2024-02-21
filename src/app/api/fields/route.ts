@@ -40,6 +40,15 @@ export async function GET(req: Request, res: NextApiResponse) {
                 "NR",
                 "No Modulation"
             ]
+        },
+        {
+            "name": "privacyLevel",
+            "values": [
+                "--",
+                "Public",
+                "Open",
+                "Sensitive"
+            ]
         }
     ]
     const hostname = headers().get('host');

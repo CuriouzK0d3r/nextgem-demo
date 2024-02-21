@@ -697,9 +697,10 @@ li {
     font-family: 'Poppins',sans-serif !important;
     line-height: 1em;
     color: #fff !important;
-    font-weight: 700;
+    font-weight: 1000;
     padding: 0px;
     letter-spacing :0.02em;
+    margin-left: -5px !important;
     text-transform: capitalize;
 }
 
