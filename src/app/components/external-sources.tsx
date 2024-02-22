@@ -1,6 +1,11 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import ErrorModal from './helpers/ErrorModal';
+
 
 const ExternalSources = ({ hasSubmitted, setHasSubmitted, inputState, setSearchResults, chosenSources, setChosenSources }: { hasSubmitted: boolean, setHasSubmitted: any, inputState: any, setSearchResults: any, chosenSources: any, setChosenSources: any }) => {
+    const [open, setOpen] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+
 
     const submitSearch = (formData: any) => {
         const apiEndpoint = "/api/search";
@@ -21,7 +26,9 @@ const ExternalSources = ({ hasSubmitted, setHasSubmitted, inputState, setSearchR
                     setSearchResults(repJSON.searchResults);
                     setHasSubmitted(false);
                     if (repJSON.searchResults.length == 0) {
-                        alert("No results found");
+                        // alert("No results found");
+                        setErrorMessage("No results found!");
+                        setOpen(true);
                     }
                 } else {
                     console.error("Login failed. Status: " + response.status);
@@ -35,7 +42,8 @@ const ExternalSources = ({ hasSubmitted, setHasSubmitted, inputState, setSearchR
     useEffect(() => {
         if (hasSubmitted) {
             if (chosenSources.length == 0) {
-                alert("Please select at least one source");
+                setErrorMessage("Please select at least one source!");
+                        setOpen(true);
                 setHasSubmitted(false);
             } else
                 submitSearch(inputState);
@@ -47,6 +55,9 @@ const ExternalSources = ({ hasSubmitted, setHasSubmitted, inputState, setSearchR
             <h1 className='text-xl text-black italic decoration-offset-4 decoration-wavy block text-center'>Choose 1 or more sources:</h1> <br />
 
             <div className=' flex mx-auto items-center'>
+            <button className={""} onClick={() => { chosenSources.includes("NextGEM") ? setChosenSources(chosenSources.filter(function (e: any) { return e !== 'NextGEM' })) : setChosenSources([...chosenSources, "NextGEM"]) }}>
+                   All {/* <img width={100} src="./NextGEM_Button.svg" alt="NextGEM" className={chosenSources.includes("NextGEM") ? "custom-bounce chosen-source mr-[13px] p-0 rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900" : "mr-[13px] p-0 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50"} /> */}
+                </button>
                 <button className={""} onClick={() => { chosenSources.includes("NextGEM") ? setChosenSources(chosenSources.filter(function (e: any) { return e !== 'NextGEM' })) : setChosenSources([...chosenSources, "NextGEM"]) }}>
                     <img width={100} src="./NextGEM_Button.svg" alt="NextGEM" className={chosenSources.includes("NextGEM") ? "custom-bounce chosen-source mr-[13px] p-0 rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900" : "mr-[13px] p-0 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50"} />
                 </button>
@@ -83,6 +94,9 @@ const ExternalSources = ({ hasSubmitted, setHasSubmitted, inputState, setSearchR
                     <img width={100} src="./YODA.svg" alt="Yoda" className={chosenSources.includes("Yoda") ? " chosen-source p-0 rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50" : "p-0 rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50"} />
                 </button> */}
             </div>
+
+            <ErrorModal errorMessage={errorMessage} showModal={open} setShowModal={setOpen} ></ErrorModal>
+            
         </div>
     );
 };

@@ -164,7 +164,7 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, isLoggedIn
                 </CardHeader>
 
                 <CardBody placeholder={""} className=" px-0">
-                    <Typography as="a" placeholder="" onClick={() => (setSearchResults([]))} variant="small" color="blue-gray" className="font-medium mb-4 cursor-pointer	">
+                    <Typography as="a" placeholder="" onClick={() => (setSearchResults([]))} variant="h6" color="blue-gray" className="font-medium mb-4 cursor-pointer	">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="float-left w-12 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
                         </svg>
@@ -177,13 +177,13 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, isLoggedIn
                                 {TABLE_HEAD.map((head, index) => (
                                     <th
                                         key={index}
-                                        className={`border-b border-blue-gray-100 bg-blue-gray-50 p-4 pb-0 ${['More', 'Status', 'Output Type', 'Type of Study'].includes(head) ? 'hidden lg:table-cell': ''}`}
+                                        className={`border-b border-blue-gray-100 bg-blue-gray-50 p-4 pb-4 ${['More', 'Status', 'Output Type', 'Type of Study'].includes(head) ? 'hidden lg:table-cell': ''}`}
                                     >
                                         <Typography
                                             placeholder={""}
-                                            variant="small"
+                                            variant="h6"
                                             color="blue-gray"
-                                            className="font-normal leading-none opacity-70"
+                                            className="font-normal opacity-70"
                                         >
                                             {head}
                                         </Typography>
@@ -218,7 +218,7 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, isLoggedIn
 
                                                     <Typography
                                                         placeholder=""
-                                                        variant="small"
+                                                        variant="h6"
                                                         color="blue-gray"
                                                         className="font-bold"
                                                     >
@@ -240,7 +240,7 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, isLoggedIn
                                                     <div className="flex flex-col">
                                                 <Typography
                                                     placeholder=""
-                                                    variant="small"
+                                                    variant="h6"
                                                     color="blue-gray"
                                                     className="font-normal hidden lg:table-cell"
                                                 >
@@ -254,7 +254,7 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, isLoggedIn
                                                     <div className="flex flex-col">
                                                         <Typography
                                                             placeholder=""
-                                                            variant="small"
+                                                            variant="h6"
                                                             color="blue-gray"
                                                             className="font-normal capitalize "
                                                         >
@@ -269,7 +269,7 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, isLoggedIn
                                                     <div className="flex flex-col w-30 text-left">
                                                         <Typography
                                                             placeholder=""
-                                                            variant="small"
+                                                            variant="h6"
                                                             color="blue-gray"
                                                             className="font-normal capitalize  text-left"
                                                         >
@@ -297,7 +297,7 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, isLoggedIn
                                                 </div>
                                             </td>
                                             <td>
-                                                <Typography placeholder={""} as="a" href="#" variant="small" color="blue-gray" className="font-medium underline mb-4 hidden lg:table-cell">
+                                                <Typography placeholder={""} as="a" href="#" variant="h6" color="blue-gray" className="font-medium underline mb-4 hidden lg:table-cell">
                                                     <MoreDialog description={description} source={location} isLoggedIn={isLoggedIn} />
                                                 </Typography>
                                             </td>
@@ -310,7 +310,7 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, isLoggedIn
                 </CardBody>
                 <CardFooter placeholder={""} className=" w-full border-t border-blue-gray-50 p-4">
                 { searchResults.length ? <div className='flex justify-center mx-auto flex-col'>
-                    <div className='text-center text-gray-900'>{searchResults.length} results found.</div> 
+                    <Typography placeholder={""} variant='h6' className='text-center text-gray-900'>{searchResults.length} results found.</Typography> 
                     <DefaultPagination active={active} setActive={setActive} searchResults={searchResults} />
                     </div> : <></>}
                 </CardFooter>

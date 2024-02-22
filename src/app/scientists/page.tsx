@@ -6,6 +6,10 @@ import {
     CardBody,
     CardFooter,
     CardHeader,
+    Dialog,
+    DialogBody,
+    DialogFooter,
+    DialogHeader,
     Input,
     Option,
     Select,
@@ -27,6 +31,7 @@ function SearchPage() {
     const [chosenSources, setChosenSources] = useState<string[]>([]);
     const [inputFields, setInputFields] = useState<any>([]);
     const [inputState, setInputState] = useState<any>([]);
+
 
     function clearState() {
         let inputs: any = {};
@@ -116,12 +121,22 @@ function SearchPage() {
                                                     </div>
                                                 </div>
                                                 <div className="p-0">
-                                                        
+
                                                 </div>
                                             </div>
                                             <CardFooter placeholder={""} className="flex p-0 mt-4 justify-left">
                                                 <Button placeholder={""} onClick={() => { setInputState(inputFields); setChosenSources([]); clearState() }} className="clear-button font-bold w-30 h-12 mr-4 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50" variant="gradient">Clear</Button>
-                                                <Button placeholder={""} id="searchBtn" type="submit" className="btn font-bold w-30 h-12 mr-4 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50" variant="gradient">Search</Button>
+                                                {hasSubmitted ?
+                                                    (<div
+                                                        className="inline-block ml-8 mt-2 h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                                                        role="status">
+                                                        <span
+                                                            className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+                                                        >Loading...</span>
+                                                    </div>) :
+                                                    (<Button placeholder={""} id="searchBtn" type="submit" className="btn font-bold w-30 h-12 mr-4 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50" variant="gradient">Search</Button>
+                                                    )}
+
                                             </CardFooter>
                                         </form>
                                     </CardBody>
