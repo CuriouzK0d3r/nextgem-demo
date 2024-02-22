@@ -214,7 +214,7 @@ const SearchResults: React.FC<any> = ({ searchResults, mode, setMode, isLoggedIn
                                     return (
                                         <tr key={index} className="even:bg-blue-gray-50/50">
                                             <td className={classes}>
-                                                <div className="flex items-center w-[15rem] md:w-[15rem] lg:w-[22rem] xl:w-[32rem]">
+                                                <div className="flex items-center w-[15rem] md:w-[15rem] lg:w-[22rem] xl:w-[50rem]">
 
                                                     <Typography
                                                         placeholder=""
