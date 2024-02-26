@@ -11,8 +11,12 @@ import {
   IconButton,
   Typography,
 } from "@material-tailwind/react";
-import { MoreDialog } from "./helpers/more-dialog";
 import { motion } from "framer-motion";
+import SearchTable from "./search-table";
+// import Table from 'react-tailwind-table';
+
+// import 'react-tailwind-table/dist/index.css';
+
 
 function DefaultPagination({
   searchResults,
@@ -41,6 +45,9 @@ function DefaultPagination({
 
     setActive(active - 1);
   };
+
+
+    
 
   const pagesNo = Math.ceil(searchResults.length / 5);
 
@@ -96,12 +103,42 @@ const SearchResults: React.FC<any> = ({
   const [active, setActive] = React.useState(0);
   const [moreIdx, setMoreIdx] = React.useState(-1);
 
+  var rows  = [
+    {
+          id: 1,
+          name: "Sadio Mane",
+          country_id: 3,
+          club_id: 2,
+          front_end_position:{
+            name:{
+              full_name:"Forward",
+              short_code:"FW"
+            },
+            id:2
+          }
+    },
+    {
+          id: 3,
+          name: "Virgil VanDijk",
+          country_id: 30,
+          club_id: 2,
+          front_end_position:{
+            name:{
+              full_name:"Defence",
+              short_code:"DF"
+            },
+            id:2
+          }
+    }
+    ]
+
   const TABLE_HEAD = [
     "Title",
     "Type of Study",
     "Output Type",
     "Location",
     "Status",
+    "",
     " ",
   ];
 
@@ -115,6 +152,41 @@ const SearchResults: React.FC<any> = ({
     riskAssessment: "Risk Assessment",
     exposureAssessment: "Exposure Assessment",
   };
+
+  var columns = [
+    {
+     field: "title",
+     use: "Title",
+     //Will not be used in search filtering
+     use_in_search:true
+   },
+   {
+     field: "typeOfStudy",
+     use: "Type of Study",
+   },
+   {
+    field: "outputType",
+    use: "Output Type",
+  },
+  {
+    field: "location",
+    use: "Location",
+  },
+  {
+    field: "privacyLevel",
+    use: "Status",
+  },
+  {
+    field: "source",
+    use: "",
+  },
+  // {
+  //   field: "more",
+  //   use: "",
+  // },
+]
+
+  
 
   const TABLE_ROWS = searchResults.slice(active * 5, active * 5 + 5);
   // const TABLE_ROWS = [
@@ -232,7 +304,7 @@ const SearchResults: React.FC<any> = ({
           </Typography>
           {searchResults.length ? (
             moreIdx === -1 ? (
-              <table className="mx-auto mt-6 w-full table-auto text-left">
+              <table className="mx-auto mt-6 w-full table-auto overflow-hidden border-collapse text-left">
                 <thead>
                   <tr>
                     {TABLE_HEAD.map((head, index) => (
@@ -264,6 +336,7 @@ const SearchResults: React.FC<any> = ({
                         institution,
                         studyType,
                         privacyLevel,
+                        source
                       }: any,
                       index: number,
                     ) => {
@@ -356,6 +429,19 @@ const SearchResults: React.FC<any> = ({
                               />
                             </div>
                           </td>
+                          <td className={classes + " hidden lg:table-cell"}>
+                            <div className="hidden w-max lg:table-cell">
+                              <Chip
+                                size="sm"
+                                variant="ghost"
+                                value={source}
+                                className="mb-6"
+                                color={
+                                  "gray"
+                                }
+                              />
+                            </div>
+                          </td>
                           <td>
                             <Typography
                               placeholder={""}
@@ -381,7 +467,7 @@ const SearchResults: React.FC<any> = ({
                 exit={{ opacity: 0 }}
                 transition={{ duration: 2 }}
               >
-                More
+                <SearchTable searchResults={searchResults} />
               </motion.div>
             )
           ) : (

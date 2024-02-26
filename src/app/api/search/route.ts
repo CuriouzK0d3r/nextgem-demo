@@ -20,19 +20,22 @@ export async function POST(req: Request, res: NextApiResponse) {
                 'Access-Control-Allow-Methods': 'GET',
                 'Access-Control-Allow-Headers': 'Content-Type, X-CSRF-TOKEN',
             }, 
-        })
+        });
 
         let resJ: any[] = [];
 
         const responseJSON = await response.json();
-
         responseJSON.forEach((record: any) => {
-            if (record.title.toLowerCase().includes(formData['title'].toLowerCase()))
+            if (record.title && formData['title'] && record.title.toLowerCase().includes(formData['title'].toLowerCase()))
+                resJ.push(record);
+
+            if (record.institution && formData['institution'] && record.institution.toLowerCase().includes(formData['institution'].toLowerCase()))
                 resJ.push(record);
         });
 
-        results = results.concat(resJ);
+        results = results.concat(addSource(resJ, "NextGEM"));
     }
+
     if (sources.includes("Zenodo")) {
         let query = "";
 
@@ -70,7 +73,7 @@ export async function POST(req: Request, res: NextApiResponse) {
         })
 
         const responseJSON = await response.json();
-        results = results.concat(responseJSON);
+        results = results.concat(addSource(responseJSON, "EMF-Portal"));
     }
 
     if (sources.includes("WOS")) {
@@ -86,7 +89,7 @@ export async function POST(req: Request, res: NextApiResponse) {
         })
 
         const responseJSON = await response.json();
-        results = results.concat(responseJSON);
+        results = results.concat(addSource(responseJSON, "WOS"));
     }
 
     if (sources.includes("PubMed")) {
@@ -99,11 +102,29 @@ export async function POST(req: Request, res: NextApiResponse) {
                 'Access-Control-Allow-Headers': 'Content-Type, X-CSRF-TOKEN',
             },
             body: JSON.stringify({ query: formData, source: "pubmed"})
-        })
+        });
 
         const responseJSON = await response.json();
-        results = results.concat(responseJSON);
+        results = results.concat(addSource(responseJSON, "PubMed"));
     }
 
+    let titles: any[] = [];
+
+    titles = results.map((result) => {
+        return result.title;
+    });
+
+    let uniqueTitles = titles.filter((v, i, a) => a.indexOf(v) === i);
+    console.log(uniqueTitles.length, titles.length, results.length)
+
     return Response.json({ searchResults: results });
+}
+
+function addSource(responseJSON: any, arg1: string): string {
+    return responseJSON.map((result: any) => {
+        return {
+            ...result,
+            source: arg1.toUpperCase(),
+        }
+    });
 }

@@ -16,34 +16,6 @@ export async function POST(req: Request) {
         let cursor;
         let filters: any[] = [];
 
-        // const filters = [
-        //     {
-        //         'title': {
-        //             '$regex': data.query
-        //         }
-        //     },
-        //     {
-        //         'author.given': {
-        //             '$regex': data.query
-        //         }
-        //     },
-        //     {
-        //         'DOI': {
-        //             '$regex': data.query
-        //         }
-        //     },
-        //     {
-        //         'subject.': {
-        //             '$regex': data.query
-        //         }
-        //     },
-        //     {
-        //         'abstract': {
-        //             '$regex': data.query
-        //         }
-        //     }
-        // ];
-
         Object.keys(data).forEach((key: string) => {
             if (!["title", 'doi', 'abstract'].includes(key as never)) {
                 return;
@@ -65,7 +37,7 @@ export async function POST(req: Request) {
         results = results?.map((result) => {
             return {
                 ...result,
-                location: result.source.toUpperCase(),
+                location: "",
                 privacyLevel: "open",
             }
         });
