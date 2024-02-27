@@ -15,7 +15,6 @@ const Header = ({ isLoggedIn, skipLogin, pageName }: { isLoggedIn: boolean, skip
         data-elementor-type="wp-post"
         data-elementor-id={7}
         className="elementor elementor-7"
-
       >
         <div
           className="elementor-element elementor-element-24aa96b e-flex e-con-boxed wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-parent"

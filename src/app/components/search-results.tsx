@@ -138,7 +138,7 @@ const SearchResults: React.FC<any> = ({
     "Output Type",
     "Location",
     "Status",
-    "",
+    "Source",
     " ",
   ];
 
@@ -306,11 +306,11 @@ const SearchResults: React.FC<any> = ({
             moreIdx === -1 ? (
               <table className="mx-auto mt-6 w-full table-auto overflow-hidden border-collapse text-left">
                 <thead>
-                  <tr>
+                  <tr className="whitespace-nowrap">
                     {TABLE_HEAD.map((head, index) => (
                       <th
                         key={index}
-                        className={`border-blue-gray-100 bg-blue-gray-50 border-b p-4 pb-4 ${["More", "Status", "Output Type", "Type of Study"].includes(head) ? "hidden lg:table-cell" : ""}`}
+                        className={`border-blue-gray-100 bg-blue-gray-50 border-b p-4 pb-4 ${[ "Status", "Location"].includes(head) ? "hidden lg:table-cell" : ["Output Type", "Type of Study"].includes(head) ? "hidden xl:table-cell" : ""}`}
                       >
                         <Typography
                           placeholder={""}
@@ -342,13 +342,13 @@ const SearchResults: React.FC<any> = ({
                     ) => {
                       const isLast = index === TABLE_ROWS.length - 1;
                       const classes = isLast
-                        ? "p-4"
-                        : "p-4 border-b border-blue-gray-50";
+                        ? "p-4 "
+                        : "p-4 border-b border-blue-gray-50 whitespace-break-spaces";
 
                       return (
                         <tr key={index} className="even:bg-blue-gray-50/50">
                           <td className={classes}>
-                            <div className="flex w-[15rem] items-center md:w-[15rem] lg:w-[22rem] xl:w-[50rem]">
+                            <div className="flex  items-center">
                               <Typography
                                 placeholder=""
                                 variant="h6"
@@ -368,42 +368,42 @@ const SearchResults: React.FC<any> = ({
                                                         {description}
                                                     </Typography>
                                                 </td> */}
-                          <td className={classes + " hidden lg:table-cell "}>
+                          <td className={classes + " hidden xl:table-cell "}>
                             <div className="flex items-center gap-3">
                               <div className="flex flex-col">
                                 <Typography
                                   placeholder=""
                                   variant="h6"
                                   color="blue-gray"
-                                  className="hidden font-normal lg:table-cell"
+                                  className="hidden font-normal xl:table-cell"
                                 >
                                   {studyType ? studyTypeMap[studyType] : "N/A"}
                                 </Typography>
                               </div>
                             </div>
                           </td>
-                          <td className={classes + " hidden lg:table-cell"}>
+                          <td className={classes + " hidden xl:table-cell"}>
                             <div className="flex items-center gap-3">
                               <div className="flex flex-col">
                                 <Typography
                                   placeholder=""
                                   variant="h6"
                                   color="blue-gray"
-                                  className="font-normal capitalize "
+                                  className="font-normal capitalize hidden xl:table-cell"
                                 >
                                   {outputType || "N/A"}
                                 </Typography>
                               </div>
                             </div>
                           </td>
-                          <td className={classes}>
+                          <td className={classes + " hidden lg:table-cell"}>
                             <div className="flex items-center gap-3">
-                              <div className="w-30 flex flex-col text-left">
+                              <div className=" flex flex-col text-left">
                                 <Typography
                                   placeholder=""
                                   variant="h6"
                                   color="blue-gray"
-                                  className="text-left font-normal  capitalize"
+                                  className="text-left font-normal hidden lg:table-cell  capitalize"
                                 >
                                   {institution || location}
                                 </Typography>
@@ -411,7 +411,7 @@ const SearchResults: React.FC<any> = ({
                             </div>
                           </td>
                           <td className={classes + " hidden lg:table-cell"}>
-                            <div className="hidden w-max lg:table-cell">
+                            <div className="hidden lg:table-cell">
                               <Chip
                                 size="sm"
                                 variant="ghost"
@@ -429,8 +429,8 @@ const SearchResults: React.FC<any> = ({
                               />
                             </div>
                           </td>
-                          <td className={classes + " hidden lg:table-cell"}>
-                            <div className="hidden w-max lg:table-cell">
+                          <td className={classes + " "}>
+                            <div className=" w-max">
                               <Chip
                                 size="sm"
                                 variant="ghost"

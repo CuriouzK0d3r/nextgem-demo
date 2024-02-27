@@ -89,6 +89,7 @@ function SearchPage() {
           <div className={`mt-32 min-h-[65rem] w-full`}>
             <Card
               placeholder={""}
+              style={{background: "#D9D9D9"}}
               className="form-container shadow-blue-gray-900/50 mx-auto mt-6 w-1/2 rounded-lg object-cover object-center shadow-xl"
             >
               <CardHeader placeholder={""} className="bg-[#D4D9DD] text-black">
@@ -100,7 +101,7 @@ function SearchPage() {
                   Search Scientific Catalogue
                 </Typography>
               </CardHeader>
-              <CardBody placeholder={""}>
+              <CardBody placeholder={""} >
                 <form
                   className="mt-4"
                   id="searchForm"
@@ -143,7 +144,7 @@ function SearchPage() {
                             );
                           } else {
                             return (
-                              <div key={index} className=" mt-4 w-full p-0">
+                              <div key={index} className=" mt-4 w-full p-0 select-input">
                                 <Select
                                   name={field.fieldName}
                                   value={inputState[field.fieldName]}
@@ -153,7 +154,7 @@ function SearchPage() {
                                       [field.fieldName]: event,
                                     })
                                   }
-                                  className="ct-cover shadow-blue-gray-900/50 bg-white object-center text-black shadow-sm"
+                                  className=" ct-cover shadow-blue-gray-900/50 bg-white object-center text-black shadow-sm"
                                   label={
                                     words.charAt(0).toUpperCase() +
                                     words.slice(1)
