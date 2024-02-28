@@ -6,7 +6,7 @@ import Table from 'react-tailwind-table';
 // create a new component called SearchTable
 const SearchTable = ({ searchResults }: { searchResults: any }) => {
   const TABLE_HEAD = [
-    "Title",
+    "Abstract",
     "Type of Study",
     "Output Type",
     "Location",
@@ -24,8 +24,9 @@ const SearchTable = ({ searchResults }: { searchResults: any }) => {
     riskAssessment: "Risk Assessment",
     exposureAssessment: "Exposure Assessment",
   };
+  console.log(searchResults);
 
-  const TABLE_ROWS = searchResults.slice(0 * 5, 1 * 5 + 5);
+  const TABLE_ROWS = searchResults.slice(0 * 1, 1);
 
   return (
     <table className="mx-auto mt-6 w-full table-auto overflow-hidden border-collapse text-left">
@@ -53,6 +54,7 @@ const SearchTable = ({ searchResults }: { searchResults: any }) => {
                     (
                       {
                         title,
+                        abstract,
                         description,
                         typeOfStudy,
                         outputType,
@@ -77,9 +79,9 @@ const SearchTable = ({ searchResults }: { searchResults: any }) => {
                                 placeholder=""
                                 variant="h6"
                                 color="blue-gray"
-                                className="font-bold"
+                                className="font-normal"
                               >
-                                {title}
+                                {abstract}
                               </Typography>
                             </div>
                           </td>

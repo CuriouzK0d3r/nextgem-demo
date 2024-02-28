@@ -20,7 +20,7 @@ function InputPage() {
     return (
         <PageLayout isLoggedIn={isLoggedIn} pageName='input' skipLogin={false}>
             {/* <div id="formTab" className="tabcontent " style={{ display: "block" }}> */}
-            <div className="w-full min-h-[58rem] mt-0 flex items-center justify-center ">
+            <div className="w-full min-h-[48rem] mt-0 flex items-center justify-center ">
                 <a href='/upload?tab=form' className=''>
                     <div className="menu-box members-cat  mr-8">
                         <div className=" w-full h-full text-center rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900/50">

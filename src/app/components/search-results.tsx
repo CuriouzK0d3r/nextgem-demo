@@ -481,12 +481,13 @@ const SearchResults: React.FC<any> = ({
           >
             {searchResults.length ? (
               <div className="mx-auto flex flex-col justify-center">
+                 {searchResults.length} results found
                 <Typography
                   placeholder={""}
                   variant="h6"
                   className="text-center text-gray-900"
                 >
-                  {searchResults.length} results found.
+                  Page {active + 1} of {searchResults.length/5}
                 </Typography>
                 <DefaultPagination
                   active={active}
