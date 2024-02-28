@@ -134,11 +134,11 @@ const SearchResults: React.FC<any> = ({
 
   const TABLE_HEAD = [
     "Title",
-    "Type of Study",
+    // "Type of Study",
     "Output Type",
     "Location",
     "Status",
-    "Source",
+    "Sources",
     " ",
   ];
 
@@ -368,7 +368,7 @@ const SearchResults: React.FC<any> = ({
                                                         {description}
                                                     </Typography>
                                                 </td> */}
-                          <td className={classes + " hidden xl:table-cell "}>
+                          {/* <td className={classes + " hidden xl:table-cell "}>
                             <div className="flex items-center gap-3">
                               <div className="flex flex-col">
                                 <Typography
@@ -381,7 +381,7 @@ const SearchResults: React.FC<any> = ({
                                 </Typography>
                               </div>
                             </div>
-                          </td>
+                          </td> */}
                           <td className={classes + " hidden xl:table-cell"}>
                             <div className="flex items-center gap-3">
                               <div className="flex flex-col">
@@ -487,7 +487,7 @@ const SearchResults: React.FC<any> = ({
                   variant="h6"
                   className="text-center text-gray-900"
                 >
-                  Page {active + 1} of {searchResults.length/5}
+                  Page {active + 1} of { Math.floor(searchResults.length/5) + (searchResults.length%5 > 0 ? 1 : 0)}
                 </Typography>
                 <DefaultPagination
                   active={active}
