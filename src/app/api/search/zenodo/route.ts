@@ -4,7 +4,7 @@ const filter = (data: any): any[] => {
     let returnedObj: any[] = [];
 
     data.forEach((element: any) => {
-        const picked = (({ metadata, doi_url, files }) => ({ location: 'zenodo', privacyLevel: "open", files: files, creators: metadata["creators"], DOI: doi_url, title: metadata["title"], description: metadata["description"], publication_date: metadata["publication_date"] }))(element);
+        const picked = (({ metadata, doi_url, files, links }) => ({ source_url: links.self_doi, location: 'zenodo', privacyLevel: "open", files: files, creators: metadata["creators"], DOI: doi_url, title: metadata["title"], description: metadata["description"], publication_date: metadata["publication_date"] }))(element);
         returnedObj.push(picked);
     });
     return returnedObj;

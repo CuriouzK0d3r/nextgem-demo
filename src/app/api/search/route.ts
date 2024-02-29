@@ -13,7 +13,7 @@ export async function POST(req: Request, res: NextApiResponse) {
 
     if (sources.includes("NextGEM")) {
         const response = await fetch(apiEndpoint, {
-            method: 'GET',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
@@ -115,7 +115,21 @@ export async function POST(req: Request, res: NextApiResponse) {
     });
 
     let uniqueTitles = titles.filter((v, i, a) => a.indexOf(v) === i);
-    console.log(uniqueTitles.length, titles.length, results.length)
+    results = results.sort((a, b) => {
+        let fa = a.title.toLowerCase(),
+            fb = b.title.toLowerCase();
+    
+        if (fa < fb) {
+            return -1;
+        }
+        if (fa > fb) {
+            return 1;
+        }
+        return 0;
+    });
+
+    // console.log(results[1])
+
 
     return Response.json({ searchResults: results });
 }

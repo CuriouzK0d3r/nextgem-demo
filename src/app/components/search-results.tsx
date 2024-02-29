@@ -47,7 +47,7 @@ function DefaultPagination({
   };
 
 
-    
+
 
   const pagesNo = Math.ceil(searchResults.length / 5);
 
@@ -103,34 +103,34 @@ const SearchResults: React.FC<any> = ({
   const [active, setActive] = React.useState(0);
   const [moreIdx, setMoreIdx] = React.useState(-1);
 
-  var rows  = [
+  var rows = [
     {
-          id: 1,
-          name: "Sadio Mane",
-          country_id: 3,
-          club_id: 2,
-          front_end_position:{
-            name:{
-              full_name:"Forward",
-              short_code:"FW"
-            },
-            id:2
-          }
+      id: 1,
+      name: "Sadio Mane",
+      country_id: 3,
+      club_id: 2,
+      front_end_position: {
+        name: {
+          full_name: "Forward",
+          short_code: "FW"
+        },
+        id: 2
+      }
     },
     {
-          id: 3,
-          name: "Virgil VanDijk",
-          country_id: 30,
-          club_id: 2,
-          front_end_position:{
-            name:{
-              full_name:"Defence",
-              short_code:"DF"
-            },
-            id:2
-          }
+      id: 3,
+      name: "Virgil VanDijk",
+      country_id: 30,
+      club_id: 2,
+      front_end_position: {
+        name: {
+          full_name: "Defence",
+          short_code: "DF"
+        },
+        id: 2
+      }
     }
-    ]
+  ]
 
   const TABLE_HEAD = [
     "Title",
@@ -155,38 +155,38 @@ const SearchResults: React.FC<any> = ({
 
   var columns = [
     {
-     field: "title",
-     use: "Title",
-     //Will not be used in search filtering
-     use_in_search:true
-   },
-   {
-     field: "typeOfStudy",
-     use: "Type of Study",
-   },
-   {
-    field: "outputType",
-    use: "Output Type",
-  },
-  {
-    field: "location",
-    use: "Location",
-  },
-  {
-    field: "privacyLevel",
-    use: "Status",
-  },
-  {
-    field: "source",
-    use: "",
-  },
-  // {
-  //   field: "more",
-  //   use: "",
-  // },
-]
+      field: "title",
+      use: "Title",
+      //Will not be used in search filtering
+      use_in_search: true
+    },
+    {
+      field: "typeOfStudy",
+      use: "Type of Study",
+    },
+    {
+      field: "outputType",
+      use: "Output Type",
+    },
+    {
+      field: "location",
+      use: "Location",
+    },
+    {
+      field: "privacyLevel",
+      use: "Status",
+    },
+    {
+      field: "source",
+      use: "",
+    },
+    // {
+    //   field: "more",
+    //   use: "",
+    // },
+  ]
 
-  
+
 
   const TABLE_ROWS = searchResults.slice(active * 5, active * 5 + 5);
   // const TABLE_ROWS = [
@@ -310,7 +310,7 @@ const SearchResults: React.FC<any> = ({
                     {TABLE_HEAD.map((head, index) => (
                       <th
                         key={index}
-                        className={`border-blue-gray-100 bg-blue-gray-50 border-b p-4 pb-4 ${[ "Status", "Location"].includes(head) ? "hidden lg:table-cell" : ["Output Type", "Type of Study"].includes(head) ? "hidden xl:table-cell" : ""}`}
+                        className={`border-blue-gray-100 bg-blue-gray-50 border-b p-4 pb-4 ${["Status", "Location"].includes(head) ? "hidden lg:table-cell" : ["Output Type", "Type of Study"].includes(head) ? "hidden xl:table-cell" : ""}`}
                       >
                         <Typography
                           placeholder={""}
@@ -333,6 +333,7 @@ const SearchResults: React.FC<any> = ({
                         typeOfStudy,
                         outputType,
                         location,
+                        source_url,
                         institution,
                         studyType,
                         privacyLevel,
@@ -419,10 +420,10 @@ const SearchResults: React.FC<any> = ({
                                 className="mb-6"
                                 color={
                                   privacyLevel === "Public" ||
-                                  privacyLevel === "open"
+                                    privacyLevel === "open"
                                     ? "green"
                                     : privacyLevel === "restricted" ||
-                                        privacyLevel === "sensitive"
+                                      privacyLevel === "sensitive"
                                       ? "orange"
                                       : "gray"
                                 }
@@ -431,15 +432,17 @@ const SearchResults: React.FC<any> = ({
                           </td>
                           <td className={classes + " "}>
                             <div className=" w-max">
-                              <Chip
-                                size="sm"
-                                variant="ghost"
-                                value={source}
-                                className="mb-6"
-                                color={
-                                  "gray"
-                                }
-                              />
+                              <a href={source_url} target="_blank" rel="noreferrer" className="p-0">
+                                <Chip
+                                  size="sm"
+                                  variant="ghost"
+                                  value={source}
+                                  className="mb-6"
+                                  color={
+                                    "gray"
+                                  }
+                                />
+                              </a>
                             </div>
                           </td>
                           <td>
@@ -481,13 +484,13 @@ const SearchResults: React.FC<any> = ({
           >
             {searchResults.length ? (
               <div className="mx-auto flex flex-col justify-center">
-                 {searchResults.length} results found
+                {searchResults.length} results found
                 <Typography
                   placeholder={""}
                   variant="h6"
                   className="text-center text-gray-900"
                 >
-                  Page {active + 1} of { Math.floor(searchResults.length/5) + (searchResults.length%5 > 0 ? 1 : 0)}
+                  Page {active + 1} of {Math.floor(searchResults.length / 5) + (searchResults.length % 5 > 0 ? 1 : 0)}
                 </Typography>
                 <DefaultPagination
                   active={active}

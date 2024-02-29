@@ -27,7 +27,7 @@ function DashboardPage() {
                             <div className=" w-full h-full text-center rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900/50">
                                 <img width={90} className='mx-auto pt-8' src="./input-logo.svg" alt="" />
                                 <span className='text-white'>
-                                    Input Data
+                                    Data Management
                                 </span>
                             </div>
                         </div>

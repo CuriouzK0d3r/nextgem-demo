@@ -35,6 +35,11 @@ export async function POST(req: Request) {
         results = resultTitle;
 
         results = results?.map((result) => {
+            result["doi"] = typeof result["doi"] === 'string' ? result["doi"] : result["doi"]?.[1];
+            return result;
+        });
+
+        results = results?.map((result) => {
             return {
                 ...result,
                 location: "",
