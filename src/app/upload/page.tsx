@@ -178,7 +178,7 @@ function InputPage() {
             <div className="w-full mt-40 min-h-[60rem]">
                 <Card placeholder={""} className="mt-6 w-full lg:w-1/2 xl:1/3 mx-auto form-container object-cover object-center shadow-xl shadow-blue-gray-900/50">
                     <CardHeader placeholder={""} className='bg-[#D4D9DD] text-black p-0 divide-y-2 divide-[#fff]'>
-                        <Typography placeholder={""} variant="h2" className="text-center pb-4 pt-4">
+                        <Typography placeholder={""} variant="h1" className="text-center pb-4 pt-4">
                             Input Data
                         </Typography>
                         <div className="tab bt-2 object-cover object-center shadow-3xl shadow-blue-gray-900/50 ">
@@ -201,7 +201,7 @@ function InputPage() {
                                                     if (inputField.type === "text") {
                                                         return (
                                                             <div key={index} className="flex flex-row mt-4 p-0">
-                                                                <Input required key={index} className='object-cover bg-white object-center shadow-sm shadow-blue-gray-900/50' value={inputState[inputField.field]} onChange={(event: any ) => { event.preventDefault(); setInputState({ ...inputState, [inputField.field]: event.target.value }) }} crossOrigin="true" style={{ color: "black" }} label={inputField.label} />
+                                                                <Input required key={index} className='object-cover bg-white object-center shadow-sm shadow-blue-gray-900/50' value={inputState[inputField.field]} onChange={(event: any) => { event.preventDefault(); setInputState({ ...inputState, [inputField.field]: event.target.value }) }} crossOrigin="true" style={{ color: "black" }} label={inputField.label} />
                                                             </div>
                                                         );
                                                     } else if (inputField.type === "select") {
@@ -210,8 +210,7 @@ function InputPage() {
                                                                 <Select key={index} className='object-cover bg-white object-center shadow-sm shadow-blue-gray-900/50 text-black' label={inputField.label} placeholder={inputField.label} value={inputState[inputField.field]} onChange={(event: any) => setInputState({ ...inputState, [inputField.field]: event })}>
                                                                     {inputField.values?.map((value: any) => (
                                                                         <Option key={value} value={value}>{value}</Option>
-                                                                    ))
-                                                                    }
+                                                                    ))}
                                                                 </Select>
                                                             </div>
 
@@ -234,7 +233,7 @@ function InputPage() {
                             <Typography variant="h5" placeholder={"Description"}>Upload scientific data files</Typography>
 
                             {/* <h2 className='mb-8 text-xl bold underline decoration-dotted decoration-4 decoration-[#1D2E66]'>Upload scientific data files</h2> */}
-                             <FileUploader
+                            <FileUploader
                                 url={'/api/upload'}
                                 acceptedFileTypes={[
                                     "application/json",

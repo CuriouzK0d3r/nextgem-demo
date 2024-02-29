@@ -136,7 +136,7 @@ const SearchResults: React.FC<any> = ({
     "Title",
     // "Type of Study",
     "Output Type",
-    "Location",
+    // "Location",
     "Status",
     "Sources",
     " ",
@@ -267,7 +267,7 @@ const SearchResults: React.FC<any> = ({
         <CardHeader placeholder="" className="bg-[#D4D9DD] text-black">
           <Typography
             placeholder=""
-            variant="h2"
+            variant="h1"
             className="pb-4 pt-4 text-center"
           >
             {moreIdx === -1 ? "Search Results" : "More Information"}
@@ -396,7 +396,7 @@ const SearchResults: React.FC<any> = ({
                               </div>
                             </div>
                           </td>
-                          <td className={classes + " hidden lg:table-cell"}>
+                          {/* <td className={classes + " hidden lg:table-cell"}>
                             <div className="flex items-center gap-3">
                               <div className=" flex flex-col text-left">
                                 <Typography
@@ -409,7 +409,7 @@ const SearchResults: React.FC<any> = ({
                                 </Typography>
                               </div>
                             </div>
-                          </td>
+                          </td> */}
                           <td className={classes + " hidden lg:table-cell"}>
                             <div className="hidden lg:table-cell">
                               <Chip
