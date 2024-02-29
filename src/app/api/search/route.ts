@@ -19,7 +19,7 @@ export async function POST(req: Request, res: NextApiResponse) {
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Methods': 'GET',
                 'Access-Control-Allow-Headers': 'Content-Type, X-CSRF-TOKEN',
-            }, 
+            },
         });
 
         let resJ: any[] = [];
@@ -53,9 +53,9 @@ export async function POST(req: Request, res: NextApiResponse) {
                 'Access-Control-Allow-Methods': 'GET',
                 'Access-Control-Allow-Headers': 'Content-Type, X-CSRF-TOKEN',
             },
-            body: JSON.stringify({ query: `(title: ${formData['title']}) ${query.length > 0 ? ` OR (description:${query})` : ""}`})
+            body: JSON.stringify({ query: `(title: ${formData['title']}) ${query.length > 0 ? ` OR (description:${query})` : ""}` })
         })
-        
+
         const responseJSON = await response.json();
         results = results.concat(JSON.parse(responseJSON));
     }
@@ -69,7 +69,7 @@ export async function POST(req: Request, res: NextApiResponse) {
                 'Access-Control-Allow-Methods': 'GET',
                 'Access-Control-Allow-Headers': 'Content-Type, X-CSRF-TOKEN',
             },
-            body: JSON.stringify({ query: formData, source: "emf"})
+            body: JSON.stringify({ query: formData, source: "emf" })
         })
 
         const responseJSON = await response.json();
@@ -85,7 +85,7 @@ export async function POST(req: Request, res: NextApiResponse) {
                 'Access-Control-Allow-Methods': 'GET',
                 'Access-Control-Allow-Headers': 'Content-Type, X-CSRF-TOKEN',
             },
-            body: JSON.stringify({ query: formData, source: "wos"})
+            body: JSON.stringify({ query: formData, source: "wos" })
         })
 
         const responseJSON = await response.json();
@@ -101,24 +101,24 @@ export async function POST(req: Request, res: NextApiResponse) {
                 'Access-Control-Allow-Methods': 'GET',
                 'Access-Control-Allow-Headers': 'Content-Type, X-CSRF-TOKEN',
             },
-            body: JSON.stringify({ query: formData, source: "pubmed"})
+            body: JSON.stringify({ query: formData, source: "pubmed" })
         });
 
         const responseJSON = await response.json();
         results = results.concat(addSource(responseJSON, "PubMed"));
     }
 
-    let titles: any[] = [];
+    let distinct: any = []
+    for (var i = 0; i < results.length; i++)
+        if (!(results[i].title in distinct))
+            distinct.push(results[i].title)
+        else
+            console.log(results[i].title)
 
-    titles = results.map((result) => {
-        return result.title;
-    });
-
-    let uniqueTitles = titles.filter((v, i, a) => a.indexOf(v) === i);
     results = results.sort((a, b) => {
         let fa = a.title.toLowerCase(),
             fb = b.title.toLowerCase();
-    
+
         if (fa < fb) {
             return -1;
         }
