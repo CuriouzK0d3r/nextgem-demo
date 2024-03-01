@@ -13,6 +13,18 @@ const matchOutputType = (record: any, outputType: string) => {
     return !outputType.length || (record.institution.toLowerCase() === outputType.toLowerCase());
 }
 
+const matchStudyType = (record: any, studyType: string) => {
+    return !studyType.length || (record.studyType.toLowerCase() === studyType.toLowerCase());
+}
+
+const matchModulation = (record: any, modulation: string) => {
+    return !modulation.length || (record.modulation.toLowerCase() === modulation.toLowerCase());
+}
+
+const matchPrivacyLevel = (record: any, privacyLevel: string) => {
+    return !privacyLevel.length || (record.privacyLevel.toLowerCase() === privacyLevel.toLowerCase());
+}
+
 export async function POST(req: Request, res: NextApiResponse) {
     const hostname = headers().get('host');
     let apiEndpoint = "https://139.91.58.16/metadata/records?";
@@ -36,14 +48,13 @@ export async function POST(req: Request, res: NextApiResponse) {
 
         let resJ: any[] = [];
         let inputData: any = {};
-        ['title', 'institution', 'outputType'].forEach((key) => {
+        ['title', 'institution', 'outputType', 'modulation', 'studyType', 'privacyLevel'].forEach((key) => {
             formData[key] ? inputData[key] = formData[key] : inputData[key] = "";
         });
 
         const responseJSON = await response.json();
         responseJSON.forEach((record: any) => {
-            console.log(record)
-            if (matchTitle(record, inputData['title']) && matchInstitution(record, inputData['institution']) && matchOutputType(record, inputData['outputType'])) {
+            if (matchTitle(record, inputData['title']) && matchPrivacyLevel(record, inputData['privacyLevel']) && matchStudyType(record, inputData['studyType']) && matchModulation(record, inputData['modulation']) && matchInstitution(record, inputData['institution']) && matchOutputType(record, inputData['outputType'])) {
                 resJ.push(record);
             }
         });
