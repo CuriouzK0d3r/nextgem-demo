@@ -1,6 +1,18 @@
 import { NextApiResponse } from 'next';
 import { headers } from 'next/headers';
 
+const matchTitle = (record: any, title: string) => {
+    return !title.length || record.title.toLowerCase().includes(title.toLowerCase());
+}
+
+const matchInstitution = (record: any, institution: string) => {
+    return !institution.length || (record.institution.toLowerCase() === institution.toLowerCase());
+}
+
+const matchOutputType = (record: any, outputType: string) => {
+    return !outputType.length || (record.institution.toLowerCase() === outputType.toLowerCase());
+}
+
 export async function POST(req: Request, res: NextApiResponse) {
     const hostname = headers().get('host');
     let apiEndpoint = "https://139.91.58.16/metadata/records?";
@@ -23,14 +35,17 @@ export async function POST(req: Request, res: NextApiResponse) {
         });
 
         let resJ: any[] = [];
+        let inputData: any = {};
+        ['title', 'institution', 'outputType'].forEach((key) => {
+            formData[key] ? inputData[key] = formData[key] : inputData[key] = "";
+        });
 
         const responseJSON = await response.json();
         responseJSON.forEach((record: any) => {
-            if (record.title && formData['title'] && record.title.toLowerCase().includes(formData['title'].toLowerCase()))
+            console.log(record)
+            if (matchTitle(record, inputData['title']) && matchInstitution(record, inputData['institution']) && matchOutputType(record, inputData['outputType'])) {
                 resJ.push(record);
-
-            if (record.institution && formData['institution'] && record.institution.toLowerCase().includes(formData['institution'].toLowerCase()))
-                resJ.push(record);
+            }
         });
 
         results = results.concat(addSource(resJ, "NextGEM"));
