@@ -10,27 +10,83 @@ export async function POST(req: Request) {
         const collection = database.collection('pub_metadata'); // replace with your collection name
         let filter = {};
         let json = await req.json();
-        const source = json.source;
-        let data = json.query;
+        const source = json.source ? [json.source] : ["pubmed", "emf", "wos"];
+        // const sources = json.sources || [source];
+        let query = json.query;
+        let type = json.type;
         let results;
         let cursor;
-        let filters: any[] = [];
+        let appliedFilters: any[] = [];
 
-        Object.keys(data).forEach((key: string) => {
+        let filters = [
+            {
+                'title': {
+                    '$regex': query
+                }
+            },
+            {
+                'author.given': {
+                    '$regex': query
+                }
+            },
+            {
+                'DOI': {
+                    '$regex': query
+                }
+            },
+            {
+                'subject.': {
+                    '$regex': query
+                }
+            },
+            {
+                'abstract': {
+                    '$regex': query
+                }
+            }
+        ];
+
+        switch (type) {
+            case "title":
+                appliedFilters.push(filters[0]);
+                break;
+            case "author":
+                appliedFilters.push(filters[1]);
+                break;
+            case "doi":
+                appliedFilters.push(filters[2]);
+                break;
+            case "subject":
+                appliedFilters.push(filters[3]);
+                break;
+            case "abstract":
+                appliedFilters.push(filters[4]);
+                break;
+            case "all fields":
+                const filter = {
+                    $or: filters
+                };
+                appliedFilters.push(filter);
+                break;
+        }
+
+        Object.keys(query).forEach((key: string) => {
             if (!["title", 'doi', 'abstract'].includes(key as never)) {
                 return;
             }
             let filter: any = {};
             filter[key] = {
-                '$regex': data[key]
+                '$regex': query[key]
             }
-            filters.push(filter);
+            appliedFilters.push(filter);
         });
-        filters.push({source: source});
+
+        appliedFilters.push({source: {'$in': source}});
 
         let cursorFilter = collection.find({
-            $and: filters
+            $and: appliedFilters
         });
+
         let resultTitle = await cursorFilter.toArray();
         results = resultTitle;
 

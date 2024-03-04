@@ -1,0 +1,8 @@
+Bio==1.6.0
+crossref==0.1.2
+gradio==4.0.2
+pandas==2.1.2
+playwright==1.39.0
+pymed==0.8.9
+pymongo==4.5.0
+PyPDF2==3.0.1

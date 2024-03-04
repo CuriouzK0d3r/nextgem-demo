@@ -52,7 +52,6 @@ const SearchResultsTable: React.FC<any> = ({ submittedQuery, type, setCurrentPag
     async function search() {
         if (submittedQuery.length === 0) return;
         setIsLoading(true);
-
         if (searchMode === 'Publications') {
             const res = await fetch('/api/search/publications', {
                 method: 'POST',
@@ -220,5 +219,3 @@ const SearchResultsTable: React.FC<any> = ({ submittedQuery, type, setCurrentPag
 };
 
 export default SearchResultsTable;
-
-

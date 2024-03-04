@@ -13,7 +13,7 @@ import {
 const SearchCardZenodo: React.FC<any> = ({ document, index, setShowModal, setPaperAbstract, setDataFiles }) => {
     return (
         <div style={{ borderColor: "#6359E1" }} className='rounded-lg'>
-            <Card placeholder={""} className="w-full mb-4 p-6 hover:bg-[#eeeeee85] object-cover bg-[#eee] object-center shadow-xl shadow-blue-gray-900/50">
+            <Card placeholder={""} className="w-full mb-4 p-6 object-cover hover:bg-[#eee]  bg-[#D9D9D9] object-center shadow-xl shadow-blue-gray-900/50">
                 <div className='flex'>
                     <div className="float-left w-5/6">
                         <h3 className="ml-3 text-left mb-3 text-lg">{document.title}</h3>

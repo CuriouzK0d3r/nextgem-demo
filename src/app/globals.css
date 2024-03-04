@@ -342,6 +342,7 @@ label {
 .pagination>nav>ul>li>button {
   padding-left: 8px;
   padding-right: 8px;
+  color: rgb(37, 34, 34);
 }
 
 .pagination>nav>ul>li>button>svg {
@@ -349,7 +350,8 @@ label {
 }
 
 .pagination>nav>ul>li[aria-current="page"]>button {
-  background-color: #2FC1FF;
+  background-color: #1d3f66;
+  color: white;
 }
 
 .pagination>nav>ul>li>button {
@@ -358,11 +360,11 @@ label {
 
 .pagination>nav>ul>li {
   list-style-type: none;
-  
 }
 
 li>button:hover {
-  background-color: #2f7fff !important;
+  background-color: #1D2E66 !important;
+  color: white !important;
 }
 
 .search-mode > button {

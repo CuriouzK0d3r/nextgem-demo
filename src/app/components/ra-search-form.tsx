@@ -26,7 +26,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ handleSearch, searchType, setSe
                 <Menu as="div" className="relative flex-none text-left w-[138px]">
                     <div>
                         <Menu.Button style={{ borderWidth: "2px", borderColor: "#6359E1", borderTopLeftRadius: "8px" }} id="dropdown-button" data-dropdown-toggle="dropdown" className=" w-[150px]  h-[70px] flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center 
-            text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none
+            text-gray-900 bg-[#D9D9D9] border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none
              focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700
               dark:text-white dark:border-gray-600 pl-9">
                             {searchType}
@@ -137,12 +137,12 @@ const SearchForm: React.FC<SearchFormProps> = ({ handleSearch, searchType, setSe
                         style={{ borderWidth: "2px", borderColor: "#6359E1" }}
                         value={searchQuery}
                         onChange={(e) => { setSearchQuery(e.target.value); }}
-                        type="search" id="search-dropdown" className="w-full h-[70px] block p-2.5 z-20 text-sm text-gray-800 
+                        type="search" id="search-dropdown" className="bg-[#D9D9D9] w-full h-[70px] block p-2.5 z-20 text-sm text-gray-800 
                  rounded-r-lg border-l-gray-50 border-l-2 border placeholder-gray-800 border-gray-300 focus:ring-blue-500 focus:border-blue-500 
                 " placeholder="Search Titles, DOIs, Authors, Subjects" required />
                 </div>
                 <div className='flex-none'>
-                    <button style={{ borderWidth: "2px", borderColor: "#6359E1", borderTopLeftRadius: "8px" }} type="submit" className="w-[100px] absolute top-0 right-0 pl-6 text-sm font-medium h-full text-white bg-blue-500 rounded-r-lg border border-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-700">
+                    <button style={{ borderWidth: "2px", borderColor: "#6359E1", borderTopLeftRadius: "8px" }} type="submit" className="w-[100px] absolute top-0 right-0 pl-6 text-sm font-medium h-full text-white bg-[#1D2E66] rounded-r-lg border border-blue-500 hover:bg-[#1d3f66] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-[#1d3f66] dark:focus:ring-blue-700">
                         <svg className="w-12 h-12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                         </svg>
