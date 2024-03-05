@@ -107,7 +107,7 @@ const ChatResults: React.FC<any> = ({ submittedQuery, finished, setFinished, set
     }, []);
 
     return (
-        <div className='h-full w-4/5 mx-auto'>
+        <div className='h-full w-full p-0 mx-auto'>
             {submittedQuery.length ?
                 (<div className="mt-6 h-full">
                     <div className='mx-auto'>
@@ -127,7 +127,7 @@ const ChatResults: React.FC<any> = ({ submittedQuery, finished, setFinished, set
                                                                     <div className="flex items-end">
                                                                         <div className="flex flex-col space-y-2 text-md leading-tight max-w-xl mx-2">
                                                                             <div>
-                                                                                <span className="px-4 py-3 rounded-xl inline-block text-white" style={{ backgroundColor: '#6359E1' }} >{message}</span>
+                                                                                <span className="px-4 py-3 rounded-xl inline-block text-white text-left" style={{ backgroundColor: '#6359E1' }} >{message}</span>
                                                                             </div>
                                                                         </div>
                                                                         <TbRobot className="w-6 h-6" />

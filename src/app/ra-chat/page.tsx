@@ -74,8 +74,9 @@ function RASearchPage() {
                         </MenuList>
                     </Menu></h1> : <></>
                 }
-                <ChatResults finished={finished} setFinished={setFinished} setSubmittedQuery={setSubmittedQuery} setChatMessage={setChatMessage} submittedQuery={submittedQuery} type={searchType.toLowerCase()}></ChatResults>
-                <div className={classNames("relative flex mx-auto place-items-center w-full md:w-5/6", submittedQuery.length ? "mt-9" : "mt-0")}>
+                <div className={classNames("relative flex mx-auto flex-col place-items-center w-full md:w-5/6 p-0", submittedQuery.length ? "mt-9" : "mt-0")}>
+                    <ChatResults finished={finished} setFinished={setFinished} setSubmittedQuery={setSubmittedQuery} setChatMessage={setChatMessage} submittedQuery={submittedQuery} type={searchType.toLowerCase()}></ChatResults>
+
                     {/* create a search form with tailwindcss */}
                     <ChatForm finished={finished} setFinished={setFinished} submittedQuery={submittedQuery} handleSearch={handleChat}
                         chatMessage={chatMessage} setChatMessage={setChatMessage}></ChatForm>
