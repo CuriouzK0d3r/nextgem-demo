@@ -114,7 +114,7 @@ const ChatResults: React.FC<any> = ({ submittedQuery, finished, setFinished, set
                     </div>
                     <div className="">
                         <div className="flex flex-col">
-                            <div className="-my-2 flex-1 sm:-mx-6 lg:-mx-8 rounded-xl">
+                            <div className=" flex-1 rounded-xl">
                                 <div className=" align-middle rounded inline-block w-full ">
                                     <div style={{background: "#D9D9D9"}} className={"rounded-lg object-cover object-center shadow-md shadow-blue-gray-900/50 " + (submittedQuery.length ? "border-t border-l border-r dark:border-gray-700 border-gray-200" : "")}>
                                         <div>
