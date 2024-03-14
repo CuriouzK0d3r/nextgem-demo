@@ -43,7 +43,7 @@ const ExternalSources = ({ hasSubmitted, setHasSubmitted, inputState, setSearchR
         if (hasSubmitted) {
             if (chosenSources.length == 0) {
                 setErrorMessage("Please select at least one source!");
-                        setOpen(true);
+                setOpen(true);
                 setHasSubmitted(false);
             } else
                 submitSearch(inputState);
@@ -54,9 +54,9 @@ const ExternalSources = ({ hasSubmitted, setHasSubmitted, inputState, setSearchR
         <div className='flex flex-col mx-auto w-full mt-10 mb-20'>
             <h1 className='text-xl text-black italic decoration-offset-4 decoration-wavy block text-center'>Select one or more sources:</h1> <br />
 
-            <div className=' flex mx-auto mt-4 items-center'>
-            <button className={""} onClick={() => { chosenSources.length === 5 ? setChosenSources([]) : setChosenSources(["EMF", "NextGEM", "Zenodo", "PubMed", "WOS"]) }}>
-            <img width={110} src="./allsources.svg" alt="NextGEM" className={"mr-[18px] p-0 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50"} />
+            <div className=' grid grid-cols-2 gap-2 lg:gap-0 lg:grid-cols-6 mx-auto mt-4 items-center'>
+                <button className={""} onClick={() => { chosenSources.length === 5 ? setChosenSources([]) : setChosenSources(["EMF", "NextGEM", "Zenodo", "PubMed", "WOS"]) }}>
+                    <img width={110} src="./allsources.svg" alt="NextGEM" className={"mr-[18px] p-0 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50"} />
                 </button>
                 <button className={""} onClick={() => { chosenSources.includes("NextGEM") ? setChosenSources(chosenSources.filter(function (e: any) { return e !== 'NextGEM' })) : setChosenSources([...chosenSources, "NextGEM"]) }}>
                     <img width={100} src="./NextGEM_Button.svg" alt="NextGEM" className={chosenSources.includes("NextGEM") ? "custom-bounce chosen-source mr-[13px] p-0 rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900" : "mr-[13px] p-0 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50"} />
@@ -96,7 +96,7 @@ const ExternalSources = ({ hasSubmitted, setHasSubmitted, inputState, setSearchR
             </div>
 
             <ErrorModal errorMessage={errorMessage} showModal={open} setShowModal={setOpen} ></ErrorModal>
-            
+
         </div>
     );
 };

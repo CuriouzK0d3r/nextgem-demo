@@ -90,13 +90,13 @@ function SearchPage() {
             <Card
               placeholder={""}
               style={{background: "#D9D9D9"}}
-              className="form-container shadow-blue-gray-900/50 mx-auto mt-6 w-1/2 rounded-lg object-cover object-center shadow-xl"
+              className="form-container shadow-blue-gray-900/50 mx-auto mt-6 w-4/5 lg:w-1/2 rounded-lg object-cover object-center shadow-xl"
             >
               <CardHeader placeholder={""} className="bg-[#D4D9DD] text-black">
                 <Typography
                   placeholder={""}
                   variant="h2"
-                  className="pb-4 pt-4 text-center"
+                  className="pb-4 pt-4 text-center text-xl lg:text-2xl xl:text-4xl"
                 >
                   Search Scientific Catalogue
                 </Typography>
@@ -113,7 +113,7 @@ function SearchPage() {
                   <div className=" ">
                     <div>
                       {/* <Typography variant="h5" placeholder={"Description"}>Description</Typography> */}
-                      <div className="mb-12 grid w-full grid-cols-2 gap-x-12 gap-y-2 p-0">
+                      <div className="mb-12 grid w-full grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-2 p-0">
                         {inputFields.map((field: any, index: any) => {
                           const words = field.fieldName.replace(
                             /([a-z])([A-Z])/g,
