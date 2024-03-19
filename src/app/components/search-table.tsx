@@ -1,5 +1,5 @@
-import { Chip, Typography } from '@material-tailwind/react';
-import Table from 'react-tailwind-table';
+import { Card, Chip, Typography } from "@material-tailwind/react";
+import Table from "react-tailwind-table";
 
 // import 'react-tailwind-table/dist/index.css';
 
@@ -26,166 +26,76 @@ const SearchTable = ({ searchResults }: { searchResults: any }) => {
   };
   console.log(searchResults);
 
-  const TABLE_ROWS = searchResults.slice(0 * 1, 1);
+  const document = searchResults.slice(0 * 1, 1);
 
   return (
-    <table className="mx-auto mt-6 w-full table-auto overflow-hidden border-collapse text-left">
-                <thead>
-                  <tr className="whitespace-nowrap">
-                    {TABLE_HEAD.map((head, index) => (
-                      <th
-                        key={index}
-                        className={`border-blue-gray-100 bg-blue-gray-50 border-b p-4 pb-4 ${[ "Status", "Location"].includes(head) ? "hidden lg:table-cell" : ["Output Type", "Type of Study"].includes(head) ? "hidden xl:table-cell" : ""}`}
-                      >
-                        <Typography
-                          placeholder={""}
-                          variant="h6"
-                          color="blue-gray"
-                          className="font-normal opacity-70"
-                        >
-                          {head}
-                        </Typography>
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {TABLE_ROWS.map(
-                    (
-                      {
-                        title,
-                        abstract,
-                        description,
-                        typeOfStudy,
-                        outputType,
-                        location,
-                        institution,
-                        studyType,
-                        privacyLevel,
-                        source
-                      }: any,
-                      index: number,
-                    ) => {
-                      const isLast = index === TABLE_ROWS.length - 1;
-                      const classes = isLast
-                        ? "p-4 "
-                        : "p-4 border-b border-blue-gray-50 whitespace-break-spaces";
-
-                      return (
-                        <tr key={index} className="even:bg-blue-gray-50/50">
-                          <td className={classes}>
-                            <div className="flex  items-center">
-                              <Typography
-                                placeholder=""
-                                variant="h6"
-                                color="blue-gray"
-                                className="font-normal"
-                              >
-                                {abstract}
-                              </Typography>
-                            </div>
-                          </td>
-                          {/* <td className={classes}>
-                                                    <Typography
-                                                        variant="small"
-                                                        color="blue-gray"
-                                                        className="font-normal"
-                                                    >
-                                                        {description}
-                                                    </Typography>
-                                                </td> */}
-                          <td className={classes + " hidden xl:table-cell "}>
-                            <div className="flex items-center gap-3">
-                              <div className="flex flex-col">
-                                <Typography
-                                  placeholder=""
-                                  variant="h6"
-                                  color="blue-gray"
-                                  className="hidden font-normal xl:table-cell"
-                                >
-                                  {studyType ? studyTypeMap[studyType] : "N/A"}
-                                </Typography>
-                              </div>
-                            </div>
-                          </td>
-                          <td className={classes + " hidden xl:table-cell"}>
-                            <div className="flex items-center gap-3">
-                              <div className="flex flex-col">
-                                <Typography
-                                  placeholder=""
-                                  variant="h6"
-                                  color="blue-gray"
-                                  className="font-normal capitalize hidden xl:table-cell"
-                                >
-                                  {outputType || "N/A"}
-                                </Typography>
-                              </div>
-                            </div>
-                          </td>
-                          <td className={classes + " hidden lg:table-cell"}>
-                            <div className="flex items-center gap-3">
-                              <div className=" flex flex-col text-left">
-                                <Typography
-                                  placeholder=""
-                                  variant="h6"
-                                  color="blue-gray"
-                                  className="text-left font-normal hidden lg:table-cell  capitalize"
-                                >
-                                  {institution || location}
-                                </Typography>
-                              </div>
-                            </div>
-                          </td>
-                          <td className={classes + " hidden lg:table-cell"}>
-                            <div className="hidden lg:table-cell">
-                              <Chip
-                                size="sm"
-                                variant="ghost"
-                                value={privacyLevel}
-                                className="mb-6"
-                                color={
-                                  privacyLevel === "Public" ||
-                                  privacyLevel === "open"
-                                    ? "green"
-                                    : privacyLevel === "restricted" ||
-                                        privacyLevel === "sensitive"
-                                      ? "orange"
-                                      : "gray"
-                                }
-                              />
-                            </div>
-                          </td>
-                          <td className={classes + " "}>
-                            <div className=" w-max">
-                              <Chip
-                                size="sm"
-                                variant="ghost"
-                                value={source}
-                                className="mb-6"
-                                color={
-                                  "gray"
-                                }
-                              />
-                            </div>
-                          </td>
-                          <td>
-                            <Typography
-                              placeholder={""}
-                              as="a"
-                              variant="small"
-                              color="blue-gray"
-                              className="mb-4 cursor-pointer font-medium"
-                            >
-                              More
-                            </Typography>
-                          </td>
-                        </tr>
-                      );
-                    },
-                  )}
-                </tbody>
-              </table>
-
+    <Card
+      placeholder={""}
+      className="shadow-blue-gray-900/50 mb-4 w-full bg-[#D9D9D9]  object-cover object-center pt-6 shadow-xl hover:bg-[#eee]"
+    >
+      <div className="flex">
+        {/* <div className="float-left w-5/6">
+          <h3 className="mb-3 ml-3 text-left text-lg">{document.title}.</h3>
+          <p className="mt-1 flex items-center">
+            <div className=" ml-6 text-blue-500">
+              {document.author?.map((auth: { given: string }, i: number) => {
+                if (i < 5)
+                  return (
+                    <span className="p-0" key={i + " span " + index}>
+                      {auth.given},{" "}
+                    </span>
+                  );
+                else if (i == 5)
+                  return (
+                    <span className="p-0" key={i + " span " + index}>
+                      {auth.given} et al.{" "}
+                    </span>
+                  );
+              })}
+              - {document.publisher},{" "}
+              {document.created && document.created["date-time"]
+                ? new Date(document.created["date-time"]).getFullYear()
+                : " "}
+            </div>
+          </p>
+          <p className="-mt-4 mb-2 flex items-center">
+            <div className="ml-6 text-gray-700 dark:text-gray-400">
+              {document.subject ? document.subject.join(", ") : ""}
+            </div>
+          </p>
+          <p className="flex items-center">
+            <div style={{ color: "#6359E1" }} className="ml-3 underline">
+              <a href={document.URL}>{document.DOI}</a>
+            </div>
+          </p>
+        </div>
+        <div className="float-right w-1/6">
+          <div className="align-right flex flex-col">
+            <a href={linkMap[document.source]} target="_blank" className="">
+              <div className="invisible float-right mx-auto mb-4 mr-1 w-[8rem] rounded-lg bg-[#1d3f66] p-3 text-center text-sm text-gray-100 lg:visible">
+                📖 {sourceMap[document.source]}
+              </div>
+            </a>
+            {/* {document.abstract?.length ? (
+              <a
+                className="cursor-pointer"
+                onClick={() => {
+                  setShowModal(true);
+                  setPaperAbstract(document.abstract);
+                }}
+                target="_blank"
+              >
+                <div className="invisible float-right mx-auto mr-1 w-[8rem] rounded-lg bg-[#1d3f66] p-3 text-center text-sm text-gray-100 lg:visible">
+                  📄 Abstract
+                </div>
+              </a>
+            ) : (
+              <></>
+            )} */}
+        {/* </div>
+    </div> * /} */}
+      </div>
+    </Card>
   );
 };
 

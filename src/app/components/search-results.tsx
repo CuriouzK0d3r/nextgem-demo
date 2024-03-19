@@ -15,9 +15,6 @@ import { motion } from "framer-motion";
 import SearchTable from "./search-table";
 // import Table from 'react-tailwind-table';
 
-// import 'react-tailwind-table/dist/index.css';
-
-
 function DefaultPagination({
   searchResults,
   active,
@@ -45,9 +42,6 @@ function DefaultPagination({
 
     setActive(active - 1);
   };
-
-
-
 
   const pagesNo = Math.ceil(searchResults.length / 5);
 
@@ -97,7 +91,7 @@ const SearchResults: React.FC<any> = ({
   mode,
   setMode,
   isLoggedIn,
-  seletedSources,
+  selectedSources,
   setSearchResults,
 }) => {
   const [active, setActive] = React.useState(0);
@@ -112,10 +106,10 @@ const SearchResults: React.FC<any> = ({
       front_end_position: {
         name: {
           full_name: "Forward",
-          short_code: "FW"
+          short_code: "FW",
         },
-        id: 2
-      }
+        id: 2,
+      },
     },
     {
       id: 3,
@@ -125,12 +119,12 @@ const SearchResults: React.FC<any> = ({
       front_end_position: {
         name: {
           full_name: "Defence",
-          short_code: "DF"
+          short_code: "DF",
         },
-        id: 2
-      }
-    }
-  ]
+        id: 2,
+      },
+    },
+  ];
 
   const TABLE_HEAD = [
     "Title",
@@ -158,7 +152,7 @@ const SearchResults: React.FC<any> = ({
       field: "title",
       use: "Title",
       //Will not be used in search filtering
-      use_in_search: true
+      use_in_search: true,
     },
     {
       field: "typeOfStudy",
@@ -184,9 +178,7 @@ const SearchResults: React.FC<any> = ({
     //   field: "more",
     //   use: "",
     // },
-  ]
-
-
+  ];
 
   const TABLE_ROWS = searchResults.slice(active * 5, active * 5 + 5);
   // const TABLE_ROWS = [
@@ -304,7 +296,7 @@ const SearchResults: React.FC<any> = ({
           </Typography>
           {searchResults.length ? (
             moreIdx === -1 ? (
-              <table className="mx-auto mt-6 w-full table-auto overflow-hidden border-collapse text-left">
+              <table className="mx-auto mt-6 w-full table-auto border-collapse overflow-hidden text-left">
                 <thead>
                   <tr className="whitespace-nowrap">
                     {TABLE_HEAD.map((head, index) => (
@@ -336,8 +328,9 @@ const SearchResults: React.FC<any> = ({
                         source_url,
                         institution,
                         studyType,
+                        output_type,
                         privacyLevel,
-                        source
+                        source,
                       }: any,
                       index: number,
                     ) => {
@@ -390,9 +383,9 @@ const SearchResults: React.FC<any> = ({
                                   placeholder=""
                                   variant="h6"
                                   color="blue-gray"
-                                  className="font-normal capitalize hidden xl:table-cell"
+                                  className="hidden font-normal capitalize xl:table-cell"
                                 >
-                                  {outputType || "N/A"}
+                                  {outputType || output_type || "N/A"}
                                 </Typography>
                               </div>
                             </div>
@@ -420,10 +413,10 @@ const SearchResults: React.FC<any> = ({
                                 className="mb-6"
                                 color={
                                   privacyLevel === "Public" ||
-                                    privacyLevel === "open"
+                                  privacyLevel === "open"
                                     ? "green"
                                     : privacyLevel === "restricted" ||
-                                      privacyLevel === "sensitive"
+                                        privacyLevel === "sensitive"
                                       ? "orange"
                                       : "gray"
                                 }
@@ -432,15 +425,18 @@ const SearchResults: React.FC<any> = ({
                           </td>
                           <td className={classes + " "}>
                             <div className=" w-max">
-                              <a href={source_url} target="_blank" rel="noreferrer" className="p-0">
+                              <a
+                                href={source_url}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="p-0"
+                              >
                                 <Chip
                                   size="sm"
                                   variant="ghost"
                                   value={source}
                                   className="mb-6"
-                                  color={
-                                    "gray"
-                                  }
+                                  color={"gray"}
                                 />
                               </a>
                             </div>
@@ -490,7 +486,9 @@ const SearchResults: React.FC<any> = ({
                   variant="h6"
                   className="text-center text-gray-900"
                 >
-                  Page {active + 1} of {Math.floor(searchResults.length / 5) + (searchResults.length % 5 > 0 ? 1 : 0)}
+                  Page {active + 1} of{" "}
+                  {Math.floor(searchResults.length / 5) +
+                    (searchResults.length % 5 > 0 ? 1 : 0)}
                 </Typography>
                 <DefaultPagination
                   active={active}

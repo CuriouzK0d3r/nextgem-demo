@@ -89,8 +89,8 @@ function SearchPage() {
           <div className={`mt-32 min-h-[65rem] w-full`}>
             <Card
               placeholder={""}
-              style={{background: "#D9D9D9"}}
-              className="form-container shadow-blue-gray-900/50 mx-auto mt-6 w-4/5 lg:w-1/2 rounded-lg object-cover object-center shadow-xl"
+              style={{ background: "#D9D9D9" }}
+              className="form-container shadow-blue-gray-900/50 mx-auto mt-6 w-4/5 rounded-lg object-cover object-center shadow-xl lg:w-1/2"
             >
               <CardHeader placeholder={""} className="bg-[#D4D9DD] text-black">
                 <Typography
@@ -101,7 +101,7 @@ function SearchPage() {
                   Search Scientific Catalogue
                 </Typography>
               </CardHeader>
-              <CardBody placeholder={""} >
+              <CardBody placeholder={""}>
                 <form
                   className="mt-4"
                   id="searchForm"
@@ -113,7 +113,7 @@ function SearchPage() {
                   <div className=" ">
                     <div>
                       {/* <Typography variant="h5" placeholder={"Description"}>Description</Typography> */}
-                      <div className="mb-12 grid w-full grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-2 p-0">
+                      <div className="mb-12 grid w-full grid-cols-1 gap-x-12 gap-y-2 p-0 lg:grid-cols-2">
                         {inputFields.map((field: any, index: any) => {
                           const words = field.fieldName.replace(
                             /([a-z])([A-Z])/g,
@@ -144,7 +144,10 @@ function SearchPage() {
                             );
                           } else {
                             return (
-                              <div key={index} className=" mt-4 w-full p-0 select-input">
+                              <div
+                                key={index}
+                                className=" select-input mt-4 w-full p-0"
+                              >
                                 <Select
                                   name={field.fieldName}
                                   value={inputState[field.fieldName]}
