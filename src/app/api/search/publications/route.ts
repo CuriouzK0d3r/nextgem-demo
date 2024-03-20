@@ -92,6 +92,8 @@ export async function POST(req: Request) {
 
         results = results?.map((result) => {
             result["doi"] = typeof result["doi"] === 'string' ? result["doi"] : result["doi"]?.[1];
+            result["output_type"] = "publication";
+
             return result;
         });
 
@@ -102,6 +104,8 @@ export async function POST(req: Request) {
                 privacyLevel: "open",
             }
         });
+
+        console.log(JSON.stringify(results));
 
         return Response.json(results)
     } catch (err) {

@@ -342,7 +342,7 @@ const SearchResults: React.FC<any> = ({
                       return (
                         <tr key={index} className="even:bg-blue-gray-50/50">
                           <td className={classes}>
-                            <div className="flex  items-center">
+                            <div className="flex  items-center w-max-[55rem]">
                               <Typography
                                 placeholder=""
                                 variant="h6"
