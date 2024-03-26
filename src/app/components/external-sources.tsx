@@ -1,11 +1,9 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import ErrorModal from './helpers/ErrorModal';
 
-
 const ExternalSources = ({ hasSubmitted, setHasSubmitted, inputState, setSearchResults, chosenSources, setChosenSources }: { hasSubmitted: boolean, setHasSubmitted: any, inputState: any, setSearchResults: any, chosenSources: any, setChosenSources: any }) => {
     const [open, setOpen] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-
 
     const submitSearch = (formData: any) => {
         const apiEndpoint = "/api/search";
@@ -65,7 +63,6 @@ const ExternalSources = ({ hasSubmitted, setHasSubmitted, inputState, setSearchR
                 <button className={""} onClick={() => { chosenSources.includes("CLUE-H") ? setChosenSources(chosenSources.filter(function(e) { return e !== 'CLUE-H' })) : setChosenSources([...chosenSources, "CLUE-H"]) }}>
                     <img width={100} src="./CLUE-H_Button.svg" alt="CLUE-H" className={chosenSources.includes("CLUE-H") ? " custom-bounce chosen-source mr-[4px] p-0 rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50" : "mr-[4px] p-0 rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50"} />
                 </button> */}
-
                 <button className={""} onClick={() => { chosenSources.includes("EMF") ? setChosenSources(chosenSources.filter(function (e: any) { return e !== 'EMF' })) : setChosenSources([...chosenSources, "EMF"]) }}>
                     <img width={105} src="./EMF-portal_Button.svg" alt="EMF-Portal" className={chosenSources.includes("EMF") ? " custom-bounce chosen-source mr-[12px] p-0 rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900" : "mr-[12px] p-0 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50"} />
                 </button>

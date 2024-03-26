@@ -113,6 +113,5 @@ export async function POST(req: Request) {
         return Response.json([])
     } finally {
         await client.close();
-        // return Response.json({ error: 500 })
     }
 }

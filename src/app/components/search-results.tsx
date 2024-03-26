@@ -181,73 +181,8 @@ const SearchResults: React.FC<any> = ({
   ];
 
   const TABLE_ROWS = searchResults.slice(active * 5, active * 5 + 5);
-  // const TABLE_ROWS = [
-  //     {
-  //         title: "Epigenetic Tests on HaCat after FR2 limited exposure ",
-  //         description: "Limited Exposure of HaCat 0.1",
-  //         typeOfStudy: "In Vitro",
-  //         outputType: "Publication",
-  //         location: "CNR",
-  //         status: "Public",
-  //         img: "https://docs.material-tailwind.com/img/logos/logo-spotify.svg",
-  //         name: "Spotify",
-  //         amount: "$2,500",
-  //         date: "Wed 3:00pm",
-  //         //   status: "paid",
-  //         account: "visa",
-  //         accountNumber: "1234",
-  //         expiry: "06/2026",
-  //     },
-  //     {
-  //         title: "Behavioural and developmental dfferentiations in bees by 5G exposure... ",
-  //         description: "Continuous Exposure of bees",
-  //         typeOfStudy: "In Vivo",
-  //         outputType: "Video/Audio",
-  //         location: "Lorem",
-  //         status: "Restricted",
-  //         img: "https://docs.material-tailwind.com/img/logos/logo-spotify.svg",
-  //         name: "Spotify",
-  //         amount: "$2,500",
-  //         date: "Wed 3:00pm",
-  //         //   status: "paid",
-  //         account: "visa",
-  //         accountNumber: "1234",
-  //         expiry: "06/2026",
-  //     },
-  //     {
-  //         title: "Cumulative 5G Exposure in indoor working environment",
-  //         description: "Cumulative Exposure in indoor working environment",
-  //         typeOfStudy: "Simulation",
-  //         outputType: "Poster",
-  //         location: "CIMNE",
-  //         status: "Restricted",
-  //         img: "https://docs.material-tailwind.com/img/logos/logo-spotify.svg",
-  //         name: "Spotify",
-  //         amount: "$2,500",
-  //         date: "Wed 3:00pm",
-  //         //   status: "paid",
-  //         account: "visa",
-  //         accountNumber: "1234",
-  //         expiry: "06/2026",
-  //     },
-  //     {
-  //         title: "Combined 5G, WiFi  Exposure",
-  //         description: "Lorem ipsum dolor sit amet, consectetur ",
-  //         typeOfStudy: "In Silico",
-  //         outputType: "Dataset",
-  //         location: "Lorem",
-  //         status: "Public",
-  //         img: "https://docs.material-tailwind.com/img/logos/logo-spotify.svg",
-  //         name: "Spotify",
-  //         amount: "$2,500",
-  //         date: "Wed 3:00pm",
-  //         //   status: "paid",
-  //         account: "visa",
-  //         accountNumber: "1234",
-  //         expiry: "06/2026",
-  //     },
-  // ];
   console.log(searchResults);
+  
   return (
     <div
       className={`mt-0 flex min-h-[68rem] w-full items-center justify-center`}
@@ -353,29 +288,6 @@ const SearchResults: React.FC<any> = ({
                               </Typography>
                             </div>
                           </td>
-                          {/* <td className={classes}>
-                                                    <Typography
-                                                        variant="small"
-                                                        color="blue-gray"
-                                                        className="font-normal"
-                                                    >
-                                                        {description}
-                                                    </Typography>
-                                                </td> */}
-                          {/* <td className={classes + " hidden xl:table-cell "}>
-                            <div className="flex items-center gap-3">
-                              <div className="flex flex-col">
-                                <Typography
-                                  placeholder=""
-                                  variant="h6"
-                                  color="blue-gray"
-                                  className="hidden font-normal xl:table-cell"
-                                >
-                                  {studyType ? studyTypeMap[studyType] : "N/A"}
-                                </Typography>
-                              </div>
-                            </div>
-                          </td> */}
                           <td className={classes + " hidden xl:table-cell"}>
                             <div className="flex items-center gap-3">
                               <div className="flex flex-col">
@@ -390,20 +302,6 @@ const SearchResults: React.FC<any> = ({
                               </div>
                             </div>
                           </td>
-                          {/* <td className={classes + " hidden lg:table-cell"}>
-                            <div className="flex items-center gap-3">
-                              <div className=" flex flex-col text-left">
-                                <Typography
-                                  placeholder=""
-                                  variant="h6"
-                                  color="blue-gray"
-                                  className="text-left font-normal hidden lg:table-cell  capitalize"
-                                >
-                                  {institution || location}
-                                </Typography>
-                              </div>
-                            </div>
-                          </td> */}
                           <td className={classes + " hidden lg:table-cell"}>
                             <div className="hidden lg:table-cell">
                               <Chip

@@ -175,24 +175,15 @@ export async function POST(req: Request, res: NextApiResponse) {
   }
 
   let distinct: any = [];
-  for (var i = 0; i < results.length; i++)
-    if (!(results[i].title in distinct)) distinct.push(results[i].title);
-    else console.log(results[i].title);
-
-  results = results.sort((a, b) => {
-    let fa = a.title.toLowerCase(),
-      fb = b.title.toLowerCase();
-
-    if (fa < fb) {
-      return -1;
-    }
-    if (fa > fb) {
-      return 1;
-    }
-    return 0;
-  });
-
+  
+  results.forEach((result) => {   
   // console.log(results[1])
+    if (!distinct.some((r: any) => r.title === result.title)) {
+      distinct.push(result);
+    } else {
+      
+    }
+  });
 
   return Response.json({ searchResults: results });
 }
