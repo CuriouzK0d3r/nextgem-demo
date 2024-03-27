@@ -159,7 +159,7 @@ export async function POST(req: Request, res: NextApiResponse) {
   }
 
   if (sources.includes("PubMed")) {
-    const response = await fetch(`http://${hostname}/api/search/publications`, {
+    const response = await fetch(`http://${hostname}/api/search/pubmed`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
