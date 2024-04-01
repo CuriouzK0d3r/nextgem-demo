@@ -1,7 +1,44 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import urllib.parse
+from pymed import PubMed
 
 PORT = 8000
+
+def search_pubmed(search_term, max_results, include_pubmed_id, include_title, include_abstract):
+      pubmed = PubMed(tool="MyTool", email="aalamel@clemson.edu")
+      results = pubmed.query(search_term, max_results=max_results)
+      dois_list = []
+      abstract_list = []
+      medid_list = []
+      med_list = []
+      articles = []
+      for article in results:
+          article_dict = article.toDict()
+          articles.append(article_dict)
+          doi = article_dict["doi"]
+          pubmed_id = ""
+          if include_pubmed_id:
+              pubmed_id = article_dict['pubmed_id'].partition('\n')[0]
+          else:
+              pubmed_id = ""
+          if include_title:
+              title = article_dict['title']
+          else:
+              title = ""
+          if include_abstract:
+              abstract = article_dict['abstract']
+          else:
+              abstract = ""
+              
+          # med_list.append(pubmed_id)
+          abstract_list.append(abstract)
+
+          # dois_list.append(doi)
+          medid_list.append(pubmed_id)
+          
+      print(articles)          
+      return articles
+    
 
 class Handler(BaseHTTPRequestHandler):
 
@@ -15,7 +52,9 @@ class Handler(BaseHTTPRequestHandler):
 
     # Construct the response body
     if message:
-      response_body = f"Hello, you sent the message: {message}"
+      search_pubmed(message, 100, True, True, True)
+      
+      response_body = "yeah"
     else:
       response_body = "No message received in the query parameter."
 
