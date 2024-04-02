@@ -1,6 +1,7 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import urllib.parse
 from pymed import PubMed
+import json
 
 PORT = 8000
 
@@ -36,7 +37,6 @@ def search_pubmed(search_term, max_results, include_pubmed_id, include_title, in
           # dois_list.append(doi)
           medid_list.append(pubmed_id)
           
-      print(articles)          
       return articles
     
 
@@ -52,15 +52,15 @@ class Handler(BaseHTTPRequestHandler):
 
     # Construct the response body
     if message:
-      search_pubmed(message, 100, True, True, True)
-      
-      response_body = "yeah"
+        json_object = json.dumps(search_pubmed(message, 100, True, True, True), indent = 4) 
+        print(json_object)
+        response_body = json_object
     else:
       response_body = "No message received in the query parameter."
 
     # Set response headers and send the response
     self.send_response(200)
-    self.send_header("Content-type", "text/html")
+    self.send_header("Content-type", "text/json")
     self.end_headers()
     self.wfile.write(response_body.encode("utf-8"))
 

@@ -22,25 +22,12 @@ export async function POST(req: Request) {
     try {
         let data = await req.json();
 
-        const response = await axios.get(`https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=${data.query}&retmode=json&retstart=0&retmax=20`);
-        _requestsMade.push(new Date());
-        let returnedIds = await response.data.esearchresult.idlist;
-        // console.log(returnedIds)
+        const response = await axios.get(`http://localhost:8000/?message=${data.query}`);
+        data = (await response.data)
 
-        let returnedObj: any[] = [];
-        // for (let i = 0; i < returnedIds.length; i++) {
-            while (exceedRateLimit()) {
-                // This loop will continue indefinitely until the rate limit is no longer exceeded
-            }
+        console.log(JSON.parse(data))
 
-            let pubmedData = await getPubmedData(returnedIds);
-            console.log(xmljs.xml2json(pubmedData))
-            // _requestsMade.push(new Date());
-
-            returnedObj.push(pubmedData);
-        // }
-
-        return Response.json(JSON.stringify(returnedObj));
+        return Response.json(JSON.stringify(response));
     } catch (err) {
         console.error(err);
         return Response.json([]);
