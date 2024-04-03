@@ -171,7 +171,7 @@ export async function POST(req: Request, res: NextApiResponse) {
     });
 
     const responseJSON = await response.json();
-    results = results.concat(addSource(responseJSON, "PubMed"));
+    results = results.concat(addSource(JSON.parse(responseJSON), "PubMed"));
   }
 
   let distinct: any = [];

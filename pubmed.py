@@ -52,15 +52,27 @@ class Handler(BaseHTTPRequestHandler):
 
     # Construct the response body
     if message:
-        json_object = json.dumps(search_pubmed(message, 100, True, True, True), indent = 4) 
-        print(json_object)
+        results = search_pubmed(message, 100, True, True, True)
+        entries = []
+        for result in results:
+            pubmed_id = ""
+            doi = ""
+            if result["pubmed_id"]:
+                pubmed_id = result["pubmed_id"].partition('\n')[0]
+            if result["doi"]:
+                doi = result["doi"].partition('\n')[0]
+                
+            entry = {"status": "public", "pubmed_id": pubmed_id, "title" : result["title"], "abstract": result["abstract"], "keywords": result["keywords"], "publication_date": str(result["publication_date"]), "authors": result["authors"], "doi": doi}
+            entries.append(entry)
+        json_object = json.dumps(entries, indent = 4) 
+
         response_body = json_object
     else:
       response_body = "No message received in the query parameter."
 
     # Set response headers and send the response
     self.send_response(200)
-    self.send_header("Content-type", "text/json")
+    self.send_header("Content-type", "text/javascript")
     self.end_headers()
     self.wfile.write(response_body.encode("utf-8"))
 

@@ -25,9 +25,7 @@ export async function POST(req: Request) {
         const response = await axios.get(`http://localhost:8000/?message=${data.query}`);
         data = (await response.data)
 
-        console.log(JSON.parse(data))
-
-        return Response.json(JSON.stringify(response));
+        return Response.json(JSON.stringify(data));
     } catch (err) {
         console.error(err);
         return Response.json([]);
