@@ -105,19 +105,39 @@ const SearchMore: React.FC<any> = ({
 
   console.log(searchResult)
 
-  
+
   return (
     <div
       className={`mx-auto mt-6 w-full table-auto border-collapse overflow-hidden text-left"`}
     >
-      {
-            searchResult.abstract
-          }
-          <br />
-          {
-           searchResult.author ? searchResult.author.map((person : any) => `${person.given} ${person.family}`).join(', ') :
-           searchResult.authors.map((person: any) => `${person.firstname} ${person.lastname} @ ${person.affiliation}`).join(', ')
-          }
+      <h4 className="text-xxl">{searchResult.title}</h4>
+      <div className="mt-10 italic"> {
+        searchResult.author ? searchResult.author.map((person: any) => `${person.given} ${person.family}`).join(', ') :
+          searchResult.authors.map((person: any) => `${person.firstname} ${person.lastname} @ ${person.affiliation}`).join(', ')
+      }
+      </div>
+      <div className="mt-2">          <span className="pl-0 mr-8">Published: {(new Date(searchResult.created.timestamp).toDateString())}</span>
+        DOI: <a href={"https://doi.org/" + searchResult.DOI} >{searchResult.DOI} </a></div>
+      <div className="mt-10">          <h2 className="text-lg mb-2 font-bold ml-0 pl-0">Abstract</h2>
+        {searchResult.abstract} </div>
+      <div className="text-lg  font-bold ml-0 pl-0 mt-8">
+        Files
+        <div>
+
+        </div>
+      </div>
+      <div className="mt-12">
+        <Button
+          placeholder={""}
+          id="searchBtn"
+          style={{background: "#3A416F"}}
+          className=" ml-0 w-25 shadow-blue-gray-900/50 mr-4 h-50 rounded-lg object-cover object-center font-bold shadow-lg"
+          variant="gradient"
+          onClick={()=> ""}
+        >
+          Download Metadata
+        </Button>
+      </div>
     </div>
   );
 };

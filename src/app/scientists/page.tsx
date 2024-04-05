@@ -89,8 +89,8 @@ function SearchPage() {
           <div className={`mt-32 min-h-[65rem] w-full`}>
             <Card
               placeholder={""}
-              style={{ background: "#D9D9D9" }}
-              className="form-container shadow-blue-gray-900/50 mx-auto mt-6 w-4/5 rounded-lg object-cover object-center shadow-xl lg:w-1/2"
+              style={{ background: "white" }}
+              className="form-container shadow-[0_10px_50px_rgba(58,_65,_11,_0.8)] mx-auto mt-6 w-4/5 rounded-lg object-cover object-center lg:w-1/2"
             >
               <CardHeader placeholder={""} className="bg-[#D4D9DD] text-black">
                 <Typography
@@ -132,7 +132,7 @@ function SearchPage() {
                                     });
                                   }}
                                   name={field.fieldName}
-                                  className="shadow-blue-gray-900/50 bg-white object-cover object-center shadow-sm"
+                                  className="shadow-blue-gray-900/50 bg-white object-cover object-center shadow-inner"
                                   crossOrigin="true"
                                   style={{ color: "black" }}
                                   label={
@@ -157,7 +157,7 @@ function SearchPage() {
                                       [field.fieldName]: event,
                                     })
                                   }
-                                  className=" ct-cover shadow-blue-gray-900/50 bg-white object-center text-black shadow-sm"
+                                  className=" ct-cover shadow-blue-gray-900/50 bg-white object-center text-black shadow-inner"
                                   label={
                                     words.charAt(0).toUpperCase() +
                                     words.slice(1)

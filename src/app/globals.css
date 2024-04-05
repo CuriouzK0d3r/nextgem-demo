@@ -105,6 +105,11 @@ box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
   animation: bounce 1s infinite;
 }
 
+.custom-bounce-hover:hover {
+  animation: bounce 1s infinite;
+}
+
+
 @keyframes bounce {
   0%, 100% {
     transform: translateY(-10%);

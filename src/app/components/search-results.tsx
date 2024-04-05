@@ -12,7 +12,6 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { motion } from "framer-motion";
-import SearchTable from "./search-table";
 import SearchMore from "./search-more";
 // import Table from 'react-tailwind-table';
 
@@ -190,7 +189,8 @@ const SearchResults: React.FC<any> = ({
     >
       <Card
         placeholder=""
-        className="form-container shadow-blue-gray-900/50 mx-auto mt-6 min-h-[30rem] w-3/4 object-cover object-center shadow-xl"
+        style={{ background: "#fefefe" }}
+        className="form-container bg-white shadow-[0_10px_50px_rgba(58,_65,_11,_0.8)] mx-auto mt-6 min-h-[30rem] w-3/4 object-cover object-center "
       >
         <CardHeader placeholder="" className="bg-[#D4D9DD] text-black">
           <Typography
@@ -297,7 +297,7 @@ const SearchResults: React.FC<any> = ({
                       console.log(source_icon.type)
 
                       return (
-                        <tr key={index} className="even:bg-blue-gray-50/50">
+                        <tr key={index} className="even:bg-blue-gray-100/50">
                           <td className={classes}>
                             <div className="flex  items-center w-max-[55rem]">
                               <Typography
@@ -402,7 +402,15 @@ const SearchResults: React.FC<any> = ({
           >
             {searchResults.length ? (
               <div className="mx-auto flex flex-col justify-center">
-                {searchResults.length} results found
+                <div>{searchResults.length} results found <Button
+                  placeholder={""}
+                  id="searchBtn"
+                  className="float-end ml-0 w-25 shadow-blue-gray-900/50  h-10 rounded-lg object-cover object-center font-bold shadow-lg"
+                  variant="gradient"
+                  onClick={() => ""}
+                >
+                  Export Metadata
+                </Button></div>
                 <Typography
                   placeholder={""}
                   variant="h6"

@@ -64,7 +64,7 @@ const ExternalSources = ({ hasSubmitted, setHasSubmitted, inputState, setSearchR
                     <img width={100} src="./CLUE-H_Button.svg" alt="CLUE-H" className={chosenSources.includes("CLUE-H") ? " custom-bounce chosen-source mr-[4px] p-0 rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50" : "mr-[4px] p-0 rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50"} />
                 </button> */}
                 <button className={""} onClick={() => { chosenSources.includes("EMF") ? setChosenSources(chosenSources.filter(function (e: any) { return e !== 'EMF' })) : setChosenSources([...chosenSources, "EMF"]) }}>
-                    <img width={105} src="./EMF-portal_Button.svg" alt="EMF-Portal" className={chosenSources.includes("EMF") ? " custom-bounce chosen-source mr-[12px] p-0 rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900" : "mr-[12px] p-0 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50"} />
+                    <img width={105} src="./EMF-portal_Button.svg" alt="EMF-Portal" className={chosenSources.includes("EMF") ? " custom-bounce chosen-source mr-[12px] p-0 rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900" : "custom-bounce-hover mr-[12px] p-0 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50"} />
                 </button>
 
                 <button className={""} onClick={() => { chosenSources.includes("Zenodo") ? setChosenSources(chosenSources.filter(function (e: any) { return e !== 'Zenodo' })) : setChosenSources([...chosenSources, "Zenodo"]) }}>
