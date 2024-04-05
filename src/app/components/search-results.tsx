@@ -13,6 +13,7 @@ import {
 } from "@material-tailwind/react";
 import { motion } from "framer-motion";
 import SearchTable from "./search-table";
+import SearchMore from "./search-more";
 // import Table from 'react-tailwind-table';
 
 function DefaultPagination({
@@ -364,7 +365,10 @@ const SearchResults: React.FC<any> = ({
                 exit={{ opacity: 0 }}
                 transition={{ duration: 2 }}
               >
-                <SearchTable searchResults={searchResults} />
+                <SearchMore searchResult={searchResults[moreIdx]} />
+                <SearchMore searchResult={searchResults[moreIdx]} />
+
+
               </motion.div>
             )
           ) : (
