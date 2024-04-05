@@ -183,7 +183,7 @@ const SearchResults: React.FC<any> = ({
 
   const TABLE_ROWS = searchResults.slice(active * 5, active * 5 + 5);
   console.log(searchResults);
-  
+
   return (
     <div
       className={`mt-0 flex min-h-[68rem] w-full items-center justify-center`}
@@ -275,6 +275,27 @@ const SearchResults: React.FC<any> = ({
                         ? "p-4 "
                         : "p-4 border-b border-blue-gray-50 whitespace-break-spaces";
 
+                      let source_icon = <></>;
+                      console.log(source)
+                      switch (source) {
+                        case "PUBMED":
+                          source_icon = <img className="w-[50px]" src="https://static-00.iconduck.com/assets.00/pubmed-icon-463x512-q8ocx6xf.png" />;
+                          break;
+                        case "EMF-PORTAL":
+                          source_icon = <img className="w-[50px]" src="./EMF-portalicon-96x96.svg" />;
+                          break;
+                        case "zenodo":
+                          source_icon = <img className="w-[60px]" src="./logozenodo.svg" />;
+                          break;
+                        case "WOS":
+                          source_icon = <img className="w-[50px]" src="./web-of-science.jpg" />;
+                          break;
+                        case "NEXTGEM":
+                          source_icon = <img className="w-[52px]" src="./cropped2-NextGEM_final_transparent 1.svg" />;
+                          break;
+                      }
+                      console.log(source_icon.type)
+
                       return (
                         <tr key={index} className="even:bg-blue-gray-50/50">
                           <td className={classes}>
@@ -312,10 +333,10 @@ const SearchResults: React.FC<any> = ({
                                 className="mb-6"
                                 color={
                                   privacyLevel === "Public" ||
-                                  privacyLevel === "open"
+                                    privacyLevel === "open"
                                     ? "green"
                                     : privacyLevel === "restricted" ||
-                                        privacyLevel === "sensitive"
+                                      privacyLevel === "sensitive"
                                       ? "orange"
                                       : "gray"
                                 }
@@ -330,13 +351,15 @@ const SearchResults: React.FC<any> = ({
                                 rel="noreferrer"
                                 className="p-0"
                               >
-                                <Chip
+                                {/* <Chip
                                   size="sm"
                                   variant="ghost"
-                                  value={source}
+                                  value={                              <img className="w-[50px]" src="https://marketplace.digimind.com/hubfs/Website%20Visual%20assets%20S2/Digimind%20Website%20-%20Marketplace/Logos/Pubmed-logo-WithBG.png" ></img>
+                                }
                                   className="mb-6"
                                   color={"gray"}
-                                />
+                                /> */}
+                                {source_icon}
                               </a>
                             </div>
                           </td>
@@ -366,9 +389,6 @@ const SearchResults: React.FC<any> = ({
                 transition={{ duration: 2 }}
               >
                 <SearchMore searchResult={searchResults[moreIdx]} />
-                <SearchMore searchResult={searchResults[moreIdx]} />
-
-
               </motion.div>
             )
           ) : (

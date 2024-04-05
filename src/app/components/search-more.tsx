@@ -103,6 +103,8 @@ const SearchMore: React.FC<any> = ({
     " ",
   ];
 
+  console.log(searchResult)
+
   
   return (
     <div
@@ -110,6 +112,11 @@ const SearchMore: React.FC<any> = ({
     >
       {
             searchResult.abstract
+          }
+          <br />
+          {
+           searchResult.author ? searchResult.author.map((person : any) => `${person.given} ${person.family}`).join(', ') :
+           searchResult.authors.map((person: any) => `${person.firstname} ${person.lastname} @ ${person.affiliation}`).join(', ')
           }
     </div>
   );
