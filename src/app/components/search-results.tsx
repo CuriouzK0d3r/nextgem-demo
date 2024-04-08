@@ -402,15 +402,23 @@ const SearchResults: React.FC<any> = ({
           >
             {searchResults.length ? (
               <div className="mx-auto flex flex-col justify-center">
-                <div>{searchResults.length} results found <Button
+                <div>{searchResults.length} results found 
+                <a
+            href={`data:text/json;charset=utf-8,${encodeURIComponent(
+              JSON.stringify(searchResults)
+            )}`}
+            download="results.json"
+          >
+                <Button
                   placeholder={""}
                   id="searchBtn"
                   className="float-end ml-0 w-25 shadow-blue-gray-900/50  h-10 rounded-lg object-cover object-center font-bold shadow-lg"
                   variant="gradient"
-                  onClick={() => ""}
                 >
-                  Export Metadata
-                </Button></div>
+                  Download Metadata
+                </Button>
+                </a>
+                </div>
                 <Typography
                   placeholder={""}
                   variant="h6"

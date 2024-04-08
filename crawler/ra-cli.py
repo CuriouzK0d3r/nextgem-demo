@@ -217,10 +217,21 @@ class Crawlers:
             seed_questions = [query]
         else:
             seed_questions = [
-                "children + mobile + radiation",
-                "children + mobile + radiation + cancer",
-                "mobile + radiation + tumor",
-                "mobile + radiation + tumor + cancer"
+                "5G",
+                "mobile communication",
+                "4G",
+                "radiation",
+                "brain cancer",
+                "hypersensitivity",
+                "electromagnetic",
+                "magnetic field",
+                "cells",
+                "bio",
+                "microweave",
+                "field exposure",
+                "RF-EMF",
+                "EMF",
+        
             ]
 
         doisList = []

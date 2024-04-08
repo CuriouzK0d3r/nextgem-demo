@@ -103,7 +103,7 @@ const SearchMore: React.FC<any> = ({
     " ",
   ];
 
-  console.log(searchResult)
+  console.log(searchResult.files)
 
 
   return (
@@ -113,30 +113,45 @@ const SearchMore: React.FC<any> = ({
       <h4 className="text-xxl">{searchResult.title}</h4>
       <div className="mt-10 italic"> {
         searchResult.author ? searchResult.author.map((person: any) => `${person.given} ${person.family}`).join(', ') :
-          searchResult.authors.map((person: any) => `${person.firstname} ${person.lastname} @ ${person.affiliation}`).join(', ')
+          (searchResult.authors ? searchResult.authors.map((person: any) => `${person.firstname} ${person.lastname} @ ${person.affiliation}`).join(', ') :
+            searchResult.creators.map((person: any) => `${person.name} ${person.affiliation ? ((!person.affiliation.includes("@") ? " @ " + person.affiliation : person.affiliation)) : ""}`).join(', '))
       }
       </div>
-      <div className="mt-2">          <span className="pl-0 mr-8">Published: {(new Date(searchResult.created.timestamp).toDateString())}</span>
+      <div className="mt-2">          <span className="pl-0 mr-8">Published: {searchResult.created ? (new Date(searchResult.created.timestamp).toDateString()) : ""}</span>
         DOI: <a href={"https://doi.org/" + searchResult.DOI} >{searchResult.DOI} </a></div>
       <div className="mt-10">          <h2 className="text-lg mb-2 font-bold ml-0 pl-0">Abstract</h2>
         {searchResult.abstract} </div>
       <div className="text-lg  font-bold ml-0 pl-0 mt-8">
-        Files
+        {
+          searchResult.files ? (<>
+          Files
+          <div>
+            <ul>
+              {searchResult.files.map((file: any) => <li><a href={file.links.self}>{file.key}</a></li>)}
+            </ul>
+            </div>
+          </>) : <></>
+        }
         <div>
 
         </div>
       </div>
       <div className="mt-12">
-        <Button
-          placeholder={""}
-          id="searchBtn"
-          style={{background: "#3A416F"}}
-          className=" ml-0 w-25 shadow-blue-gray-900/50 mr-4 h-50 rounded-lg object-cover object-center font-bold shadow-lg"
-          variant="gradient"
-          onClick={()=> ""}
+        <a
+          href={`data:text/json;charset=utf-8,${encodeURIComponent(
+            JSON.stringify(searchResult)
+          )}`}
+          download="results.json"
         >
-          Download Metadata
-        </Button>
+          <Button
+            placeholder={""}
+            id="searchBtn"
+            className="float-end ml-0 w-25 shadow-blue-gray-900/50  h-10 rounded-lg object-cover object-center font-bold shadow-lg"
+            variant="gradient"
+          >
+            Download Metadata
+          </Button>
+        </a>
       </div>
     </div>
   );

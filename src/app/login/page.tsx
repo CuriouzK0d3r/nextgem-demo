@@ -148,7 +148,7 @@ function LoginPage() {
                         />
                     </a>
                 </div>
-                <Card placeholder={""} className="form-container w-full mx-auto form-container mt-0 rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50">
+                <Card style={{background: "white"}} placeholder={""} className="form-container w-full mx-auto form-container mt-0 rounded-lg object-cover object-center shadow-[0_10px_50px_rgba(58,_65,_11,_0.8)]">
                     <CardBody placeholder={''}>
                         <div className="tab">
                             <button className={"tablinks " + (activeTab === "loginTab" ? "active" : "")} onClick={(event) => setActiveTab('loginTab')}>
@@ -163,13 +163,13 @@ function LoginPage() {
                         <div id="loginTab" className={(activeTab === "loginTab" ? "block " : "tabcontent ")}>
                             {/* <h3>Login</h3> */}
                             <form className='mt-12' id="loginForm" onSubmit={(event) => submitLoginForm(event)}>
-                                <Input className='object-cover bg-white p-0 object-center shadow-sm shadow-blue-gray-900/50 ' size="lg" crossOrigin="true" id="loginUsername" inputRef={loginUsernameRef} required style={{ color: "black" }} label={"Username"} />
+                                <Input className='object-cover bg-white p-0 object-center shadow-inner shadow-blue-gray-900/50 ' size="lg" crossOrigin="true" id="loginUsername" inputRef={loginUsernameRef} required style={{ color: "black" }} label={"Username"} />
 
                                 <div className='h-6'></div>
 
-                                <Input className='bg-white p-0 object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin="true" id="loginPassword" inputRef={loginPasswordRef} type='password' required style={{ color: "black" }} label={"Password"} />
+                                <Input className='bg-white p-0 object-cover object-center shadow-inner shadow-blue-gray-900/50' size="lg" crossOrigin="true" id="loginPassword" inputRef={loginPasswordRef} type='password' required style={{ color: "black" }} label={"Password"} />
 
-                                <Button placeholder={""} id="loginBtn" type="submit" className="btn font-bold w-full h-12 mt-8 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50" variant="gradient">Login</Button>
+                                <Button placeholder={""} id="loginBtn" type="submit" className="clear-button text-md font-bold w-full h-12 mt-8 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50" variant="gradient">Login</Button>
                             </form>
                         </div>
 
@@ -178,18 +178,18 @@ function LoginPage() {
                             <form className={'mt-4 '} id="registerForm" onSubmit={(event) => submitRegisterForm(event)}>
                                 <div className='h-8'></div>
 
-                                <Input className=' bg-white p-0 object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin="true" id="registerUsername" inputRef={registerUsernameRef} required style={{ color: "black" }} label={"Username"} />
+                                <Input className=' bg-white p-0 object-cover object-center shadow-inner shadow-blue-gray-900/50' size="lg" crossOrigin="true" id="registerUsername" inputRef={registerUsernameRef} required style={{ color: "black" }} label={"Username"} />
                                 <div className='h-6'></div>
 
-                                <Input className='bg-white p-0 object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin="true" id="registerPassword" inputRef={registerPasswordRef} required style={{ color: "black" }} type='password' label={"Password"} />
+                                <Input className='bg-white p-0 object-cover object-center shadow-inner shadow-blue-gray-900/50' size="lg" crossOrigin="true" id="registerPassword" inputRef={registerPasswordRef} required style={{ color: "black" }} type='password' label={"Password"} />
                                 <div className='h-6'></div>
 
-                                <Input className='bg-white p-0 object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin="true" id="registerEmail" type='email' inputRef={registerEmailRef} required style={{ color: "black" }} label={"E-mail"} />
+                                <Input className='bg-white p-0 object-cover object-center shadow-inner shadow-blue-gray-900/50' size="lg" crossOrigin="true" id="registerEmail" type='email' inputRef={registerEmailRef} required style={{ color: "black" }} label={"E-mail"} />
                                 <div className='h-6'></div>
 
-                                <Input className='bg-white p-0 object-cover object-center shadow-sm shadow-blue-gray-900/50' size="lg" crossOrigin="true" id="registerOrg" inputRef={registerOrgRef} required style={{ color: "black" }} label={"Organization"} />
+                                <Input className='bg-white p-0 object-cover object-center shadow-inner shadow-blue-gray-900/50' size="lg" crossOrigin="true" id="registerOrg" inputRef={registerOrgRef} required style={{ color: "black" }} label={"Organization"} />
 
-                                <Button placeholder={""} id="searchBtn" type="submit" className="btn font-bold w-full h-12 mt-8" variant="gradient">Register</Button>
+                                <Button placeholder={""} id="searchBtn" type="submit" className="clear-button text-md font-bold w-full h-12 mt-8" variant="gradient">Register</Button>
 
                             </form>
                         </div>

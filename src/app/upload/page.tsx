@@ -176,7 +176,7 @@ function InputPage() {
     return (
         <PageLayout skipLogin={false} isLoggedIn={isLoggedIn} pageName='input'>
             <div className="w-full mt-40 min-h-[60rem]">
-                <Card placeholder={""} className="mt-6 w-full lg:w-1/2 xl:1/3 mx-auto form-container object-cover object-center shadow-xl shadow-blue-gray-900/50">
+                <Card style={{background: "white"}} placeholder={""} className="mt-6 w-full lg:w-1/2 xl:1/3 mx-auto form-container object-cover object-center shadow-[0_10px_50px_rgba(58,_65,_11,_0.8)]"> 
                     <CardHeader placeholder={""} className='bg-[#D4D9DD] text-black p-0 divide-y-2 divide-[#fff]'>
                         <Typography placeholder={""} variant="h1" className="text-center pb-4 pt-4">
                             Input Data
@@ -201,13 +201,13 @@ function InputPage() {
                                                     if (inputField.type === "text") {
                                                         return (
                                                             <div key={index} className="flex flex-row mt-4 p-0">
-                                                                <Input required key={index} className='object-cover bg-white object-center shadow-sm shadow-blue-gray-900/50' value={inputState[inputField.field]} onChange={(event: any) => { event.preventDefault(); setInputState({ ...inputState, [inputField.field]: event.target.value }) }} crossOrigin="true" style={{ color: "black" }} label={inputField.label} />
+                                                                <Input required key={index} className='object-cover bg-white object-center shadow-inner shadow-blue-gray-900/50' value={inputState[inputField.field]} onChange={(event: any) => { event.preventDefault(); setInputState({ ...inputState, [inputField.field]: event.target.value }) }} crossOrigin="true" style={{ color: "black" }} label={inputField.label} />
                                                             </div>
                                                         );
                                                     } else if (inputField.type === "select") {
                                                         return (
                                                             <div key={index} className="flex flex-row mt-4 p-0">
-                                                                <Select key={index} className='object-cover bg-white object-center shadow-sm shadow-blue-gray-900/50 text-black' label={inputField.label} placeholder={inputField.label} value={inputState[inputField.field]} onChange={(event: any) => setInputState({ ...inputState, [inputField.field]: event })}>
+                                                                <Select key={index} className='object-cover bg-white object-center shadow-inner shadow-blue-gray-900/50 text-black' label={inputField.label} placeholder={inputField.label} value={inputState[inputField.field]} onChange={(event: any) => setInputState({ ...inputState, [inputField.field]: event })}>
                                                                     {inputField.values?.map((value: any) => (
                                                                         <Option key={value} value={value}>{value}</Option>
                                                                     ))}
