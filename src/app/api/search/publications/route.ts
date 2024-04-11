@@ -6,7 +6,7 @@ const client = new MongoClient(uri, {});
 export async function POST(req: Request) {
     try {
         await client.connect();
-        const database = client.db('test'); // replace with your database name
+        const database = client.db('risk_assesment'); // replace with your database name
         const collection = database.collection('pub_metadata'); // replace with your collection name
         let filter = {};
         let json = await req.json();
@@ -104,8 +104,6 @@ export async function POST(req: Request) {
                 privacyLevel: "open",
             }
         });
-
-        console.log(JSON.stringify(results));
 
         return Response.json(results)
     } catch (err) {

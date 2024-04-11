@@ -175,10 +175,8 @@ export async function POST(req: Request, res: NextApiResponse) {
   }
 
   let distinct: any = [];
-
-  console.log(JSON.stringify(results[0].creators))
   
-  results.forEach((result) => {   
+  results.forEach((result) => {
   // console.log(results[1])
     if (!distinct.some((r: any) => r.doi === result.doi)) {
       distinct.push(result);

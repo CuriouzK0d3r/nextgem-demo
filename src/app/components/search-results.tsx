@@ -270,6 +270,7 @@ const SearchResults: React.FC<any> = ({
                       }: any,
                       index: number,
                     ) => {
+                      console.log(source_url) 
                       const isLast = index === TABLE_ROWS.length - 1;
                       const classes = isLast
                         ? "p-4 "
@@ -294,7 +295,6 @@ const SearchResults: React.FC<any> = ({
                           source_icon = <img className="w-[52px]" src="./cropped2-NextGEM_final_transparent 1.svg" />;
                           break;
                       }
-                      console.log(source_icon.type)
 
                       return (
                         <tr key={index} className="even:bg-blue-gray-100/50">
