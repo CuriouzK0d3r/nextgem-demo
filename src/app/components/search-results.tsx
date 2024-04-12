@@ -181,7 +181,6 @@ const SearchResults: React.FC<any> = ({
   ];
 
   const TABLE_ROWS = searchResults.slice(active * 5, active * 5 + 5);
-  console.log(searchResults);
 
   return (
     <div

@@ -64,6 +64,11 @@ function SearchPage() {
     // setFieldRefs(fields);
   }, []);
 
+  console.log({
+    mode:mode,
+    searchResults : searchResults
+  })
+
   return (
     <PageLayout
       isLoggedIn={isLoggedIn}
