@@ -34,15 +34,13 @@ const ChatResults: React.FC<any> = ({ submittedQuery, finished, setFinished, set
         setChatMessage('');
 
         setFinished(false);
-        console.log(finished)
-        console.log('yolo')
 
         await fetch(DUMMY_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ "model": "llama2:13b", "prompt": submittedQuery, "stream": true }),
+            body: JSON.stringify({ "model": "13b-text-q6_K", "prompt": submittedQuery, "stream": true }),
         })
             .then(response => {
                 if (response.ok && response.body) {
