@@ -30,8 +30,8 @@ export async function POST(req: Request) {
         });
 
         collection.insertOne({username: history, history: [{query: query, results: results}]});
-        let resultTitle = await cursorFilter.toArray();
-        results = resultTitle;
+        // let resultTitle = await cursorFilter.toArray();
+        // results = resultTitle;
 
 
         return Response.json(results)

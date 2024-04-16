@@ -127,7 +127,7 @@ const SearchMore: React.FC<any> = ({
           Files
           <div>
             <ul>
-              {searchResult.files.map((file: any) => <li><a href={file.links.self}>{file.key}</a></li>)}
+              {searchResult.files.map((file: any, idx: number) => <li key={idx}><a href={file.links.self}>{file.key}</a></li>)}
             </ul>
             </div>
           </>) : <></>

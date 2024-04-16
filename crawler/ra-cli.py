@@ -231,7 +231,6 @@ class Crawlers:
                 "field exposure",
                 "RF-EMF",
                 "EMF",
-        
             ]
 
         doisList = []

@@ -379,9 +379,9 @@ function RASearchPage() {
           </CardHeader>
           <CardBody placeholder={""}>
             <div className={classNames("relative flex mx-auto place-items-center w-full float-left", submittedQuery.length ? "mt-9" : "mt-0")}>
-              <Card className="max-w-[25rem] shadow-xl shadow-blue-gray-900/5 float-left">
+              <Card placeholder={""} className="max-w-[25rem] shadow-xl shadow-blue-gray-900/5 float-left">
                 <div className="mb-2 p-4 ml-0 text-left">
-                  <Typography variant="h5" color="blue-gray" className="float-left ">
+                  <Typography placeholder={""} variant="h5" color="blue-gray" className="float-left ">
                     New RA Session
                   </Typography>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10 pb-3">
@@ -392,11 +392,11 @@ function RASearchPage() {
                 <span className="text-left">
                   History
                 </span>
-                <List>
-                  <ListItem className="ml-8">
+                <List placeholder={""}>
+                  <ListItem placeholder={""} className="ml-8">
                     Sessions
                   </ListItem>
-                  <ListItem className="ml-12">
+                  <ListItem placeholder={""} className="ml-12">
                     Literature Search <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10">
                       <path fillRule="evenodd" d="M16.72 7.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H3a.75.75 0 0 1 0-1.5h16.19l-2.47-2.47a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
                     </svg>
@@ -405,127 +405,12 @@ function RASearchPage() {
                       <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.125 4.5a4.125 4.125 0 1 0 2.338 7.524l2.007 2.006a.75.75 0 1 0 1.06-1.06l-2.006-2.007a4.125 4.125 0 0 0-3.399-6.463Z" clipRule="evenodd" />
                     </svg>
                   </ListItem>
-                  <ListItem className="ml-20">
+                  <ListItem placeholder={""} className="ml-20">
                     Search 1
                   </ListItem>
                 </List>
               </Card>
               <div className="float-right pl-10">
-              <form
-                  className="mt-4"
-                  id="searchForm"
-                  onSubmit={(event) => {
-                    event.preventDefault();
-                    setHasSubmitted(true);
-                  }}
-                >
-                  <div className=" ">
-                    <div>
-                      {/* <Typography variant="h5" placeholder={"Description"}>Description</Typography> */}
-                      <div className="mb-12 grid w-full grid-cols-1 gap-x-12 gap-y-2 p-0 lg:grid-cols-2">
-                        {inputFields.map((field: any, index: any) => {
-                          const words = field.fieldName.replace(
-                            /([a-z])([A-Z])/g,
-                            "$1 $2",
-                          );
-                          if (field.type == "String") {
-                            return (
-                              <div key={index} className=" mt-4 p-0">
-                                <Input
-                                  value={inputState[field.fieldName]}
-                                  onChange={(event) => {
-                                    event.preventDefault();
-                                    setInputState({
-                                      ...inputState,
-                                      [field.fieldName]: event.target.value,
-                                    });
-                                  }}
-                                  name={field.fieldName}
-                                  className="shadow-blue-gray-900/50 bg-white object-cover object-center shadow-inner"
-                                  crossOrigin="true"
-                                  style={{ color: "black" }}
-                                  label={
-                                    words.charAt(0).toUpperCase() +
-                                    words.slice(1)
-                                  }
-                                />
-                              </div>
-                            );
-                          } else {
-                            return (
-                              <div
-                                key={index}
-                                className=" select-input mt-4 w-full p-0"
-                              >
-                                <Select
-                                  name={field.fieldName}
-                                  value={inputState[field.fieldName]}
-                                  onChange={(event) =>
-                                    setInputState({
-                                      ...inputState,
-                                      [field.fieldName]: event,
-                                    })
-                                  }
-                                  className=" ct-cover shadow-blue-gray-900/50 bg-white object-center text-black shadow-inner"
-                                  label={
-                                    words.charAt(0).toUpperCase() +
-                                    words.slice(1)
-                                  }
-                                  placeholder={field.fieldName}
-                                >
-                                  {/* <Option key={index} value={"-"}>{"-"}</Option> */}
-                                  {field.enumValues.map((value: any) => (
-                                    <Option key={value} value={value}>
-                                      {value}
-                                    </Option>
-                                  ))}
-                                </Select>
-                              </div>
-                            );
-                          }
-                        })}
-                      </div>
-                    </div>
-                    <div className="p-0"></div>
-                  </div>
-                  <CardFooter
-                    placeholder={""}
-                    className="justify-left mt-4 flex p-0"
-                  >
-                    <Button
-                      placeholder={""}
-                      onClick={() => {
-                        setInputState(inputFields);
-                        setChosenSources([]);
-                        clearState();
-                      }}
-                      className="clear-button w-30 shadow-blue-gray-900/50 mr-4 h-12 rounded-lg object-cover object-center font-bold shadow-lg"
-                      variant="gradient"
-                    >
-                      Clear
-                    </Button>
-                    {hasSubmitted ? (
-                      <div
-                        className="ml-8 mt-2 inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
-                        role="status"
-                      >
-                        <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
-                          Loading...
-                        </span>
-                      </div>
-                    ) : (
-                      <Button
-                        placeholder={""}
-                        id="searchBtn"
-                        type="submit"
-                        className="btn w-30 shadow-blue-gray-900/50 mr-4 h-12 rounded-lg object-cover object-center font-bold shadow-lg"
-                        variant="gradient"
-                      >
-                        Search
-                      </Button>
-                    )}
-                  </CardFooter>
-                </form>
                 <table className="mx-auto mt-6 w-full table-auto border-collapse overflow-hidden text-left">
                   <thead>
                     <tr className="whitespace-nowrap">
