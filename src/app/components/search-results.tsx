@@ -269,14 +269,13 @@ const SearchResults: React.FC<any> = ({
                       }: any,
                       index: number,
                     ) => {
-                      console.log(source_url) 
                       const isLast = index === TABLE_ROWS.length - 1;
                       const classes = isLast
                         ? "p-4 "
                         : "p-4 border-b border-blue-gray-50 whitespace-break-spaces";
 
                       let source_icon = <></>;
-                      console.log(source)
+
                       switch (source) {
                         case "PUBMED":
                           source_icon = <img className="w-[50px]" src="https://static-00.iconduck.com/assets.00/pubmed-icon-463x512-q8ocx6xf.png" />;
@@ -387,7 +386,7 @@ const SearchResults: React.FC<any> = ({
                 exit={{ opacity: 0 }}
                 transition={{ duration: 2 }}
               >
-                <SearchMore searchResult={searchResults[moreIdx]} />
+                <SearchMore searchResult={searchResults[moreIdx + 5*active]} />
               </motion.div>
             )
           ) : (

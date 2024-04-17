@@ -21,92 +21,47 @@ import ExternalSources from "../components/external-sources";
 import PageLayout from "../components/page-layout";
 import SearchResults from "../components/search-results";
 import { checkLoginStatus } from "../helpers/login";
-
-function SearchPage() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [mode, setMode] = useState<string>("search");
-  const [fieldRefs, setFieldRefs] = useState<any>({});
-  const [hasSubmitted, setHasSubmitted] = useState<boolean>(false);
-  const [searchResults, setSearchResults] = useState<any>({});
-  const [chosenSources, setChosenSources] = useState<string[]>([]);
-  const [inputFields, setInputFields] = useState<any>([]);
-  const [inputState, setInputState] = useState<any>([]);
-
-  function clearState() {
-    let inputs: any = {};
-    for (let i = 0; i < inputFields.length; i++) {
-      inputs[inputFields[i].fieldName] = "";
+const RASessionSearch = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [mode, setMode] = useState<string>("search");
+    const [fieldRefs, setFieldRefs] = useState<any>({});
+    const [hasSubmitted, setHasSubmitted] = useState<boolean>(false);
+    const [searchResults, setSearchResults] = useState<any>({});
+    const [chosenSources, setChosenSources] = useState<string[]>([]);
+    const [inputFields, setInputFields] = useState<any>([]);
+    const [inputState, setInputState] = useState<any>([]);
+  
+    function clearState() {
+      let inputs: any = {};
+      for (let i = 0; i < inputFields.length; i++) {
+        inputs[inputFields[i].fieldName] = "";
+      }
+      setInputState(inputs);
     }
-    setInputState(inputs);
-  }
-
-  useEffect(() => {
-    fetch("/api/fields", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then(async (response) => {
-        if (response.ok) {
-          let responseJSON = await response.json();
-          setInputFields(responseJSON.fields);
-          clearState();
-        } else {
-          console.error("Request failed. Status: " + response.status);
-        }
+  
+    useEffect(() => {
+      fetch("/api/fields", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
       })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-
-    checkLoginStatus(setIsLoggedIn);
-  }, []);
-
-  console.log({
-    mode:mode,
-    searchResults : searchResults
-  })
-
-  return (
-    <PageLayout
-      isLoggedIn={isLoggedIn}
-      skipLogin={false}
-      pageName={"scientists"}
-    >
-      <AnimatePresence>
-        {searchResults.length > 0 ? (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 2 }}
-          >
-            <SearchResults
-              mode={mode}
-              setMode={setMode}
-              setSearchResults={setSearchResults}
-              searchResults={searchResults}
-            />
-          </motion.div>
-        ) : (
-          <div className={`mt-32 min-h-[65rem] w-full`}>
-            <Card
-              placeholder={""}
-              style={{ background: "white" }}
-              className="form-container shadow-[0_10px_50px_rgba(58,_65,_11,_0.8)] mx-auto mt-6 w-4/5 rounded-lg object-cover object-center lg:w-1/2"
-            >
-              <CardHeader placeholder={""} className="bg-[#D4D9DD] text-black">
-                <Typography
-                  placeholder={""}
-                  variant="h2"
-                  className="pb-4 pt-4 text-center text-xl lg:text-2xl xl:text-4xl"
-                >
-                  Search Scientific Catalogue
-                </Typography>
-              </CardHeader>
-              <CardBody placeholder={""}>
-                <form
+        .then(async (response) => {
+          if (response.ok) {
+            let responseJSON = await response.json();
+            setInputFields(responseJSON.fields);
+            clearState();
+          } else {
+            console.error("Request failed. Status: " + response.status);
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+  
+      checkLoginStatus(setIsLoggedIn);
+    }, []);
+     return (<form
                   className="mt-4"
                   id="searchForm"
                   onSubmit={(event) => {
@@ -117,7 +72,7 @@ function SearchPage() {
                   <div className=" ">
                     <div>
                       {/* <Typography variant="h5" placeholder={"Description"}>Description</Typography> */}
-                      <div className="mb-12 grid w-full grid-cols-1 gap-x-12 gap-y-2 p-0 lg:grid-cols-2">
+                      <div className="mb-12 ml-40 grid w-full grid-cols-1 gap-x-12 gap-y-2 p-0 lg:grid-cols-2">
                         {inputFields.map((field: any, index: any) => {
                           const words = field.fieldName.replace(
                             /([a-z])([A-Z])/g,
@@ -185,7 +140,7 @@ function SearchPage() {
                   </div>
                   <CardFooter
                     placeholder={""}
-                    className="justify-left mt-4 flex p-0"
+                    className="justify-left mt-4 ml-40 flex p-0"
                   >
                     <Button
                       placeholder={""}
@@ -220,22 +175,7 @@ function SearchPage() {
                       </Button>
                     )}
                   </CardFooter>
-                </form>
-              </CardBody>
-            </Card>
-            <ExternalSources
-              hasSubmitted={hasSubmitted}
-              setHasSubmitted={setHasSubmitted}
-              inputState={inputState}
-              setSearchResults={setSearchResults}
-              chosenSources={chosenSources}
-              setChosenSources={setChosenSources}
-            />
-          </div>
-        )}
-      </AnimatePresence>
-    </PageLayout>
-  );
+                </form>);
 }
 
-export default SearchPage;
+export default RASessionSearch;

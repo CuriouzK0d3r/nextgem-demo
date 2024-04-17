@@ -12,6 +12,7 @@ import {
 import React, { useState } from "react";
 import PageLayout from '../components/page-layout';
 import { checkLoginStatus } from '../helpers/login';
+import RASessionSearch from "../components/ra-session-search";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -410,7 +411,7 @@ function RASearchPage() {
                   </ListItem>
                 </List>
               </Card>
-              <div className="float-right pl-10">
+            { false &&  <div className="float-right pl-10">
                 <table className="mx-auto mt-6 w-full table-auto border-collapse overflow-hidden text-left">
                   <thead>
                     <tr className="whitespace-nowrap">
@@ -560,7 +561,8 @@ function RASearchPage() {
                     )}
                   </tbody>
                 </table>
-              </div>
+              </div> }
+              <RASessionSearch />
             </div>
 
           </CardBody>

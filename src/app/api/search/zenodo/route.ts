@@ -98,6 +98,8 @@ export async function POST(req: Request) {
       returnedObj[i].status = returnedObj[i]["access_right"];
     }
 
+    // console.log(returnedObj[0])
+
     return Response.json(JSON.stringify(returnedObj));
   } catch (err) {
     console.error(err);
