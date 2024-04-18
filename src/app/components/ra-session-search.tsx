@@ -20,7 +20,8 @@ import { useEffect, useState } from "react";
 import ExternalSources from "../components/external-sources";
 import PageLayout from "../components/page-layout";
 import SearchResults from "../components/search-results";
-import { checkLoginStatus } from "../helpers/login";
+import { checkLoginStatus, parseJwt } from "../helpers/login";
+import Cookies from "js-cookie";
 const RASessionSearch = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [mode, setMode] = useState<string>("search");
@@ -37,6 +38,37 @@ const RASessionSearch = () => {
         inputs[inputFields[i].fieldName] = "";
       }
       setInputState(inputs);
+    }
+
+    function saveHistory() {
+      const token = Cookies.get('token');
+      const jwtObj = parseJwt(token);
+
+      console.log(jwtObj["preferred_username"])
+
+      fetch("/api/history", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          query: JSON.stringify(inputState),
+          username: jwtObj["preferred_username"],
+          results: "",
+        })
+      })
+        .then(async (response) => {
+          if (response.ok) {
+            let responseJSON = await response.json();
+            setInputFields(responseJSON.fields);
+            clearState();
+          } else {
+            console.error("Request failed. Status: " + response.status);
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
     }
   
     useEffect(() => {
@@ -61,12 +93,14 @@ const RASessionSearch = () => {
   
       checkLoginStatus(setIsLoggedIn);
     }, []);
+
      return (<form
                   className="mt-4"
                   id="searchForm"
                   onSubmit={(event) => {
                     event.preventDefault();
                     setHasSubmitted(true);
+                    saveHistory();
                   }}
                 >
                   <div className=" ">
@@ -174,6 +208,14 @@ const RASessionSearch = () => {
                         Search
                       </Button>
                     )}
+                     <ExternalSources
+              hasSubmitted={hasSubmitted}
+              setHasSubmitted={setHasSubmitted}
+              inputState={inputState}
+              setSearchResults={setSearchResults}
+              chosenSources={chosenSources}
+              setChosenSources={setChosenSources}
+            />
                   </CardFooter>
                 </form>);
 }

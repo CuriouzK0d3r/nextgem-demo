@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 
 export const checkLoginStatus = (setIsLoggedIn: any, redirectToLogin: boolean = false, router: any = undefined) => {
-    const apiEndpoint = "http://subra.ics.forth.gr:3000/api/auth/token";
+    const apiEndpoint = "http://localhost:3000/api/auth/token";
 
     fetch(apiEndpoint, {
         method: "POST",
@@ -31,4 +31,14 @@ export const checkLoginStatus = (setIsLoggedIn: any, redirectToLogin: boolean = 
         .catch((error) => {
             console.error("Error:", error);
         });
+}
+
+export function parseJwt (token: string|undefined) {
+    var base64Url = token?.split('.')[1];
+    var base64 = base64Url?.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(window.atob(base64? base64 : '').split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(jsonPayload);
 }
