@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   Button,
@@ -6,23 +6,23 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
-  Dialog,
-  DialogBody,
-  DialogFooter,
-  DialogHeader,
   Input,
   Option,
   Select,
-  Typography,
+  Typography
 } from "@material-tailwind/react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ExternalSources from "../components/external-sources";
-import PageLayout from "../components/page-layout";
-import SearchResults from "../components/search-results";
-import { checkLoginStatus } from "../helpers/login";
+import PageLayout from '../components/page-layout';
+import SearchResults from "../components/ra-search-results";
+import { checkLoginStatus } from '../helpers/login';
 
-function SearchPage() {
+function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(" ");
+}
+
+function RASearchPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [mode, setMode] = useState<string>("search");
   const [fieldRefs, setFieldRefs] = useState<any>({});
@@ -39,6 +39,32 @@ function SearchPage() {
     }
     setInputState(inputs);
   }
+  const saveHistory = (e: React.FormEvent<any>) => {
+    e.preventDefault();
+    fetch("/api/history", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: '',
+        query: '',
+        results: ''
+      }),
+    })
+      .then(async (response) => {
+        if (response.ok) {
+          let responseJSON = await response.json();
+
+        } else {
+          console.error("Request failed. Status: " + response.status);
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
 
   useEffect(() => {
     fetch("/api/fields", {
@@ -63,12 +89,13 @@ function SearchPage() {
     checkLoginStatus(setIsLoggedIn);
   }, []);
 
+  console.log({
+    mode: mode,
+    searchResults: searchResults
+  })
+
   return (
-    <PageLayout
-      isLoggedIn={isLoggedIn}
-      skipLogin={false}
-      pageName={"scientists"}
-    >
+    <PageLayout pageName='members' isLoggedIn={isLoggedIn} skipLogin={false}>
       <AnimatePresence>
         {searchResults.length > 0 ? (
           <motion.div
@@ -97,10 +124,17 @@ function SearchPage() {
                   variant="h2"
                   className="pb-4 pt-4 text-center text-xl lg:text-2xl xl:text-4xl"
                 >
-                  Search Scientific Catalogue
+                  Search Literature
                 </Typography>
               </CardHeader>
               <CardBody placeholder={""}>
+              <Typography
+                  placeholder={""}
+                  variant="h2"
+                  className="text-center text-lg lg:text-xl xl:text-2xl"
+                >
+                  Session 1 (0 search queries submitted)
+                </Typography>
                 <form
                   className="mt-4"
                   id="searchForm"
@@ -229,8 +263,7 @@ function SearchPage() {
           </div>
         )}
       </AnimatePresence>
-    </PageLayout>
-  );
+    </ PageLayout>);
 }
 
-export default SearchPage;
+export default RASearchPage;

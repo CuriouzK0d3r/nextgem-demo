@@ -47,7 +47,7 @@ function DashboardPage() {
                             <div className="w-full h-full text-center rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900/50">
                                 <img width={88} className='mx-auto pt-10' src="./ra-logo.svg" alt="" />
                                 <span className='text-white'>
-                                    Risk Assessment Tool
+                                    Risk Assessment Tools
                                 </span>
                             </div>
                         </div>

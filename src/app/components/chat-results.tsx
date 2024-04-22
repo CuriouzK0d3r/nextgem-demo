@@ -40,7 +40,7 @@ const ChatResults: React.FC<any> = ({ submittedQuery, finished, setFinished, set
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ "model": "13b-text-q6_K", "prompt": submittedQuery, "stream": true }),
+            body: JSON.stringify({ "model": "llama3", "prompt": submittedQuery, "stream": true }),
         })
             .then(response => {
                 if (response.ok && response.body) {
@@ -55,9 +55,7 @@ const ChatResults: React.FC<any> = ({ submittedQuery, finished, setFinished, set
                             if (!finishedRef.current) {
                                 if (done) {
                                     messagesList = [...messagesList, cMess];
-                                    console.log(messages)
                                     setMessages(messagesList);
-                                    console.log(currentMessage)
                                     setCurrentMessage("");
                                     cMess = "";
                                     setIsLoading(false);
@@ -133,7 +131,7 @@ const ChatResults: React.FC<any> = ({ submittedQuery, finished, setFinished, set
                                                                 </div> :
                                                                 <div key={index}>
                                                                     <div className="flex items-end float-right">
-                                                                        <div className="flex flex-col space-y-2 text-md leading-tight max-w-lg mx-2">
+                                                                        <div className="flex flex-col space-y-2 text-md leading-tight text-left max-w-lg mx-2">
 
                                                                             <div>
                                                                                 <FaUserLarge className="float-left mr-2 mt-6 h-4 w-4" />

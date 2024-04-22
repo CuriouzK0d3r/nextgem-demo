@@ -50,29 +50,16 @@ function RASearchPage() {
             {/* <div id="formTab" className="tabcontent " style={{ display: "block" }}> */}
             <div className='w-full text-center place-items-center min-h-[68rem]'>
                 {submittedQuery.length == 0 ?
-                    <h1 className="mb-6 text-center mt-48 text-4xl">Your <AnimatedText /> <Menu placement="bottom-start">
-                        <MenuHandler>
-                            <Button
+                    <h1 className="mb-6 text-center mt-48 text-4xl">Your <AnimatedText /> 
+                    <Button
                                 placeholder={"Search Engine"}
                                 ripple={false}
                                 variant="text"
                                 // color="blue-gray"
-                                className="rounded-lg object-cover object-center shadow-md shadow-blue-gray-900/50 h-16 items-center  border-white bg-gradient-to-r from-cyan-500 to-blue-500  inline text-gray-800  text-4xl normal-case underline-offset-4 underline "
+                                className="rounded-lg ml-4 object-cover object-center shadow-md shadow-blue-gray-900/50 h-16 items-center  border-white bg-gradient-to-r from-cyan-500 to-blue-500  inline text-gray-800  text-4xl normal-case  "
                             >
                                 AI Chat.
-                            </Button>
-                        </MenuHandler>
-                        <MenuList placeholder={""} className="max-h-[20rem] max-w-[18rem] text-gray-800 text-lg">
-                            <MenuItem placeholder={""}
-
-                                className="flex items-center gap-2"
-                            ><Link href="/ra-search">Search Engine</Link></MenuItem>
-                            <MenuItem placeholder={""}
-
-                                className="flex items-center gap-2"
-                            ><Link href="/ra-chat">AI Chat</Link></MenuItem>
-                        </MenuList>
-                    </Menu></h1> : <></>
+                            </Button></h1> : <></>
                 }
                 <div className={classNames("relative flex mx-auto flex-col place-items-center w-full md:w-5/6 p-0", submittedQuery.length ? "mt-9" : "mt-0")}>
                     <ChatResults finished={finished} setFinished={setFinished} setSubmittedQuery={setSubmittedQuery} setChatMessage={setChatMessage} submittedQuery={submittedQuery} type={searchType.toLowerCase()}></ChatResults>

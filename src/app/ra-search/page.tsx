@@ -37,41 +37,45 @@ function RASearchPage() {
     return (
         <PageLayout pageName='members' isLoggedIn={isLoggedIn} skipLogin={false}>
             {/* <div id="formTab" className="tabcontent " style={{ display: "block" }}> */}
-            <div className='w-full text-center place-items-center min-h-[48rem]'>
-                {submittedQuery.length == 0 ?
-                    <h1 className="mb-6 text-center mt-48 text-4xl">Your <AnimatedText /> <Menu placement="bottom-start">
-                        <MenuHandler>
-                            <Button
-                                placeholder={"Search Engine"}
-                                ripple={false}
-                                variant="text"
-                                // color="blue-gray"
-                                className="rounded-lg object-cover object-center shadow-md shadow-blue-gray-900/50 h-16 items-center  border-white bg-gradient-to-r from-cyan-500 to-blue-500  inline text-gray-800  text-4xl normal-case underline-offset-4 underline "
-                            >
-                                Search Engine.
-                            </Button>
-                        </MenuHandler>
-                        <MenuList placeholder={""} className="max-h-[20rem] max-w-[18rem] text-gray-800 text-lg">
-                            <MenuItem placeholder={""}
+            <div className="w-full min-h-[45rem] mt-0 flex items-center justify-center ">
+                <div className="grid grid-cols-2 gap-4">
+                    <a href='/literature-search' className='mb-12'>
+                        <div className="menu-box members-cat mr-8">
+                            <div className=" w-full h-full text-center rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900/50">
+                                <img width={90} className='mx-auto pt-8' src="./input-logo.svg" alt="" />
+                                <span className='text-white'>
+                                    Literature Search
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                    <a href='/literature-search-history'>
+                        <div className="menu-box members-cat">
+                            <div className="w-full h-full text-center rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900/50">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="mx-auto pt-10 w-20 text-white">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+                                </svg>
 
-                                className="flex items-center gap-2 "
-                            ><Link href="/ra-search" className='text-gray-800'>Search Engine</Link></MenuItem>
-                            <MenuItem placeholder={""}
+                                <span className='text-white'>
+                                    Search History
+                                </span>
+                            </div>
+                        </div>
+                    </a>
 
-                                className="flex items-center gap-2"
-                            ><Link href="/ra-chat" className='text-gray-800'>AI Chat</Link></MenuItem>
-                        </MenuList>
-                    </Menu></h1> : <></>
-                }
-                <div className={classNames("relative flex mx-auto place-items-center w-full md:w-5/6", submittedQuery.length ? "mt-9" : "mt-0")}>
-                    {/* create a search form with tailwindcss */}
-                    <SearchForm handleSearch={handleSearch} searchType={searchType} setSearchType={setSearchType}
-                        setCurrentPage={setCurrentPage} currentPage={currentPage} searchQuery={searchQuery} setSearchQuery={setSearchQuery}  ></SearchForm>
-
+                    <a href='ra-chat'>
+                        <div className="menu-box members-cat">
+                            <div className="w-full h-full text-center rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900/50">
+                                <img width={93} className='mx-auto pt-8' src="./chatbot.svg" alt="" />
+                                <span className='text-white'>
+                                    AI Chat
+                                </span>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-                <SearchResultsTable setSearchQuery={setSearchQuery} setCurrentPage={setCurrentPage} currentPage={currentPage} setSubmittedQuery={setSubmittedQuery} submittedQuery={submittedQuery} type={searchType.toLowerCase()}></SearchResultsTable>
-
             </div>
+
             {/* </div> */}
         </ PageLayout>);
 }

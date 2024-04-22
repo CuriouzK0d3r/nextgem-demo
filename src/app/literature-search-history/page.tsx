@@ -375,7 +375,7 @@ function RASearchPage() {
               variant="h2"
               className="pb-4 pt-4 text-center text-xl lg:text-2xl xl:text-4xl"
             >
-              Risk Assesment Toolkit
+              Literature Search History
             </Typography>
           </CardHeader>
           <CardBody placeholder={""}>
@@ -562,7 +562,7 @@ function RASearchPage() {
                   </tbody>
                 </table>
               </div> }
-              <RASessionSearch />
+              {/* <RASessionSearch /> */}
             </div>
 
           </CardBody>
