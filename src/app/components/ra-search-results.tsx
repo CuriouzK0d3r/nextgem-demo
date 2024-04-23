@@ -230,11 +230,16 @@ const SearchResults: React.FC<any> = ({
                         </svg>
                         {moreIdx === -1 ? "Add a New Search" : "Back to Results"}
                     </Typography>
+                    
                     <div className="float-right mb-4">  {moreIdx === -1 ? (
-                            <Select value={"Show current results"} className="w-60" variant="standard" placeholder={""} label="">
-                                <Option>Show current results</Option>
-                                <Option>Show all session results</Option>
-                            </Select>) : ""}</div>
+                        <Select value={"Show current results"} className="w-60" variant="standard" placeholder={""} label="">
+                            <Option>Show current results</Option>
+                            <Option>Show all session results</Option>
+                        </Select>) : ""}</div>
+                        <Button
+                    className="float-right mt-3 p-2"
+                        placeholder={""}
+                    >Deduplicate</Button>
                     {/* <Typography
                         placeholder=""
                 

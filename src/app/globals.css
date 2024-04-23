@@ -74,11 +74,21 @@ a.menu-link:hover {
 
 .menu-box {
   width: 358px;
-height: 168px;
-flex-shrink: 0; 
-border-radius: 5px;
-background: #1D2E66;
-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15); 
+  height: 168px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  background: #1D2E66;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
+}
+
+.search-menu-box {
+  width: 15rem;
+  height: 10rem;
+  flex-shrink: 0;
+  border-radius: 5px;
+  background: #1D2E66;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
+
 }
 
 .box {
@@ -111,10 +121,13 @@ box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
 
 
 @keyframes bounce {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(-10%);
     animationTimingFunction: cubic-bezier(0.8, 0, 1, 1);
   }
+
   50% {
     transform: translateY(0);
     animationTimingFunction: cubic-bezier(0, 0, 0.2, 1);
@@ -130,7 +143,8 @@ box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
   width: 120px;
 }
 
-#loginForm > div, #registerForm > div {
+#loginForm>div,
+#registerForm>div {
   padding: 0px !important;
 }
 
@@ -211,11 +225,11 @@ h4 {
   padding-top: 16px;
 } */
 
-ul > li {
+ul>li {
   margin-left: 1rem;
 }
 
-ul.main-header-menu > li {
+ul.main-header-menu>li {
   margin-left: 0rem !important;
 }
 
@@ -238,6 +252,7 @@ ul.main-header-menu > li {
 ul {
   margin-left: 0px !important;
 }
+
 .clear-button {
   background: rgb(15, 21, 62);
   display: inline-block;
@@ -268,8 +283,8 @@ ul {
   cursor: pointer;
   will-change: box-shadow, transform;
   background: radial-gradient(100% 100% at 100% 0%,
-  #1d3f66 0%,
-  #1D2E66 100%);
+      #1d3f66 0%,
+      #1D2E66 100%);
   color: #fff;
   text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
   transition: box-shadow 0.15s ease, transform 0.15s ease;
@@ -288,7 +303,7 @@ ul {
 
 .form-container {
   background-color: #D9D9D9;
-   padding: 0 2rem 2rem 2rem !important;
+  padding: 0 2rem 2rem 2rem !important;
 }
 
 label {
@@ -325,8 +340,8 @@ label {
 .tab button.active {
   color: #fff;
   background: radial-gradient(100% 100% at 100% 0%,
-  #1d3f66 0%,
-  #1D2E66 100%);  
+      #1d3f66 0%,
+      #1D2E66 100%);
   box-shadow: 0px 2px 4px rgb(45 35 66 / 40%),
     0px 7px 13px -3px rgb(45 35 66 / 30%),
     inset 0px -3px 0px rgb(58 65 111 / 50%);
@@ -373,9 +388,9 @@ li>button:hover {
   color: white !important;
 }
 
-.search-mode > button {
+.search-mode>button {
   border: 0px;
-  background:  transparent !important;
+  background: transparent !important;
 }
 
 form {
@@ -383,7 +398,7 @@ form {
   flex-direction: column;
 }
 
-.loginInput > div {
+.loginInput>div {
   padding: 0px !important;
   margin-top: 1rem;
 }

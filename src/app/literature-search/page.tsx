@@ -17,6 +17,7 @@ import ExternalSources from "../components/external-sources";
 import PageLayout from '../components/page-layout';
 import SearchResults from "../components/ra-search-results";
 import { checkLoginStatus } from '../helpers/login';
+import SearchModal from "../components/helpers/SearchModal";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -31,6 +32,8 @@ function RASearchPage() {
   const [chosenSources, setChosenSources] = useState<string[]>([]);
   const [inputFields, setInputFields] = useState<any>([]);
   const [inputState, setInputState] = useState<any>([]);
+  const [open, setOpen] = useState(true);
+
 
   function clearState() {
     let inputs: any = {};
@@ -263,6 +266,7 @@ function RASearchPage() {
           </div>
         )}
       </AnimatePresence>
+      <SearchModal showModal={open} setShowModal={setOpen} />
     </ PageLayout>);
 }
 
