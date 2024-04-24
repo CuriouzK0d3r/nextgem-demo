@@ -7,6 +7,8 @@ import {
   Chip,
   List,
   ListItem,
+  Select,
+  Option,
   Typography
 } from "@material-tailwind/react";
 import React, { useState } from "react";
@@ -35,12 +37,12 @@ function RASearchPage() {
         username: '',
         query: '',
         results: ''
-    }),
+      }),
     })
       .then(async (response) => {
         if (response.ok) {
           let responseJSON = await response.json();
-        
+
         } else {
           console.error("Request failed. Status: " + response.status);
         }
@@ -379,8 +381,33 @@ function RASearchPage() {
             </Typography>
           </CardHeader>
           <CardBody placeholder={""}>
-            <div className={classNames("relative flex mx-auto place-items-center w-full float-left", submittedQuery.length ? "mt-9" : "mt-0")}>
-              <Card placeholder={""} className="max-w-[25rem] shadow-xl shadow-blue-gray-900/5 float-left">
+            <div className={classNames("relative  mx-auto place-items-center w-full float-left", submittedQuery.length ? "mt-9" : "mt-0")}>
+              <div className="mb-2 p-4 ml-0 text-left w-full">
+                <Typography placeholder={""} variant="h5" color="blue-gray" className="float-left ">
+                  New RA Session
+                </Typography>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10 pb-3">
+                  <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z" clipRule="evenodd" />
+                </svg>
+                <span className="float-right">
+                  <b>new search</b>  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10 -ml-2">
+                    <path d="M8.25 10.875a2.625 2.625 0 1 1 5.25 0 2.625 2.625 0 0 1-5.25 0Z" />
+                    <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.125 4.5a4.125 4.125 0 1 0 2.338 7.524l2.007 2.006a.75.75 0 1 0 1.06-1.06l-2.006-2.007a4.125 4.125 0 0 0-3.399-6.463Z" clipRule="evenodd" />
+                  </svg>
+                </span>
+              </div>
+              <div className="mb-2 p-4 ml-0 text-left w-full">
+                <Select value={"Last Session"} className="w-60" variant="standard" placeholder={""} label="">
+                  <Option>Session 1</Option>
+                  <Option>Session 2</Option>
+                </Select>
+                <Select value={"Search 1"} className="w-60" variant="standard" placeholder={""} label="">
+                  <Option>Search 1</Option>
+                  <Option>Search 2</Option>
+                </Select>
+              </div>
+
+              {/* <Card placeholder={""} className="max-w-[25rem] shadow-xl shadow-blue-gray-900/5 float-left">
                 <div className="mb-2 p-4 ml-0 text-left">
                   <Typography placeholder={""} variant="h5" color="blue-gray" className="float-left ">
                     New RA Session
@@ -410,8 +437,8 @@ function RASearchPage() {
                     Search 1
                   </ListItem>
                 </List>
-              </Card>
-            { false &&  <div className="float-right pl-10">
+              </Card> */}
+              {<div className=" pl-10">
                 <table className="mx-auto mt-6 w-full table-auto border-collapse overflow-hidden text-left">
                   <thead>
                     <tr className="whitespace-nowrap">
@@ -561,7 +588,7 @@ function RASearchPage() {
                     )}
                   </tbody>
                 </table>
-              </div> }
+              </div>}
               {/* <RASessionSearch /> */}
             </div>
 
