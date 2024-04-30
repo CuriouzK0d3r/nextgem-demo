@@ -14,27 +14,11 @@ export async function POST(req: Request) {
         // const sources = json.sources || [source];
         let {username, query, search_results} = json;
 
-        let results;
-        let cursor;
-        let appliedFilters: any[] = [];
-
-        Object.keys(query).forEach((key: string) => {
-            if (!["title", 'doi', 'abstract'].includes(key as never)) {
-                return;
-            }
-            let filter: any = {};
-            filter[key] = {
-                '$regex': query[key]
-            }
-            appliedFilters.push(filter);
-        });
-
-        collection.insertOne({username: history, history: [{query: query, results: results}]});
+        collection.insertOne({username: history, history: [{session_id: "", search_id: "", query: query, results: search_results}]});
         // let resultTitle = await cursorFilter.toArray();
         // results = resultTitle;
 
-
-        return Response.json(results)
+        return Response.json([])
     } catch (err) {
         console.error(err);
         return Response.json([])

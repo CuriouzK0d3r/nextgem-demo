@@ -383,7 +383,7 @@ function RASearchPage() {
           <CardBody placeholder={""}>
             <div className={classNames("relative  mx-auto place-items-center w-full float-left", submittedQuery.length ? "mt-9" : "mt-0")}>
               <div className=" mt-2 ml-0  w-full flex">
-              Start a
+                Start a
                 <div className="w-70 ">
                   <Typography placeholder={""} variant="h6" color="blue-gray" className="float-left pr-0 underline underline-offset-4">
                     New Session
