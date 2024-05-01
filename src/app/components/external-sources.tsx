@@ -28,8 +28,20 @@ const ExternalSources = ({ hasSubmitted, setHasSubmitted, inputState, setSearchR
                         setErrorMessage("No results found!");
                         setOpen(true);
                     }
+                    // if (hasHistory)
+                    //     await fetch("/api/history", {
+                    //         method: "POST",
+                    //         headers: {
+                    //             "Content-Type": "application/json",
+                    //         },
+                    //         body: JSON.stringify({
+                    //             formData: formData,
+                    //             chosenSources: chosenSources,
+                    //             username:
+                    //         }),
+                    //     });
                 } else {
-                    console.error("Login failed. Status: " + response.status);
+                    console.error("Search failed. Status: " + response.status);
                 }
             })
             .catch((error) => {

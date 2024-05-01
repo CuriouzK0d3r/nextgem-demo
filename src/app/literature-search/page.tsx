@@ -1,4 +1,5 @@
 "use client"
+import Cookies from "js-cookie";
 
 import {
   Button,
@@ -16,7 +17,7 @@ import React, { useEffect, useState } from "react";
 import ExternalSources from "../components/external-sources";
 import PageLayout from '../components/page-layout';
 import SearchResults from "../components/ra-search-results";
-import { checkLoginStatus } from '../helpers/login';
+import { checkLoginStatus, parseJwt } from '../helpers/login';
 import SearchModal from "../components/helpers/SearchModal";
 
 function classNames(...classes: string[]) {
@@ -42,23 +43,31 @@ function RASearchPage() {
     }
     setInputState(inputs);
   }
-  const saveHistory = (e: React.FormEvent<any>) => {
-    e.preventDefault();
+  const saveHistory = (
+
+  ) => {
+    const token = Cookies.get('token');
+    const jwtObj = parseJwt(token);
+
+    console.log('fdsfsd')
+
     fetch("/api/history", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        username: '',
-        query: '',
-        results: ''
-      }),
+        query: JSON.stringify(inputState),
+        username: jwtObj["preferred_username"],
+        search_results: searchResults,
+        chosenSources: chosenSources
+      })
     })
       .then(async (response) => {
         if (response.ok) {
           let responseJSON = await response.json();
-
+          // setInputFields(responseJSON.fields);
+          // clearState();
         } else {
           console.error("Request failed. Status: " + response.status);
         }
@@ -68,6 +77,12 @@ function RASearchPage() {
       });
   };
 
+
+  useEffect(() => {
+    if (searchResults.length !== 0) {
+      saveHistory();
+    }
+  }, [searchResults]);
 
   useEffect(() => {
     fetch("/api/fields", {
@@ -91,11 +106,6 @@ function RASearchPage() {
 
     checkLoginStatus(setIsLoggedIn);
   }, []);
-
-  console.log({
-    mode: mode,
-    searchResults: searchResults
-  })
 
   return (
     <PageLayout pageName='members' isLoggedIn={isLoggedIn} skipLogin={false}>
@@ -131,7 +141,7 @@ function RASearchPage() {
                 </Typography>
               </CardHeader>
               <CardBody placeholder={""}>
-              <Typography
+                <Typography
                   placeholder={""}
                   variant="h2"
                   className="text-center text-lg lg:text-xl xl:text-2xl"

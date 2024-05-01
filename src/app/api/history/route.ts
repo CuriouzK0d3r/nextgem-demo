@@ -12,13 +12,35 @@ export async function POST(req: Request) {
         let json = await req.json();
         const source = json.source ? [json.source] : ["pubmed", "emf", "wos"];
         // const sources = json.sources || [source];
-        let {username, query, search_results} = json;
+        const {username, query, search_results, chosenSources} = json;
 
-        collection.insertOne({username: history, history: [{session_id: "", search_id: "", query: query, results: search_results}]});
+        collection.insertOne({username: username, history: [{session_id: "", search_id: "", query: query, results: search_results, chosenSources: chosenSources}]});
+
+        return Response.json([])
+    } catch (err) {
+        console.error(err);
+        return Response.json([])
+    } finally {
+        await client.close();
+    }
+}
+
+export async function GET(req: Request) {
+    try {
+        await client.connect();
+        const database = client.db('risk_assesment'); // replace with your database name
+        const collection = database.collection('search_history'); // replace with your collection name
+        let filter = {};
+        let json = await req.json();
+        const source = json.source ? [json.source] : ["pubmed", "emf", "wos"];
+        // const sources = json.sources || [source];
+        const {username, query, search_results, chosenSources} = json;
+
+        const history = collection.find({username: username}).toArray();
         // let resultTitle = await cursorFilter.toArray();
         // results = resultTitle;
 
-        return Response.json([])
+        return Response.json(history)
     } catch (err) {
         console.error(err);
         return Response.json([])
