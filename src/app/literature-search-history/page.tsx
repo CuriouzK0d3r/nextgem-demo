@@ -402,13 +402,13 @@ function RASearchPage() {
               </div>
               <div className="pb-6 p-4 mt-10 pt-0 ml-0 text-left w-[370px]">
                 <div className="w-18 float-left">
-                  <Select label="Choose Session">
+                  <Select placeholder={"Choose Session"} label="Choose Session">
                     <Option>Session 1</Option>
                     <Option>Session 2</Option>
                   </Select>
                 </div>
                 <div className="w-28 float-right">
-                  <Select className="" label="Choose Search">
+                  <Select placeholder={"Choose Search"} className="" label="Choose Search">
                     <Option>Search 1</Option>
                     <Option>Search 2</Option>
                   </Select>

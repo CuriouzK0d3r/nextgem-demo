@@ -2,26 +2,15 @@
 
 import {
   Button,
-  Card,
-  CardBody,
   CardFooter,
-  CardHeader,
-  Dialog,
-  DialogBody,
-  DialogFooter,
-  DialogHeader,
   Input,
   Option,
-  Select,
-  Typography,
+  Select
 } from "@material-tailwind/react";
-import { AnimatePresence, motion } from "framer-motion";
+import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import ExternalSources from "../components/external-sources";
-import PageLayout from "../components/page-layout";
-import SearchResults from "../components/search-results";
 import { checkLoginStatus, parseJwt } from "../helpers/login";
-import Cookies from "js-cookie";
 const RASessionSearch = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [mode, setMode] = useState<string>("search");
