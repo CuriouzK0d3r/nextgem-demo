@@ -17,13 +17,17 @@ export async function POST(req: Request) {
 
         console.log("elaaaa      ");
 
-        // const history = await collection.find({ username: username }).toArray();
+        const history = await collection.find({ username: username }).toArray();
         // console.log(history)
 
-        collection.updateOne({username: username}, {
-            "username": username, "history":
-                []
-        });
+        if (history.length > 0) {
+            await collection.updateOne({"username": username}, {"$set": {
+                "username": username, "history":
+                    [...history[0].history, {session_id: "", search_id: "", query: query, results: search_results}]
+            }});
+        } else {
+            await collection.insertOne({username: history, history: [{session_id: "", search_id: "", query: query, results: search_results}]});
+        }
 
         // return Response.json([]);
     } catch (err) {
