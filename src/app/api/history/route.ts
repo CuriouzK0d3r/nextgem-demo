@@ -64,13 +64,14 @@ export async function GET(req: Request) {
     await client.connect();
     const database = client.db("risk_assesment"); // replace with your database name
     const collection = database.collection("search_history"); // replace with your collection name
-    let json = await req.json();
-    // const sources = json.sources || [source];
-    console.log(json);
-    const { username } = json;
+    const username = req.nextUrl.searchParams.get("username");
+    // let json = await  json.sources || [source];
+    // // console.log(json);req.json();
+    // // // const sources =
+    // // const { username } = json;
 
     const history = await collection.find({ username: username }).toArray();
-    console.log("history");
+    // // console.log("history");
     return Response.json(history);
   } catch (err) {
     console.error(err);

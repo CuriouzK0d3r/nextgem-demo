@@ -25,9 +25,9 @@ function RASearchPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchType, setSearchType] = useState("All Fields");
   const [currentPage, setCurrentPage] = useState(1);
+  const [currentHistory, setCurrentHistory] = useState([]);
 
   const getHistory = () => {
-    console.log("fdsfdsfsd");
     fetch("/api/history?username=" + "forth-admin", {
       method: "GET",
       headers: {
@@ -35,10 +35,9 @@ function RASearchPage() {
       },
     })
       .then(async (response) => {
-        console.log("fdsfds");
         if (response.ok) {
           let responseJSON = await response.json();
-          console.log(responseJSON);
+          setCurrentHistory(responseJSON);
         } else {
           console.error("Request failed. Status: " + response.status);
         }
@@ -51,6 +50,7 @@ function RASearchPage() {
   useEffect(() => {
     getHistory();
   }, []);
+
   const searchResult = [
     {
       _id: "6603f4b763ce7798f7249d04",
@@ -464,14 +464,13 @@ function RASearchPage() {
                           }: any,
                           index: number,
                         ) => {
-                          console.log(source_url);
                           const isLast = index === searchResult.length - 1;
                           const classes = isLast
                             ? "p-4 "
                             : "p-4 border-b border-blue-gray-50 whitespace-break-spaces";
 
                           let source_icon = <></>;
-                          console.log(source);
+
                           switch (source) {
                             case "PUBMED":
                               source_icon = (
