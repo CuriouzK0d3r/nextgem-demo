@@ -60,6 +60,7 @@ export async function POST(req: Request) {
 }
 
 export async function GET(req: Request) {
+  let history = {};
   try {
     await client.connect();
     const database = client.db("risk_assesment"); // replace with your database name
@@ -70,13 +71,15 @@ export async function GET(req: Request) {
     // // // const sources =
     // // const { username } = json;
 
-    const history = await collection.find({ username: username }).toArray();
+    history = await collection.find({ username: username }).toArray();
     // // console.log("history");
-    return Response.json(history);
   } catch (err) {
     console.error(err);
+    await client.close();
+
     return Response.json([]);
   } finally {
     await client.close();
+    return Response.json(history);
   }
 }
