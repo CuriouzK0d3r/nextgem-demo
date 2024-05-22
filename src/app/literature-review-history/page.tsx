@@ -4,19 +4,14 @@ import {
   Card,
   CardBody,
   CardHeader,
-  Chip,
-  List,
-  ListItem,
-  Select,
   Option,
-  Typography,
+  Select,
+  Typography
 } from "@material-tailwind/react";
 import React, { useEffect, useState } from "react";
 import PageLayout from "../components/page-layout";
-import { checkLoginStatus } from "../helpers/login";
-import RASessionSearch from "../components/ra-session-search";
-import SearchResults from "../components/ra-search-results";
 import SearchTable from "../components/search-table";
+import { checkLoginStatus } from "../helpers/login";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -41,7 +36,6 @@ function RASearchPage() {
       .then(async (response) => {
         if (response.ok) {
           let responseJSON = await response.json();
-          console.log(responseJSON)
           setCurrentHistory(responseJSON);
         } else {
           console.error("Request failed. Status: " + response.status);
@@ -104,7 +98,7 @@ function RASearchPage() {
                     color="blue-gray"
                     className="float-left pr-0 underline underline-offset-4"
                   >
-                    New Session
+                    New Review
                   </Typography>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -148,14 +142,14 @@ function RASearchPage() {
               <div className="pb-6 p-4 mt-10 pt-0 ml-0 text-left w-[370px]">
                 <div className="w-18 float-left">
                   {currentHistory.length > 0 &&
-                  <Select placeholder={"Choose Session"} label="Choose Session" onChange={(value) => setSessionIndex(Number(value))}>
-                    {
-                      currentHistory.map((session, idx) => {
-                        return <Option value={idx}>Session {idx}</Option>;
-                      })
-                    }
-                  </Select>
-}
+                    <Select placeholder={"Choose Review"} label="Choose Review" onChange={(value) => setSessionIndex(Number(value))}>
+                      {
+                        currentHistory.map((session, idx: number) => {
+                          return <Option value={String(idx)}>Review {idx + 1}</Option>;
+                        })
+                      }
+                    </Select>
+                  }
                 </div>
                 <div className="w-28 float-right">
                   {currentHistory.length > 0 &&
@@ -167,7 +161,7 @@ function RASearchPage() {
                     >
                       {
                         currentHistory[sessionIndex].history.map((_, idx) => {
-                          return <Option value={idx}>Search {idx}</Option>;
+                          return <Option value={idx}>Search {idx + 1}</Option>;
                         })
                       }
                     </Select>
@@ -208,8 +202,12 @@ function RASearchPage() {
               </Card> */}
               {
                 <div className=" pl-4 w-full">
-                  {currentHistory.length > 0 ? <SearchTable searchResults={currentHistory[0].history[searchIndex].results} />
+                  {currentHistory.length > 0 ? <SearchTable searchResults={currentHistory[currentHistory.length - 1].history[searchIndex].results} />
                     : <></>}
+                  {
+                    (!currentHistory || currentHistory.length === 0) &&
+                    <>No searches in history</>
+                  }
                 </div>
               }
               {/* <RASessionSearch /> */}

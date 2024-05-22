@@ -15,7 +15,7 @@ export async function POST(req: Request) {
     const source = json.source ? [json.source] : ["pubmed", "emf", "wos"];
     // const sources = json.sources || [source];
     const { username, query, search_results, chosenSources } = json;
-
+    console.log(username)
     const history = await collection.find({ username: username }).toArray();
     // console.log(history)
 
@@ -39,7 +39,7 @@ export async function POST(req: Request) {
       );
     } else {
       await collection.insertOne({
-        username: history,
+        username: username,
         history: [
           {
             session_id: "",

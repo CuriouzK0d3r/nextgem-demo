@@ -27,7 +27,7 @@ function InputPage() {
                         <div className=" w-full h-full text-center rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900/50">
                             <img width={90} className='mx-auto pt-8' src="./input-logo.svg" alt="" />
                             <span className='text-white'>
-                                Input Scientific data
+                                Input Data
                             </span>
                         </div>
                     </div>
@@ -37,12 +37,12 @@ function InputPage() {
                         <div className="w-full h-full text-center rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900/50">
                             <img width={90} className='mx-auto pt-8' src="./file-logo.svg" alt="" />
                             <span className='text-white'>
-                                Input Files
+                                Management Data
                             </span>
                         </div>
                     </div>
                 </a>
-                <a href='/upload?tab=file'>
+                {/* <a href='/upload?tab=file'>
                     <div className="menu-box members-cat mt-12">
                         <div className="w-full h-full text-center rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900/50">
                             <img width={90} className='mx-auto pt-8' src="./file-logo.svg" alt="" />
@@ -61,7 +61,7 @@ function InputPage() {
                             </span>
                         </div>
                     </div>
-                </a>
+                </a> */}
                 </div>
             </div>
             {/* </div> */}

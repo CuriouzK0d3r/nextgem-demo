@@ -34,6 +34,31 @@ function RASearchPage() {
   const [inputFields, setInputFields] = useState<any>([]);
   const [inputState, setInputState] = useState<any>([]);
   const [open, setOpen] = useState(true);
+  const [currentHistory, setCurrentHistory] = useState([]);
+
+  const getHistory = () => {
+    fetch("/api/history?username=" + "forth-admin", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then(async (response) => {
+        if (response.ok) {
+          let responseJSON = await response.json();
+          setCurrentHistory(responseJSON);
+        } else {
+          console.error("Request failed. Status: " + response.status);
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
+  useEffect(() => {
+    getHistory();
+  }, []);
 
 
   function clearState() {
@@ -49,8 +74,6 @@ function RASearchPage() {
     const token = Cookies.get('token');
     const jwtObj = parseJwt(token);
 
-    console.log('fdsfsd')
-
     fetch("/api/history", {
       method: "POST",
       headers: {
@@ -58,7 +81,7 @@ function RASearchPage() {
       },
       body: JSON.stringify({
         query: JSON.stringify(inputState),
-        username: jwtObj["preferred_username"],
+        username: "forth-admin", //jwtObj["preferred_username"],
         search_results: searchResults,
         chosenSources: chosenSources
       })
@@ -137,17 +160,17 @@ function RASearchPage() {
                   variant="h2"
                   className="pb-4 pt-4 text-center text-xl lg:text-2xl xl:text-4xl"
                 >
-                  Search Literature
+                  Literature Review
                 </Typography>
               </CardHeader>
               <CardBody placeholder={""}>
-                <Typography
-                  placeholder={""}
-                  variant="h2"
-                  className="text-center text-lg lg:text-xl xl:text-2xl"
-                >
-                  Session 1 (0 search queries submitted)
-                </Typography>
+                  <Typography
+                    placeholder={""}
+                    variant="h2"
+                    className="text-center text-lg lg:text-xl xl:text-2xl"
+                  >
+                    Review {currentHistory.length ? currentHistory.length : 1} ({currentHistory.length ? currentHistory[currentHistory.length - 1].history.length : 0} search queries submitted)
+                  </Typography>
                 <form
                   className="mt-4"
                   id="searchForm"
@@ -276,7 +299,7 @@ function RASearchPage() {
           </div>
         )}
       </AnimatePresence>
-      <SearchModal showModal={open} setShowModal={setOpen} />
+      {/* <SearchModal showModal={open} setShowModal={setOpen} /> */}
     </ PageLayout>);
 }
 

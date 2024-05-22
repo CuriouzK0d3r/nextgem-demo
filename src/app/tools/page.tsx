@@ -21,13 +21,13 @@ function DashboardPage() {
             {/* <div id="formTab" className="tabcontent " style={{ display: "block" }}> */}
 
             <div className="w-full min-h-[45rem] mt-0 flex items-center justify-center ">
-                <div className="grid grid-cols-2 gap-4">
-                    <a href='/input' className='mb-12'>
+                <div className="grid grid-cols-2 gap-4 mt-8">
+                    <a href='/literature-review' className='mb-6'>
                         <div className="menu-box members-cat  mr-8">
                             <div className=" w-full h-full text-center rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900/50">
                                 <img width={90} className='mx-auto pt-8' src="./input-logo.svg" alt="" />
                                 <span className='text-white'>
-                                    Data Management
+                                    Literature Review
                                 </span>
                             </div>
                         </div>
@@ -42,12 +42,12 @@ function DashboardPage() {
                             </div>
                         </div>
                     </a>
-                    <a href='/ra-search'>
+                    <a href='/ra-search' className=' mb-6'>
                         <div className="menu-box members-cat">
                             <div className="w-full h-full text-center rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900/50">
                                 <img width={88} className='mx-auto pt-10' src="./ra-logo.svg" alt="" />
                                 <span className='text-white'>
-                                    Risk Assessment Tools
+                                    Risk Assessment
                                 </span>
                             </div>
                         </div>
@@ -58,6 +58,16 @@ function DashboardPage() {
                                 <img width={93} className='mx-auto pt-8' src="./ecosystem-logo.svg" alt="" />
                                 <span className='text-white'>
                                     Ecosystem
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                    <a href='/ra-search'>
+                        <div className="menu-box members-cat">
+                            <div className="w-full h-full text-center rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900/50">
+                                <img width={88} className='mx-auto pt-10' src="./ra-logo.svg" alt="" />
+                                <span className='text-white'>
+                                    Literature Review History
                                 </span>
                             </div>
                         </div>

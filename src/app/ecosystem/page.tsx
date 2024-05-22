@@ -21,8 +21,8 @@ function DashboardPage() {
             {/* <div id="formTab" className="tabcontent " style={{ display: "block" }}> */}
 
             <div className="w-full min-h-[45rem] mt-0 flex items-center justify-center ">
-                <div className="grid grid-cols-2 gap-4">
-                    <a href='/input' className='mb-12'>
+                <div className="grid grid-cols-2 gap-4 mt-12">
+                    <a href='/input' className='mb-4'>
                         <div className="menu-box members-cat  mr-8">
                             <div className=" w-full h-full text-center rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900/50">
                                 <img width={90} className='mx-auto pt-8' src="./input-logo.svg" alt="" />
@@ -42,7 +42,7 @@ function DashboardPage() {
                             </div>
                         </div>
                     </a>
-                    <a href='/ra-search'>
+                    <a href='/ra-search' className='mb-4'>
                         <div className="menu-box members-cat">
                             <div className="w-full h-full text-center rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900/50">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="mx-auto mt-2 pt-8 w-24 h-24 text-white">
@@ -65,6 +65,16 @@ function DashboardPage() {
 
                                 <span className='text-white'>
                                     Users
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                    <a href='/input' className='mb-12'>
+                        <div className="menu-box members-cat  mr-8">
+                            <div className=" w-full h-full text-center rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900/50">
+                                <img width={90} className='mx-auto pt-8' src="./input-logo.svg" alt="" />
+                                <span className='text-white'>
+                                    Data Management
                                 </span>
                             </div>
                         </div>
