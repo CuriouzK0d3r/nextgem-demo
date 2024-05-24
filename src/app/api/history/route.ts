@@ -1,10 +1,11 @@
 import { MongoClient } from "mongodb";
+import { NextRequest } from "next/server";
 
 const uri =
   "mongodb+srv://kornilak:testpassdelete@nextgem.prxatax.mongodb.net/?retryWrites=true&w=majority"; // replace with your MongoDB URI
 const client = new MongoClient(uri, {});
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
     await client.connect();
     const database = await client.db("risk_assesment"); // replace with your database name
@@ -59,7 +60,7 @@ export async function POST(req: Request) {
   return Response.json([]);
 }
 
-export async function GET(req: Request) {
+export async function GET(req: NextRequest) {
   let history = {};
   try {
     await client.connect();

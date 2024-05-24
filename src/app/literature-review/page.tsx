@@ -34,7 +34,7 @@ function RASearchPage() {
   const [inputFields, setInputFields] = useState<any>([]);
   const [inputState, setInputState] = useState<any>([]);
   const [open, setOpen] = useState(true);
-  const [currentHistory, setCurrentHistory] = useState([]);
+  const [currentHistory, setCurrentHistory] = useState<any[]>([]);
 
   const getHistory = () => {
     fetch("/api/history?username=" + "forth-admin", {

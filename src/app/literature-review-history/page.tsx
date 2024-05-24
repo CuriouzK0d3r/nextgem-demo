@@ -22,7 +22,7 @@ function RASearchPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchType, setSearchType] = useState("All Fields");
   const [currentPage, setCurrentPage] = useState(1);
-  const [currentHistory, setCurrentHistory] = useState([]);
+  const [currentHistory, setCurrentHistory] = useState<any[]>([]);
   const [mode, setMode] = useState<string>("search");
   const [submittedQuery, setSubmittedQuery] = useState("");
   const [searchIndex, setSearchIndex] = useState(0);
@@ -145,7 +145,7 @@ function RASearchPage() {
                     <Select placeholder={"Choose Review"} label="Choose Review" onChange={(value) => setSessionIndex(Number(value))}>
                       {
                         currentHistory.map((session, idx: number) => {
-                          return <Option value={String(idx)}>Review {idx + 1}</Option>;
+                          return <Option key={idx} value={String(idx)}>Review {idx + 1}</Option>;
                         })
                       }
                     </Select>
@@ -160,8 +160,8 @@ function RASearchPage() {
                       onChange={(value) => setSearchIndex(Number(value))}
                     >
                       {
-                        currentHistory[sessionIndex].history.map((_, idx) => {
-                          return <Option value={idx}>Search {idx + 1}</Option>;
+                        currentHistory[sessionIndex].history.map((_:any, idx:any) => {
+                          return <Option key={idx} value={idx}>Search {idx + 1}</Option>;
                         })
                       }
                     </Select>
