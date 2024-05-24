@@ -20,7 +20,7 @@ import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 import { checkLoginStatus } from '../helpers/login';
 
-const PageLayout = ({ isLoggedIn, skipLogin, children, pageName }: { isLoggedIn: boolean, skipLogin: boolean, children: React.ReactNode, pageName: string | undefined }) => {
+const PageLayout = ({ isLoggedIn, checkLogin, children, pageName }: { isLoggedIn: boolean, checkLogin: boolean, children: React.ReactNode, pageName: string | undefined }) => {
     const router = useRouter();
     const [open, setOpen] = useState(false);
     const [isModalLoggedIn, setIsModalLoggedIn] = useState(false);
@@ -30,7 +30,7 @@ const PageLayout = ({ isLoggedIn, skipLogin, children, pageName }: { isLoggedIn:
 
     const handleOpen = () => setOpen((cur) => !cur);
 
-    if ((pageName === "members" || pageName === 'input') && !skipLogin && !isLoggedIn) {
+    if (checkLogin && !isLoggedIn) {
         checkLoginStatus(setIsLogged, true, router);
     }
 
@@ -68,7 +68,7 @@ const PageLayout = ({ isLoggedIn, skipLogin, children, pageName }: { isLoggedIn:
     return (
         <div className=" flex flex-col min-h-screen p-0 w-full bg-white">
             <div className='page-layout flex flex-col min-h-screen w-full gap-0'>
-                <Header isLoggedIn={isLoggedIn || isModalLoggedIn || isLogged} skipLogin={skipLogin} pageName={pageName} />
+                <Header isLoggedIn={isLoggedIn || isModalLoggedIn || isLogged} pageName={pageName} />
                 <div className='flex-grow p-0'>
                     {children}
                 </div>

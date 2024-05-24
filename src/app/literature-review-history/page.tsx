@@ -38,8 +38,6 @@ function RASearchPage() {
       .then(async (response) => { 
         if (response.ok) {
           let responseJSON = await response.json();
-          console.log( 'dsfsdfds ')
-          console.log( responseJSON )
           setCurrentHistory(responseJSON);
         } else {
           console.error("Request failed. Status: " + response.status);
@@ -66,7 +64,7 @@ function RASearchPage() {
   };
 
   return (
-    <PageLayout pageName="members" isLoggedIn={isLoggedIn} skipLogin={false}>
+    <PageLayout pageName="Literature Review History" isLoggedIn={isLoggedIn} checkLogin={true}>
       <div className={`mt-32 min-h-[65rem] w-full`}>
         <Card
           placeholder={""}

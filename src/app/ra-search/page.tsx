@@ -35,7 +35,7 @@ function RASearchPage() {
     };
 
     return (
-        <PageLayout pageName='members' isLoggedIn={isLoggedIn} skipLogin={false}>
+        <PageLayout pageName='Risk Assesment' isLoggedIn={isLoggedIn} checkLogin={true}>
             {/* <div id="formTab" className="tabcontent " style={{ display: "block" }}> */}
             <div className="w-full min-h-[45rem] mt-0 flex items-center justify-center ">
                 <div className="grid grid-cols-2 gap-4">

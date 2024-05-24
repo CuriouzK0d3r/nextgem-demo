@@ -17,12 +17,12 @@ function DashboardPage() {
     const handleOpen = () => setOpen((cur) => !cur);
 
     return (
-        <PageLayout skipLogin={false} isLoggedIn={isLoggedIn} pageName='members'>
+        <PageLayout checkLogin={true} isLoggedIn={isLoggedIn} pageName='members'>
             {/* <div id="formTab" className="tabcontent " style={{ display: "block" }}> */}
 
             <div className="w-full min-h-[45rem] mt-0 flex items-center justify-center ">
                 <div className="grid grid-cols-2 gap-4 mt-8">
-                    <a href='/literature-review' className='mb-6'>
+                    <a href='/literature-session' className='mb-6'>
                         <div className="menu-box members-cat  mr-8">
                             <div className=" w-full h-full text-center rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900/50">
                                 <img width={90} className='mx-auto pt-8' src="./input-logo.svg" alt="" />
@@ -52,22 +52,12 @@ function DashboardPage() {
                             </div>
                         </div>
                     </a>
-                    <a href='/ecosystem'>
+                    <a href='/data-management'>
                         <div className="menu-box members-cat">
                             <div className="w-full h-full text-center rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900/50">
                                 <img width={93} className='mx-auto pt-8' src="./ecosystem-logo.svg" alt="" />
                                 <span className='text-white'>
-                                    Ecosystem
-                                </span>
-                            </div>
-                        </div>
-                    </a>
-                    <a href='/literature-review-history'>
-                        <div className="menu-box members-cat">
-                            <div className="w-full h-full text-center rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900/50">
-                                <img width={88} className='mx-auto pt-10' src="./ra-logo.svg" alt="" />
-                                <span className='text-white'>
-                                    Literature Review History
+                                    Data Management
                                 </span>
                             </div>
                         </div>

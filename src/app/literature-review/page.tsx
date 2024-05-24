@@ -131,7 +131,7 @@ function RASearchPage() {
   }, []);
 
   return (
-    <PageLayout pageName='members' isLoggedIn={isLoggedIn} skipLogin={false}>
+    <PageLayout pageName='Literature Review' isLoggedIn={isLoggedIn} checkLogin={true}>
       <AnimatePresence>
         {searchResults.length > 0 ? (
           <motion.div

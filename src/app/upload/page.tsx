@@ -174,7 +174,7 @@ function InputPage() {
     }
 
     return (
-        <PageLayout skipLogin={false} isLoggedIn={isLoggedIn} pageName='input'>
+        <PageLayout checkLogin={true} isLoggedIn={isLoggedIn} pageName='Input'>
             <div className="w-full mt-40 min-h-[60rem]">
                 <Card style={{background: "white"}} placeholder={""} className="mt-6 w-full lg:w-1/2 xl:1/3 mx-auto form-container object-cover object-center shadow-[0_10px_50px_rgba(58,_65,_11,_0.8)]"> 
                     <CardHeader placeholder={""} className='bg-[#D4D9DD] text-black p-0 divide-y-2 divide-[#fff]'>

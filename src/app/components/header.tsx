@@ -6,7 +6,7 @@ import Cookies from 'js-cookie';
 
 import '../snipped.css'
 
-const Header = ({ isLoggedIn, skipLogin, pageName }: { isLoggedIn: boolean, skipLogin: boolean | undefined, pageName: string | undefined }) => {
+const Header = ({ isLoggedIn, pageName }: { isLoggedIn: boolean, pageName: string | undefined }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (

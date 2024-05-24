@@ -46,7 +46,7 @@ function RASearchPage() {
     checkLoginStatus(setIsLoggedIn);
 
     return (
-        <PageLayout pageName='members' isLoggedIn={isLoggedIn} skipLogin={false}>
+        <PageLayout pageName='Risk Assesment Chat' isLoggedIn={isLoggedIn} checkLogin={true}>
             {/* <div id="formTab" className="tabcontent " style={{ display: "block" }}> */}
             <div className='w-full text-center place-items-center min-h-[68rem]'>
                 {submittedQuery.length == 0 ?

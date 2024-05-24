@@ -135,7 +135,7 @@ function LoginPage() {
     }
 
     return (
-        <PageLayout pageName='login' isLoggedIn={true} skipLogin={true}>
+        <PageLayout pageName='Login' isLoggedIn={true} checkLogin={false}>
             <div className="relative min-h-[48rem] mx-auto auth-container w-[40rem] ">
                 {/* */}
                 <div>

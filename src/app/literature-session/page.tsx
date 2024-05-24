@@ -35,26 +35,36 @@ function LiteratureSearchPage() {
     };
 
     return (
-        <PageLayout pageName='members' isLoggedIn={isLoggedIn} skipLogin={false}>
+        <PageLayout pageName='Literature Review' isLoggedIn={isLoggedIn} checkLogin={true}>
             {/* <div id="formTab" className="tabcontent " style={{ display: "block" }}> */}
             <div className="w-full min-h-[45rem] mt-0 flex items-center justify-center ">
                 <div className="grid grid-cols-2 gap-4">
-                    <a href='/ra-dash' className='mb-12'>
+                    <a href='/literature-review?new=true' className='mb-12'>
                         <div className="menu-box members-cat mr-8">
                             <div className=" w-full h-full text-center rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900/50">
                                 <img width={90} className='mx-auto pt-8' src="./input-logo.svg" alt="" />
                                 <span className='text-white'>
-                                    New Session
+                                    New Review
                                 </span>
                             </div>
                         </div>
                     </a>
-                    <a href='#'>
+                    <a href='/literature-review'>
                         <div className="menu-box members-cat">
                             <div className="w-full h-full text-center rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900/50">
                                 <img width={93} className='mx-auto pt-8' src="./modeling-logo.svg" alt="" />
                                 <span className='text-white'>
-                                    Last Session
+                                    Last Review
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                    <a href='/literature-review-history'>
+                        <div className="menu-box members-cat">
+                            <div className="w-full h-full text-center rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900/50">
+                                <img width={93} className='mx-auto pt-8' src="./modeling-logo.svg" alt="" />
+                                <span className='text-white'>
+                                    Review History
                                 </span>
                             </div>
                         </div>

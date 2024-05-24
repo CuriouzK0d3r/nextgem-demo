@@ -62,8 +62,8 @@ function SearchPage() {
   return (
     <PageLayout
       isLoggedIn={isLoggedIn}
-      skipLogin={false}
-      pageName={"scientists"}
+      checkLogin={true}
+      pageName="Scientists"
     >
       <AnimatePresence>
         {searchResults.length > 0 ? (
