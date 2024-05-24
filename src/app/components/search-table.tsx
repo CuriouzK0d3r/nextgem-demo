@@ -105,7 +105,6 @@ const SearchTable = ({ searchResults }: { searchResults: any }) => {
     riskAssessment: "Risk Assessment",
     exposureAssessment: "Exposure Assessment",
   };
-  console.log(searchResults);
 
   const document = searchResults.slice(0 * 1, 1);
 

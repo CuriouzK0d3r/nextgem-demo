@@ -24,7 +24,9 @@ function RASearchPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [currentHistory, setCurrentHistory] = useState([]);
   const [mode, setMode] = useState<string>("search");
-
+  const [submittedQuery, setSubmittedQuery] = useState("");
+  const [searchIndex, setSearchIndex] = useState(0);
+  const [sessionIndex, setSessionIndex] = useState(0);
 
   const getHistory = () => {
     fetch("/api/history?username=" + "forth-admin", {
@@ -33,9 +35,11 @@ function RASearchPage() {
         "Content-Type": "application/json",
       },
     })
-      .then(async (response) => {
+      .then(async (response) => { 
         if (response.ok) {
           let responseJSON = await response.json();
+          console.log( 'dsfsdfds ')
+          console.log( responseJSON )
           setCurrentHistory(responseJSON);
         } else {
           console.error("Request failed. Status: " + response.status);
@@ -49,10 +53,6 @@ function RASearchPage() {
   useEffect(() => {
     getHistory();
   }, []);
-
-  const [submittedQuery, setSubmittedQuery] = useState("");
-  const [searchIndex, setSearchIndex] = useState(0);
-  const [sessionIndex, setSessionIndex] = useState(0);
 
   checkLoginStatus(setIsLoggedIn);
   const handleSearch = (e: React.FormEvent<any>) => {
@@ -79,7 +79,7 @@ function RASearchPage() {
               variant="h2"
               className="pb-4 pt-4 text-center text-xl lg:text-2xl xl:text-4xl"
             >
-              Literature Search History
+              Literature Review History
             </Typography>
           </CardHeader>
           <CardBody placeholder={""}>

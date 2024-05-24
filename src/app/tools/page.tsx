@@ -62,7 +62,7 @@ function DashboardPage() {
                             </div>
                         </div>
                     </a>
-                    <a href='/ra-search'>
+                    <a href='/literature-review-history'>
                         <div className="menu-box members-cat">
                             <div className="w-full h-full text-center rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900/50">
                                 <img width={88} className='mx-auto pt-10' src="./ra-logo.svg" alt="" />
