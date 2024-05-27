@@ -292,6 +292,9 @@ const SearchResults: React.FC<any> = ({
                         case "NEXTGEM":
                           source_icon = <img className="w-[52px]" src="./cropped2-NextGEM_final_transparent 1.svg" />;
                           break;
+                        case "seawave":
+                          source_icon = <img className="w-[52px]" src="./logozenodo.svg" />;
+                          break;  
                       }
 
                       return (

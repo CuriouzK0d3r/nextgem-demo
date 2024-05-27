@@ -62,7 +62,7 @@ function SearchPage() {
   return (
     <PageLayout
       isLoggedIn={isLoggedIn}
-      checkLogin={true}
+      checkLogin={false}
       pageName="Scientists"
     >
       <AnimatePresence>
@@ -108,7 +108,7 @@ function SearchPage() {
                   <div className=" ">
                     <div>
                       {/* <Typography variant="h5" placeholder={"Description"}>Description</Typography> */}
-                      <div className="mb-12 grid w-full grid-cols-1 gap-x-12 gap-y-2 p-0 lg:grid-cols-2">
+                      <div className="mb-12 grid w-full grid-flow-col grid-cols-1 gap-x-12 gap-y-2 p-0 lg:grid-cols-2 grid-rows-3">
                         {inputFields.map((field: any, index: any) => {
                           const words = field.fieldName.replace(
                             /([a-z])([A-Z])/g,
@@ -137,6 +137,16 @@ function SearchPage() {
                                 />
                               </div>
                             );
+                          } else {
+                          
+                          }
+                        })}
+                        {inputFields.map((field: any, index: any) => {
+                          const words = field.fieldName.replace(
+                            /([a-z])([A-Z])/g,
+                            "$1 $2",
+                          );
+                          if (field.type == "String") {
                           } else {
                             return (
                               <div

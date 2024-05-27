@@ -64,14 +64,12 @@ const ExternalSources = ({ hasSubmitted, setHasSubmitted, inputState, setSearchR
         <div className='flex flex-col mx-auto w-full mt-10 mb-20'>
             <h1 className='text-xl text-black italic decoration-offset-4 decoration-wavy block text-center'>Select one or more sources:</h1> <br />
 
-            <div className=' grid grid-cols-2 gap-2 lg:gap-0 lg:grid-cols-6 mx-auto mt-4 items-center'>
-                <button className={""} onClick={() => { chosenSources.length === 5 ? setChosenSources([]) : setChosenSources(["EMF", "NextGEM", "Zenodo", "PubMed", "WOS"]) }}>
+            <div className=' grid grid-cols-2 gap-x-2 lg:gap-0 lg:grid-cols-5 gap-y-2 mx-auto mt-4 items-center'>
+                <button className={""} onClick={() => { chosenSources.length === 6 ? setChosenSources([]) : setChosenSources(["EMF", "NextGEM", "Zenodo", "PubMed", "WOS", "SEAWave"]) }}>
                     <img width={110} src="./allsources.svg" alt="NextGEM" className={"mr-[18px] p-0 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50"} />
                 </button>
+            
 
-                <button className={""} onClick={() => { chosenSources.includes("NextGEM") ? setChosenSources(chosenSources.filter(function (e: any) { return e !== 'NextGEM' })) : setChosenSources([...chosenSources, "NextGEM"]) }}>
-                    <img width={100} src="./NextGEM_Button.svg" alt="NextGEM" className={chosenSources.includes("NextGEM") ? "custom-bounce chosen-source mr-[13px] p-0 rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900" : "custom-bounce-hover mr-[13px] p-0 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50"} />
-                </button>
                 {/* 
                 <button className={""} onClick={() => { chosenSources.includes("CLUE-H") ? setChosenSources(chosenSources.filter(function(e) { return e !== 'CLUE-H' })) : setChosenSources([...chosenSources, "CLUE-H"]) }}>
                     <img width={100} src="./CLUE-H_Button.svg" alt="CLUE-H" className={chosenSources.includes("CLUE-H") ? " custom-bounce chosen-source mr-[4px] p-0 rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50" : "mr-[4px] p-0 rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50"} />
@@ -90,6 +88,16 @@ const ExternalSources = ({ hasSubmitted, setHasSubmitted, inputState, setSearchR
 
                 <button className={""} onClick={() => { chosenSources.includes("WOS") ? setChosenSources(chosenSources.filter(function (e: any) { return e !== 'WOS' })) : setChosenSources([...chosenSources, "WOS"]) }}>
                     <img width={100} src="./wos-logo.svg" alt="WOS" className={chosenSources.includes("WOS") ? " custom-bounce chosen-source mr-[12px] p-0 rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900" : "custom-bounce-hover mr-[12px] p-0 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50"} />
+                </button>
+                
+                <div></div>
+                
+                <button className={""} onClick={() => { chosenSources.includes("NextGEM") ? setChosenSources(chosenSources.filter(function (e: any) { return e !== 'NextGEM' })) : setChosenSources([...chosenSources, "NextGEM"]) }}>
+                    <img width={100} src="./NextGEM_Button.svg" alt="NextGEM" className={chosenSources.includes("NextGEM") ? "custom-bounce chosen-source mr-[13px] p-0 rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900 mt-4" : "mt-6 custom-bounce-hover mr-[13px] p-0 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50"} />
+                </button>
+
+                <button className={""} onClick={() => { chosenSources.includes("SEAWave") ? setChosenSources(chosenSources.filter(function (e: any) { return e !== 'SEAWave' })) : setChosenSources([...chosenSources, "SEAWave"]) }}>
+                    <img width={100} src="./seawave.svg" alt="SEAWave" className={chosenSources.includes("SEAWave") ? "custom-bounce chosen-source mr-[13px] p-0 rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900 mt-4" : "mt-6 custom-bounce-hover mr-[13px] p-0 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50"} />
                 </button>
                 {/* 
                 <button className={""} onClick={() => { chosenSources.includes("EHDS") ? setChosenSources(chosenSources.filter(function(e) { return e !== 'EHDS' })) : setChosenSources([...chosenSources, "EHDS"]) }}>

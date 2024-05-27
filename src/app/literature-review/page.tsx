@@ -13,12 +13,11 @@ import {
   Typography
 } from "@material-tailwind/react";
 import { AnimatePresence, motion } from "framer-motion";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ExternalSources from "../components/external-sources";
 import PageLayout from '../components/page-layout';
 import SearchResults from "../components/ra-search-results";
 import { checkLoginStatus, parseJwt } from '../helpers/login';
-import SearchModal from "../components/helpers/SearchModal";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -182,8 +181,8 @@ function RASearchPage() {
                   <div className=" ">
                     <div>
                       {/* <Typography variant="h5" placeholder={"Description"}>Description</Typography> */}
-                      <div className="mb-12 grid w-full grid-cols-1 gap-x-12 gap-y-2 p-0 lg:grid-cols-2">
-                        {inputFields.map((field: any, index: any) => {
+                      <div className="mb-12 grid w-full grid-flow-col grid-cols-1 gap-x-12 gap-y-2 p-0 lg:grid-cols-2 grid-rows-3">
+                      {inputFields.map((field: any, index: any) => {
                           const words = field.fieldName.replace(
                             /([a-z])([A-Z])/g,
                             "$1 $2",
@@ -211,6 +210,16 @@ function RASearchPage() {
                                 />
                               </div>
                             );
+                          } else {
+                          
+                          }
+                        })}
+                        {inputFields.map((field: any, index: any) => {
+                          const words = field.fieldName.replace(
+                            /([a-z])([A-Z])/g,
+                            "$1 $2",
+                          );
+                          if (field.type == "String") {
                           } else {
                             return (
                               <div

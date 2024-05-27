@@ -126,6 +126,39 @@ export async function POST(req: Request, res: NextApiResponse) {
     results = results.concat(JSON.parse(responseJSON));
   }
 
+  if (sources.includes("SEAWave")) {
+    let query = "";
+
+    for (let i = 0; i < Object.keys(formData).length; i++) {
+      if (
+        Object.keys(formData)[i] !== undefined &&
+        Object.keys(formData)[i] !== "title" &&
+        formData[Object.keys(formData)[i]] !== ""
+      ) {
+        query += ` ${formData[Object.keys(formData)[i]]} `;
+      }
+    }
+
+    const response = await fetch(`http://${hostname}/api/search/seawave`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET",
+        "Access-Control-Allow-Headers": "Content-Type, X-CSRF-TOKEN",
+      },
+      body: JSON.stringify({
+        query: `(title: ${formData["title"]}) ${query.length > 0 ? ` OR (description:${query})` : ""}`,
+        institution: formData["institution"],
+        output_type: formData["outputType"],
+        privacy_level: formData["privacyLevel"],
+      }),
+    });
+
+    const responseJSON = await response.json();
+    results = results.concat(JSON.parse(responseJSON));
+  }
+
   if (sources.includes("EMF")) {
     const response = await fetch(`http://${hostname}/api/search/publications`, {
       method: "POST",
