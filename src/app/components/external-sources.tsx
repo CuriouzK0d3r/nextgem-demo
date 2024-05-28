@@ -65,7 +65,7 @@ const ExternalSources = ({ hasSubmitted, setHasSubmitted, inputState, setSearchR
             <h1 className='text-xl text-black italic decoration-offset-4 decoration-wavy block text-center'>Select one or more sources:</h1> <br />
 
             <div className=' grid grid-cols-2 gap-x-2 lg:gap-0 lg:grid-cols-5 gap-y-2 mx-auto mt-4 items-center'>
-                <button className={""} onClick={() => { chosenSources.length === 6 ? setChosenSources([]) : setChosenSources(["EMF", "NextGEM", "Zenodo", "PubMed", "WOS", "SEAWave"]) }}>
+                <button className={""} onClick={() => { chosenSources.length === 6 ? setChosenSources([]) : setChosenSources(["EMF", "NextGEM", "Zenodo", "PubMed", "WOS", "SEAWave", "GOLIAT"]) }}>
                     <img width={110} src="./allsources.svg" alt="NextGEM" className={"mr-[18px] p-0 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50"} />
                 </button>
             
@@ -98,6 +98,14 @@ const ExternalSources = ({ hasSubmitted, setHasSubmitted, inputState, setSearchR
 
                 <button className={""} onClick={() => { chosenSources.includes("SEAWave") ? setChosenSources(chosenSources.filter(function (e: any) { return e !== 'SEAWave' })) : setChosenSources([...chosenSources, "SEAWave"]) }}>
                     <img width={100} src="./seawave.svg" alt="SEAWave" className={chosenSources.includes("SEAWave") ? "custom-bounce chosen-source mr-[13px] p-0 rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900 mt-4" : "mt-6 custom-bounce-hover mr-[13px] p-0 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50"} />
+                </button>
+
+                <button className={""} onClick={() => { chosenSources.includes("GOLIAT") ? setChosenSources(chosenSources.filter(function (e: any) { return e !== 'GOLIAT' })) : setChosenSources([...chosenSources, "GOLIAT"]) }}>
+                    <img width={100} src="./goliat.svg" alt="GOLIAT" className={chosenSources.includes("GOLIAT") ? "custom-bounce chosen-source mr-[13px] p-0 rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900 mt-4" : "mt-6 custom-bounce-hover mr-[13px] p-0 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50"} />
+                </button>
+
+                <button className={""} onClick={() => { chosenSources.includes("ETAIN") ? setChosenSources(chosenSources.filter(function (e: any) { return e !== 'ETAIN' })) : setChosenSources([...chosenSources, "ETAIN"]) }}>
+                    <img width={100} src="./ETAIN.svg" alt="ETAIN" className={chosenSources.includes("ETAIN") ? "custom-bounce chosen-source mr-[13px] p-0 rounded-lg object-cover object-center shadow-2xl shadow-blue-gray-900 mt-4" : "mt-6 custom-bounce-hover mr-[13px] p-0 rounded-lg object-cover object-center shadow-lg shadow-blue-gray-900/50"} />
                 </button>
                 {/* 
                 <button className={""} onClick={() => { chosenSources.includes("EHDS") ? setChosenSources(chosenSources.filter(function(e) { return e !== 'EHDS' })) : setChosenSources([...chosenSources, "EHDS"]) }}>
