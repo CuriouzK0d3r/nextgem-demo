@@ -159,6 +159,22 @@ export async function POST(req: Request, res: NextApiResponse) {
     results = results.concat(JSON.parse(responseJSON));
   }
 
+  if (sources.includes("GOLIAT")) {
+    const response = await fetch(`http://${hostname}/api/search/goliat`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET",
+        "Access-Control-Allow-Headers": "Content-Type, X-CSRF-TOKEN",
+      },
+      body: JSON.stringify({ query: formData, source: "goliat" }),
+    });
+
+    const responseJSON = await response.json();
+    results = results.concat(addSource(responseJSON, "GOLIAT"));
+  }
+
   if (sources.includes("EMF")) {
     const response = await fetch(`http://${hostname}/api/search/publications`, {
       method: "POST",
