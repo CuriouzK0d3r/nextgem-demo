@@ -13,7 +13,18 @@ import {
 } from "@material-tailwind/react";
 import { motion } from "framer-motion";
 import SearchMore from "./search-more";
-// import Table from 'react-tailwind-table';
+
+function jsonToCSV(json: any) {
+  const items = json;
+  const replacer = (key: string, value: any) => value === null ? '' : value; // specify how you want to handle null values here
+  const header = Object.keys(items[0]);
+  const csv = [
+    header.join(','), // header row first
+    ...items.map((row: any) => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','))
+  ].join('\r\n');
+  console.log(csv)
+  return csv;
+}
 
 function DefaultPagination({
   searchResults,
@@ -294,7 +305,10 @@ const SearchResults: React.FC<any> = ({
                           break;
                         case "seawave":
                           source_icon = <img className="w-[52px]" src="./logozenodo.svg" />;
-                          break;  
+                          break;
+                        case "goliat":
+                          source_icon = <img className="w-[52px]" src="./logozenodo.svg" />;
+                          break;
                       }
 
                       return (
@@ -389,7 +403,7 @@ const SearchResults: React.FC<any> = ({
                 exit={{ opacity: 0 }}
                 transition={{ duration: 2 }}
               >
-                <SearchMore searchResult={searchResults[moreIdx + 5*active]} />
+                <SearchMore searchResult={searchResults[moreIdx + 5 * active]} />
               </motion.div>
             )
           ) : (
@@ -403,22 +417,22 @@ const SearchResults: React.FC<any> = ({
           >
             {searchResults.length ? (
               <div className="mx-auto flex flex-col justify-center">
-                <div>{searchResults.length} results found 
-                <a
-            href={`data:text/json;charset=utf-8,${encodeURIComponent(
-              JSON.stringify(searchResults)
-            )}`}
-            download="results.json"
-          >
-                <Button
-                  placeholder={""}
-                  id="searchBtn"
-                  className="float-end ml-0 w-25 shadow-blue-gray-900/50  h-10 rounded-lg object-cover object-center font-bold shadow-lg"
-                  variant="gradient"
-                >
-                  Download Metadata
-                </Button>
-                </a>
+                <div>{searchResults.length} results found
+                  <a
+                    href={`data:text/json;charset=utf-8,${encodeURIComponent(
+                      jsonToCSV(searchResults)
+                    )}`}
+                    download="results.csv"
+                  >
+                    <Button
+                      placeholder={""}
+                      id="searchBtn"
+                      className="float-end ml-0 w-25 shadow-blue-gray-900/50  h-10 rounded-lg object-cover object-center font-bold shadow-lg"
+                      variant="gradient"
+                    >
+                      Download Metadata
+                    </Button>
+                  </a>
                 </div>
                 <Typography
                   placeholder={""}

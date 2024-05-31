@@ -30,17 +30,17 @@ const filter = (
   let returnedObj: any[] = [];
 
   data.forEach((element: any) => {
-    const picked = (({ metadata, doi_url, files, links }) => ({
-      source_url: links.url,
+    const picked = (({ url, authors, name, description, published_at, type }) => ({
+      source_url: url,
       location: "",
-      privacyLevel: metadata["access_right"],
-      files: files,
-      creators: metadata["creators"],
-      DOI: doi_url,
-      title: metadata["title"],
-      description: metadata["description"],
-      publication_date: metadata["publication_date"],
-      output_type: metadata["resource_type"]["type"],
+      privacyLevel: "public",
+      // files: files,
+      creators: authors,
+      DOI: url,
+      title: name,
+      description: description,
+      publication_date: published_at,
+      output_type: type,
     }))(element);
 
     if (institution) {
@@ -71,32 +71,32 @@ const filter = (
 export async function POST(req: Request) {
   try {
     const requestParams2 = {
-      params: {
-        access_token:
-          "I2ZxABWJ9EsaQGJiZyqRpaY8AIwExSOm5zUrTA5ISnStDHjjCo31cM1Z9CSs",
-      },
+      // params: {
+      //   access_token:
+      //     "I2ZxABWJ9EsaQGJiZyqRpaY8AIwExSOm5zUrTA5ISnStDHjjCo31cM1Z9CSs",
+      // },
       headers: { "Content-Type": "application/json" },
     };
+    console.log('yuoo')
     let data = await req.json();
 
     const response = await axios.get(
-      "https://dataverse.csuc.cat/api/search?q=" + data.query,
+      "https://dataverse.csuc.cat/api/search?q=" + data.query.title,
       requestParams2,
     );
 
+    console.log(response.data.data["items"])
     let returnedObj = filter(
-      response.data["items"],
+      response.data.data["items"],
       data.institution,
       data.output_type,
       data.privacy_level,
     );
 
     for (let i in returnedObj) {
-      returnedObj[i].source = "goliat";
+      returnedObj[i].source = "GOLIAT";
       returnedObj[i].status = returnedObj[i]["access_right"];
     }
-
-    // console.log(returnedObj[0])
 
     return Response.json(JSON.stringify(returnedObj));
   } catch (err) {

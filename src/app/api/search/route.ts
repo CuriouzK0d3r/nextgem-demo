@@ -168,11 +168,11 @@ export async function POST(req: Request, res: NextApiResponse) {
         "Access-Control-Allow-Methods": "GET",
         "Access-Control-Allow-Headers": "Content-Type, X-CSRF-TOKEN",
       },
-      body: JSON.stringify({ query: formData, source: "goliat" }),
+      body: JSON.stringify({ query: formData }),
     });
 
     const responseJSON = await response.json();
-    results = results.concat(addSource(responseJSON, "GOLIAT"));
+    results = results.concat(JSON.parse(responseJSON));
   }
 
   if (sources.includes("EMF")) {

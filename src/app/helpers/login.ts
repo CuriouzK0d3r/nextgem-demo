@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 
 export const checkLoginStatus = (setIsLoggedIn: any, redirectToLogin: boolean = false, router: any = undefined) => {
-    const apiEndpoint = "http://localhost:3000/api/auth/token";
+    const apiEndpoint = "https://subra.ics.forth.gr:3000/api/auth/token";
 
     fetch(apiEndpoint, {
         method: "POST",
