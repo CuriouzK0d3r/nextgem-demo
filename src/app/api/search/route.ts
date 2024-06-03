@@ -42,6 +42,29 @@ const matchPrivacyLevel = (record: any, privacyLevel: string) => {
   );
 };
 
+const deDublicate = (data: any) => {
+  let seen = new Map();
+  let distinct = [];
+  data.forEach((record: any) => {
+    if (!seen.has(record.doi)) {
+      seen.set(record.doi, [record]);
+    } else {
+      const prev = seen.get(record.doi);
+      seen.set(record.doi, [...prev, record]);
+    }
+  });
+
+  seen.forEach((value, key) => {
+    let tmp = [];
+    for (let i = 0; i < value.length; i++) {
+      tmp.push(value[i].source);
+    }
+    let t = value[0];
+    t.source = tmp;
+    distinct.push(t);
+  });
+};
+
 export async function POST(req: Request, res: NextApiResponse) {
   const hostname = headers().get("host");
   let apiEndpoint = "https://139.91.58.16/metadata/records?";
@@ -90,7 +113,7 @@ export async function POST(req: Request, res: NextApiResponse) {
       }
     });
 
-    results = results.concat(addSource(resJ, "NextGEM"));
+    results = results.concat(addSource(resJ, "nextgem"));
   }
 
   if (sources.includes("Zenodo")) {
@@ -123,7 +146,7 @@ export async function POST(req: Request, res: NextApiResponse) {
     });
 
     const responseJSON = await response.json();
-    results = results.concat(JSON.parse(responseJSON));
+    results = results.concat(addSource(responseJSON, "zenodo"));
   }
 
   if (sources.includes("SEAWave")) {
@@ -156,7 +179,7 @@ export async function POST(req: Request, res: NextApiResponse) {
     });
 
     const responseJSON = await response.json();
-    results = results.concat(JSON.parse(responseJSON));
+    results = results.concat(addSource(responseJSON, "seawave"));
   }
 
   if (sources.includes("GOLIAT")) {
@@ -172,7 +195,7 @@ export async function POST(req: Request, res: NextApiResponse) {
     });
 
     const responseJSON = await response.json();
-    results = results.concat(JSON.parse(responseJSON));
+    results = results.concat(addSource(responseJSON, "goliat"));
   }
 
   if (sources.includes("EMF")) {
@@ -188,7 +211,7 @@ export async function POST(req: Request, res: NextApiResponse) {
     });
 
     const responseJSON = await response.json();
-    results = results.concat(addSource(responseJSON, "EMF-Portal"));
+    results = results.concat(addSource(responseJSON, "emf-portal"));
   }
 
   if (sources.includes("WOS")) {
@@ -204,7 +227,7 @@ export async function POST(req: Request, res: NextApiResponse) {
     });
 
     const responseJSON = await response.json();
-    results = results.concat(addSource(responseJSON, "WOS"));
+    results = results.concat(addSource(responseJSON, "wos"));
   }
 
   if (sources.includes("PubMed")) {
@@ -220,7 +243,7 @@ export async function POST(req: Request, res: NextApiResponse) {
     });
 
     const responseJSON = await response.json();
-    results = results.concat(addSource(JSON.parse(responseJSON), "PubMed"));
+    results = results.concat(addSource(JSON.parse(responseJSON), "pubmed"));
   }
 
   let distinct: any = [];
@@ -241,7 +264,7 @@ function addSource(responseJSON: any, arg1: string): string {
   return responseJSON.map((result: any) => {
     return {
       ...result,
-      source: arg1.toUpperCase(),
+      source: [arg1.toUpperCase()],
     };
   });
 }
