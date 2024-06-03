@@ -16,13 +16,17 @@ import SearchMore from "./search-more";
 
 function jsonToCSV(json: any) {
   const items = json;
-  const replacer = (key: string, value: any) => value === null ? '' : value; // specify how you want to handle null values here
+  const replacer = (key: string, value: any) => (value === null ? "" : value); // specify how you want to handle null values here
   const header = Object.keys(items[0]);
   const csv = [
-    header.join(','), // header row first
-    ...items.map((row: any) => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','))
-  ].join('\r\n');
-  console.log(csv)
+    header.join(","), // header row first
+    ...items.map((row: any) =>
+      header
+        .map((fieldName) => JSON.stringify(row[fieldName], replacer))
+        .join(","),
+    ),
+  ].join("\r\n");
+  console.log(csv);
   return csv;
 }
 
@@ -289,25 +293,51 @@ const SearchResults: React.FC<any> = ({
 
                       switch (source) {
                         case "PUBMED":
-                          source_icon = <img className="w-[50px]" src="https://static-00.iconduck.com/assets.00/pubmed-icon-463x512-q8ocx6xf.png" />;
+                          source_icon = (
+                            <img
+                              className="w-[50px]"
+                              src="https://static-00.iconduck.com/assets.00/pubmed-icon-463x512-q8ocx6xf.png"
+                            />
+                          );
                           break;
                         case "EMF-PORTAL":
-                          source_icon = <img className="w-[50px]" src="./EMF-portalicon-96x96.svg" />;
+                          source_icon = (
+                            <img
+                              className="w-[50px]"
+                              src="./EMF-portalicon-96x96.svg"
+                            />
+                          );
                           break;
                         case "zenodo":
-                          source_icon = <img className="w-[60px]" src="./logozenodo.svg" />;
+                          source_icon = (
+                            <img className="w-[60px]" src="./logozenodo.svg" />
+                          );
                           break;
                         case "WOS":
-                          source_icon = <img className="w-[50px]" src="./web-of-science.jpg" />;
+                          source_icon = (
+                            <img
+                              className="w-[50px]"
+                              src="./web-of-science.jpg"
+                            />
+                          );
                           break;
                         case "NEXTGEM":
-                          source_icon = <img className="w-[52px]" src="./cropped2-NextGEM_final_transparent 1.svg" />;
+                          source_icon = (
+                            <img
+                              className="w-[52px]"
+                              src="./cropped2-NextGEM_final_transparent 1.svg"
+                            />
+                          );
                           break;
                         case "seawave":
-                          source_icon = <img className="w-[52px]" src="./logozenodo.svg" />;
+                          source_icon = (
+                            <img className="w-[52px]" src="./seawave.png" />
+                          );
                           break;
-                        case "goliat":
-                          source_icon = <img className="w-[52px]" src="./logozenodo.svg" />;
+                        case "GOLIAT":
+                          source_icon = (
+                            <img className="w-[38px]" src="./goliat.png" />
+                          );
                           break;
                       }
 
@@ -348,10 +378,10 @@ const SearchResults: React.FC<any> = ({
                                 className="mb-6"
                                 color={
                                   privacyLevel === "Public" ||
-                                    privacyLevel === "open"
+                                  privacyLevel === "open"
                                     ? "green"
                                     : privacyLevel === "restricted" ||
-                                      privacyLevel === "sensitive"
+                                        privacyLevel === "sensitive"
                                       ? "orange"
                                       : "gray"
                                 }
@@ -403,7 +433,9 @@ const SearchResults: React.FC<any> = ({
                 exit={{ opacity: 0 }}
                 transition={{ duration: 2 }}
               >
-                <SearchMore searchResult={searchResults[moreIdx + 5 * active]} />
+                <SearchMore
+                  searchResult={searchResults[moreIdx + 5 * active]}
+                />
               </motion.div>
             )
           ) : (
@@ -417,10 +449,11 @@ const SearchResults: React.FC<any> = ({
           >
             {searchResults.length ? (
               <div className="mx-auto flex flex-col justify-center">
-                <div>{searchResults.length} results found
+                <div>
+                  {searchResults.length} results found
                   <a
                     href={`data:text/json;charset=utf-8,${encodeURIComponent(
-                      jsonToCSV(searchResults)
+                      jsonToCSV(searchResults),
                     )}`}
                     download="results.csv"
                   >
