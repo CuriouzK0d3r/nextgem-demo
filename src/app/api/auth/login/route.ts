@@ -1,5 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
+/**
+ * Function to handle POST request for user login authentication.
+ *
+ * @param {Request} req - The request object containing user credentials.
+ * @param {NextApiResponse} res - The response object to send back the authentication result.
+ * @return {Promise<void>} A promise representing the authentication process.
+ */
 export async function POST(req: Request, res: NextApiResponse) {
     if (req.method !== 'POST') {
         res.status(405).json({ message: 'Method Not Allowed' });

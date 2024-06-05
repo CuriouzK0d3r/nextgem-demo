@@ -1,5 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
+/**
+ * Handles the POST request for user registration.
+ *
+ * @param {Request} req - The request object containing user registration data.
+ * @param {NextApiResponse} res - The response object to send back the registration result.
+ * @return {Promise<void>} A promise representing the registration process.
+ */
 export async function POST(req: Request, res: NextApiResponse) {
     const { username, password, email, organizationId} = await req.json();
     const apiEndpoint = "https://139.91.58.16/nikh-auth/registration/register";

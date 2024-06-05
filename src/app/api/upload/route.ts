@@ -44,6 +44,13 @@ async function postRecords(formData: any, access_token: string) {
     return respp;
 }
 
+/**
+ * Handles the POST request for uploading data.
+ *
+ * @param {Request} req - The request object containing the form data and access token.
+ * @param {NextApiResponse} res - The response object to send back the result.
+ * @return {Promise<void>} A promise representing the upload process.
+ */
 export async function POST(req: Request, res: NextApiResponse) {
     if (req.method !== 'POST') {
         res.status(405).json({ message: 'Method Not Allowed' });
