@@ -236,10 +236,10 @@ const SearchResults: React.FC<any> = ({
                             <Option>Show current results</Option>
                             <Option>Show all session results</Option>
                         </Select>) : ""}</div>
-                        <Button
+                        {/* <Button
                     className="float-right mt-3 p-2"
                         placeholder={""}
-                    >Deduplicate</Button>
+                    >Deduplicate</Button> */}
                     {/* <Typography
                         placeholder=""
                 

@@ -225,7 +225,7 @@ export async function POST(req: Request, res: NextApiResponse) {
       },
       body: JSON.stringify({ query: formData, source: "wos" }),
     });
-
+  
     const responseJSON = await response.json();
     results = results.concat(addSource(responseJSON, "wos"));
   }
@@ -261,7 +261,8 @@ export async function POST(req: Request, res: NextApiResponse) {
 }
 
 function addSource(responseJSON: any, arg1: string): string {
-  return responseJSON.map((result: any) => {
+  console.log(typeof responseJSON)
+  return JSON.parse(responseJSON).map((result: any) => {
     return {
       ...result,
       source: [arg1.toUpperCase()],
