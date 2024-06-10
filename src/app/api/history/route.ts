@@ -5,6 +5,11 @@ const uri =
   "mongodb+srv://kornilak:testpassdelete@nextgem.prxatax.mongodb.net/?retryWrites=true&w=majority"; // replace with your MongoDB URI
 const client = new MongoClient(uri, {});
 
+/**
+ * Handles the POST request for saving search history.
+ * @param req - The NextRequest object containing username, search query and search results.
+ * @returns A Promise that resolves to an empty JSON response.
+ */
 export async function POST(req: NextRequest) {
   try {
     await client.connect();

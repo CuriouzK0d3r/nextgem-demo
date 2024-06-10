@@ -1,6 +1,11 @@
-import { metadata } from "@/app/layout";
 import axios from "axios";
 
+/**
+ * Filters the data based on the output type.
+ * @param data - The data to filter.
+ * @param outputType - The output type to filter by.
+ * @returns The filtered data.
+ */
 const filterOutputType = (data: any, outputType: string) => {
   return data.filter((record: any) => {
     return (
@@ -11,6 +16,12 @@ const filterOutputType = (data: any, outputType: string) => {
   });
 };
 
+/**
+ * Filters the data based on the privacy level.
+ * @param data - The data to filter.
+ * @param privacy_level - The privacy level to filter by.
+ * @returns The filtered data.
+ */
 const filterPrivacyLevel = (data: any, privacy_level: string) => {
   return data.filter((record: any) => {
     return (
@@ -21,6 +32,14 @@ const filterPrivacyLevel = (data: any, privacy_level: string) => {
   });
 };
 
+/**
+ * Filters the data based on the institution, output type, and privacy level.
+ * @param data - The data to filter.
+ * @param institution - The institution to filter by.
+ * @param output_type - The output type to filter by.
+ * @param privacy_level - The privacy level to filter by.
+ * @returns The filtered data.
+ */
 const filter = (
   data: any,
   institution: string,
@@ -68,6 +87,11 @@ const filter = (
   return returnedObj;
 };
 
+/**
+ * Handles the POST request for searching goliat project metadata records based on the given search parameters.
+ * @param req - The request object containing the search parameters.
+ * @returns The response object containing the filtered metadata records.
+ */
 export async function POST(req: Request) {
   try {
     const requestParams2 = {

@@ -1,12 +1,24 @@
 import { NextApiResponse } from "next";
 import { headers } from "next/headers";
 
+/**
+ * Checks if the record's title matches the given title.
+ * @param record - The record object.
+ * @param title - The title to match.
+ * @returns True if the record's title matches the given title, false otherwise.
+ */
 const matchTitle = (record: any, title: string) => {
   return (
     !title.length || record.title.toLowerCase().includes(title.toLowerCase())
   );
 };
 
+/**
+ * Checks if the record's institution matches the given institution.
+ * @param record - The record object.
+ * @param institution - The institution to match.
+ * @returns True if the record's institution matches the given institution, false otherwise.
+ */
 const matchInstitution = (record: any, institution: string) => {
   return (
     !institution.length ||
@@ -14,6 +26,12 @@ const matchInstitution = (record: any, institution: string) => {
   );
 };
 
+/**
+ * Checks if the record's output type matches the given output type.
+ * @param record - The record object.
+ * @param outputType - The output type to match.
+ * @returns True if the record's output type matches the given output type, false otherwise.
+ */
 const matchOutputType = (record: any, outputType: string) => {
   return (
     !outputType.length ||
@@ -21,6 +39,12 @@ const matchOutputType = (record: any, outputType: string) => {
   );
 };
 
+/**
+ * Checks if the record's study type matches the given study type.
+ * @param record - The record object.
+ * @param studyType - The study type to match.
+ * @returns True if the record's study type matches the given study type, false otherwise.
+ */
 const matchStudyType = (record: any, studyType: string) => {
   return (
     !studyType.length ||
@@ -28,6 +52,12 @@ const matchStudyType = (record: any, studyType: string) => {
   );
 };
 
+/**
+ * Checks if the record's modulation matches the given modulation.
+ * @param record - The record object.
+ * @param modulation - The modulation to match.
+ * @returns True if the record's modulation matches the given modulation, false otherwise.
+ */
 const matchModulation = (record: any, modulation: string) => {
   return (
     !modulation.length ||
@@ -35,6 +65,12 @@ const matchModulation = (record: any, modulation: string) => {
   );
 };
 
+/**
+ * Checks if the record's privacy level matches the given privacy level.
+ * @param record - The record object.
+ * @param privacyLevel - The privacy level to match.
+ * @returns True if the record's privacy level matches the given privacy level, false otherwise.
+ */
 const matchPrivacyLevel = (record: any, privacyLevel: string) => {
   return (
     !privacyLevel.length ||
@@ -42,6 +78,10 @@ const matchPrivacyLevel = (record: any, privacyLevel: string) => {
   );
 };
 
+/**
+ * Removes duplicate records based on the 'doi' property.
+ * @param data - The array of records.
+ */
 const deDublicate = (data: any) => {
   let seen = new Map();
   let distinct = [];
@@ -65,6 +105,12 @@ const deDublicate = (data: any) => {
   });
 };
 
+/**
+ * Handles the POST request for searching metadata records based on the given search parameters.
+ * @param req - The request object containing the search parameters.
+ * @param res - The response object.
+ * @returns The search results as a JSON response.
+ */
 export async function POST(req: Request, res: NextApiResponse) {
   const hostname = headers().get("host");
   let apiEndpoint = "https://139.91.58.16/metadata/records?";

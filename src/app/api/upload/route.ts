@@ -49,7 +49,7 @@ async function postRecords(formData: any, access_token: string) {
  *
  * @param {Request} req - The request object containing the form data and access token.
  * @param {NextApiResponse} res - The response object to send back the result.
- * @return {Promise<void>} A promise representing the upload process.
+ * @return {Promise<void>} A promise including a success message if the data is uploaded successfully, or an error message if the upload fails
  */
 export async function POST(req: Request, res: NextApiResponse) {
     if (req.method !== 'POST') {

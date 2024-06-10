@@ -1,6 +1,11 @@
 import { NextApiResponse } from 'next';
 import { headers } from 'next/headers';
-
+/**
+ * 
+ * @param req  The request object containing user credentials.
+ * @param res  The response object to send back the result.
+ * @returns A promise including the searchable fields.
+ */
 export async function GET(req: Request, res: NextApiResponse) {
     const eValuesHard: any = {
         "privacyLevel": [

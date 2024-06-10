@@ -5,7 +5,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
  *
  * @param {Request} req - The request object containing the access token.
  * @param {NextApiResponse} res - The response object to send back the authentication result.
- * @return {Promise<void>} A promise representing the authentication process.
+ * @return {Promise<void>} A promise including the logged in status for the user.
  */
 export async function POST(req: Request, res: NextApiResponse) {
     const { access_token } = await req.json();
