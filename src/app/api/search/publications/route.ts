@@ -1,3 +1,8 @@
+/**
+ * Handles the POST request for searching emf-portal and web of science publications.
+ * @param req - The request object.
+ * @returns A JSON response containing the search results.
+ */
 import { MongoClient } from 'mongodb';
 
 const uri = 'mongodb+srv://kornilak:testpassdelete@nextgem.prxatax.mongodb.net/?retryWrites=true&w=majority'; // replace with your MongoDB URI

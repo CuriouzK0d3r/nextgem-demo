@@ -1,6 +1,12 @@
 import { metadata } from "@/app/layout";
 import axios from "axios";
 
+/**
+ * Filters the data based on the output type.
+ * @param data - The data to filter.
+ * @param outputType - The desired output type.
+ * @returns The filtered data.
+ */
 const filterOutputType = (data: any, outputType: string) => {
   return data.filter((record: any) => {
     return (
@@ -11,6 +17,12 @@ const filterOutputType = (data: any, outputType: string) => {
   });
 };
 
+/**
+ * Filters the data based on the privacy level.
+ * @param data - The data to filter.
+ * @param privacy_level - The desired privacy level.
+ * @returns The filtered data.
+ */
 const filterPrivacyLevel = (data: any, privacy_level: string) => {
   return data.filter((record: any) => {
     return (
@@ -21,6 +33,14 @@ const filterPrivacyLevel = (data: any, privacy_level: string) => {
   });
 };
 
+/**
+ * Filters the data based on the provided parameters.
+ * @param data - The data to filter.
+ * @param institution - The desired institution.
+ * @param output_type - The desired output type.
+ * @param privacy_level - The desired privacy level.
+ * @returns The filtered data.
+ */
 const filter = (
   data: any,
   institution: string,
@@ -68,6 +88,11 @@ const filter = (
   return returnedObj;
 };
 
+/**
+ * Handles the POST request for searching zenodo metadata records based on the given search parameters.
+ * @param req - The request object containing the search parameter.
+ * @returns The response object containing the filtered metadata records.
+ */
 export async function POST(req: Request) {
   try {
     const requestParams2 = {
