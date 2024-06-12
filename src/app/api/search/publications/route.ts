@@ -106,11 +106,12 @@ export async function POST(req: Request) {
             return {
                 ...result,
                 location: "",
+                source: 'emf-portal',
                 privacyLevel: "open",
             }
         });
 
-        return Response.json(results)
+        return Response.json(JSON.stringify(results))
     } catch (err) {
         console.error(err);
         return Response.json([])

@@ -101,7 +101,7 @@ export async function POST(req: Request) {
       // },
       headers: { "Content-Type": "application/json" },
     };
-    console.log('yuoo')
+
     let data = await req.json();
 
     const response = await axios.get(

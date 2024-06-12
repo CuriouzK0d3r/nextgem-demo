@@ -78,31 +78,37 @@ const matchPrivacyLevel = (record: any, privacyLevel: string) => {
   );
 };
 
+
 /**
  * Removes duplicate records based on the 'doi' property.
  * @param data - The array of records.
  */
 const deDublicate = (data: any) => {
   let seen = new Map();
-  let distinct = [];
+  let distinct: any = [];
+  // console.log(data)
   data.forEach((record: any) => {
-    if (!seen.has(record.doi)) {
-      seen.set(record.doi, [record]);
+    const doi = record.DOI ? record.DOI : record.doi;
+    if (!seen.has(doi)) {
+      seen.set(doi, [record]);
     } else {
-      const prev = seen.get(record.doi);
-      seen.set(record.doi, [...prev, record]);
+      const prev = seen.get(doi);
+      seen.set(doi, [...prev, record]);
     }
   });
 
   seen.forEach((value, key) => {
     let tmp = [];
     for (let i = 0; i < value.length; i++) {
-      tmp.push(value[i].source);
+      tmp.push(value[i].source[0]);
     }
     let t = value[0];
     t.source = tmp;
     distinct.push(t);
   });
+  // console.log(JSON.stringify(seen))
+  // console.log(JSON.stringify(distinct))
+  return distinct;
 };
 
 /**
@@ -255,7 +261,7 @@ export async function POST(req: Request, res: NextApiResponse) {
       },
       body: JSON.stringify({ query: formData, source: "emf" }),
     });
-
+    
     const responseJSON = await response.json();
     results = results.concat(addSource(responseJSON, "emf-portal"));
   }
@@ -289,25 +295,14 @@ export async function POST(req: Request, res: NextApiResponse) {
     });
 
     const responseJSON = await response.json();
-    results = results.concat(addSource(JSON.parse(responseJSON), "pubmed"));
+
+    results = results.concat(addSource(responseJSON, "pubmed"));
   }
 
-  let distinct: any = [];
-  
-  results.forEach((result) => {
-  // console.log(results[1])
-    if (!distinct.some((r: any) => r.doi === result.doi)) {
-      distinct.push(result);
-    } else {
-      
-    }
-  });
-
-  return Response.json({ searchResults: results });
+  return Response.json({ searchResults: deDublicate(results) });
 }
 
 function addSource(responseJSON: any, arg1: string): string {
-  console.log(typeof responseJSON)
   return JSON.parse(responseJSON).map((result: any) => {
     return {
       ...result,
