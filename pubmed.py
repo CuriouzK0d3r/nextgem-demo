@@ -30,15 +30,15 @@ def search_pubmed(search_term, max_results, include_pubmed_id, include_title, in
               abstract = article_dict['abstract']
           else:
               abstract = ""
-              
+
           # med_list.append(pubmed_id)
           abstract_list.append(abstract)
 
           # dois_list.append(doi)
           medid_list.append(pubmed_id)
-          
+
       return articles
-    
+
 
 class Handler(BaseHTTPRequestHandler):
 
@@ -52,7 +52,7 @@ class Handler(BaseHTTPRequestHandler):
 
     # Construct the response body
     if message:
-        results = search_pubmed(message, 100, True, True, True)
+        results = search_pubmed(message, 10, True, True, True)
         entries = []
         for result in results:
             pubmed_id = ""
@@ -61,10 +61,10 @@ class Handler(BaseHTTPRequestHandler):
                 pubmed_id = result["pubmed_id"].partition('\n')[0]
             if result["doi"]:
                 doi = result["doi"].partition('\n')[0]
-                
+
             entry = {"source_url": "https://pubmed.ncbi.nlm.nih.gov/" + pubmed_id, "privacyLevel": "open", "outputType": "publication", "pubmed_id": pubmed_id, "title" : result["title"], "abstract": result["abstract"], "keywords": result["keywords"], "publication_date": str(result["publication_date"]), "authors": result["authors"], "doi": doi}
             entries.append(entry)
-        json_object = json.dumps(entries, indent = 4) 
+        json_object = json.dumps(entries, indent = 4)
 
         response_body = json_object
     else:
