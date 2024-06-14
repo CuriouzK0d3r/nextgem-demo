@@ -294,25 +294,59 @@ const SearchResults: React.FC<any> = ({
                                                 ? "p-4 "
                                                 : "p-4 border-b border-blue-gray-50 whitespace-break-spaces";
 
-                                            let source_icon = <></>;
+                                                let source_icons = [];
 
-                                            switch (source) {
-                                                case "PUBMED":
-                                                    source_icon = <img className="w-[50px]" src="https://static-00.iconduck.com/assets.00/pubmed-icon-463x512-q8ocx6xf.png" />;
-                                                    break;
-                                                case "EMF-PORTAL":
-                                                    source_icon = <img className="w-[50px]" src="./EMF-portalicon-96x96.svg" />;
-                                                    break;
-                                                case "zenodo":
-                                                    source_icon = <img className="w-[60px]" src="./logozenodo.svg" />;
-                                                    break;
-                                                case "WOS":
-                                                    source_icon = <img className="w-[50px]" src="./web-of-science.jpg" />;
-                                                    break;
-                                                case "NEXTGEM":
-                                                    source_icon = <img className="w-[52px]" src="./cropped2-NextGEM_final_transparent 1.svg" />;
-                                                    break;
-                                            }
+                                                for (let i=0; i < source.length; i++) {
+                                                  switch (source[i]) {
+                                                    case "PUBMED":
+                                                      source_icons.push(
+                                                        <img
+                                                          className="w-[50px]"
+                                                          src="https://static-00.iconduck.com/assets.00/pubmed-icon-463x512-q8ocx6xf.png"
+                                                        />
+                                                      );
+                                                      break;
+                                                    case "EMF-PORTAL":
+                                                      source_icons.push(
+                                                        <img
+                                                          className="w-[50px]"
+                                                          src="./EMF-portalicon-96x96.svg"
+                                                        />
+                                                      );
+                                                      break;
+                                                    case "ZENODO":
+                                                      source_icons.push(
+                                                        <img className="w-[60px]" src="./logozenodo.svg" />
+                                                      );
+                                                      break;
+                                                    case "WOS":
+                                                      source_icons.push(
+                                                        <img
+                                                          className="w-[50px]"
+                                                          src="./web-of-science.jpg"
+                                                        />
+                                                      );
+                                                      break;
+                                                    case "NEXTGEM":
+                                                      source_icons.push(
+                                                        <img
+                                                          className="w-[52px]"
+                                                          src="./cropped2-NextGEM_final_transparent 1.svg"
+                                                        />
+                                                      );
+                                                      break;
+                                                    case "SEAWAVE":
+                                                      source_icons.push(
+                                                        <img className="w-[52px]" src="./seawave.png" />
+                                                      );
+                                                      break;
+                                                    case "GOLIAT":
+                                                      source_icons.push(
+                                                        <img className="w-[38px]" src="./goliat.png" />
+                                                      );
+                                                      break;
+                                                  }
+                                                }
 
                                             return (
                                                 <tr key={index} className="even:bg-blue-gray-100/50">
@@ -362,14 +396,14 @@ const SearchResults: React.FC<any> = ({
                                                         </div>
                                                     </td>
                                                     <td className={classes + " "}>
-                                                        <div className=" w-max">
-                                                            <a
-                                                                href={source_url}
-                                                                target="_blank"
-                                                                rel="noreferrer"
-                                                                className="p-0"
-                                                            >
-                                                                {/* <Chip
+                                                    <div className="w-[8rem] flex text-center">
+                              {/* <a
+                                href={source_url}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="p-0"
+                              > */}
+                                {/* <Chip
                                   size="sm"
                                   variant="ghost"
                                   value={                              <img className="w-[50px]" src="https://marketplace.digimind.com/hubfs/Website%20Visual%20assets%20S2/Digimind%20Website%20-%20Marketplace/Logos/Pubmed-logo-WithBG.png" ></img>
@@ -377,9 +411,8 @@ const SearchResults: React.FC<any> = ({
                                   className="mb-6"
                                   color={"gray"}
                                 /> */}
-                                                                {source_icon}
-                                                            </a>
-                                                        </div>
+                                {source_icons.map((icon) => icon)}
+                            </div>
                                                     </td>
                                                     <td>
                                                         <Typography
