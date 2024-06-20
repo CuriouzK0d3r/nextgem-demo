@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
     const source = json.source ? [json.source] : ["pubmed", "emf", "wos"];
     // const sources = json.sources || [source];
     const { username, query, search_results, chosenSources } = json;
-    console.log(username)
+    console.log(username);
     const history = await collection.find({ username: username }).toArray();
     // console.log(history)
 
@@ -37,11 +37,11 @@ export async function POST(req: NextRequest) {
                 session_id: "",
                 search_id: "",
                 query: query,
-                results: search_results,
-              },
-            ],
-          },
-        },
+                results: search_results
+              }
+            ]
+          }
+        }
       );
     } else {
       await collection.insertOne({
@@ -51,9 +51,9 @@ export async function POST(req: NextRequest) {
             session_id: "",
             search_id: "",
             query: query,
-            results: search_results,
-          },
-        ],
+            results: search_results
+          }
+        ]
       });
     }
   } catch (err) {

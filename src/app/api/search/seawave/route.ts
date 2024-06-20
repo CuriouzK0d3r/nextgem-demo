@@ -45,7 +45,7 @@ const filter = (
   data: any,
   institution: string,
   output_type: string,
-  privacy_level: string,
+  privacy_level: string
 ): any[] => {
   let returnedObj: any[] = [];
 
@@ -60,7 +60,7 @@ const filter = (
       title: metadata["title"],
       description: metadata["description"],
       publication_date: metadata["publication_date"],
-      output_type: metadata["resource_type"]["type"],
+      output_type: metadata["resource_type"]["type"]
     }))(element);
 
     if (institution) {
@@ -98,22 +98,23 @@ export async function POST(req: Request) {
     const requestParams2 = {
       params: {
         access_token:
-          "I2ZxABWJ9EsaQGJiZyqRpaY8AIwExSOm5zUrTA5ISnStDHjjCo31cM1Z9CSs",
+          "I2ZxABWJ9EsaQGJiZyqRpaY8AIwExSOm5zUrTA5ISnStDHjjCo31cM1Z9CSs"
       },
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json" }
     };
     let data = await req.json();
 
     const response = await axios.get(
-      "https://zenodo.org/api/communities/seawave_data_managing/records?q=" + data.query,
-      requestParams2,
+      "https://zenodo.org/api/communities/seawave_data_managing/records?q=" +
+        data.query,
+      requestParams2
     );
 
     let returnedObj = filter(
       response.data["hits"]["hits"],
       data.institution,
       data.output_type,
-      data.privacy_level,
+      data.privacy_level
     );
 
     for (let i in returnedObj) {

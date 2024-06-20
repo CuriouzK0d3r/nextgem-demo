@@ -44,12 +44,19 @@ const filter = (
   data: any,
   institution: string,
   output_type: string,
-  privacy_level: string,
+  privacy_level: string
 ): any[] => {
   let returnedObj: any[] = [];
 
   data.forEach((element: any) => {
-    const picked = (({ url, authors, name, description, published_at, type }) => ({
+    const picked = (({
+      url,
+      authors,
+      name,
+      description,
+      published_at,
+      type
+    }) => ({
       source_url: url,
       location: "",
       privacyLevel: "public",
@@ -59,7 +66,7 @@ const filter = (
       title: name,
       description: description,
       publication_date: published_at,
-      output_type: type,
+      output_type: type
     }))(element);
 
     if (institution) {
@@ -99,22 +106,22 @@ export async function POST(req: Request) {
       //   access_token:
       //     "I2ZxABWJ9EsaQGJiZyqRpaY8AIwExSOm5zUrTA5ISnStDHjjCo31cM1Z9CSs",
       // },
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json" }
     };
 
     let data = await req.json();
 
     const response = await axios.get(
       "https://dataverse.csuc.cat/api/search?q=" + data.query.title,
-      requestParams2,
+      requestParams2
     );
 
-    console.log(response.data.data["items"])
+    console.log(response.data.data["items"]);
     let returnedObj = filter(
       response.data.data["items"],
       data.institution,
       data.output_type,
-      data.privacy_level,
+      data.privacy_level
     );
 
     for (let i in returnedObj) {

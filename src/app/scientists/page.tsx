@@ -41,10 +41,10 @@ function SearchPage() {
     fetch("/api/fields", {
       method: "GET",
       headers: {
-        "Content-Type": "application/json",
-      },
+        "Content-Type": "application/json"
+      }
     })
-      .then(async (response) => {
+      .then(async response => {
         if (response.ok) {
           let responseJSON = await response.json();
           setInputFields(responseJSON.fields);
@@ -53,7 +53,7 @@ function SearchPage() {
           console.error("Request failed. Status: " + response.status);
         }
       })
-      .catch((error) => {
+      .catch(error => {
         console.error("Error:", error);
       });
 
@@ -101,7 +101,7 @@ function SearchPage() {
                 <form
                   className="mt-4"
                   id="searchForm"
-                  onSubmit={(event) => {
+                  onSubmit={event => {
                     event.preventDefault();
                     setHasSubmitted(true);
                   }}
@@ -110,77 +110,84 @@ function SearchPage() {
                     <div>
                       {/* <Typography variant="h5" placeholder={"Description"}>Description</Typography> */}
                       <div className="mb-12 grid w-full grid-flow-col grid-cols-1 gap-x-12 gap-y-2 p-0 lg:grid-cols-2 grid-rows-3">
-                        {inputFields ? inputFields.map((field: any, index: any) => {
-                          const words = field.fieldName.replace(
-                            /([a-z])([A-Z])/g,
-                            "$1 $2",
-                          );
-                          if (field.type == "String") {
-                            return (
-                              <div key={index} className=" mt-4 p-0">
-                                <Input
-                                  value={inputState[field.fieldName]}
-                                  onChange={(event) => {
-                                    event.preventDefault();
-                                    setInputState({
-                                      ...inputState,
-                                      [field.fieldName]: event.target.value,
-                                    });
-                                  }}
-                                  name={field.fieldName}
-                                  className="shadow-blue-gray-900/50 bg-white object-cover object-center shadow-inner"
-                                  crossOrigin="true"
-                                  style={{ color: "black" }}
-                                  label={
-                                    words.charAt(0).toUpperCase() +
-                                    words.slice(1)
-                                  }
-                                />
-                              </div>
+                        {inputFields ? (
+                          inputFields.map((field: any, index: any) => {
+                            const words = field.fieldName.replace(
+                              /([a-z])([A-Z])/g,
+                              "$1 $2"
                             );
-                          } else {
-                          
-                          }
-                        }): <div></div>}
-                        {inputFields ? inputFields.map((field: any, index: any) => {
-                          const words = field.fieldName.replace(
-                            /([a-z])([A-Z])/g,
-                            "$1 $2",
-                          );
-                          if (field.type == "String") {
-                          } else {
-                            return (
-                              <div
-                                key={index}
-                                className=" select-input mt-4 w-full p-0"
-                              >
-                                <Select
-                                  name={field.fieldName}
-                                  value={inputState[field.fieldName]}
-                                  onChange={(event) =>
-                                    setInputState({
-                                      ...inputState,
-                                      [field.fieldName]: event,
-                                    })
-                                  }
-                                  className=" ct-cover shadow-blue-gray-900/50 bg-white object-center text-black shadow-inner"
-                                  label={
-                                    words.charAt(0).toUpperCase() +
-                                    words.slice(1)
-                                  }
-                                  placeholder={field.fieldName}
+                            if (field.type == "String") {
+                              return (
+                                <div key={index} className=" mt-4 p-0">
+                                  <Input
+                                    value={inputState[field.fieldName]}
+                                    onChange={event => {
+                                      event.preventDefault();
+                                      setInputState({
+                                        ...inputState,
+                                        [field.fieldName]: event.target.value
+                                      });
+                                    }}
+                                    name={field.fieldName}
+                                    className="shadow-blue-gray-900/50 bg-white object-cover object-center shadow-inner"
+                                    crossOrigin="true"
+                                    style={{ color: "black" }}
+                                    label={
+                                      words.charAt(0).toUpperCase() +
+                                      words.slice(1)
+                                    }
+                                  />
+                                </div>
+                              );
+                            } else {
+                            }
+                          })
+                        ) : (
+                          <div></div>
+                        )}
+                        {inputFields ? (
+                          inputFields.map((field: any, index: any) => {
+                            const words = field.fieldName.replace(
+                              /([a-z])([A-Z])/g,
+                              "$1 $2"
+                            );
+                            if (field.type == "String") {
+                            } else {
+                              return (
+                                <div
+                                  key={index}
+                                  className=" select-input mt-4 w-full p-0"
                                 >
-                                  {/* <Option key={index} value={"-"}>{"-"}</Option> */}
-                                  {field.enumValues.map((value: any) => (
-                                    <Option key={value} value={value}>
-                                      {value}
-                                    </Option>
-                                  ))}
-                                </Select>
-                              </div>
-                            );
-                          }
-                        }): <></>}
+                                  <Select
+                                    name={field.fieldName}
+                                    value={inputState[field.fieldName]}
+                                    onChange={event =>
+                                      setInputState({
+                                        ...inputState,
+                                        [field.fieldName]: event
+                                      })
+                                    }
+                                    className=" ct-cover shadow-blue-gray-900/50 bg-white object-center text-black shadow-inner"
+                                    label={
+                                      words.charAt(0).toUpperCase() +
+                                      words.slice(1)
+                                    }
+                                    placeholder={field.fieldName}
+                                  >
+                                    {/* <Option key={index} value={"-"}>{"-"}</Option> */}
+                                    {field.enumValues.map((value: any) => (
+                                      <Option key={value} value={value}>
+                                        {value}
+                                      </Option>
+                                    ))}
+                                  </Select>
+                                </div>
+                              );
+                            }
+                          })
+                        ) : (
+                          <></>
+                        )}
                       </div>
                     </div>
                     <div className="p-0"></div>

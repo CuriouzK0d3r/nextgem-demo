@@ -78,7 +78,6 @@ const matchPrivacyLevel = (record: any, privacyLevel: string) => {
   );
 };
 
-
 /**
  * Removes duplicate records based on the 'doi' property.
  * @param data - The array of records.
@@ -134,8 +133,8 @@ export async function POST(req: Request, res: NextApiResponse) {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET",
-        "Access-Control-Allow-Headers": "Content-Type, X-CSRF-TOKEN",
-      },
+        "Access-Control-Allow-Headers": "Content-Type, X-CSRF-TOKEN"
+      }
     });
 
     let resJ: any[] = [];
@@ -146,8 +145,8 @@ export async function POST(req: Request, res: NextApiResponse) {
       "outputType",
       "modulation",
       "studyType",
-      "privacyLevel",
-    ].forEach((key) => {
+      "privacyLevel"
+    ].forEach(key => {
       formData[key] ? (inputData[key] = formData[key]) : (inputData[key] = "");
     });
 
@@ -187,14 +186,16 @@ export async function POST(req: Request, res: NextApiResponse) {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET",
-        "Access-Control-Allow-Headers": "Content-Type, X-CSRF-TOKEN",
+        "Access-Control-Allow-Headers": "Content-Type, X-CSRF-TOKEN"
       },
       body: JSON.stringify({
-        query: `(title: ${formData["title"]}) ${query.length > 0 ? ` OR (description:${query})` : ""}`,
+        query: `(title: ${formData["title"]}) ${
+          query.length > 0 ? ` OR (description:${query})` : ""
+        }`,
         institution: formData["institution"],
         output_type: formData["outputType"],
-        privacy_level: formData["privacyLevel"],
-      }),
+        privacy_level: formData["privacyLevel"]
+      })
     });
 
     const responseJSON = await response.json();
@@ -220,14 +221,16 @@ export async function POST(req: Request, res: NextApiResponse) {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET",
-        "Access-Control-Allow-Headers": "Content-Type, X-CSRF-TOKEN",
+        "Access-Control-Allow-Headers": "Content-Type, X-CSRF-TOKEN"
       },
       body: JSON.stringify({
-        query: `(title: ${formData["title"]}) ${query.length > 0 ? ` OR (description:${query})` : ""}`,
+        query: `(title: ${formData["title"]}) ${
+          query.length > 0 ? ` OR (description:${query})` : ""
+        }`,
         institution: formData["institution"],
         output_type: formData["outputType"],
-        privacy_level: formData["privacyLevel"],
-      }),
+        privacy_level: formData["privacyLevel"]
+      })
     });
 
     const responseJSON = await response.json();
@@ -241,9 +244,9 @@ export async function POST(req: Request, res: NextApiResponse) {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET",
-        "Access-Control-Allow-Headers": "Content-Type, X-CSRF-TOKEN",
+        "Access-Control-Allow-Headers": "Content-Type, X-CSRF-TOKEN"
       },
-      body: JSON.stringify({ query: formData }),
+      body: JSON.stringify({ query: formData })
     });
 
     const responseJSON = await response.json();
@@ -257,11 +260,11 @@ export async function POST(req: Request, res: NextApiResponse) {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET",
-        "Access-Control-Allow-Headers": "Content-Type, X-CSRF-TOKEN",
+        "Access-Control-Allow-Headers": "Content-Type, X-CSRF-TOKEN"
       },
-      body: JSON.stringify({ query: formData, source: "emf" }),
+      body: JSON.stringify({ query: formData, source: "emf" })
     });
-    
+
     const responseJSON = await response.json();
     results = results.concat(addSource(responseJSON, "emf-portal"));
   }
@@ -273,11 +276,11 @@ export async function POST(req: Request, res: NextApiResponse) {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET",
-        "Access-Control-Allow-Headers": "Content-Type, X-CSRF-TOKEN",
+        "Access-Control-Allow-Headers": "Content-Type, X-CSRF-TOKEN"
       },
-      body: JSON.stringify({ query: formData, source: "wos" }),
+      body: JSON.stringify({ query: formData, source: "wos" })
     });
-  
+
     const responseJSON = await response.json();
     results = results.concat(addSource(responseJSON, "wos"));
   }
@@ -289,9 +292,9 @@ export async function POST(req: Request, res: NextApiResponse) {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET",
-        "Access-Control-Allow-Headers": "Content-Type, X-CSRF-TOKEN",
+        "Access-Control-Allow-Headers": "Content-Type, X-CSRF-TOKEN"
       },
-      body: JSON.stringify({ query: formData, source: "pubmed" }),
+      body: JSON.stringify({ query: formData, source: "pubmed" })
     });
 
     const responseJSON = await response.json();
@@ -306,7 +309,7 @@ function addSource(responseJSON: any, arg1: string): string {
   return JSON.parse(responseJSON).map((result: any) => {
     return {
       ...result,
-      source: [arg1.toUpperCase()],
+      source: [arg1.toUpperCase()]
     };
   });
 }

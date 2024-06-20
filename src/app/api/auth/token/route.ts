@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextApiRequest, NextApiResponse } from "next";
 
 /**
  * Handles the POST request for token authentication.
@@ -8,17 +8,17 @@ import { NextApiRequest, NextApiResponse } from 'next';
  * @return {Promise<void>} A promise including the logged in status for the user.
  */
 export async function POST(req: Request, res: NextApiResponse) {
-    const { access_token } = await req.json();
-    const apiEndpoint = "https://139.91.58.16/nikh-auth/getUser/forth-admin";
-    // return Response.json({ loggedin: true });
+  const { access_token } = await req.json();
+  const apiEndpoint = "https://139.91.58.16/nikh-auth/getUser/forth-admin";
+  // return Response.json({ loggedin: true });
 
-    const response = await fetch(apiEndpoint, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer " + access_token
-        },
-    });
+  const response = await fetch(apiEndpoint, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + access_token
+    }
+  });
 
-    return Response.json({ loggedin: response.ok });    
+  return Response.json({ loggedin: response.ok });
 }

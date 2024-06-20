@@ -32,10 +32,10 @@ function RASearchPage() {
     fetch("/api/history?username=" + "forth-admin", {
       method: "GET",
       headers: {
-        "Content-Type": "application/json",
-      },
+        "Content-Type": "application/json"
+      }
     })
-      .then(async (response) => { 
+      .then(async response => {
         if (response.ok) {
           let responseJSON = await response.json();
           setCurrentHistory(responseJSON);
@@ -43,7 +43,7 @@ function RASearchPage() {
           console.error("Request failed. Status: " + response.status);
         }
       })
-      .catch((error) => {
+      .catch(error => {
         console.error("Error:", error);
       });
   };
@@ -59,12 +59,16 @@ function RASearchPage() {
   };
 
   const handleSearchChoice = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(e)
+    console.log(e);
     // setSearchIndex(e.target.value);
   };
 
   return (
-    <PageLayout pageName="Literature Review History" isLoggedIn={isLoggedIn} checkLogin={true}>
+    <PageLayout
+      pageName="Literature Review History"
+      isLoggedIn={isLoggedIn}
+      checkLogin={true}
+    >
       <div className={`mt-32 min-h-[65rem] w-full`}>
         <Card
           placeholder={""}
@@ -84,7 +88,7 @@ function RASearchPage() {
             <div
               className={classNames(
                 "relative  mx-auto place-items-center w-full float-left",
-                submittedQuery.length ? "mt-9" : "mt-0",
+                submittedQuery.length ? "mt-9" : "mt-0"
               )}
             >
               <div className=" mt-2 ml-0  w-full flex">
@@ -139,31 +143,41 @@ function RASearchPage() {
               </div>
               <div className="pb-6 p-4 mt-10 pt-0 ml-0 text-left w-[370px]">
                 <div className="w-18 float-left">
-                  {currentHistory.length > 0 &&
-                    <Select placeholder={"Choose Review"} label="Choose Review" onChange={(value) => setSessionIndex(Number(value))}>
-                      {
-                        currentHistory.map((session, idx: number) => {
-                          return <Option key={idx} value={String(idx)}>Review {idx + 1}</Option>;
-                        })
-                      }
+                  {currentHistory.length > 0 && (
+                    <Select
+                      placeholder={"Choose Review"}
+                      label="Choose Review"
+                      onChange={value => setSessionIndex(Number(value))}
+                    >
+                      {currentHistory.map((session, idx: number) => {
+                        return (
+                          <Option key={idx} value={String(idx)}>
+                            Review {idx + 1}
+                          </Option>
+                        );
+                      })}
                     </Select>
-                  }
+                  )}
                 </div>
                 <div className="w-28 float-right">
-                  {currentHistory.length > 0 &&
+                  {currentHistory.length > 0 && (
                     <Select
                       placeholder={"Choose Search"}
                       className=""
                       label="Choose Search"
-                      onChange={(value) => setSearchIndex(Number(value))}
+                      onChange={value => setSearchIndex(Number(value))}
                     >
-                      {
-                        currentHistory[sessionIndex].history.map((_:any, idx:any) => {
-                          return <Option key={idx} value={idx}>Search {idx + 1}</Option>;
-                        })
-                      }
+                      {currentHistory[sessionIndex].history.map(
+                        (_: any, idx: any) => {
+                          return (
+                            <Option key={idx} value={idx}>
+                              Search {idx + 1}
+                            </Option>
+                          );
+                        }
+                      )}
                     </Select>
-                  }
+                  )}
                 </div>
               </div>
 
@@ -200,12 +214,20 @@ function RASearchPage() {
               </Card> */}
               {
                 <div className=" pl-4 w-full">
-                  {currentHistory.length > 0 ? <SearchTable searchResults={currentHistory[currentHistory.length - 1].history[searchIndex].results} />
-                    : <></>}
-                  {
-                    (!currentHistory || currentHistory.length === 0) &&
+                  {currentHistory.length > 0 ? (
+                    <SearchTable
+                      searchResults={
+                        currentHistory[currentHistory.length - 1].history[
+                          searchIndex
+                        ].results
+                      }
+                    />
+                  ) : (
+                    <></>
+                  )}
+                  {(!currentHistory || currentHistory.length === 0) && (
                     <>No searches in history</>
-                  }
+                  )}
                 </div>
               }
               {/* <RASessionSearch /> */}

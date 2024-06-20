@@ -9,7 +9,7 @@ import {
   CardHeader,
   Chip,
   IconButton,
-  Typography,
+  Typography
 } from "@material-tailwind/react";
 import { motion } from "framer-motion";
 import SearchMore from "./search-more";
@@ -22,9 +22,9 @@ function jsonToCSV(json: any) {
     header.join(","), // header row first
     ...items.map((row: any) =>
       header
-        .map((fieldName) => JSON.stringify(row[fieldName], replacer))
-        .join(","),
-    ),
+        .map(fieldName => JSON.stringify(row[fieldName], replacer))
+        .join(",")
+    )
   ].join("\r\n");
 
   return csv;
@@ -33,7 +33,7 @@ function jsonToCSV(json: any) {
 function DefaultPagination({
   searchResults,
   active,
-  setActive,
+  setActive
 }: {
   searchResults: any[];
   active: number;
@@ -43,8 +43,8 @@ function DefaultPagination({
     ({
       variant: active === index ? "filled" : "text",
       color: "gray",
-      onClick: () => setActive(index),
-    }) as any;
+      onClick: () => setActive(index)
+    } as any);
 
   const next = (pagesNo: number) => {
     if (active === pagesNo) return;
@@ -76,7 +76,7 @@ function DefaultPagination({
         {Array.from(Array(pagesNo).keys())
           .slice(
             active > 2 ? active - 2 : 0,
-            active > 3 ? active + 3 : active + 5,
+            active > 3 ? active + 3 : active + 5
           )
           .map((i, index) => {
             return (
@@ -107,7 +107,7 @@ const SearchResults: React.FC<any> = ({
   setMode,
   isLoggedIn,
   selectedSources,
-  setSearchResults,
+  setSearchResults
 }) => {
   const [active, setActive] = React.useState(0);
   const [moreIdx, setMoreIdx] = React.useState(-1);
@@ -121,10 +121,10 @@ const SearchResults: React.FC<any> = ({
       front_end_position: {
         name: {
           full_name: "Forward",
-          short_code: "FW",
+          short_code: "FW"
         },
-        id: 2,
-      },
+        id: 2
+      }
     },
     {
       id: 3,
@@ -134,11 +134,11 @@ const SearchResults: React.FC<any> = ({
       front_end_position: {
         name: {
           full_name: "Defence",
-          short_code: "DF",
+          short_code: "DF"
         },
-        id: 2,
-      },
-    },
+        id: 2
+      }
+    }
   ];
 
   const TABLE_HEAD = [
@@ -148,7 +148,7 @@ const SearchResults: React.FC<any> = ({
     // "Location",
     "Status",
     "Sources",
-    " ",
+    " "
   ];
 
   const studyTypeMap: any = {
@@ -159,7 +159,7 @@ const SearchResults: React.FC<any> = ({
     humanStudies: "Human Studies",
     simulation: "Simulation",
     riskAssessment: "Risk Assessment",
-    exposureAssessment: "Exposure Assessment",
+    exposureAssessment: "Exposure Assessment"
   };
 
   var columns = [
@@ -167,28 +167,28 @@ const SearchResults: React.FC<any> = ({
       field: "title",
       use: "Title",
       //Will not be used in search filtering
-      use_in_search: true,
+      use_in_search: true
     },
     {
       field: "typeOfStudy",
-      use: "Type of Study",
+      use: "Type of Study"
     },
     {
       field: "outputType",
-      use: "Output Type",
+      use: "Output Type"
     },
     {
       field: "location",
-      use: "Location",
+      use: "Location"
     },
     {
       field: "privacyLevel",
-      use: "Status",
+      use: "Status"
     },
     {
       field: "source",
-      use: "",
-    },
+      use: ""
+    }
     // {
     //   field: "more",
     //   use: "",
@@ -252,7 +252,13 @@ const SearchResults: React.FC<any> = ({
                     {TABLE_HEAD.map((head, index) => (
                       <th
                         key={index}
-                        className={`border-blue-gray-100 bg-blue-gray-50 border-b p-4 pb-4 ${["Status", "Location"].includes(head) ? "hidden lg:table-cell" : ["Output Type", "Type of Study"].includes(head) ? "hidden xl:table-cell" : ""}`}
+                        className={`border-blue-gray-100 bg-blue-gray-50 border-b p-4 pb-4 ${
+                          ["Status", "Location"].includes(head)
+                            ? "hidden lg:table-cell"
+                            : ["Output Type", "Type of Study"].includes(head)
+                            ? "hidden xl:table-cell"
+                            : ""
+                        }`}
                       >
                         <Typography
                           placeholder={""}
@@ -280,9 +286,9 @@ const SearchResults: React.FC<any> = ({
                         studyType,
                         output_type,
                         privacyLevel,
-                        source,
+                        source
                       }: any,
-                      index: number,
+                      index: number
                     ) => {
                       const isLast = index === TABLE_ROWS.length - 1;
                       const classes = isLast
@@ -291,7 +297,7 @@ const SearchResults: React.FC<any> = ({
 
                       let source_icons = [];
 
-                      for (let i=0; i < source.length; i++) {
+                      for (let i = 0; i < source.length; i++) {
                         switch (source[i]) {
                           case "PUBMED":
                             source_icons.push(
@@ -311,7 +317,10 @@ const SearchResults: React.FC<any> = ({
                             break;
                           case "ZENODO":
                             source_icons.push(
-                              <img className="w-[60px]" src="./logozenodo.svg" />
+                              <img
+                                className="w-[60px]"
+                                src="./logozenodo.svg"
+                              />
                             );
                             break;
                           case "WOS":
@@ -342,7 +351,6 @@ const SearchResults: React.FC<any> = ({
                             break;
                         }
                       }
-                      
 
                       return (
                         <tr key={index} className="even:bg-blue-gray-100/50">
@@ -384,9 +392,9 @@ const SearchResults: React.FC<any> = ({
                                   privacyLevel === "open"
                                     ? "green"
                                     : privacyLevel === "restricted" ||
-                                        privacyLevel === "sensitive"
-                                      ? "orange"
-                                      : "gray"
+                                      privacyLevel === "sensitive"
+                                    ? "orange"
+                                    : "gray"
                                 }
                               />
                             </div>
@@ -399,7 +407,7 @@ const SearchResults: React.FC<any> = ({
                                 rel="noreferrer"
                                 className="p-0"
                               > */}
-                                {/* <Chip
+                              {/* <Chip
                                   size="sm"
                                   variant="ghost"
                                   value={                              <img className="w-[50px]" src="https://marketplace.digimind.com/hubfs/Website%20Visual%20assets%20S2/Digimind%20Website%20-%20Marketplace/Logos/Pubmed-logo-WithBG.png" ></img>
@@ -407,7 +415,7 @@ const SearchResults: React.FC<any> = ({
                                   className="mb-6"
                                   color={"gray"}
                                 /> */}
-                                {source_icons.map((icon) => icon)}
+                              {source_icons.map(icon => icon)}
                             </div>
                           </td>
                           <td>
@@ -424,7 +432,7 @@ const SearchResults: React.FC<any> = ({
                           </td>
                         </tr>
                       );
-                    },
+                    }
                   )}
                 </tbody>
               </table>
@@ -455,7 +463,7 @@ const SearchResults: React.FC<any> = ({
                   {searchResults.length} results found
                   <a
                     href={`data:text/json;charset=utf-8,${encodeURIComponent(
-                      jsonToCSV(searchResults),
+                      jsonToCSV(searchResults)
                     )}`}
                     download="results.csv"
                   >

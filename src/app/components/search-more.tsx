@@ -9,14 +9,14 @@ import {
   CardHeader,
   Chip,
   IconButton,
-  Typography,
+  Typography
 } from "@material-tailwind/react";
 import { MoreDialog } from "./helpers/more-dialog";
 
 function DefaultPagination({
   searchResults,
   active,
-  setActive,
+  setActive
 }: {
   searchResults: any[];
   active: number;
@@ -26,8 +26,8 @@ function DefaultPagination({
     ({
       variant: active === index ? "filled" : "text",
       color: "gray",
-      onClick: () => setActive(index),
-    }) as any;
+      onClick: () => setActive(index)
+    } as any);
 
   const next = (pagesNo: number) => {
     if (active === pagesNo) return;
@@ -59,7 +59,7 @@ function DefaultPagination({
         {Array.from(Array(pagesNo).keys())
           .slice(
             active > 2 ? active - 2 : 0,
-            active > 3 ? active + 3 : active + 5,
+            active > 3 ? active + 3 : active + 5
           )
           .map((i, index) => {
             return (
@@ -90,13 +90,13 @@ const SearchMore: React.FC<any> = ({
   setMode,
   isLoggedIn,
   seletedSources,
-  setSearchResults,
+  setSearchResults
 }) => {
   const [active, setActive] = React.useState(0);
 
   const strip_html_tags = (str: string) => {
     // Check if the input string is null or empty
-    if ((str === null) || (str === '')) {
+    if (str === null || str === "") {
       // If so, return false
       return false;
     } else {
@@ -104,8 +104,8 @@ const SearchMore: React.FC<any> = ({
       str = str.toString();
     }
     // Use a regular expression to replace all HTML tags with an empty string
-    return str.replace(/<[^>]*>/g, '');
-  }
+    return str.replace(/<[^>]*>/g, "");
+  };
 
   const TABLE_HEAD = [
     "Title",
@@ -113,7 +113,7 @@ const SearchMore: React.FC<any> = ({
     "Output Type",
     "Location",
     "Status",
-    " ",
+    " "
   ];
 
   return (
@@ -121,36 +121,83 @@ const SearchMore: React.FC<any> = ({
       className={`mx-auto mt-6 w-full table-auto border-collapse overflow-hidden text-left"`}
     >
       <h4 className="text-xxl">{searchResult.title}</h4>
-      <h6 className="text-xl mt-10">{searchResult["subject"] && (searchResult["subject"].join(", "))}</h6>
-      <div className="mt-4 italic"> {
-        searchResult.author ? searchResult.author.map((person: any) => `${person.given} ${person.family}`).join(', ') :
-          (searchResult.authors ? searchResult.authors.map((person: any) => `${person.firstname} ${person.lastname} @ ${person.affiliation}`).join(', ') :
-            searchResult.creators.map((person: any) => `${person.name} ${person.affiliation ? ((!person.affiliation.includes("@") ? " @ " + person.affiliation : person.affiliation)) : ""}`).join(', '))
-      }
+      <h6 className="text-xl mt-10">
+        {searchResult["subject"] && searchResult["subject"].join(", ")}
+      </h6>
+      <div className="mt-4 italic">
+        {" "}
+        {searchResult.author
+          ? searchResult.author
+              .map((person: any) => `${person.given} ${person.family}`)
+              .join(", ")
+          : searchResult.authors
+          ? searchResult.authors
+              .map(
+                (person: any) =>
+                  `${person.firstname} ${person.lastname} @ ${person.affiliation}`
+              )
+              .join(", ")
+          : searchResult.creators
+              .map(
+                (person: any) =>
+                  `${person.name} ${
+                    person.affiliation
+                      ? !person.affiliation.includes("@")
+                        ? " @ " + person.affiliation
+                        : person.affiliation
+                      : ""
+                  }`
+              )
+              .join(", ")}
       </div>
       <div className="mt-2">
-        {(searchResult.created || searchResult.publication_date) && 
-        (<span className="pl-0 mr-8">Published {searchResult["container-title"] && "in"}: <b>{searchResult["container-title"]}</b> {searchResult.created ? (new Date(searchResult.created.timestamp).toDateString()) : searchResult.publication_date}
-        </span>)}
-        DOI: <a href={"https://doi.org/" + searchResult.DOI} >{searchResult.DOI} </a></div>
-      {searchResult.abstract && (<div className="mt-10">          <h2 className="text-lg mb-2 font-bold ml-0 pl-0">Abstract</h2>
-        {searchResult.abstract && strip_html_tags(searchResult.abstract)} </div>)}
-      {searchResult.description && (<div className="mt-10">          <h2 className="text-lg mb-2 font-bold ml-0 pl-0">Description</h2>
-      <div className="Container" dangerouslySetInnerHTML={{__html: searchResult.description}}></div> </div>)}
+        {(searchResult.created || searchResult.publication_date) && (
+          <span className="pl-0 mr-8">
+            Published {searchResult["container-title"] && "in"}:{" "}
+            <b>{searchResult["container-title"]}</b>{" "}
+            {searchResult.created
+              ? new Date(searchResult.created.timestamp).toDateString()
+              : searchResult.publication_date}
+          </span>
+        )}
+        DOI:{" "}
+        <a href={"https://doi.org/" + searchResult.DOI}>{searchResult.DOI} </a>
+      </div>
+      {searchResult.abstract && (
+        <div className="mt-10">
+          {" "}
+          <h2 className="text-lg mb-2 font-bold ml-0 pl-0">Abstract</h2>
+          {searchResult.abstract && strip_html_tags(searchResult.abstract)}{" "}
+        </div>
+      )}
+      {searchResult.description && (
+        <div className="mt-10">
+          {" "}
+          <h2 className="text-lg mb-2 font-bold ml-0 pl-0">Description</h2>
+          <div
+            className="Container"
+            dangerouslySetInnerHTML={{ __html: searchResult.description }}
+          ></div>{" "}
+        </div>
+      )}
       <div className="text-lg  font-bold ml-0 pl-0 mt-8">
-        {
-          searchResult.files ? (<>
+        {searchResult.files ? (
+          <>
             Files
             <div>
               <ul>
-                {searchResult.files.map((file: any, idx: number) => <li key={idx}><a href={file.links.self}>{file.key}</a></li>)}
+                {searchResult.files.map((file: any, idx: number) => (
+                  <li key={idx}>
+                    <a href={file.links.self}>{file.key}</a>
+                  </li>
+                ))}
               </ul>
             </div>
-          </>) : <></>
-        }
-        <div>
-
-        </div>
+          </>
+        ) : (
+          <></>
+        )}
+        <div></div>
       </div>
       <div className="mt-12">
         <a

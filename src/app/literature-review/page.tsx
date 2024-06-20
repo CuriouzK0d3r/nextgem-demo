@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Cookies from "js-cookie";
 
 import {
@@ -15,9 +15,9 @@ import {
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import ExternalSources from "../components/external-sources";
-import PageLayout from '../components/page-layout';
+import PageLayout from "../components/page-layout";
 import SearchResults from "../components/ra-search-results";
-import { checkLoginStatus, parseJwt } from '../helpers/login';
+import { checkLoginStatus, parseJwt } from "../helpers/login";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -39,10 +39,10 @@ function RASearchPage() {
     fetch("/api/history?username=" + "forth-admin", {
       method: "GET",
       headers: {
-        "Content-Type": "application/json",
-      },
+        "Content-Type": "application/json"
+      }
     })
-      .then(async (response) => {
+      .then(async response => {
         if (response.ok) {
           let responseJSON = await response.json();
           setCurrentHistory(responseJSON);
@@ -50,7 +50,7 @@ function RASearchPage() {
           console.error("Request failed. Status: " + response.status);
         }
       })
-      .catch((error) => {
+      .catch(error => {
         console.error("Error:", error);
       });
   };
@@ -59,7 +59,6 @@ function RASearchPage() {
     getHistory();
   }, []);
 
-
   function clearState() {
     let inputs: any = {};
     for (let i = 0; i < inputFields.length; i++) {
@@ -67,16 +66,14 @@ function RASearchPage() {
     }
     setInputState(inputs);
   }
-  const saveHistory = (
-
-  ) => {
-    const token = Cookies.get('token');
+  const saveHistory = () => {
+    const token = Cookies.get("token");
     const jwtObj = parseJwt(token);
 
     fetch("/api/history", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         query: JSON.stringify(inputState),
@@ -85,7 +82,7 @@ function RASearchPage() {
         chosenSources: chosenSources
       })
     })
-      .then(async (response) => {
+      .then(async response => {
         if (response.ok) {
           let responseJSON = await response.json();
           // setInputFields(responseJSON.fields);
@@ -94,11 +91,10 @@ function RASearchPage() {
           console.error("Request failed. Status: " + response.status);
         }
       })
-      .catch((error) => {
+      .catch(error => {
         console.error("Error:", error);
       });
   };
-
 
   useEffect(() => {
     if (searchResults.length !== 0) {
@@ -110,10 +106,10 @@ function RASearchPage() {
     fetch("/api/fields", {
       method: "GET",
       headers: {
-        "Content-Type": "application/json",
-      },
+        "Content-Type": "application/json"
+      }
     })
-      .then(async (response) => {
+      .then(async response => {
         if (response.ok) {
           let responseJSON = await response.json();
           setInputFields(responseJSON.fields);
@@ -122,7 +118,7 @@ function RASearchPage() {
           console.error("Request failed. Status: " + response.status);
         }
       })
-      .catch((error) => {
+      .catch(error => {
         console.error("Error:", error);
       });
 
@@ -130,7 +126,11 @@ function RASearchPage() {
   }, []);
 
   return (
-    <PageLayout pageName='Literature Review' isLoggedIn={isLoggedIn} checkLogin={true}>
+    <PageLayout
+      pageName="Literature Review"
+      isLoggedIn={isLoggedIn}
+      checkLogin={true}
+    >
       <AnimatePresence>
         {searchResults.length > 0 ? (
           <motion.div
@@ -163,17 +163,21 @@ function RASearchPage() {
                 </Typography>
               </CardHeader>
               <CardBody placeholder={""}>
-                  <Typography
-                    placeholder={""}
-                    variant="h2"
-                    className="text-center text-lg lg:text-xl xl:text-2xl"
-                  >
-                    Review {currentHistory.length ? currentHistory.length : 1} ({currentHistory.length ? currentHistory[currentHistory.length - 1].history.length : 0} search queries submitted)
-                  </Typography>
+                <Typography
+                  placeholder={""}
+                  variant="h2"
+                  className="text-center text-lg lg:text-xl xl:text-2xl"
+                >
+                  Review {currentHistory.length ? currentHistory.length : 1} (
+                  {currentHistory.length
+                    ? currentHistory[currentHistory.length - 1].history.length
+                    : 0}{" "}
+                  search queries submitted)
+                </Typography>
                 <form
                   className="mt-4"
                   id="searchForm"
-                  onSubmit={(event) => {
+                  onSubmit={event => {
                     event.preventDefault();
                     setHasSubmitted(true);
                   }}
@@ -182,21 +186,21 @@ function RASearchPage() {
                     <div>
                       {/* <Typography variant="h5" placeholder={"Description"}>Description</Typography> */}
                       <div className="mb-12 grid w-full grid-flow-col grid-cols-1 gap-x-12 gap-y-2 p-0 lg:grid-cols-2 grid-rows-3">
-                      {inputFields.map((field: any, index: any) => {
+                        {inputFields.map((field: any, index: any) => {
                           const words = field.fieldName.replace(
                             /([a-z])([A-Z])/g,
-                            "$1 $2",
+                            "$1 $2"
                           );
                           if (field.type == "String") {
                             return (
                               <div key={index} className=" mt-4 p-0">
                                 <Input
                                   value={inputState[field.fieldName]}
-                                  onChange={(event) => {
+                                  onChange={event => {
                                     event.preventDefault();
                                     setInputState({
                                       ...inputState,
-                                      [field.fieldName]: event.target.value,
+                                      [field.fieldName]: event.target.value
                                     });
                                   }}
                                   name={field.fieldName}
@@ -211,13 +215,12 @@ function RASearchPage() {
                               </div>
                             );
                           } else {
-                          
                           }
                         })}
                         {inputFields.map((field: any, index: any) => {
                           const words = field.fieldName.replace(
                             /([a-z])([A-Z])/g,
-                            "$1 $2",
+                            "$1 $2"
                           );
                           if (field.type == "String") {
                           } else {
@@ -229,10 +232,10 @@ function RASearchPage() {
                                 <Select
                                   name={field.fieldName}
                                   value={inputState[field.fieldName]}
-                                  onChange={(event) =>
+                                  onChange={event =>
                                     setInputState({
                                       ...inputState,
-                                      [field.fieldName]: event,
+                                      [field.fieldName]: event
                                     })
                                   }
                                   className=" ct-cover shadow-blue-gray-900/50 bg-white object-center text-black shadow-inner"
@@ -309,7 +312,8 @@ function RASearchPage() {
         )}
       </AnimatePresence>
       {/* <SearchModal showModal={open} setShowModal={setOpen} /> */}
-    </ PageLayout>);
+    </PageLayout>
+  );
 }
 
 export default RASearchPage;

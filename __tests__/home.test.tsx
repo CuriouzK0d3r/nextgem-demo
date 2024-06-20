@@ -3,29 +3,28 @@ import { act, fireEvent, render, screen } from "@testing-library/react";
 import Home from "../src/app/scientists/page";
 import React from "react";
 export function mockFetch(data: any) {
-    return jest.fn().mockImplementation(() =>
-      Promise.resolve({
-        ok: true,
-        json: () => data,
-      }),
-    );
-  }
-  
+  return jest.fn().mockImplementation(() =>
+    Promise.resolve({
+      ok: true,
+      json: () => data
+    })
+  );
+}
+
 jest.mock("next/navigation", () => ({
-    useRouter() {
-      return {
-        prefetch: () => null
-      };
-    }
-  }));
-  
+  useRouter() {
+    return {
+      prefetch: () => null
+    };
+  }
+}));
 
 describe("Scientists page", () => {
-    window.fetch = mockFetch({});
+  window.fetch = mockFetch({});
 
-    it("renders /scientists", async () => {
-        await act( async () => render(<Home/>));
+  it("renders /scientists", async () => {
+    await act(async () => render(<Home />));
 
-        expect(2).toBe(2);
-    });
+    expect(2).toBe(2);
+  });
 });
