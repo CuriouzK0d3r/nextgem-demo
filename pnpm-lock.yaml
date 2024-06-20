@@ -79,7 +79,7 @@ importers:
         specifier: 18.0.4
         version: 18.0.4(@babel/traverse@7.23.9)(@playwright/test@1.41.2)(@types/node@20.11.5)(js-yaml@4.1.0)(nx@18.0.4)(typescript@5.3.3)
       '@playwright/test':
-        specifier: ^1.36.0
+        specifier: ^1.41.2
         version: 1.41.2
       '@testing-library/jest-dom':
         specifier: ^6.4.6
