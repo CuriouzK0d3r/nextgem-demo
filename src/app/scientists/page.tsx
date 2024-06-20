@@ -17,6 +17,7 @@ import ExternalSources from "../components/external-sources";
 import PageLayout from "../components/page-layout";
 import SearchResults from "../components/search-results";
 import { checkLoginStatus } from "../helpers/login";
+import React from "react";
 
 function SearchPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -109,7 +110,7 @@ function SearchPage() {
                     <div>
                       {/* <Typography variant="h5" placeholder={"Description"}>Description</Typography> */}
                       <div className="mb-12 grid w-full grid-flow-col grid-cols-1 gap-x-12 gap-y-2 p-0 lg:grid-cols-2 grid-rows-3">
-                        {inputFields.map((field: any, index: any) => {
+                        {inputFields ? inputFields.map((field: any, index: any) => {
                           const words = field.fieldName.replace(
                             /([a-z])([A-Z])/g,
                             "$1 $2",
@@ -140,8 +141,8 @@ function SearchPage() {
                           } else {
                           
                           }
-                        })}
-                        {inputFields.map((field: any, index: any) => {
+                        }): <div></div>}
+                        {inputFields ? inputFields.map((field: any, index: any) => {
                           const words = field.fieldName.replace(
                             /([a-z])([A-Z])/g,
                             "$1 $2",
@@ -179,7 +180,7 @@ function SearchPage() {
                               </div>
                             );
                           }
-                        })}
+                        }): <></>}
                       </div>
                     </div>
                     <div className="p-0"></div>

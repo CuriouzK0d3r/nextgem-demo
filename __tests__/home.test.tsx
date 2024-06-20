@@ -1,11 +1,31 @@
 import "@testing-library/jest-dom";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import Home from "../src/app/scientists/page";
 import React from "react";
+export function mockFetch(data: any) {
+    return jest.fn().mockImplementation(() =>
+      Promise.resolve({
+        ok: true,
+        json: () => data,
+      }),
+    );
+  }
+  
+jest.mock("next/navigation", () => ({
+    useRouter() {
+      return {
+        prefetch: () => null
+      };
+    }
+  }));
+  
 
 describe("Scientists page", () => {
-    it("renders /scientists", () => {
-        render(<Home />);
+    window.fetch = mockFetch({});
+
+    it("renders /scientists", async () => {
+        await act( async () => render(<Home/>));
+
         expect(2 == 2);
     });
 });
