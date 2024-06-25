@@ -8,9 +8,7 @@
     "start": "NODE_TLS_REJECT_UNAUTHORIZED=0 nx start",
     "lint": "next lint",
     "test": "jest",
-    "format": "nx format",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "format": "nx format"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.19",

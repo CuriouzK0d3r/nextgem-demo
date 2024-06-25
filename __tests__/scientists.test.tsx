@@ -6,17 +6,17 @@ export function mockFetch(data: any) {
   return jest.fn().mockImplementation(() =>
     Promise.resolve({
       ok: true,
-      json: () => data
-    })
+      json: () => data,
+    }),
   );
 }
 
 jest.mock("next/navigation", () => ({
   useRouter() {
     return {
-      prefetch: () => null
+      prefetch: () => null,
     };
-  }
+  },
 }));
 
 describe("Scientists page", () => {
@@ -24,7 +24,5 @@ describe("Scientists page", () => {
 
   it("renders /scientists", async () => {
     await act(async () => render(<Home />));
-
-    expect(2).toBe(2);
   });
 });

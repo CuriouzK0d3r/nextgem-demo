@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import PageLayout from "../components/page-layout";
+import React from "react";
 
 function DashboardPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -13,7 +14,7 @@ function DashboardPage() {
   const loginUsernameRef = useRef<any>(null);
   const loginPasswordRef = useRef<any>(null);
 
-  const handleOpen = () => setOpen(cur => !cur);
+  const handleOpen = () => setOpen((cur) => !cur);
 
   return (
     <PageLayout checkLogin={true} isLoggedIn={isLoggedIn} pageName="members">

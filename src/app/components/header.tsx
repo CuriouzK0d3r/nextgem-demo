@@ -8,7 +8,7 @@ import "../snipped.css";
 
 const Header = ({
   isLoggedIn,
-  pageName
+  pageName,
 }: {
   isLoggedIn: boolean;
   pageName: string | undefined;
@@ -175,7 +175,7 @@ const Header = ({
                             <div
                               style={{
                                 paddingLeft: "32px",
-                                paddingRight: "33px"
+                                paddingRight: "33px",
                               }}
                               className="ast-custom-button cursor-pointer"
                             >
@@ -214,10 +214,11 @@ const Header = ({
                   <style
                     dangerouslySetInnerHTML={{
                       __html:
-                        "/*! elementor - v3.19.0 - 07-02-2024 */\n.elementor-heading-title{padding:0;margin:0;line-height:1}.elementor-widget-heading .elementor-heading-title[class*=elementor-size-]>a{color:inherit;font-size:inherit;line-height:inherit}.elementor-widget-heading .elementor-heading-title.elementor-size-small{font-size:15px}.elementor-widget-heading .elementor-heading-title.elementor-size-medium{font-size:19px}.elementor-widget-heading .elementor-heading-title.elementor-size-large{font-size:29px}.elementor-widget-heading .elementor-heading-title.elementor-size-xl{font-size:39px}.elementor-widget-heading .elementor-heading-title.elementor-size-xxl{font-size:59px}"
+                        "/*! elementor - v3.19.0 - 07-02-2024 */\n.elementor-heading-title{padding:0;margin:0;line-height:1}.elementor-widget-heading .elementor-heading-title[class*=elementor-size-]>a{color:inherit;font-size:inherit;line-height:inherit}.elementor-widget-heading .elementor-heading-title.elementor-size-small{font-size:15px}.elementor-widget-heading .elementor-heading-title.elementor-size-medium{font-size:19px}.elementor-widget-heading .elementor-heading-title.elementor-size-large{font-size:29px}.elementor-widget-heading .elementor-heading-title.elementor-size-xl{font-size:39px}.elementor-widget-heading .elementor-heading-title.elementor-size-xxl{font-size:59px}",
                     }}
                   />
                   <h1
+                    id="page-title"
                     className="elementor-heading-title elementor-size-default left w-[50rem]"
                     style={{ paddingTop: "14px", paddingBottom: "12px" }}
                   >
