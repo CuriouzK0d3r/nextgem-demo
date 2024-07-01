@@ -6,17 +6,17 @@ export function mockFetch(data: any) {
   return jest.fn().mockImplementation(() =>
     Promise.resolve({
       ok: true,
-      json: () => data,
-    }),
+      json: () => data
+    })
   );
 }
 
 jest.mock("next/navigation", () => ({
   useRouter() {
     return {
-      prefetch: () => null,
+      prefetch: () => null
     };
-  },
+  }
 }));
 
 describe("Scientists page", () => {

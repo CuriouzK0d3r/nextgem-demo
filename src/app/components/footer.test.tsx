@@ -3,13 +3,14 @@ import { act, fireEvent, render, screen } from "@testing-library/react";
 import Footer from "./footer";
 import React from "react";
 import { useRouter } from "next/navigation";
+import "@testing-library/jest-dom";
 
 export function mockFetch(data: any) {
   return jest.fn().mockImplementation(() =>
     Promise.resolve({
       ok: true,
-      json: () => data,
-    }),
+      json: () => data
+    })
   );
 }
 
@@ -19,9 +20,9 @@ jest.mock("next/navigation", () => ({
       route: "/",
       pathname: "",
       query: "",
-      asPath: "",
+      asPath: ""
     };
-  },
+  }
 }));
 
 jest.mock("next/router", () => ({
@@ -30,9 +31,9 @@ jest.mock("next/router", () => ({
       route: "/",
       pathname: "",
       query: "",
-      asPath: "",
+      asPath: ""
     };
-  },
+  }
 }));
 
 describe("Scientists page", () => {
@@ -43,10 +44,10 @@ describe("Scientists page", () => {
 
     const { container } = await act(async () => render(<Footer />));
     const pageTitle = container.querySelector(
-      ".elementor-image-box-description",
+      ".elementor-image-box-description"
     );
     expect(pageTitle).toHaveTextContent(
-      "Views and opinions expressed are those of the authors",
+      "Views and opinions expressed are those of the authors"
     );
   });
 });

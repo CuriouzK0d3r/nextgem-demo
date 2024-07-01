@@ -3,13 +3,14 @@ import { act, fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
 import { useRouter } from "next/navigation";
 import Header from "../src/app/components/header";
+import "@testing-library/jest-dom";
 
 export function mockFetch(data: any) {
   return jest.fn().mockImplementation(() =>
     Promise.resolve({
       ok: true,
-      json: () => data,
-    }),
+      json: () => data
+    })
   );
 }
 
@@ -19,9 +20,9 @@ jest.mock("next/navigation", () => ({
       route: "/",
       pathname: "",
       query: "",
-      asPath: "",
+      asPath: ""
     };
-  },
+  }
 }));
 
 jest.mock("next/router", () => ({
@@ -30,9 +31,9 @@ jest.mock("next/router", () => ({
       route: "/",
       pathname: "",
       query: "",
-      asPath: "",
+      asPath: ""
     };
-  },
+  }
 }));
 
 describe("Scientists page", () => {
@@ -42,7 +43,7 @@ describe("Scientists page", () => {
     const push = jest.fn();
 
     const { container } = await act(async () =>
-      render(<Header isLoggedIn={true} pageName={"tools"} />),
+      render(<Header isLoggedIn={true} pageName={"tools"} />)
     );
     const pageTitle = container.querySelector("#page-title");
     expect(pageTitle).toHaveTextContent("tools");

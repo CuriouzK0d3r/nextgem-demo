@@ -8,8 +8,8 @@ export function mockFetch(data: any) {
   return jest.fn().mockImplementation(() =>
     Promise.resolve({
       ok: true,
-      json: () => data,
-    }),
+      json: () => data
+    })
   );
 }
 
@@ -19,9 +19,9 @@ jest.mock("next/navigation", () => ({
       route: "/",
       pathname: "",
       query: "",
-      asPath: "",
+      asPath: ""
     };
-  },
+  }
 }));
 
 jest.mock("next/router", () => ({
@@ -30,9 +30,9 @@ jest.mock("next/router", () => ({
       route: "/",
       pathname: "",
       query: "",
-      asPath: "",
+      asPath: ""
     };
-  },
+  }
 }));
 
 describe("Scientists page", () => {

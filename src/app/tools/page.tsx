@@ -14,7 +14,7 @@ function DashboardPage() {
   const loginUsernameRef = useRef<any>(null);
   const loginPasswordRef = useRef<any>(null);
 
-  const handleOpen = () => setOpen((cur) => !cur);
+  const handleOpen = () => setOpen(cur => !cur);
 
   return (
     <PageLayout checkLogin={true} isLoggedIn={isLoggedIn} pageName="members">
